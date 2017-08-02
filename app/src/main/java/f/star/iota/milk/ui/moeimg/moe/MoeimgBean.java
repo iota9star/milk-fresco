@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.moeimg.moe;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class MoeimgBean extends BaseBean {
+class MoeimgBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

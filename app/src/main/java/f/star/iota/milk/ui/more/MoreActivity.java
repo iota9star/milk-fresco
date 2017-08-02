@@ -10,33 +10,39 @@ import android.widget.CompoundButton;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import f.star.iota.milk.Contracts;
 import f.star.iota.milk.R;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;
 
 public class MoreActivity extends BaseActivity {
+    private final long[] mHints = new long[5];
     @BindView(R.id.switch_compat_r)
     SwitchCompat mSwitchCompatR;
-    private long[] mHints = new long[5];
 
-    @OnClick({R.id.linear_layout_donation, R.id.text_view_hitokoto_loli, R.id.text_view_hitokoto_ad, R.id.text_view_yiju, R.id.linear_layout_grade, R.id.text_view_hitokoto_bilibilijj, R.id.linear_layout_r})
+    @OnClick({R.id.linear_layout_donation_alipay, R.id.linear_layout_donation_qq, R.id.linear_layout_donation_wechat, R.id.text_view_hitokoto_loli, R.id.text_view_hitokoto_ad, R.id.text_view_yiju, R.id.linear_layout_grade, R.id.text_view_hitokoto_bilibilijj, R.id.linear_layout_r})
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         switch (view.getId()) {
+            case R.id.linear_layout_donation_qq:
+                intent.setData(Uri.parse(mContext.getString(R.string.qq_pay_code)));
+                break;
+            case R.id.linear_layout_donation_wechat:
+                intent.setData(Uri.parse(mContext.getString(R.string.wechat_pay_code)));
+                break;
             case R.id.text_view_hitokoto_bilibilijj:
-                intent.setData(Uri.parse(Contracts.Url.HITOKOTO_BILIBILIJJ_BASE));
+                intent.setData(Uri.parse(Url.HITOKOTO_BILIBILIJJ_BASE));
                 break;
             case R.id.text_view_yiju:
-                intent.setData(Uri.parse(Contracts.Url.YIJU_BASE));
+                intent.setData(Uri.parse(Url.YIJU_BASE));
                 break;
             case R.id.text_view_hitokoto_ad:
-                intent.setData(Uri.parse(Contracts.Url.HITOKOTO_IMJAD_BASE));
+                intent.setData(Uri.parse(Url.HITOKOTO_IMJAD_BASE));
                 break;
             case R.id.text_view_hitokoto_loli:
-                intent.setData(Uri.parse(Contracts.Url.HITOKOTO_LOLI_BASE));
+                intent.setData(Uri.parse(Url.HITOKOTO_LOLI_BASE));
                 break;
             case R.id.linear_layout_grade:
                 intent.setData(Uri.parse("market://details?id=" + mContext.getPackageName()));
@@ -51,7 +57,7 @@ public class MoreActivity extends BaseActivity {
                     }
                 }
                 return;
-            case R.id.linear_layout_donation:
+            case R.id.linear_layout_donation_alipay:
                 AlipayZeroSdk.startAlipayClient(this, getResources().getString(R.string.alipay_code));
                 return;
         }

@@ -2,7 +2,7 @@ package f.star.iota.milk.ui.minitokyo;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class MINITOKYOBean extends BaseBean {
+class MINITOKYOBean extends BaseBean {
     private String size;
     private String preview;
     private String url;

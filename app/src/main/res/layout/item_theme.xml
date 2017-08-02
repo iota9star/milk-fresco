@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout_theme_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:id="@+id/linear_layout_theme_container"
     android:padding="@dimen/v4dp">
 
     <ImageView

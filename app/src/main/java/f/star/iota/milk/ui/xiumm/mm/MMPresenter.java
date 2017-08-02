@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -33,7 +33,7 @@ public class MMPresenter extends StringPresenter<List<MMBean>> {
         Elements select = Jsoup.parse(s).select("#bodywrap > table > tbody > tr > td > div > div.innercol.grid > div > div > div.item > div > table > tbody > tr > td > img");
         for (Element element : select) {
             MMBean bean = new MMBean();
-            String url = Contracts.Url.XIUMM_BASE + element.attr("src");
+            String url = Url.XIUMM_BASE + element.attr("src");
             bean.setUrl(url);
             list.add(bean);
         }

@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -24,13 +24,13 @@ public class JDLINGYUPagerFragment extends PagerFragment {
         titles.add("写真");
         titles.add("下载");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_ALL));
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_ZHUANTI));
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_TEDIAN));
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_NONGCAO));
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_COSPLAY));
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_XIEZHEN));
-        fragments.add(JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_XIAZAI));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_ALL));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_ZHUANTI));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_TEDIAN));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_NONGCAO));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_COSPLAY));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_XIEZHEN));
+        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_XIAZAI));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

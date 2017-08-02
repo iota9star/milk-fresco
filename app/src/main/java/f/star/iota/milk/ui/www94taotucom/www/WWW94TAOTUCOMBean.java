@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.www94taotucom.www;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class WWW94TAOTUCOMBean extends BaseBean {
+class WWW94TAOTUCOMBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

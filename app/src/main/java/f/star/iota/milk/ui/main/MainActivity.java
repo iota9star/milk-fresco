@@ -2,9 +2,7 @@ package f.star.iota.milk.ui.main;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -26,6 +24,7 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.irozon.sneaker.Sneaker;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -36,12 +35,12 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Menus;
 import f.star.iota.milk.R;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.base.RVBean;
-import f.star.iota.milk.broadcast.NetStatusBroadcastReceiver;
 import f.star.iota.milk.ui.download.DownloadManagerActivity;
 import f.star.iota.milk.ui.menu.MenuCosplayFragment;
 import f.star.iota.milk.ui.menu.MenuIllustrationFragment;
@@ -65,7 +64,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
 
     private Drawer drawer;
-    private NetStatusBroadcastReceiver mNetStatusBroadcastReceiver;
 
     private MainActivityPresenter mPresenter;
 
@@ -75,16 +73,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     private BaseFragment currentFragment;
     private CloseableReference<CloseableImage> mCloseableImageCloseableReference;
 
-    private void initNetBroadcastReceiver() {
-        mNetStatusBroadcastReceiver = new NetStatusBroadcastReceiver();
-        IntentFilter mFilter = new IntentFilter();
-        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(mNetStatusBroadcastReceiver, mFilter);
-    }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        initNetBroadcastReceiver();
         init();
         initDrawer();
         initDrawerEvent();
@@ -97,9 +88,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     @Override
                     public void accept(@NonNull Boolean granted) throws Exception {
                         if (!granted) {
-                            SnackbarUtils.create(mContext, "您拒绝了写入文件的权限，下载可能会出现错误，是否立刻前往开启", "好的", new View.OnClickListener() {
+                            SnackbarUtils.create(mContext, "您拒绝了写入文件的权限，下载可能会出现错误，是否立刻前往开启", "好的", new Sneaker.OnSneakerClickListener() {
                                 @Override
-                                public void onClick(View view) {
+                                public void onSneakerClick(View view) {
                                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                     Uri uri = Uri.fromParts("package", getPackageName(), null);
                                     intent.setData(uri);
@@ -120,12 +111,12 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     @Override
     protected void setFirstFragment() {
         if (!ConfigUtils.getR(aContext)) {
-            currentFragment = MoeimgFragment.newInstance(Contracts.Url.MOEIMG_H);
+            currentFragment = MoeimgFragment.newInstance(Url.MOEIMG_H);
         } else {
-            currentFragment = MoeimgFragment.newInstance(Contracts.Url.MOEIMG);
+            currentFragment = MoeimgFragment.newInstance(Url.MOEIMG);
         }
         showFragment(currentFragment);
-        setTitle(Contracts.Menu.MENU_MOEIMG);
+        setTitle(Menus.MENU_MOEIMG);
     }
 
     private void initDrawer() {
@@ -152,14 +143,14 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     }
                 })
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_ILLUSTRATION).withIdentifier(Contracts.Menu.MENU_ILLUSTRATION_ID).withIcon(R.drawable.ic_menu_illustration).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_MEIZI).withIdentifier(Contracts.Menu.MENU_MEIZI_ID).withIcon(R.drawable.ic_menu_meizhi).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_COSPLAY).withIdentifier(Contracts.Menu.MENU_COSPLAY_ID).withIcon(R.drawable.ic_menu_cosplay).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_PHOTOGRAPHY).withIdentifier(Contracts.Menu.MENU_PHOTOGRAPHY_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
+                        new PrimaryDrawerItem().withName(Menus.MENU_ILLUSTRATION).withIdentifier(Menus.MENU_ILLUSTRATION_ID).withIcon(R.drawable.ic_menu_illustration).withSelectable(false),
+                        new PrimaryDrawerItem().withName(Menus.MENU_MEIZI).withIdentifier(Menus.MENU_MEIZI_ID).withIcon(R.drawable.ic_menu_meizhi).withSelectable(false),
+                        new PrimaryDrawerItem().withName(Menus.MENU_COSPLAY).withIdentifier(Menus.MENU_COSPLAY_ID).withIcon(R.drawable.ic_menu_cosplay).withSelectable(false),
+                        new PrimaryDrawerItem().withName(Menus.MENU_PHOTOGRAPHY).withIdentifier(Menus.MENU_PHOTOGRAPHY_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_THEME).withIdentifier(Contracts.Menu.MENU_THEME_ID).withIcon(R.drawable.ic_menu_theme).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_SETTINGS).withIdentifier(Contracts.Menu.MENU_SETTINGS_ID).withIcon(R.drawable.ic_menu_settings).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Contracts.Menu.MENU_ABOUT).withIdentifier(Contracts.Menu.MENU_ABOUT_ID).withIcon(R.drawable.ic_menu_more).withSelectable(false)
+                        new PrimaryDrawerItem().withName(Menus.MENU_THEME).withIdentifier(Menus.MENU_THEME_ID).withIcon(R.drawable.ic_menu_theme).withSelectable(false),
+                        new PrimaryDrawerItem().withName(Menus.MENU_SETTINGS).withIdentifier(Menus.MENU_SETTINGS_ID).withIcon(R.drawable.ic_menu_settings).withSelectable(false),
+                        new PrimaryDrawerItem().withName(Menus.MENU_ABOUT).withIdentifier(Menus.MENU_ABOUT_ID).withIcon(R.drawable.ic_menu_more).withSelectable(false)
                 )
                 .withSelectedItem(-1)
                 .build();
@@ -210,30 +201,30 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem dItem) {
                 switch ((int) dItem.getIdentifier()) {
-                    case Contracts.Menu.MENU_THEME_ID:
+                    case Menus.MENU_THEME_ID:
                         startActivity(new Intent(mContext, ThemeActivity.class));
                         break;
-                    case Contracts.Menu.MENU_SETTINGS_ID:
+                    case Menus.MENU_SETTINGS_ID:
                         startActivity(new Intent(mContext, SettingsActivity.class));
                         break;
-                    case Contracts.Menu.MENU_ABOUT_ID:
+                    case Menus.MENU_ABOUT_ID:
                         startActivity(new Intent(mContext, MoreActivity.class));
                         break;
-                    case Contracts.Menu.MENU_ILLUSTRATION_ID:
+                    case Menus.MENU_ILLUSTRATION_ID:
                         currentFragment = new MenuIllustrationFragment();
-                        setTitle(Contracts.Menu.MENU_ILLUSTRATION);
+                        setTitle(Menus.MENU_ILLUSTRATION);
                         break;
-                    case Contracts.Menu.MENU_MEIZI_ID:
+                    case Menus.MENU_MEIZI_ID:
                         currentFragment = new MenuMeiziFragment();
-                        setTitle(Contracts.Menu.MENU_MEIZI);
+                        setTitle(Menus.MENU_MEIZI);
                         break;
-                    case Contracts.Menu.MENU_COSPLAY_ID:
+                    case Menus.MENU_COSPLAY_ID:
                         currentFragment = new MenuCosplayFragment();
-                        setTitle(Contracts.Menu.MENU_COSPLAY);
+                        setTitle(Menus.MENU_COSPLAY);
                         break;
-                    case Contracts.Menu.MENU_PHOTOGRAPHY_ID:
+                    case Menus.MENU_PHOTOGRAPHY_ID:
                         currentFragment = new MenuPhotographyFragment();
-                        setTitle(Contracts.Menu.MENU_PHOTOGRAPHY);
+                        setTitle(Menus.MENU_PHOTOGRAPHY);
                         break;
                 }
                 showFragment(currentFragment);
@@ -275,9 +266,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mNetStatusBroadcastReceiver != null) {
-            unregisterReceiver(mNetStatusBroadcastReceiver);
-        }
         if (mPresenter != null) {
             mPresenter.unsubscribe();
         }

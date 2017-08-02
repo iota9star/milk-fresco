@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.magmoe.moe;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class MoeBean extends BaseBean {
+class MoeBean extends BaseBean {
     private String url;
 
     public MoeBean() {

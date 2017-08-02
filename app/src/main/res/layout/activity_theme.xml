@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.theme.ThemeActivity">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_bar_layout"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -23,8 +21,7 @@
                 android:layout_height="@dimen/v256dp"
                 android:src="@drawable/bg_default_banner"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.6"
-                tools:ignore="ContentDescription" />
+                app:layout_collapseParallaxMultiplier="0.6" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -40,6 +37,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/content_board_background"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -60,10 +58,10 @@
                 android:textSize="@dimen/v12sp" />
 
             <LinearLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="center">
 
                 <EditText
@@ -86,7 +84,7 @@
                     android:background="@drawable/bg_button"
                     android:gravity="center"
                     android:text="@string/settings"
-                    android:textColor="@color/ThemeBlack"
+                    android:textColor="?attr/button_text_color"
                     android:textSize="@dimen/v12sp" />
             </LinearLayout>
 

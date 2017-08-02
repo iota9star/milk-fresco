@@ -7,8 +7,8 @@ import android.view.View;
 
 public class SGSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
-    private int spanCount;
     private final int spacing;
+    private int spanCount;
 
     public SGSpacingItemDecoration(int spanCount, int spacing) {
         this.spanCount = spanCount;

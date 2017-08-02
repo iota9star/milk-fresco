@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.rosiyy.yy;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class YYBean extends BaseBean {
+class YYBean extends BaseBean {
     private String url;
 
     public YYBean() {

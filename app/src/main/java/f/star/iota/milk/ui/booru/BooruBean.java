@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class BooruBean extends BaseBean {
+class BooruBean extends BaseBean {
 
     @SerializedName("file_url")
     private String url;

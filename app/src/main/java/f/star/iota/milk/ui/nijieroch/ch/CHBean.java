@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.nijieroch.ch;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class CHBean extends BaseBean {
+class CHBean extends BaseBean {
     private String url;
 
     public CHBean() {

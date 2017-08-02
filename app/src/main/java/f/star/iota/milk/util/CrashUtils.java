@@ -18,19 +18,16 @@ import java.util.Locale;
 
 public final class CrashUtils {
 
+    private static final String FILE_SEP = System.getProperty("file.separator");
+    private static final Format FORMAT = new SimpleDateFormat("MM-dd HH-mm-ss", Locale.getDefault());
+    private static final String CRASH_HEAD;
+    private static final UncaughtExceptionHandler DEFAULT_UNCAUGHT_EXCEPTION_HANDLER;
+    private static final UncaughtExceptionHandler UNCAUGHT_EXCEPTION_HANDLER;
     private static boolean mInitialized;
     private static String defaultDir;
     private static String dir;
     private static String versionName;
     private static int versionCode;
-
-    private static final String FILE_SEP = System.getProperty("file.separator");
-    private static final Format FORMAT = new SimpleDateFormat("MM-dd HH-mm-ss", Locale.getDefault());
-
-    private static final String CRASH_HEAD;
-
-    private static final UncaughtExceptionHandler DEFAULT_UNCAUGHT_EXCEPTION_HANDLER;
-    private static final UncaughtExceptionHandler UNCAUGHT_EXCEPTION_HANDLER;
 
     static {
         try {

@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/frame_layout_splash_container"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:background="@color/ThemeBlack">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/simple_drawee_view_image"
+    <FrameLayout
+        android:id="@+id/frame_layout_splash_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:placeholderImage="@drawable/ic_tag_faces_white_48dp"
-        app:actualImageScaleType="centerCrop" />
+        android:animateLayoutChanges="true">
 
-    <LinearLayout
-        android:id="@+id/linear_layout_history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/ThemeLime"
-        android:orientation="vertical"
-        android:padding="@dimen/v16dp"
-        android:visibility="gone">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/simple_drawee_view_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <LinearLayout
+            android:id="@+id/linear_layout_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorTransparent"
-            android:gravity="center">
+            android:layout_gravity="bottom"
+            android:background="@color/ThemeLime"
+            android:orientation="vertical"
+            android:padding="@dimen/v16dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_view_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/v28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_view_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/v4dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/text_view_day"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_view_event"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:textSize="@dimen/v28sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_view_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:padding="@dimen/v4dp"
+                android:padding="@dimen/v8dp"
+                android:textSize="@dimen/v16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_view_event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorTransparent"
-            android:padding="@dimen/v8dp"
+        <Button
+            android:id="@+id/button_go"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/v36dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/v64dp"
+            android:background="@drawable/bg_button_splash"
+            android:text="@string/go"
+            android:textColor="?attr/button_text_color"
             android:textSize="@dimen/v16sp"
             android:textStyle="bold" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button_go"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/v36dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="@dimen/v64dp"
-        android:background="@drawable/bg_button_splash"
-        android:text="@string/go"
-        android:textSize="@dimen/v16sp"
-        android:textStyle="bold" />
-</FrameLayout>
+    </FrameLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

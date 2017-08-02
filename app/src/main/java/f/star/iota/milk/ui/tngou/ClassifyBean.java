@@ -6,7 +6,7 @@ import java.util.List;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class ClassifyBean {
+class ClassifyBean {
 
     @SerializedName("status")
     private boolean status;

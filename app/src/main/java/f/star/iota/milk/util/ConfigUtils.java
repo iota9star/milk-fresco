@@ -4,7 +4,7 @@ package f.star.iota.milk.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 
 public class ConfigUtils {
@@ -107,7 +107,7 @@ public class ConfigUtils {
 
     public static int isLock(Context context) {
         SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        return sp.getInt("lock", Contracts.LockType.NONE);
+        return sp.getInt("lock", LockType.NONE);
     }
 
     public static void setLock(Context context, int lock) {

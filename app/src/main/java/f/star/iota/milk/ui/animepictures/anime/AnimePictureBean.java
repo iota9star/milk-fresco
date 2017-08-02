@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.animepictures.anime;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class AnimePictureBean extends BaseBean {
+class AnimePictureBean extends BaseBean {
 
     private String preview;
     private String url;

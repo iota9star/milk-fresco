@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -26,7 +26,7 @@ public class OlPresenter extends StringPresenter<List<OlBean>> {
         Elements select = Jsoup.parse(s).select("#postlist div table tbody > tr > td.plc > div.pct > div.pcb div > ignore_js_op img");
         for (Element element : select) {
             OlBean bean = new OlBean();
-            String url = Contracts.Url.CHINAGIRLOL_BASE + element.attr("file");
+            String url = Url.CHINAGIRLOL_BASE + element.attr("file");
             bean.setUrl(url);
             list.add(bean);
         }

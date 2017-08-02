@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -38,7 +38,7 @@ public class BCYRankingPresenter extends StringPresenter<List<BCYRankingBean>> {
             bean.setRank(ranking);
             String preview = e.select("div > div.work-thumbnail__topBd > a > img").attr("src");
             bean.setPreview(preview);
-            String url = Contracts.Url.BCY_BASE + e.select("div > div.work-thumbnail__ft.center > a").attr("href");
+            String url = Url.BCY_BASE + e.select("div > div.work-thumbnail__ft.center > a").attr("href");
             bean.setUrl(url);
             list.add(bean);
         }

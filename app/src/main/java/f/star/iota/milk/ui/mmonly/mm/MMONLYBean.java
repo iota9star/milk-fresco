@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.mmonly.mm;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class MMONLYBean extends BaseBean {
+class MMONLYBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

@@ -4,6 +4,7 @@ package f.star.iota.milk.ui.gacha;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Menus;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseViewHolder;
 import f.star.iota.milk.base.ShowImageBean;
@@ -28,6 +29,8 @@ public class GachaViewHolder extends BaseViewHolder<GachaBean> {
     TextView mTextViewRank;
     @BindView(R.id.simple_drawee_view_avatar)
     SimpleDraweeView mSimpleDraweeViewAvatar;
+    @BindView(R.id.card_view)
+    CardView mCardView;
 
     public GachaViewHolder(View itemView) {
         super(itemView);
@@ -47,7 +50,7 @@ public class GachaViewHolder extends BaseViewHolder<GachaBean> {
             if (avatar == null) return;
             mSimpleDraweeViewAvatar.setImageURI(avatar);
         }
-        mSimpleDraweeViewImage.setOnLongClickListener(new View.OnLongClickListener() {
+        mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(mContext)
@@ -68,19 +71,19 @@ public class GachaViewHolder extends BaseViewHolder<GachaBean> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 download(bean.getUrl(), bean.getPreview(),
-                                        Contracts.Menu.MENU_GACHA, null);
+                                        Menus.MENU_GACHA, null);
                             }
                         })
                         .show();
                 return true;
             }
         });
-        mSimpleDraweeViewImage.setOnClickListener(new View.OnClickListener() {
+        mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<ShowImageBean> imgs = new ArrayList<>();
                 for (GachaBean bean : beans) {
-                    imgs.add(new ShowImageBean(bean.getUrl(), bean.getPreview(), Contracts.Menu.MENU_GACHA,
+                    imgs.add(new ShowImageBean(bean.getUrl(), bean.getPreview(), Menus.MENU_GACHA,
                             "作者：" + bean.getUrl() + "\n\n" +
                                     "排名：" + bean.getRank() + "\n\n" +
                                     "下载地址：" + bean.getRank()));

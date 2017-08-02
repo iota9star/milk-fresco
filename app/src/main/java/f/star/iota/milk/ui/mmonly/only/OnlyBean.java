@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.mmonly.only;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class OnlyBean extends BaseBean {
+class OnlyBean extends BaseBean {
     private String url;
 
     public OnlyBean() {

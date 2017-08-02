@@ -13,22 +13,19 @@ import f.star.iota.milk.base.SGSpacingItemDecoration;
 import f.star.iota.milk.util.ConfigUtils;
 
 public abstract class MenuFragment extends BaseFragment {
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-
-    private SGSpacingItemDecoration mItemDecoration;
-    private StaggeredGridLayoutManager mLayoutManager;
-
-    private MenuAdapter.OnMenuItemClickListener mOnMenuItemClickListener = new MenuAdapter.OnMenuItemClickListener() {
+    private final MenuAdapter.OnMenuItemClickListener mOnMenuItemClickListener = new MenuAdapter.OnMenuItemClickListener() {
         @Override
         public void onClick(MenuBean menu) {
             handleOnMenuItemOnClick(menu);
         }
     };
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+    private SGSpacingItemDecoration mItemDecoration;
+    private StaggeredGridLayoutManager mLayoutManager;
+    private int mSpanCount;
 
     protected abstract void handleOnMenuItemOnClick(MenuBean menu);
-
-    private int mSpanCount;
 
     @Override
     protected void init(Bundle savedInstanceState) {

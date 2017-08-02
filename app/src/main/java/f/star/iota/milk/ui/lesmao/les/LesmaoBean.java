@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.lesmao.les;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class LesmaoBean extends BaseBean {
+class LesmaoBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

@@ -23,7 +23,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:text="@string/unlock"
-            android:textColor="@color/colorText"
+            android:textColor="?attr/pin_text_color"
             android:textSize="@dimen/v36sp" />
 
         <com.andrognito.pinlockview.IndicatorDots
@@ -40,7 +40,7 @@
             app:indicatorType="fillWithAnimation"
             app:keypadButtonSize="@dimen/v64dp"
             app:keypadShowDeleteButton="true"
-            app:keypadTextColor="@color/colorText"
+            app:keypadTextColor="?attr/pin_text_color"
             app:keypadTextSize="@dimen/v18sp"
             app:pinLength="4" />
     </LinearLayout>

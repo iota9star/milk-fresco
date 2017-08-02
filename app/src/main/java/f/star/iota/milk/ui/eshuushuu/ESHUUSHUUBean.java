@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.eshuushuu;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class ESHUUSHUUBean extends BaseBean {
+class ESHUUSHUUBean extends BaseBean {
     private String preview;
     private String url;
     private String size;

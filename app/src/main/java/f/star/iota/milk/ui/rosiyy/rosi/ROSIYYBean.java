@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.rosiyy.rosi;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class ROSIYYBean extends BaseBean {
+class ROSIYYBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

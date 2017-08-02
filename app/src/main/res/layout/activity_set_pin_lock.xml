@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="@string/set_pin"
-                android:textColor="?@android:attr/colorAccent"
+                android:textColor="?attr/pin_text_color"
                 android:textSize="@dimen/v36sp" />
 
             <com.andrognito.pinlockview.IndicatorDots
@@ -47,7 +47,7 @@
                 app:indicatorType="fillWithAnimation"
                 app:keypadButtonSize="@dimen/v64dp"
                 app:keypadShowDeleteButton="true"
-                app:keypadTextColor="?@android:attr/colorAccent"
+                app:keypadTextColor="?attr/pin_text_color"
                 app:keypadTextSize="@dimen/v18sp"
                 app:pinLength="4" />
         </LinearLayout>
@@ -67,7 +67,7 @@
             android:layout_margin="@dimen/v8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_button"
-            android:textColor="@color/ThemeBlack" />
+            android:textColor="?attr/button_text_color" />
 
         <Button
             android:id="@+id/button_right"
@@ -77,7 +77,7 @@
             android:layout_margin="@dimen/v8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_button"
-            android:textColor="@color/ThemeBlack" />
+            android:textColor="?attr/button_text_color" />
     </LinearLayout>
 
 </LinearLayout>

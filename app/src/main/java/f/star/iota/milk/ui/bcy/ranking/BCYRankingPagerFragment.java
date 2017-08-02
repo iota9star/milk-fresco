@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -35,15 +35,15 @@ public class BCYRankingPagerFragment extends PagerFragment {
         List<Fragment> fragments = new ArrayList<>();
         int type = getArguments().getInt("type");
         if (type == ILLUST) {
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_ILLUST_RANK_WEEK));
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_ILLUST_RANK_TODAY));
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_ILLUST_RANK_ART_WORK));
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_ILLUST_RANK_NEW_PEOPLE));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_ILLUST_RANK_WEEK));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_ILLUST_RANK_TODAY));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_ILLUST_RANK_ART_WORK));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_ILLUST_RANK_NEW_PEOPLE));
         } else if (type == COS) {
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_COS_RANK_WEEK));
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_COS_RANK_TODAY));
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_COS_RANK_ART_WORK));
-            fragments.add(BCYRankingFragment.newInstance(Contracts.Url.BCY_COS_RANK_NEW_PEOPLE));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_COS_RANK_WEEK));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_COS_RANK_TODAY));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_COS_RANK_ART_WORK));
+            fragments.add(BCYRankingFragment.newInstance(Url.BCY_COS_RANK_NEW_PEOPLE));
         } else {
             fragments.add(null);
             fragments.add(null);

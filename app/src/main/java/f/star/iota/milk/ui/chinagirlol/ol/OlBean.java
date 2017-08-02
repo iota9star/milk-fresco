@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.chinagirlol.ol;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class OlBean extends BaseBean {
+class OlBean extends BaseBean {
     private String url;
 
     public OlBean() {

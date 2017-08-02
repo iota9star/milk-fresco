@@ -30,6 +30,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    testCompile "junit:junit:$rootProject.versions.libJunit"
     //support lib
     compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
     compile "com.android.support:design:$rootProject.versions.libSupport"
@@ -54,22 +55,12 @@ dependencies {
     //RxPermission
     compile "com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.versions.libRxPermission2"
 
-    //glide
-//    compile "com.github.bumptech.glide:glide:$rootProject.versions.libGlide"
-//    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.versions.libGlide"
-
-    //glide - transformations
-//    compile "jp.wasabeef:glide-transformations:$rootProject.versions.libGlideTransformations"
-
     //ButterKnife
     compile "com.jakewharton:butterknife:$rootProject.versions.libButterKnife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.versions.libButterKnife"
 
     //WaveView
     compile "com.github.john990:WaveView:$rootProject.versions.libWaveView"
-
-    //tkrefresh layout
-//    compile "com.lcodecorex:tkrefreshlayout:$rootProject.versions.libRefreshLayout"
 
     //material drawer
     compile("com.mikepenz:materialdrawer:$rootProject.versions.libMaterialDrawer") {
@@ -80,19 +71,16 @@ dependencies {
     compile "jp.wasabeef:recyclerview-animators:$rootProject.versions.libItemAnimators"
 
     //flow layout
-    compile "cn.lankton:flowlayout:$rootProject.versions.libFlowLayout"
+//    compile "cn.lankton:flowlayout:$rootProject.versions.libFlowLayout"
 
     //circle image view
     compile "de.hdodenhof:circleimageview:$rootProject.versions.libCircleImageView"
-
-    //junit
-    testCompile "junit:junit:$rootProject.versions.libJunit"
 
     //floating toolbar
     compile "com.github.rubensousa:floatingtoolbar:$rootProject.versions.libFloatingToolbar"
 
     //photo view
-    compile "com.github.chrisbanes:PhotoView:$rootProject.versions.libPhotoView"
+//    compile "com.github.chrisbanes:PhotoView:$rootProject.versions.libPhotoView"
 
     //jsoup
     compile "org.jsoup:jsoup:$rootProject.versions.libJsoup"
@@ -135,12 +123,14 @@ dependencies {
 
     compile 'com.github.stfalcon:frescoimageviewer:0.5.0'
 
+    compile 'com.irozon.sneaker:sneaker:1.0.1'
+
     compile 'com.github.NightFarmer:Themer:1.0.0'
 
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-2'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3-alpha-2'
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 }

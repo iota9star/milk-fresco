@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.xiumm.mm;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class MMBean extends BaseBean {
+class MMBean extends BaseBean {
     private String url;
 
     public MMBean() {

@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.zerochan;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class ZerochanBean extends BaseBean {
+class ZerochanBean extends BaseBean {
     private String preview;
     private String url;
     private String info;

@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
@@ -41,16 +40,19 @@ import f.star.iota.milk.R;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
-    public interface OnOpenListener {
-        void open(String filePath);
-    }
-
-    public interface OnSetBannerListener {
-        void set(String filePath);
-    }
-
+    public static final int TYPE_ALL = 0;
+    public static final int TYPE_FINISH = 1;
+    public static final int TYPE_ING = 2;
+    private final NumberFormat mNumberFormat;
     private OnOpenListener onOpenListener;
     private OnSetBannerListener onSetBannerListener;
+    private List<DownloadTask> mTasks;
+    private int mType;
+
+    public DownloadAdapter() {
+        mNumberFormat = NumberFormat.getPercentInstance();
+        mNumberFormat.setMinimumFractionDigits(2);
+    }
 
     public void setOnOpenListener(OnOpenListener onOpenListener) {
         this.onOpenListener = onOpenListener;
@@ -58,19 +60,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
 
     public void setOnSetBannerListener(OnSetBannerListener onSetBannerListener) {
         this.onSetBannerListener = onSetBannerListener;
-    }
-
-    public static final int TYPE_ALL = 0;
-    public static final int TYPE_FINISH = 1;
-    public static final int TYPE_ING = 2;
-
-    private List<DownloadTask> mTasks;
-    private NumberFormat mNumberFormat;
-    private int mType;
-
-    public DownloadAdapter() {
-        mNumberFormat = NumberFormat.getPercentInstance();
-        mNumberFormat.setMinimumFractionDigits(2);
     }
 
     public void updateData(int type) {
@@ -115,7 +104,39 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         return mTasks == null ? 0 : mTasks.size();
     }
 
+    private void scanFile(final Context context, String path) {
+        MediaScannerConnection.scanFile(context, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
+            public void onScanCompleted(String path, Uri uri) {
+                Intent scan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                scan.setData(uri);
+                context.sendBroadcast(scan);
+            }
+        });
+    }
+
+    private void loadFileToGlide(File file, ViewHolder holder) {
+        if (file != null && file.exists()) {
+            SnackbarUtils.create(holder.mContext, "下载完成：" + file.getAbsolutePath());
+            Uri uri = Uri.parse("file://" + file.getAbsolutePath());
+            if (uri != null) {
+                holder.mSimpleDraweeView.setImageURI(uri);
+            }
+            scanFile(holder.mContext.getApplicationContext(), file.getAbsolutePath());
+        } else {
+            SnackbarUtils.create(holder.mContext, "文件不见了？");
+        }
+    }
+
+    public interface OnOpenListener {
+        void open(String filePath);
+    }
+
+    public interface OnSetBannerListener {
+        void set(String filePath);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private final Context mContext;
         @BindView(R.id.simple_drawee_view_image)
         SimpleDraweeView mSimpleDraweeView;
         @BindView(R.id.text_view_percent)
@@ -136,7 +157,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         ImageButton mImageButtonMore;
         private DownloadTask mTask;
         private String mTag;
-        private Context mContext;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -312,32 +332,18 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
             }
         }
 
-        void setTag(String tag) {
-            this.mTag = tag;
-        }
-
         String getTag() {
             return mTag;
         }
-    }
 
-    private void scanFile(final Context context, String path) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            MediaScannerConnection.scanFile(context, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                public void onScanCompleted(String path, Uri uri) {
-                    Intent scan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                    scan.setData(uri);
-                    context.sendBroadcast(scan);
-                }
-            });
-        } else {
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.fromFile(new File(path))));
+        void setTag(String tag) {
+            this.mTag = tag;
         }
     }
 
     private class ListDownloadListener extends DownloadListener {
 
-        private ViewHolder holder;
+        private final ViewHolder holder;
 
         ListDownloadListener(Object tag, ViewHolder holder) {
             super(tag);
@@ -369,19 +375,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
 
         @Override
         public void onRemove(Progress progress) {
-        }
-    }
-
-    private void loadFileToGlide(File file, ViewHolder holder) {
-        if (file != null && file.exists()) {
-            SnackbarUtils.create(holder.mContext, "下载完成：" + file.getAbsolutePath());
-            Uri uri = Uri.parse("file://" + file.getAbsolutePath());
-            if (uri != null) {
-                holder.mSimpleDraweeView.setImageURI(uri);
-            }
-            scanFile(holder.mContext.getApplicationContext(), file.getAbsolutePath());
-        } else {
-            SnackbarUtils.create(holder.mContext, "文件不见了？");
         }
     }
 }

@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.www005tv.www;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class WWW005TVBean extends BaseBean {
+class WWW005TVBean extends BaseBean {
     private String preview;
     private String url;
     private String title;

@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.jdlingyu.jd;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class JDLINGYUBean extends BaseBean {
+class JDLINGYUBean extends BaseBean {
     private String preview;
     private String url;
     private String date;

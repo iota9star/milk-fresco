@@ -7,6 +7,17 @@ import f.star.iota.milk.base.BaseBean;
 
 
 public class BCYSelectedBean extends BaseBean implements Parcelable {
+    public static final Creator<BCYSelectedBean> CREATOR = new Creator<BCYSelectedBean>() {
+        @Override
+        public BCYSelectedBean createFromParcel(Parcel in) {
+            return new BCYSelectedBean(in);
+        }
+
+        @Override
+        public BCYSelectedBean[] newArray(int size) {
+            return new BCYSelectedBean[size];
+        }
+    };
     private String description;
     private String preview;
     private String url;
@@ -14,7 +25,7 @@ public class BCYSelectedBean extends BaseBean implements Parcelable {
     BCYSelectedBean() {
     }
 
-    protected BCYSelectedBean(Parcel in) {
+    private BCYSelectedBean(Parcel in) {
         description = in.readString();
         preview = in.readString();
         url = in.readString();
@@ -31,18 +42,6 @@ public class BCYSelectedBean extends BaseBean implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<BCYSelectedBean> CREATOR = new Creator<BCYSelectedBean>() {
-        @Override
-        public BCYSelectedBean createFromParcel(Parcel in) {
-            return new BCYSelectedBean(in);
-        }
-
-        @Override
-        public BCYSelectedBean[] newArray(int size) {
-            return new BCYSelectedBean[size];
-        }
-    };
 
     public String getDescription() {
         return description;

@@ -20,16 +20,11 @@ import f.star.iota.milk.R;
 
 public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> {
     private final List<ThemeBean> themes;
+    private OnItemClickListener onItemClickListener;
 
     public ThemeAdapter() {
         themes = new ArrayList<>();
     }
-
-    public interface OnItemClickListener {
-        void onClick(int theme);
-    }
-
-    private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -70,16 +65,26 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         return themes.size();
     }
 
+    public void add(List<ThemeBean> themes) {
+        int size = this.themes.size();
+        this.themes.addAll(themes);
+        notifyItemRangeInserted(size, themes.size());
+    }
+
+    public interface OnItemClickListener {
+        void onClick(int theme);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final Context mContext;
+        private final Context aContext;
         @BindView(R.id.image_view_image)
         ImageView image;
         @BindView(R.id.text_view_description)
         TextView description;
         @BindView(R.id.linear_layout_theme_container)
         LinearLayout container;
-        private final Context mContext;
-        private final Context aContext;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -87,11 +92,5 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
             aContext = mContext.getApplicationContext();
             ButterKnife.bind(this, itemView);
         }
-    }
-
-    public void add(List<ThemeBean> themes) {
-        int size = this.themes.size();
-        this.themes.addAll(themes);
-        notifyItemRangeInserted(size, themes.size());
     }
 }

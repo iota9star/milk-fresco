@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.xiuren.ren;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class RenBean extends BaseBean {
+class RenBean extends BaseBean {
     private String url;
 
     public RenBean() {

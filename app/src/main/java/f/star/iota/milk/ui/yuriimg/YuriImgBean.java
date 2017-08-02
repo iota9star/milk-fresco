@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.yuriimg;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class YuriImgBean extends BaseBean {
+class YuriImgBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

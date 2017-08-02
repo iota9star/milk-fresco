@@ -2,7 +2,6 @@ package f.star.iota.milk.ui.theme;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +36,7 @@ import f.star.iota.milk.util.SnackbarUtils;
 
 public class ThemeActivity extends BaseActivity {
 
+    private static boolean isExpand = true;
     @BindView(R.id.ken_burns_view_banner)
     KenBurnsView mKenBurnsViewBanner;
     @BindView(R.id.recycler_view)
@@ -49,8 +49,6 @@ public class ThemeActivity extends BaseActivity {
     EditText mEditTextUrl;
     @BindView(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
-
-    private static boolean isExpand = true;
     private CloseableReference<CloseableImage> mCloseableImageCloseableReference;
 
     @OnClick(R.id.button_set)
@@ -160,9 +158,7 @@ public class ThemeActivity extends BaseActivity {
         themes.add(new ThemeBean(R.style.ThemeGrey, R.color.ThemeGrey, "灰色/Grey", false));
         themes.add(new ThemeBean(R.style.ThemeBlueGrey, R.color.ThemeBlueGrey, "蓝灰/Blue Grey", false));
         themes.add(new ThemeBean(R.style.ThemeBiliBili, R.color.ThemeBiliBili, "哔哩哔哩/BiliBili", false));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            themes.add(new ThemeBean(R.style.ThemeBlack, R.color.ThemeBlack, "黑色/Black", false));
-        }
+        themes.add(new ThemeBean(R.style.ThemeBlack, R.color.ThemeBlack, "黑色/Black", false));
         themes.add(new ThemeBean(R.style.ThemeDarkBlack, R.color.ThemeDarkBlack, "夜间/Night", false));
 
         for (ThemeBean theme : themes) {

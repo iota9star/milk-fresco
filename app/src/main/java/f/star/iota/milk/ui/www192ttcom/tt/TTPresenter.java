@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -23,7 +23,7 @@ public class TTPresenter extends StringPresenter<List<TTBean>> {
             url = url.replace("_1.html", ".html");
         }
         if (!url.contains("192tt")) {
-            url = Contracts.Url.WWW192TTCOM_BASE + url;
+            url = Url.WWW192TTCOM_BASE + url;
         }
         return url;
     }

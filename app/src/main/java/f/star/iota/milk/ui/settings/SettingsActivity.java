@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.irozon.sneaker.Sneaker;
 import com.wei.android.lib.fingerprintidentify.FingerprintIdentify;
 import com.xw.repo.BubbleSeekBar;
 
@@ -28,7 +29,7 @@ import biz.kasual.materialnumberpicker.MaterialNumberPicker;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.ui.lock.SetPinLockActivity;
@@ -65,10 +66,11 @@ public class SettingsActivity extends BaseActivity {
                 clearCache();
                 return;
             case R.id.linear_layout_open_count:
-                SnackbarUtils.create(mContext, "清空历史打开次数", "嗯", new View.OnClickListener() {
+                SnackbarUtils.create(mContext, "清空历史打开次数", "嗯", new Sneaker.OnSneakerClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onSneakerClick(View view) {
                         ConfigUtils.saveOpenCount(aContext, 0);
+                        bindOpenCount();
                     }
                 });
                 return;
@@ -103,7 +105,7 @@ public class SettingsActivity extends BaseActivity {
                         .show();
                 break;
             case R.id.linear_layout_pin_lock:
-                if (ConfigUtils.isLock(aContext) != Contracts.LockType.PIN) {
+                if (ConfigUtils.isLock(aContext) != LockType.PIN) {
                     startActivity(new Intent(mContext, SetPinLockActivity.class));
                 } else {
                     new AlertDialog.Builder(mContext)
@@ -111,7 +113,7 @@ public class SettingsActivity extends BaseActivity {
                             .setPositiveButton("关闭 PIN", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    ConfigUtils.setLock(aContext, Contracts.LockType.NONE);
+                                    ConfigUtils.setLock(aContext, LockType.NONE);
                                     ConfigUtils.savePin(aContext, "");
                                 }
                             })
@@ -125,7 +127,7 @@ public class SettingsActivity extends BaseActivity {
                 }
                 return;
             case R.id.linear_layout_fingerprint_lock:
-                if (ConfigUtils.isLock(aContext) == Contracts.LockType.NONE) {
+                if (ConfigUtils.isLock(aContext) == LockType.NONE) {
                     SnackbarUtils.create(mContext, "请先设置至少一种解锁方式");
                     return;
                 }
@@ -135,9 +137,9 @@ public class SettingsActivity extends BaseActivity {
                     return;
                 }
                 if (!fingerprintIdentify.isRegisteredFingerprint()) {
-                    SnackbarUtils.create(mContext, "您可能还没有设置指纹，是否前往设置", "嗯", new View.OnClickListener() {
+                    SnackbarUtils.create(mContext, "您可能还没有设置指纹，是否前往设置", "嗯", new Sneaker.OnSneakerClickListener() {
                         @Override
-                        public void onClick(View view) {
+                        public void onSneakerClick(View view) {
                             startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
                         }
                     });
@@ -157,7 +159,6 @@ public class SettingsActivity extends BaseActivity {
                             }
                         })
                         .show();
-                return;
         }
     }
 
@@ -177,9 +178,9 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void clearCache() {
-        SnackbarUtils.create(mContext, "清空缓存", "嗯", new View.OnClickListener() {
+        SnackbarUtils.create(mContext, "清空缓存", "嗯", new Sneaker.OnSneakerClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onSneakerClick(View view) {
                 File cacheDir = FileUtils.getDiskCacheDir(mContext);
                 if (cacheDir != null && cacheDir.exists() && cacheDir.isDirectory()) {
                     if (!FileUtils.deleteDirsFiles(cacheDir)) {

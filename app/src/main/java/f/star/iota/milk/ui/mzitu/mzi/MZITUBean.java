@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.mzitu.mzi;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class MZITUBean extends BaseBean {
+class MZITUBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

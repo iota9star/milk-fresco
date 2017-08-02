@@ -32,14 +32,14 @@
             android:layout_gravity="end"
             android:layout_marginBottom="@dimen/v8dp"
             android:layout_marginTop="@dimen/v8dp"
+            android:background="@drawable/bg_drawer_header_hitokoto"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/v2dp"
             android:paddingEnd="@dimen/v8dp"
-            android:paddingLeft="@dimen/v8dp"
-            android:paddingRight="@dimen/v8dp"
             android:paddingStart="@dimen/v8dp"
             android:paddingTop="@dimen/v2dp"
             android:text="@string/wait"
+            android:textColor="@color/md_white_1000"
             android:textSize="@dimen/v12sp" />
     </LinearLayout>
 </LinearLayout>

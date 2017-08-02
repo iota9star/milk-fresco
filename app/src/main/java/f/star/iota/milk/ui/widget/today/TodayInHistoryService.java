@@ -36,21 +36,20 @@ import f.star.iota.milk.util.ConfigUtils;
 
 public class TodayInHistoryService extends Service implements TodayInHistoryContract.View, BannerContract.View {
 
+    private static final String ACTION_REFRESH = "star.iota.widget.today.in.history.refresh";
     private TodayInHistoryPresenter mTodayInHistoryPresenter;
     private BannerPresenter mBannerPresenter;
     private Timer mTimer;
     private boolean todayIsRunning = false;
     private boolean bannerIsRunning = false;
-    private Context mContext;
-
-    private TimerTask mTask = new TimerTask() {
+    private final TimerTask mTask = new TimerTask() {
         @Override
         public void run() {
             getToday();
             getBanner();
         }
     };
-
+    private Context mContext;
     private RefreshReceiver mRefreshReceiver;
 
     @Nullable
@@ -70,9 +69,6 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
         bannerIsRunning = true;
         mBannerPresenter.getBanner();
     }
-
-
-    private static final String ACTION_REFRESH = "star.iota.widget.today.in.history.refresh";
 
     @Override
     public void onCreate() {
@@ -168,16 +164,6 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
         bannerIsRunning = false;
     }
 
-    public class RefreshReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
-                getToday();
-                getBanner();
-            }
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -197,5 +183,15 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY_COMPATIBILITY;
+    }
+
+    public class RefreshReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
+                getToday();
+                getBanner();
+            }
+        }
     }
 }

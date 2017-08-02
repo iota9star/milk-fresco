@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class DonmaiBean extends BaseBean {
+class DonmaiBean extends BaseBean {
 
     @SerializedName("file_url")
     private String url;
@@ -29,14 +29,6 @@ public class DonmaiBean extends BaseBean {
     private int fileSize;
 
     private String size;
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setPreview(String preview) {
-        this.preview = preview;
-    }
 
     public String getTags() {
         return tags;
@@ -62,8 +54,16 @@ public class DonmaiBean extends BaseBean {
         return url;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getPreview() {
         return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 
     public String getRating() {

@@ -3,9 +3,9 @@ package f.star.iota.milk.ui.splash;
 
 public class HistoryBean {
 
-    private String day;
-    private String year;
-    private String event;
+    private final String day;
+    private final String year;
+    private final String event;
 
     public HistoryBean(String day, String year, String event) {
         this.day = day;

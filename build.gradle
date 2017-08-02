@@ -2,9 +2,13 @@ buildscript {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter()
+        google()
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url = 'https://dl.bintray.com/yuancloud/maven/' }
+        maven {
+            url 'https://maven.google.com'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
@@ -16,9 +20,13 @@ allprojects {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter()
+        google()
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url = 'https://dl.bintray.com/yuancloud/maven/' }
+        maven {
+            url 'https://maven.google.com'
+        }
     }
 }
 
@@ -29,15 +37,15 @@ task clean(type: Delete) {
 ext {
     setup = [
             compileSdk: 26,
-            buildTools: "26.0.0",
-            minSdk    : 16,
+            buildTools: "26.0.1",
+            minSdk    : 21,
             targetSdk : 26,
             resConfigs: "zh",
-            vcode     : 6,
-            vname     : "alpha-6"
+            vcode     : 7,
+            vname     : "alpha-7"
     ]
     versions = [
-            libSupport             : "26.0.0-alpha1",
+            libSupport             : "26.0.0",
             libButterKnife         : "8.7.0",
             libRxJava              : "2.1.1",
             libRxAndroid           : "2.0.1",

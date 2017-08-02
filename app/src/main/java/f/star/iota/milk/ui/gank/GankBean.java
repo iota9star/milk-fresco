@@ -8,7 +8,7 @@ import java.util.List;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class GankBean {
+class GankBean {
 
     @SerializedName("error")
     private boolean error;

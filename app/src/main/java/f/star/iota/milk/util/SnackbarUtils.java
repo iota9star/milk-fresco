@@ -2,42 +2,57 @@ package f.star.iota.milk.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.view.ViewGroup;
+
+import com.irozon.sneaker.Sneaker;
+
+import java.util.Random;
+
+import f.star.iota.milk.R;
 
 
 public class SnackbarUtils {
     public static void create(Context context, String content) {
-        int[] faces = {
-                0x1F43D, 0x1F620, 0x1F629, 0x1F632,
-                0x1F61E, 0x1F635, 0x1F630, 0x1F612,
-                0x1F60D, 0x1F624, 0x1F61C, 0x1F61D,
-                0x1F60B, 0x1F618, 0x1F61A, 0x1F637,
-                0x1F633, 0x1F603, 0x1F605, 0x1F606,
-                0x1F601, 0x1F602, 0x1F60A, 0x263A,
-                0x1F604, 0x1F622, 0x1F62D, 0x1F628,
-                0x1F623, 0x1F621, 0x1F60C, 0x1F616,
-                0x1F614, 0x1F631, 0x1F62A, 0x1F60F,
-                0x1F613, 0x1F625, 0x1F62B, 0x1F609,
-                0x1F63A, 0x1F638, 0x1F639, 0x1F63D,
-                0x1F63B, 0x1F63F, 0x1F63E, 0x1F63C,
-                0x1F640, 0x1F47B, 0x1F47C, 0x1F47F,
-                0x1F47E, 0x1F419, 0x1F42F, 0x1F42C,
-                0x1F438, 0x1F43C
+        String[] faces = {
+                "ヽ(✿ﾟ▽ﾟ)ノ", "━━(￣ー￣*|||━━", "┗|*｀0′*|┛", "o(*^▽^*)┛",
+                "( σ'ω')σ", "✧(≖ ◡ ≖✿)", "|(•_•) |•_•) |_•) |•) | )", "(ﾟｰﾟ)",
+                "´･∀･)乂(･∀･｀", "(。・∀・)ノ", "(oﾟvﾟ)ノ", "(*ﾟｰﾟ)",
+                "ʅ（´◔౪◔）ʃ", "(‾◡◝)", "(☆-ｖ-)", "*(੭*ˊᵕˋ)੭*ଘ",
+                "(>▽<)", "┗|｀O′|┛ 嗷~~", "<(￣3￣)> 表！", "不＞(￣ε￣ = ￣3￣)<要",
+                "(≧∇≦)ﾉ", "～(　TロT)σ", "n(*≧▽≦*)n", "（*＾-＾*）",
+                "（○｀ 3′○）", "（○｀ 3′○）", "( *￣▽￣)((≧︶≦*)", "(っ*´Д`)っ",
+                "ο(=•ω＜=)ρ⌒☆", "ヾ(´･ω･｀)ﾉ", "ヾ(^▽^*)))", "ｍ(o・ω・o)ｍ",
+                "ε = = (づ′▽`)づ", "(ノω<。)ノ))☆.。", "(。・・)ノ", "(/ω＼*)……… (/ω•＼*)",
+                "┬┴┤_•)", "（o´・ェ・｀o）", "(#`O′)", "o(〃'▽'〃)o",
+                "( ╯▽╰)", "(～o￣3￣)～", "(*￣3￣)╭", "（づ￣3￣）づ╭❤～",
+                "(。﹏。)", "(/▽＼)", "(′▽`〃)", "◕ฺ‿◕ฺ✿ฺ)",
+                "(*/ω＼*)", "(๑•̀ㅂ•́)و✧", "ヾ(≧▽≦*)o", "o(*≧▽≦)ツ",
+                "<(￣︶￣)>", "︿(￣︶￣)︿", "嗯~ o(*￣▽￣*)o", "╰(￣▽￣)╭",
+                "(｡･∀･)ﾉﾞ", "ヾ(≧∇≦*)ゝ", "(*^▽^*)", "╰(￣▽￣)╭",
+                "（゜▽＾*））", "ヽ(✿ﾟ▽ﾟ)ノ", "(( へ(へ´∀`)へ", "╰(*°▽°*)╯",
+                "^O^", "♪(^∇^*)", "(≧∀≦)ゞ", "(๑´ㅂ`๑)",
+                "(๑¯∀¯๑)", "(/≧▽≦)/", "ヽ(ﾟ∀ﾟ*)ﾉ━━━ｩ♪", "o(*≧▽≦)ツ┏━┓",
+                "ε(*´･∀･｀)зﾞ", "~(～￣▽￣)～", "(o゜▽゜)o☆", "o(*￣▽￣*)o"
         };
-        final Snackbar snackbar = Snackbar.make(((Activity) context).findViewById(android.R.id.content), content, Snackbar.LENGTH_LONG);
-        snackbar.setAction(new String(Character.toChars(faces[(int) (Math.random() * faces.length)])), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                snackbar.dismiss();
-            }
-        });
-        snackbar.show();
+        Sneaker.with((Activity) context)
+                .setTitle(content, R.color.white)
+                .setMessage(faces[new Random().nextInt(faces.length)], R.color.ThemeLime)
+                .setDuration(4800)
+                .autoHide(true)
+                .setHeight(ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setIcon(R.mipmap.app_icon)
+                .sneak(R.color.md_grey_800);
     }
 
-    public static void create(Context context, String content, String action, View.OnClickListener onClickListener) {
-        final Snackbar snackbar = Snackbar.make(((Activity) context).findViewById(android.R.id.content), content, Snackbar.LENGTH_LONG);
-        snackbar.setAction(action, onClickListener);
-        snackbar.show();
+    public static void create(Context context, String content, String action, Sneaker.OnSneakerClickListener listener) {
+        Sneaker.with((Activity) context)
+                .setTitle(content, R.color.white)
+                .setMessage(action, R.color.ThemeLime)
+                .setDuration(4800)
+                .autoHide(true)
+                .setHeight(ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setIcon(R.mipmap.app_icon)
+                .setOnSneakerClickListener(listener)
+                .sneak(R.color.md_grey_800);
     }
 }

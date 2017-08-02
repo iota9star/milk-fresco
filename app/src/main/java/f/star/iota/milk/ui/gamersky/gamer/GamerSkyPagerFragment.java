@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -21,10 +21,10 @@ public class GamerSkyPagerFragment extends PagerFragment {
         titles.add("手机壁纸");
         titles.add("动漫美图");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(GamerSkyFragment.newInstance(Contracts.Url.ACG_GAMERSKY_ZX));
-        fragments.add(GamerSkyFragment.newInstance(Contracts.Url.ACG_GAMERSKY_PC));
-        fragments.add(GamerSkyFragment.newInstance(Contracts.Url.ACG_GAMERSKY_SJ));
-        fragments.add(GamerSkyFragment.newInstance(Contracts.Url.ACG_GAMERSKY_MT));
+        fragments.add(GamerSkyFragment.newInstance(Url.ACG_GAMERSKY_ZX));
+        fragments.add(GamerSkyFragment.newInstance(Url.ACG_GAMERSKY_PC));
+        fragments.add(GamerSkyFragment.newInstance(Url.ACG_GAMERSKY_SJ));
+        fragments.add(GamerSkyFragment.newInstance(Url.ACG_GAMERSKY_MT));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.moe005tv.moe;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class MOE005TVBean extends BaseBean {
+class MOE005TVBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

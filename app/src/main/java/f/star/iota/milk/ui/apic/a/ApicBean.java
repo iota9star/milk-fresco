@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.apic.a;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class ApicBean extends BaseBean {
+class ApicBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

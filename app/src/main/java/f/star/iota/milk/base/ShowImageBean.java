@@ -3,10 +3,10 @@ package f.star.iota.milk.base;
 import java.util.Map;
 
 public class ShowImageBean {
-    private String url;
-    private String preview;
-    private String folder;
-    private String description;
+    private final String url;
+    private final String preview;
+    private final String folder;
+    private final String description;
     private Map<String, String> headers;
 
     public ShowImageBean(String url, String preview, String folder, String description, Map<String, String> headers) {

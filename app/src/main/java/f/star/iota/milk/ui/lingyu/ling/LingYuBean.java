@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.lingyu.ling;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class LingYuBean extends BaseBean {
+class LingYuBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -25,7 +25,7 @@ public class YYPresenter extends StringPresenter<List<YYBean>> {
         Elements select = Jsoup.parse(s).select("#content > div.post.postimg > p > a > img");
         for (Element element : select) {
             YYBean bean = new YYBean();
-            String url = Contracts.Url.ROSIYY_BASE + element.attr("src");
+            String url = Url.ROSIYY_BASE + element.attr("src");
             bean.setUrl(url);
             list.add(bean);
         }

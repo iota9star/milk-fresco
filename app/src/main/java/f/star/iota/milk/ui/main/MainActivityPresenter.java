@@ -7,7 +7,7 @@ import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.model.Response;
 import com.lzy.okrx2.adapter.ObservableResponse;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -31,7 +31,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         int random = (int) (Math.random() * 4);
         if (random == 0) {
             mCompositeDisposable.add(
-                    OkGo.<String>get(Contracts.Url.HITOKOTO_BILIBILIJJ)
+                    OkGo.<String>get(Url.HITOKOTO_BILIBILIJJ)
                             .converter(new StringConvert())
                             .adapt(new ObservableResponse<String>())
                             .subscribeOn(Schedulers.io())
@@ -67,7 +67,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             );
         } else if (random == 1) {
             mCompositeDisposable.add(
-                    OkGo.<String>get(Contracts.Url.YIJU)
+                    OkGo.<String>get(Url.YIJU)
                             .headers("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
                             .headers("Host", "yiju.ml")
                             .headers("Accept-Encoding", "gzip, deflate")
@@ -109,7 +109,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             );
         } else if (random == 2) {
             mCompositeDisposable.add(
-                    OkGo.<String>get(Contracts.Url.HITOKOTO_IMJAD)
+                    OkGo.<String>get(Url.HITOKOTO_IMJAD)
                             .converter(new StringConvert())
                             .adapt(new ObservableResponse<String>())
                             .subscribeOn(Schedulers.io())
@@ -137,7 +137,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             );
         } else if (random == 3) {
             mCompositeDisposable.add(
-                    OkGo.<String>get(Contracts.Url.HITOKOTO_LOLI)
+                    OkGo.<String>get(Url.HITOKOTO_LOLI)
                             .converter(new StringConvert())
                             .adapt(new ObservableResponse<String>())
                             .subscribeOn(Schedulers.io())

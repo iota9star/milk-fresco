@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -27,7 +27,7 @@ public class AnimePicturePresenter extends StringPresenter<List<AnimePictureBean
             AnimePictureBean bean = new AnimePictureBean();
             String preview = element.select("a > picture > source").attr("srcset");
             bean.setPreview(preview);
-            String url = Contracts.Url.ANIME_PICTURES_BASE + element.select("a").attr("href");
+            String url = Url.ANIME_PICTURES_BASE + element.select("a").attr("href");
             bean.setUrl(url);
             String size = element.select("div.img_block_text > a").text();
             bean.setSize(size);

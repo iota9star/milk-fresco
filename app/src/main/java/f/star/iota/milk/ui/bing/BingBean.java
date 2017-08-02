@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class BingBean {
+class BingBean {
     @SerializedName("images")
     private List<ImagesBean> images;
 
@@ -37,7 +37,7 @@ public class BingBean {
         }
 
         public String getUrl() {
-            return Contracts.Url.BING_BASE + url;
+            return Url.BING_BASE + url;
         }
 
         public void setUrl(String url) {

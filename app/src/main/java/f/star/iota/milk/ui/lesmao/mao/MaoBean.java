@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.lesmao.mao;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class MaoBean extends BaseBean {
+class MaoBean extends BaseBean {
     private String url;
 
     public MaoBean() {

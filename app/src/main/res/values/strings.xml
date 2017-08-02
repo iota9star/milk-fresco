@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Milk</string>
+    <string name="app_name">Milk@F</string>
     <string name="action_download_manager">下载管理</string>
     <string name="download">下载</string>
     <string name="title_activity_download_manager">下载管理</string>
@@ -23,14 +23,17 @@
     <string name="ganxieneirong">向开源致敬，感谢所有无私的开源贡献者</string>
     <string name="juedebucuo">觉得还不错</string>
     <string name="geiwopingfen">给我评分</string>
-    <string name="geiwojuanzeng">支付宝捐赠</string>
+    <string name="alipay">支付宝捐赠</string>
+    <string name="qqpay">QQ捐赠</string>
+    <string name="wechatpay">微信捐赠</string>
     <string name="dilidilijj">哔哩哔哩唧唧</string>
     <string name="hitokoto">一言</string>
     <string name="iota9star">iota9star</string>
     <string name="alipay_code">FKX08696X3YPOJFGWKD92E</string>
+    <string name="qq_pay_code">http://r.photo.store.qq.com/psb?/a97e084f-86ae-45db-a2e4-e63a3cb987b3/6wuOxikFvnHSM6rPTGtGM3U5WQBtTwiLW99WmaLsuPQ!/r/dGsBAAAAAAAA</string>
+    <string name="wechat_pay_code">http://r.photo.store.qq.com/psb?/a97e084f-86ae-45db-a2e4-e63a3cb987b3/EWJsk3GK9MggfSSVklZb9mqNNK7oGcFry4EEYuAx.HM!/r/dGkBAAAAAAAA</string>
     <string name="please_wait">少女祈祷中…</string>
     <string name="wait">…</string>
-    <string name="_0">0%</string>
     <string name="traffic_information">已用流量</string>
     <string name="cache">图片缓存</string>
     <string name="opened">打开</string>

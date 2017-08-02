@@ -150,6 +150,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
                 SnackbarUtils.create(mContext, "本次获得正确数据 0 条，请继续");
             } else {
                 mRefreshLayout.postDelayed(new Runnable() {
+                    @SuppressWarnings("unchecked")
                     @Override
                     public void run() {
                         mAdapter.add(beans);

@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -34,7 +34,7 @@ public class BannerPresenter implements BannerContract.Presenter {
 
     @Override
     public void getBanner() {
-        String url = Contracts.Url.MOEIMG + (int) (Math.random() * 100);
+        String url = Url.MOEIMG + (int) (Math.random() * 100);
         mCompositeDisposable.add(
                 OkGo.<String>get(url)
                         .converter(new StringConvert())

@@ -4,18 +4,18 @@
     <item
         android:id="@+id/action_show_all"
         android:description="@string/show_all"
-        app:showAsAction="never"
-        android:title="@string/show_all" />
+        android:title="@string/show_all"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_show_ing"
         android:description="@string/show_ing"
-        app:showAsAction="never"
-        android:title="@string/show_ing" />
+        android:title="@string/show_ing"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_show_finished"
         android:description="@string/show_finished"
-        app:showAsAction="never"
-        android:title="@string/show_finished" />
+        android:title="@string/show_finished"
+        app:showAsAction="never" />
 </menu>

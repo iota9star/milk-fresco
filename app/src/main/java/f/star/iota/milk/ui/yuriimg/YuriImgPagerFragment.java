@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -19,8 +19,8 @@ public class YuriImgPagerFragment extends PagerFragment {
         titles.add("最新");
         titles.add("随机");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(YuriImgFragment.newInstance(Contracts.Url.YURIIMG_NEW));
-        fragments.add(YuriImgFragment.newInstance(Contracts.Url.YURIIMG_RANDOM));
+        fragments.add(YuriImgFragment.newInstance(Url.YURIIMG_NEW));
+        fragments.add(YuriImgFragment.newInstance(Url.YURIIMG_RANDOM));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

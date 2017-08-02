@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.mangadrawing;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class MangaDrawingBean extends BaseBean {
+class MangaDrawingBean extends BaseBean {
     private String preview;
     private String url;
 

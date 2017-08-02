@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refresh_layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_white_1000">
+    android:background="?attr/board_background"
+    tools:ignore="Overdraw">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/v48dp"
+        android:background="?@android:attr/colorAccent" />
 
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/v16dp"
+        android:layout_marginLeft="@dimen/v16dp"
+        android:layout_marginRight="@dimen/v16dp"
+        android:layout_marginStart="@dimen/v16dp"
+        android:background="?attr/content_board_background">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -21,12 +21,12 @@ public class MangaDrawingHentaiPagerFragment extends PagerFragment {
         titles.add("DOWNLOADS");
         titles.add("POPULAR");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_HENTAI_ALL));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_HENTAI_IMAGES));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_HENTAI_UNRECOGNIZED));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_HENTAI_FAVORITES));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_HENTAI_DOWNLOADS));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_HENTAI_POPULAR));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_HENTAI_ALL));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_HENTAI_IMAGES));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_HENTAI_UNRECOGNIZED));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_HENTAI_FAVORITES));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_HENTAI_DOWNLOADS));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_HENTAI_POPULAR));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

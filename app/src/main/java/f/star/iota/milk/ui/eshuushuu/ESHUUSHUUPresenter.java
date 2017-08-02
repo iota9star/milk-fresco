@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -28,9 +28,9 @@ public class ESHUUSHUUPresenter extends StringPresenter<List<ESHUUSHUUBean>> {
             String size = element.select("div.meta > dl > dd:nth-child(8)").text();
             size = size.substring(0, size.indexOf("("));
             bean.setSize(size);
-            String preview = Contracts.Url.E_SHUUSHUU_BASE + element.select("div.thumb > a > img").attr("src");
+            String preview = Url.E_SHUUSHUU_BASE + element.select("div.thumb > a > img").attr("src");
             bean.setPreview(preview);
-            String url = Contracts.Url.E_SHUUSHUU_BASE + element.select("div.thumb > a").attr("href");
+            String url = Url.E_SHUUSHUU_BASE + element.select("div.thumb > a").attr("href");
             bean.setUrl(url);
             list.add(bean);
         }

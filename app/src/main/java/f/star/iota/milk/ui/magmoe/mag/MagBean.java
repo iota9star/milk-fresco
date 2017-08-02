@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.magmoe.mag;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class MagBean extends BaseBean {
+class MagBean extends BaseBean {
     private String preview;
     private String title;
     private String subtitle;

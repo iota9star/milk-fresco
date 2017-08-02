@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.bcy.ing;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class IngBean extends BaseBean {
+class IngBean extends BaseBean {
     private String url;
 
     public IngBean() {

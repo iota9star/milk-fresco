@@ -7,6 +7,17 @@ import f.star.iota.milk.base.BaseBean;
 
 
 public class BCYRankingBean extends BaseBean implements Parcelable {
+    public static final Creator<BCYRankingBean> CREATOR = new Creator<BCYRankingBean>() {
+        @Override
+        public BCYRankingBean createFromParcel(Parcel in) {
+            return new BCYRankingBean(in);
+        }
+
+        @Override
+        public BCYRankingBean[] newArray(int size) {
+            return new BCYRankingBean[size];
+        }
+    };
     private String description;
     private String author;
     private String avatar;
@@ -17,7 +28,7 @@ public class BCYRankingBean extends BaseBean implements Parcelable {
     public BCYRankingBean() {
     }
 
-    protected BCYRankingBean(Parcel in) {
+    private BCYRankingBean(Parcel in) {
         description = in.readString();
         author = in.readString();
         avatar = in.readString();
@@ -40,18 +51,6 @@ public class BCYRankingBean extends BaseBean implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<BCYRankingBean> CREATOR = new Creator<BCYRankingBean>() {
-        @Override
-        public BCYRankingBean createFromParcel(Parcel in) {
-            return new BCYRankingBean(in);
-        }
-
-        @Override
-        public BCYRankingBean[] newArray(int size) {
-            return new BCYRankingBean[size];
-        }
-    };
 
     public String getDescription() {
         return description;

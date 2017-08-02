@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class TGBean {
+class TGBean {
 
     @SerializedName("status")
     private boolean status;
@@ -38,7 +38,7 @@ public class TGBean {
         private String title;
 
         public String getImg() {
-            return Contracts.Url.TNGOU_BASE + img;
+            return Url.TNGOU_BASE + img;
         }
 
         public void setImg(String img) {

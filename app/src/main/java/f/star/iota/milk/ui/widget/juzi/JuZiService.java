@@ -36,21 +36,20 @@ import f.star.iota.milk.util.ConfigUtils;
 
 public class JuZiService extends Service implements JuZiContract.View, BannerContract.View {
 
+    private static final String ACTION_REFRESH = "star.iota.widget.juzi.refresh";
     private JuZiPresenter mJuziJuZiPresenter;
     private BannerPresenter mBannerPresenter;
     private Timer mTimer;
     private boolean juziIsRunning = false;
     private boolean bannerIsRunning = false;
-    private Context mContext;
-
-    private TimerTask mTask = new TimerTask() {
+    private final TimerTask mTask = new TimerTask() {
         @Override
         public void run() {
             juzi();
             banner();
         }
     };
-
+    private Context mContext;
     private RefreshReceiver mRefreshReceiver;
 
     @Nullable
@@ -70,8 +69,6 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
         bannerIsRunning = true;
         mBannerPresenter.getBanner();
     }
-
-    private static final String ACTION_REFRESH = "star.iota.widget.juzi.refresh";
 
     @Override
     public void onCreate() {
@@ -158,16 +155,6 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
         bannerIsRunning = false;
     }
 
-    public class RefreshReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
-                juzi();
-                banner();
-            }
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -187,5 +174,15 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY_COMPATIBILITY;
+    }
+
+    public class RefreshReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
+                juzi();
+                banner();
+            }
+        }
     }
 }

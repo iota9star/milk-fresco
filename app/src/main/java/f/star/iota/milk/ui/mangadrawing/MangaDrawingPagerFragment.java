@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -21,12 +21,12 @@ public class MangaDrawingPagerFragment extends PagerFragment {
         titles.add("DOWNLOADS");
         titles.add("POPULAR");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_ALL));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_IMAGES));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_ARTWORKS));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_FAVORITES));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_DOWNLOADS));
-        fragments.add(MangaDrawingFragment.newInstance(Contracts.Url.MANGA_DRAWING_POPULAR));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_ALL));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_IMAGES));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_ARTWORKS));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_FAVORITES));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_DOWNLOADS));
+        fragments.add(MangaDrawingFragment.newInstance(Url.MANGA_DRAWING_POPULAR));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

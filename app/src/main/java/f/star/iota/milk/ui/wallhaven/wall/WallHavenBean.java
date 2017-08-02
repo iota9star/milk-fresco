@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.wallhaven.wall;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class WallHavenBean extends BaseBean {
+class WallHavenBean extends BaseBean {
     private String preview;
     private String url;
     private String size;

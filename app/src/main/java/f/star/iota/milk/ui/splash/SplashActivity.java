@@ -29,12 +29,13 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.ui.lock.PinLockActivity;
@@ -58,6 +59,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     FrameLayout mFrameLayoutSplashContainer;
     @BindView(R.id.button_go)
     Button mButtonGo;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout mRefreshLayout;
+    private SplashPresenter mPresenter;
 
     @OnClick({R.id.button_go})
     public void onClick() {
@@ -65,20 +69,24 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     private void go() {
-        if (ConfigUtils.isLock(aContext) == Contracts.LockType.PIN) {
+        if (ConfigUtils.isLock(aContext) == LockType.PIN) {
             startActivity(new Intent(mContext, PinLockActivity.class));
-        } else if (ConfigUtils.isLock(aContext) == Contracts.LockType.NONE) {
+        } else if (ConfigUtils.isLock(aContext) == LockType.NONE) {
             startActivity(new Intent(mContext, MainActivity.class));
         }
         finish();
     }
 
-    private SplashPresenter mPresenter;
+    @Override
+    protected boolean isFullScreen() {
+        return true;
+    }
 
     @Override
     protected void init(Bundle savedInstanceState) {
         mPresenter = new SplashPresenter(this);
         mPresenter.getImage();
+        mRefreshLayout.autoRefresh();
         TypedValue typedValue = new TypedValue();
         mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
@@ -87,8 +95,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         progressBarDrawable.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v16dp));
         progressBarDrawable.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
         GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources())
-                .setFailureImage(R.drawable.ic_report_problem_white_48dp)
-                .setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
+                .setPlaceholderImage(R.mipmap.app_icon)
+                .setPlaceholderImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                 .setProgressBarImage(progressBarDrawable).build();
         mSimpleDraweeView.setHierarchy(hierarchyBuilder);
     }
@@ -136,11 +144,18 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>() {
             @Override
             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                mRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRefreshLayout.finishRefresh(true);
+                    }
+                }, 960);
                 mPresenter.getHistory();
             }
 
             @Override
             public void onFailure(String id, Throwable throwable) {
+                mRefreshLayout.finishRefresh(false);
                 go();
             }
         };

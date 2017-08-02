@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.cosplayla.cosplay;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class CosplayLaBean extends BaseBean {
+class CosplayLaBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

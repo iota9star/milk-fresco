@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.www005tv.tv;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class TVBean extends BaseBean {
+class TVBean extends BaseBean {
     private String url;
 
     public TVBean() {

@@ -19,7 +19,8 @@ public abstract class StringPresenter<T> implements PVContract.Presenter {
 
     private final CompositeDisposable mCompositeDisposable;
 
-    public StringPresenter(PVContract.View view) {
+    @SuppressWarnings("unchecked")
+    protected StringPresenter(PVContract.View view) {
         this.view = view;
         mCompositeDisposable = new CompositeDisposable();
     }

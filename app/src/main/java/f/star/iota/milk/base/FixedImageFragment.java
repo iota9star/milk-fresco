@@ -125,6 +125,7 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
                 SnackbarUtils.create(mContext, "本次获得数据0条，请刷新");
             } else {
                 mRefreshLayout.postDelayed(new Runnable() {
+                    @SuppressWarnings("unchecked")
                     @Override
                     public void run() {
                         mAdapter.add(beans);

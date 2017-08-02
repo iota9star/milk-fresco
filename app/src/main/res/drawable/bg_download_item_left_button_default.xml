@@ -4,5 +4,5 @@
     <corners
         android:bottomLeftRadius="@dimen/v2dp"
         android:topLeftRadius="@dimen/v2dp" />
-    <solid android:color="@color/ThemeBlack" />
+    <solid android:color="?@android:attr/colorAccent" />
 </shape>

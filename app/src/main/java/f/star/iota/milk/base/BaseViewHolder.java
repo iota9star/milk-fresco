@@ -34,8 +34,8 @@ import f.star.iota.milk.util.SnackbarUtils;
 
 
 public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.ViewHolder {
-    protected Context mContext;
-    protected Context aContext;
+    protected final Context mContext;
+    protected final Context aContext;
 
     protected BaseViewHolder(View itemView) {
         super(itemView);
@@ -153,15 +153,14 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
                                             .folder(FileUtils.getDownloadDir() + image.getFolder())
                                             .save()
                                             .start();
-                                    Toast.makeText(mContext, "开始下载：" + image.getUrl(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mContext, "开始下载：" + image.getUrl(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     }
                 })
                 .setCustomDraweeHierarchyBuilder(GenericDraweeHierarchyBuilder.newInstance(mContext.getResources())
-                        .setFailureImage(R.drawable.ic_report_problem_white_48dp)
-                        .setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
+                        .setFailureImage(R.mipmap.app_icon).setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                         .setProgressBarImage(progressBarDrawable))
                 .setOverlayView(overlayView)
                 .show();

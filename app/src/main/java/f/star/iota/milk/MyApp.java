@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.support.annotation.NonNull;
 
 import com.facebook.cache.disk.DiskCacheConfig;
@@ -46,7 +45,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.util.CrashUtils;
 import f.star.iota.milk.util.FileUtils;
+import f.star.iota.milk.util.Utils;
 import okhttp3.OkHttpClient;
 
 
@@ -56,15 +57,27 @@ public class MyApp extends Application {
     private static final long MAX_DISK_CACHE_SIZE = 1024 * ByteConstants.MB;
     private static final long MAX_DISK_CACHE_LOW_SIZE = 300 * ByteConstants.MB;
     private static final long MAX_DISK_CACHE_VERY_LOW_SIZE = 100 * ByteConstants.MB;
-    private static final int MAX_CACHE_ENTRIES_L_PLUS = 16;
-    private static final int MAX_CACHE_ENTRIES_L_PRE = 24;
+    private static final int MAX_CACHE_ENTRIES = 16;
     private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();
-    private static final int MAX_MEMORY_CACHE_SIZE_L_PLUS = MAX_HEAP_SIZE / 8;
-    private static final int MAX_MEMORY_CACHE_SIZE_L_PRE = MAX_HEAP_SIZE / 4;
-    private static final int MAX_MEMORY_SIZE_ONE_IMAGE_L_PLUS = 16 * ByteConstants.MB;
-    private static final int MAX_MEMORY_SIZE_ONE_IMAGE_L_PRE = 8 * ByteConstants.MB;
+    private static final int MAX_MEMORY_CACHE_SIZE = MAX_HEAP_SIZE / 8;
+    private static final int MAX_MEMORY_SIZE_ONE_IMAGE = 1024 * ByteConstants.MB;
     @SuppressLint("StaticFieldLeak")
     public static Context mContext;
+
+    private static OkHttpClient makeOkHttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
+        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+        loggingInterceptor.setColorLevel(Level.INFO);
+        builder.addInterceptor(loggingInterceptor);
+        builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
+        builder.writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
+        builder.connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
+        builder.cookieJar(new CookieJarImpl(new DBCookieStore(mContext)));
+        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
+        builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
+        return builder.build();
+    }
 
     @Override
     public void onCreate() {
@@ -72,8 +85,8 @@ public class MyApp extends Application {
         mContext = getApplicationContext();
         Themer.INSTANCE.init(this, ConfigUtils.getTheme(mContext));
 //        LeakCanary.install(this);
-//        Utils.init(this);
-//        CrashUtils.init(FileUtils.getDownloadDir() + "Log");
+        Utils.init(this);
+        CrashUtils.init(FileUtils.getDownloadDir() + "Log");
         addCount();
         initOkGo();
         initFresco();
@@ -129,21 +142,13 @@ public class MyApp extends Application {
         Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier = new Supplier<MemoryCacheParams>() {
             @Override
             public MemoryCacheParams get() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    return new MemoryCacheParams(
-                            MAX_MEMORY_CACHE_SIZE_L_PLUS,
-                            MAX_CACHE_ENTRIES_L_PLUS,
-                            MAX_MEMORY_CACHE_SIZE_L_PLUS,
-                            Integer.MAX_VALUE,
-                            MAX_MEMORY_SIZE_ONE_IMAGE_L_PLUS);
-                } else {
-                    return new MemoryCacheParams(
-                            MAX_MEMORY_CACHE_SIZE_L_PRE,
-                            MAX_CACHE_ENTRIES_L_PRE,
-                            MAX_MEMORY_CACHE_SIZE_L_PRE,
-                            Integer.MAX_VALUE,
-                            MAX_MEMORY_SIZE_ONE_IMAGE_L_PRE);
-                }
+                return new MemoryCacheParams(
+                        MAX_MEMORY_CACHE_SIZE,
+                        MAX_CACHE_ENTRIES,
+                        MAX_MEMORY_CACHE_SIZE,
+                        Integer.MAX_VALUE,
+                        MAX_MEMORY_SIZE_ONE_IMAGE);
+
             }
         };
         ProgressiveJpegConfig progressiveJpegConfig = new ProgressiveJpegConfig() {
@@ -201,20 +206,5 @@ public class MyApp extends Application {
                 .setRetryCount(3)
                 .addCommonHeaders(headers);
         OkDownload.getInstance().getThreadPool().setCorePoolSize(ConfigUtils.getDownloadCountConfig(this));
-    }
-
-    public static OkHttpClient makeOkHttpClient() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
-        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
-        loggingInterceptor.setColorLevel(Level.INFO);
-        builder.addInterceptor(loggingInterceptor);
-        builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
-        builder.writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
-        builder.connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
-        builder.cookieJar(new CookieJarImpl(new DBCookieStore(mContext)));
-        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
-        builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
-        return builder.build();
     }
 }

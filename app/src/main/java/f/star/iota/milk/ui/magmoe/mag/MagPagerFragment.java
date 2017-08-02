@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -19,8 +19,8 @@ public class MagPagerFragment extends PagerFragment {
         titles.add("萌星星");
         titles.add("Cosplay");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(MagFragment.newInstance(Contracts.Url.MAG_MOE_STAR));
-        fragments.add(MagFragment.newInstance(Contracts.Url.MAG_MOE_COSPLAY));
+        fragments.add(MagFragment.newInstance(Url.MAG_MOE_STAR));
+        fragments.add(MagFragment.newInstance(Url.MAG_MOE_COSPLAY));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

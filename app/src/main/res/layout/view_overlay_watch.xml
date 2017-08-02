@@ -9,8 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorTransparent"
         android:orientation="vertical">
 
         <Button
@@ -19,7 +17,8 @@
             android:layout_height="@dimen/v28dp"
             android:layout_marginBottom="@dimen/v16dp"
             android:background="@drawable/bg_button_splash"
-            android:text="@string/info" />
+            android:text="@string/info"
+            android:textColor="?attr/button_text_color" />
 
         <Button
             android:id="@+id/button_download"
@@ -27,7 +26,8 @@
             android:layout_height="@dimen/v28dp"
             android:layout_marginBottom="@dimen/v16dp"
             android:background="@drawable/bg_button_splash"
-            android:text="@string/download" />
+            android:text="@string/download"
+            android:textColor="?attr/button_text_color" />
 
         <Button
             android:id="@+id/button_index"
@@ -42,6 +42,7 @@
             android:paddingLeft="@dimen/v4dp"
             android:paddingRight="@dimen/v4dp"
             android:paddingStart="@dimen/v4dp"
+            android:textColor="?attr/button_text_color"
             android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

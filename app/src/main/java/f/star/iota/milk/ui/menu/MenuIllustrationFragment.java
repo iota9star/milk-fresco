@@ -4,7 +4,8 @@ package f.star.iota.milk.ui.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Menus;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.ui.animepictures.anime.AnimePictureFragment;
@@ -38,152 +39,152 @@ public class MenuIllustrationFragment extends MenuFragment {
         BaseActivity activity = (BaseActivity) mContext;
         BaseFragment currentFragment = null;
         switch (menu.getId()) {
-            case Contracts.Menu.MENU_YANDE_ID:
+            case Menus.MENU_YANDE_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BooruFragment.newInstance(Contracts.Url.YANDE);
-                activity.setTitle(Contracts.Menu.MENU_YANDE);
+                currentFragment = BooruFragment.newInstance(Url.YANDE);
+                activity.setTitle(Menus.MENU_YANDE);
                 break;
-            case Contracts.Menu.MENU_KONACHAN_ID:
+            case Menus.MENU_KONACHAN_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BooruFragment.newInstance(Contracts.Url.KONACHAN);
-                activity.setTitle(Contracts.Menu.MENU_KONACHAN);
+                currentFragment = BooruFragment.newInstance(Url.KONACHAN);
+                activity.setTitle(Menus.MENU_KONACHAN);
                 break;
-            case Contracts.Menu.MENU_LOLIBOORU_ID:
+            case Menus.MENU_LOLIBOORU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BooruFragment.newInstance(Contracts.Url.LOLIBOORU);
-                activity.setTitle(Contracts.Menu.MENU_LOLIBOORU);
+                currentFragment = BooruFragment.newInstance(Url.LOLIBOORU);
+                activity.setTitle(Menus.MENU_LOLIBOORU);
                 break;
-            case Contracts.Menu.MENU_DANBOORU_ID:
+            case Menus.MENU_DANBOORU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = DonmaiFragment.newInstance(Contracts.Url.DANBOORU);
-                activity.setTitle(Contracts.Menu.MENU_DANBOORU);
+                currentFragment = DonmaiFragment.newInstance(Url.DANBOORU);
+                activity.setTitle(Menus.MENU_DANBOORU);
                 break;
-            case Contracts.Menu.MENU_SAFEBOORU_ID:
+            case Menus.MENU_SAFEBOORU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = DonmaiFragment.newInstance(Contracts.Url.SAFEBOORU);
-                activity.setTitle(Contracts.Menu.MENU_SAFEBOORU);
+                currentFragment = DonmaiFragment.newInstance(Url.SAFEBOORU);
+                activity.setTitle(Menus.MENU_SAFEBOORU);
                 break;
-            case Contracts.Menu.MENU_E621_ID:
+            case Menus.MENU_E621_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BooruFragment.newInstance(Contracts.Url.E621);
-                activity.setTitle(Contracts.Menu.MENU_E621);
+                currentFragment = BooruFragment.newInstance(Url.E621);
+                activity.setTitle(Menus.MENU_E621);
                 break;
-            case Contracts.Menu.MENU_E926_ID:
+            case Menus.MENU_E926_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BooruFragment.newInstance(Contracts.Url.E926);
-                activity.setTitle(Contracts.Menu.MENU_E926);
+                currentFragment = BooruFragment.newInstance(Url.E926);
+                activity.setTitle(Menus.MENU_E926);
                 break;
-            case Contracts.Menu.MENU_WALLHAVEN_ID:
+            case Menus.MENU_WALLHAVEN_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = WallHavenFragment.newInstance(Contracts.Url.WALLHAVEN);
-                activity.setTitle(Contracts.Menu.MENU_WALLHAVEN);
+                currentFragment = WallHavenFragment.newInstance(Url.WALLHAVEN);
+                activity.setTitle(Menus.MENU_WALLHAVEN);
                 break;
-            case Contracts.Menu.MENU_GACHA_ID:
+            case Menus.MENU_GACHA_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new GachaPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_GACHA);
+                activity.setTitle(Menus.MENU_GACHA);
                 break;
-            case Contracts.Menu.MENU_BCY_ILLUST_SELECTED_ID:
+            case Menus.MENU_BCY_ILLUST_SELECTED_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BCYSelectedFragment.newInstance(Contracts.Url.BCY_ILLUST_SELECTED);
-                activity.setTitle(Contracts.Menu.MENU_BCY_SELECTED);
+                currentFragment = BCYSelectedFragment.newInstance(Url.BCY_ILLUST_SELECTED);
+                activity.setTitle(Menus.MENU_BCY_SELECTED);
                 break;
-            case Contracts.Menu.MENU_BCY_ILLUST_RANKING_ID:
+            case Menus.MENU_BCY_ILLUST_RANKING_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = BCYRankingPagerFragment.newInstance(BCYRankingPagerFragment.ILLUST);
-                activity.setTitle(Contracts.Menu.MENU_BCY_RANKING);
+                activity.setTitle(Menus.MENU_BCY_RANKING);
                 break;
-            case Contracts.Menu.MENU_MANGA_DRAWING_ID:
+            case Menus.MENU_MANGA_DRAWING_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new MangaDrawingPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_MANGA_DRAWING);
+                activity.setTitle(Menus.MENU_MANGA_DRAWING);
                 break;
-            case Contracts.Menu.MENU_MANGA_DRAWING_HENTAI_ID:
+            case Menus.MENU_MANGA_DRAWING_HENTAI_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new MangaDrawingHentaiPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_MANGA_DRAWING);
+                activity.setTitle(Menus.MENU_MANGA_DRAWING);
                 break;
-            case Contracts.Menu.MENU_MAG_MOE_MOE_ID:
+            case Menus.MENU_MAG_MOE_MOE_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = MagFragment.newInstance(Contracts.Url.MAG_MOE_MOE);
-                activity.setTitle(Contracts.Menu.MENU_MAG_MOE);
+                currentFragment = MagFragment.newInstance(Url.MAG_MOE_MOE);
+                activity.setTitle(Menus.MENU_MAG_MOE);
                 break;
 
-            case Contracts.Menu.MENU_APIC_ID:
+            case Menus.MENU_APIC_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new ApicPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_APIC);
+                activity.setTitle(Menus.MENU_APIC);
                 break;
-            case Contracts.Menu.MENU_ZEROCHAN_ID:
+            case Menus.MENU_ZEROCHAN_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = ZerochanFragment.newInstance(Contracts.Url.ZEROCHAN);
-                activity.setTitle(Contracts.Menu.MENU_ZEROCHAN);
+                currentFragment = ZerochanFragment.newInstance(Url.ZEROCHAN);
+                activity.setTitle(Menus.MENU_ZEROCHAN);
                 break;
-            case Contracts.Menu.MENU_E_SHUUSHUU_ID:
+            case Menus.MENU_E_SHUUSHUU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = ESHUUSHUUFragment.newInstance(Contracts.Url.E_SHUUSHUU);
-                activity.setTitle(Contracts.Menu.MENU_E_SHUUSHUU);
+                currentFragment = ESHUUSHUUFragment.newInstance(Url.E_SHUUSHUU);
+                activity.setTitle(Menus.MENU_E_SHUUSHUU);
                 break;
-            case Contracts.Menu.MENU_MINITOKYO_ID:
+            case Menus.MENU_MINITOKYO_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = MINITOKYOFragment.newInstance(Contracts.Url.MINITOKYO);
-                activity.setTitle(Contracts.Menu.MENU_MINITOKYO);
+                currentFragment = MINITOKYOFragment.newInstance(Url.MINITOKYO);
+                activity.setTitle(Menus.MENU_MINITOKYO);
                 break;
-            case Contracts.Menu.MENU_WWW_005_TV_ACG_ID:
+            case Menus.MENU_WWW_005_TV_ACG_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new WWW005TVPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_WWW_005_TV);
+                activity.setTitle(Menus.MENU_WWW_005_TV);
                 break;
 
-            case Contracts.Menu.MENU_JDLINGYU_ACG_ID:
+            case Menus.MENU_JDLINGYU_ACG_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = JDLINGYUFragment.newInstance(Contracts.Url.JDLINGYU_ACG);
-                activity.setTitle(Contracts.Menu.MENU_JDLINGYU);
+                currentFragment = JDLINGYUFragment.newInstance(Url.JDLINGYU_ACG);
+                activity.setTitle(Menus.MENU_JDLINGYU);
                 break;
-            case Contracts.Menu.MENU_LINGYU_ID:
+            case Menus.MENU_LINGYU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = LingYuFragment.newInstance(Contracts.Url.LINGYU);
-                activity.setTitle(Contracts.Menu.MENU_LINGYU);
+                currentFragment = LingYuFragment.newInstance(Url.LINGYU);
+                activity.setTitle(Menus.MENU_LINGYU);
                 break;
-            case Contracts.Menu.MENU_MOEIMG_ID:
+            case Menus.MENU_MOEIMG_ID:
                 activity.removeFragmentContainerChildrenViews();
                 if (!ConfigUtils.getR(aContext)) {
-                    currentFragment = MoeimgFragment.newInstance(Contracts.Url.MOEIMG_H);
+                    currentFragment = MoeimgFragment.newInstance(Url.MOEIMG_H);
                 } else {
-                    currentFragment = MoeimgFragment.newInstance(Contracts.Url.MOEIMG);
+                    currentFragment = MoeimgFragment.newInstance(Url.MOEIMG);
                 }
-                activity.setTitle(Contracts.Menu.MENU_MOEIMG);
+                activity.setTitle(Menus.MENU_MOEIMG);
                 break;
-            case Contracts.Menu.MENU_NIJIERO_CH_ID:
+            case Menus.MENU_NIJIERO_CH_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = NijieroCHFragment.newInstance(Contracts.Url.NIJIERO_CH);
-                activity.setTitle(Contracts.Menu.MENU_NIJIERO_CH);
+                currentFragment = NijieroCHFragment.newInstance(Url.NIJIERO_CH);
+                activity.setTitle(Menus.MENU_NIJIERO_CH);
                 break;
 
-            case Contracts.Menu.MENU_MOE005TV_ACG_ID:
+            case Menus.MENU_MOE005TV_ACG_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = MOE005TVPagerFragment.newInstance(MOE005TVPagerFragment.ACG);
-                activity.setTitle(Contracts.Menu.MENU_MOE005TV);
+                activity.setTitle(Menus.MENU_MOE005TV);
                 break;
-            case Contracts.Menu.MENU_ACG_GAMERSKY_ACG_ID:
+            case Menus.MENU_ACG_GAMERSKY_ACG_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new GamerSkyPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_ACG_GAMERSKY);
+                activity.setTitle(Menus.MENU_ACG_GAMERSKY);
                 break;
-            case Contracts.Menu.MENU_PANGCI_ID:
+            case Menus.MENU_PANGCI_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = PANGCIFragment.newInstance(Contracts.Url.PANGCI);
-                activity.setTitle(Contracts.Menu.MENU_PANGCI);
+                currentFragment = PANGCIFragment.newInstance(Url.PANGCI);
+                activity.setTitle(Menus.MENU_PANGCI);
                 break;
-            case Contracts.Menu.MENU_YURIIMG_ID:
+            case Menus.MENU_YURIIMG_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new YuriImgPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_YURIIMG);
+                activity.setTitle(Menus.MENU_YURIIMG);
                 break;
-            case Contracts.Menu.MENU_ANIME_PICTURES_ID:
+            case Menus.MENU_ANIME_PICTURES_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = AnimePictureFragment.newInstance(Contracts.Url.ANIME_PICTURES);
-                activity.setTitle(Contracts.Menu.MENU_ANIME_PICTURES);
+                currentFragment = AnimePictureFragment.newInstance(Url.ANIME_PICTURES);
+                activity.setTitle(Menus.MENU_ANIME_PICTURES);
                 break;
         }
         activity.showFragment(currentFragment);
@@ -192,176 +193,176 @@ public class MenuIllustrationFragment extends MenuFragment {
     @Override
     protected List<MenuBean> getMenuList() {
         List<MenuBean> menu = new ArrayList<>();
-        menu.add(new MenuBean(Contracts.Menu.MENU_YANDE_ID,
-                Contracts.Menu.MENU_YANDE,
-                Contracts.Url.YANDE_BASE,
+        menu.add(new MenuBean(Menus.MENU_YANDE_ID,
+                Menus.MENU_YANDE,
+                Url.YANDE_BASE,
                 "https://assets.yande.re/assets/logo_small-418e8d5ec0229f274edebe4af43b01aa29ed83b715991ba14bb41ba06b5b57b5.png",
-                Contracts.Url.YANDE_LOGIN
+                Url.YANDE_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_KONACHAN_ID,
-                Contracts.Menu.MENU_KONACHAN,
-                Contracts.Url.KONACHAN_BASE,
+        menu.add(new MenuBean(Menus.MENU_KONACHAN_ID,
+                Menus.MENU_KONACHAN,
+                Url.KONACHAN_BASE,
                 "https://konachan.com/images/logo.png",
-                Contracts.Url.KONACHAN_LOGIN
+                Url.KONACHAN_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_LOLIBOORU_ID,
-                Contracts.Menu.MENU_LOLIBOORU,
-                Contracts.Url.LOLIBOORU_BASE,
+        menu.add(new MenuBean(Menus.MENU_LOLIBOORU_ID,
+                Menus.MENU_LOLIBOORU,
+                Url.LOLIBOORU_BASE,
                 "https://lolibooru.moe/images/logo.png",
-                Contracts.Url.LOLIBOORU_LOGIN
+                Url.LOLIBOORU_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_DANBOORU_ID,
-                Contracts.Menu.MENU_DANBOORU,
-                Contracts.Url.DANBOORU_BASE,
+        menu.add(new MenuBean(Menus.MENU_DANBOORU_ID,
+                Menus.MENU_DANBOORU,
+                Url.DANBOORU_BASE,
                 "https://danbooru.donmai.us/favicon.ico",
-                Contracts.Url.DANBOORU_LOGIN
+                Url.DANBOORU_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_SAFEBOORU_ID,
-                Contracts.Menu.MENU_SAFEBOORU,
-                Contracts.Url.SAFEBOORU_BASE,
+        menu.add(new MenuBean(Menus.MENU_SAFEBOORU_ID,
+                Menus.MENU_SAFEBOORU,
+                Url.SAFEBOORU_BASE,
                 "https://safebooru.donmai.us/favicon.ico",
-                Contracts.Url.SAFEBOORU_LOGIN
+                Url.SAFEBOORU_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_E621_ID,
-                Contracts.Menu.MENU_E621,
-                Contracts.Url.E621_BASE,
+        menu.add(new MenuBean(Menus.MENU_E621_ID,
+                Menus.MENU_E621,
+                Url.E621_BASE,
                 "https://e621.net/images/mascot_bg/evalionfix.jpg",
-                Contracts.Url.E621_LOGIN
+                Url.E621_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_E926_ID,
-                Contracts.Menu.MENU_E926,
-                Contracts.Url.E926_BASE,
+        menu.add(new MenuBean(Menus.MENU_E926_ID,
+                Menus.MENU_E926,
+                Url.E926_BASE,
                 "http://e926.net/images/mascot_bg/peacock.png",
-                Contracts.Url.E926_LOGIN
+                Url.E926_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_MOEIMG_ID,
-                Contracts.Menu.MENU_MOEIMG,
-                Contracts.Url.MOEIMG_BASE,
+        menu.add(new MenuBean(Menus.MENU_MOEIMG_ID,
+                Menus.MENU_MOEIMG,
+                Url.MOEIMG_BASE,
                 "http://img.moeimg.net/wp-content/uploads/img/moeimg_pc.gif",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_WALLHAVEN_ID,
-                Contracts.Menu.MENU_WALLHAVEN,
-                Contracts.Url.WALLHAVEN_BASE,
+        menu.add(new MenuBean(Menus.MENU_WALLHAVEN_ID,
+                Menus.MENU_WALLHAVEN,
+                Url.WALLHAVEN_BASE,
                 "https://alpha.wallhaven.cc/images/layout/logo.png",
-                Contracts.Url.WALLHAVEN_LOGIN
+                Url.WALLHAVEN_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_GACHA_ID,
-                Contracts.Menu.MENU_GACHA,
-                Contracts.Url.GACHA_BASE,
+        menu.add(new MenuBean(Menus.MENU_GACHA_ID,
+                Menus.MENU_GACHA,
+                Url.GACHA_BASE,
                 "http://gacha.cdn.126.net/src/image/all/logo.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_BCY_ILLUST_SELECTED_ID,
-                Contracts.Menu.MENU_BCY_SELECTED,
-                Contracts.Url.BCY_BASE,
+        menu.add(new MenuBean(Menus.MENU_BCY_ILLUST_SELECTED_ID,
+                Menus.MENU_BCY_SELECTED,
+                Url.BCY_BASE,
                 "https://pubin.bcyimg.com/Image/sub-nav/logo-home-9e8a0985d6.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_BCY_ILLUST_RANKING_ID,
-                Contracts.Menu.MENU_BCY_RANKING,
-                Contracts.Url.BCY_BASE,
+        menu.add(new MenuBean(Menus.MENU_BCY_ILLUST_RANKING_ID,
+                Menus.MENU_BCY_RANKING,
+                Url.BCY_BASE,
                 "https://pubin.bcyimg.com/Image/sub-nav/logo-home-9e8a0985d6.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_MANGA_DRAWING_ID,
-                Contracts.Menu.MENU_MANGA_DRAWING,
-                Contracts.Url.MANGA_DRAWING_BASE,
+        menu.add(new MenuBean(Menus.MENU_MANGA_DRAWING_ID,
+                Menus.MENU_MANGA_DRAWING,
+                Url.MANGA_DRAWING_BASE,
                 "http://static.mangadrawing.net/themes/shinpatsu/md.jpg",
-                null
+                Url.MANGA_DRAWING_LOGIN
         ));
         if (!ConfigUtils.getR(aContext)) {
-            menu.add(new MenuBean(Contracts.Menu.MENU_MANGA_DRAWING_HENTAI_ID,
-                    Contracts.Menu.MENU_MANGA_DRAWING_HENTAI,
-                    Contracts.Url.MANGA_DRAWING_BASE,
+            menu.add(new MenuBean(Menus.MENU_MANGA_DRAWING_HENTAI_ID,
+                    Menus.MENU_MANGA_DRAWING_HENTAI,
+                    Url.MANGA_DRAWING_BASE,
                     "http://static.mangadrawing.net/themes/shinpatsu/md.jpg",
-                    null
+                    Url.MANGA_DRAWING_LOGIN
             ));
-            menu.add(new MenuBean(Contracts.Menu.MENU_NIJIERO_CH_ID,
-                    Contracts.Menu.MENU_NIJIERO_CH,
-                    Contracts.Url.NIJIERO_CH_BASE,
+            menu.add(new MenuBean(Menus.MENU_NIJIERO_CH_ID,
+                    Menus.MENU_NIJIERO_CH,
+                    Url.NIJIERO_CH_BASE,
                     "https://nijiero-ch.com/wp-content/themes/erosite-theme/images/pc/img_title.png",
                     null
             ));
         }
-        menu.add(new MenuBean(Contracts.Menu.MENU_MAG_MOE_MOE_ID,
-                Contracts.Menu.MENU_MAG_MOE,
-                Contracts.Url.MAG_MOE_BASE,
+        menu.add(new MenuBean(Menus.MENU_MAG_MOE_MOE_ID,
+                Menus.MENU_MAG_MOE,
+                Url.MAG_MOE_BASE,
                 "http://mag.moe/wp-content/themes/magmoe/img/logo.png",
                 null
         ));
         menu.add(new MenuBean(
-                Contracts.Menu.MENU_APIC_ID,
-                Contracts.Menu.MENU_APIC,
-                Contracts.Url.APIC_BASE,
+                Menus.MENU_APIC_ID,
+                Menus.MENU_APIC,
+                Url.APIC_BASE,
                 "http://img.gov.com.de/2015/04/apic-in-%E6%A3%92%E6%A3%92%E7%B3%96-3-565x800.jpg",
-                Contracts.Url.APIC_LOGIN
+                Url.APIC_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_ZEROCHAN_ID,
-                Contracts.Menu.MENU_ZEROCHAN,
-                Contracts.Url.ZEROCHAN_BASE,
+        menu.add(new MenuBean(Menus.MENU_ZEROCHAN_ID,
+                Menus.MENU_ZEROCHAN,
+                Url.ZEROCHAN_BASE,
                 "http://s1.zerochan.net/header-1.jpg",
-                Contracts.Url.ZEROCHAN_LOGIN
+                Url.ZEROCHAN_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_E_SHUUSHUU_ID,
-                Contracts.Menu.MENU_E_SHUUSHUU,
-                Contracts.Url.E_SHUUSHUU_BASE,
+        menu.add(new MenuBean(Menus.MENU_E_SHUUSHUU_ID,
+                Menus.MENU_E_SHUUSHUU,
+                Url.E_SHUUSHUU_BASE,
                 "http://e-shuushuu.net/common/image/banner/hikari-chan5/middle.jpg",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_MINITOKYO_ID,
-                Contracts.Menu.MENU_MINITOKYO,
-                Contracts.Url.MINITOKYO_BASE,
+        menu.add(new MenuBean(Menus.MENU_MINITOKYO_ID,
+                Menus.MENU_MINITOKYO,
+                Url.MINITOKYO_BASE,
                 "http://static2.minitokyo.net/view/46/07/707896.jpg",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_WWW_005_TV_ACG_ID,
-                Contracts.Menu.MENU_WWW_005_TV,
-                Contracts.Url.WWW_005_TV_BASE,
+        menu.add(new MenuBean(Menus.MENU_WWW_005_TV_ACG_ID,
+                Menus.MENU_WWW_005_TV,
+                Url.WWW_005_TV_BASE,
                 "http://www.005.tv/templets/muban/style/images/bannerbg.jpg",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_MOE005TV_ACG_ID,
-                Contracts.Menu.MENU_MOE005TV,
-                Contracts.Url.MOE005TV_BASE,
+        menu.add(new MenuBean(Menus.MENU_MOE005TV_ACG_ID,
+                Menus.MENU_MOE005TV,
+                Url.MOE005TV_BASE,
                 "http://www.005.tv/templets/muban/moe_style/image/moe_logo.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_JDLINGYU_ACG_ID,
-                Contracts.Menu.MENU_JDLINGYU,
-                Contracts.Url.JDLINGYU_BASE,
+        menu.add(new MenuBean(Menus.MENU_JDLINGYU_ACG_ID,
+                Menus.MENU_JDLINGYU,
+                Url.JDLINGYU_BASE,
                 "http://www.jdlingyu.moe/wp-content/uploads/2017/01/2017-01-07_20-57-14.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_LINGYU_ID,
-                Contracts.Menu.MENU_LINGYU,
-                Contracts.Url.LINGYU_BASE,
+        menu.add(new MenuBean(Menus.MENU_LINGYU_ID,
+                Menus.MENU_LINGYU,
+                Url.LINGYU_BASE,
                 "http://tp.lingyu.me/bz/uploads/2016/07/www.lingyu.me_20160728125540677.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_ACG_GAMERSKY_ACG_ID,
-                Contracts.Menu.MENU_ACG_GAMERSKY,
-                Contracts.Url.ACG_GAMERSKY_BASE,
+        menu.add(new MenuBean(Menus.MENU_ACG_GAMERSKY_ACG_ID,
+                Menus.MENU_ACG_GAMERSKY,
+                Url.ACG_GAMERSKY_BASE,
                 "http://image.gamersky.com/webimg13/acg/new/logo.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_PANGCI_ID,
-                Contracts.Menu.MENU_PANGCI,
-                Contracts.Url.PANGCI_BASE,
+        menu.add(new MenuBean(Menus.MENU_PANGCI_ID,
+                Menus.MENU_PANGCI,
+                Url.PANGCI_BASE,
                 "https://www.pangci.cc/skin2015/logo.png",
                 null
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_YURIIMG_ID,
-                Contracts.Menu.MENU_YURIIMG,
-                Contracts.Url.YURIIMG_BASE,
+        menu.add(new MenuBean(Menus.MENU_YURIIMG_ID,
+                Menus.MENU_YURIIMG,
+                Url.YURIIMG_BASE,
                 "http://yuri.logacg.com/1707/1e7ca5bbe5e2ee9346372bc76bbc5f96.png!single.webp",
-                Contracts.Url.YURIIMG_LOGIN
+                Url.YURIIMG_LOGIN
         ));
-        menu.add(new MenuBean(Contracts.Menu.MENU_ANIME_PICTURES_ID,
-                Contracts.Menu.MENU_ANIME_PICTURES,
-                Contracts.Url.ANIME_PICTURES_BASE,
+        menu.add(new MenuBean(Menus.MENU_ANIME_PICTURES_ID,
+                Menus.MENU_ANIME_PICTURES,
+                Url.ANIME_PICTURES_BASE,
                 "https://anime-pictures.net/static/styles/first/images/back_patern.png",
-                Contracts.Url.ANIME_PICTURES_LOGIN
+                Url.ANIME_PICTURES_LOGIN
         ));
         return menu;
     }

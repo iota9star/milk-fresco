@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -24,13 +24,13 @@ public class ApicPagerFragment extends PagerFragment {
         titles.add("杂图集");
         titles.add("福利包");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_ALL));
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_ANIME));
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_ZHIFU));
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_HENTAI));
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_YUSANJIA));
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_ZATUJI));
-        fragments.add(ApicFragment.newInstance(Contracts.Url.APIC_FULI));
+        fragments.add(ApicFragment.newInstance(Url.APIC_ALL));
+        fragments.add(ApicFragment.newInstance(Url.APIC_ANIME));
+        fragments.add(ApicFragment.newInstance(Url.APIC_ZHIFU));
+        fragments.add(ApicFragment.newInstance(Url.APIC_HENTAI));
+        fragments.add(ApicFragment.newInstance(Url.APIC_YUSANJIA));
+        fragments.add(ApicFragment.newInstance(Url.APIC_ZATUJI));
+        fragments.add(ApicFragment.newInstance(Url.APIC_FULI));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

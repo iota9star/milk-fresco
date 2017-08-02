@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import f.star.iota.milk.Contracts;
 import f.star.iota.milk.R;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.TitlePagerAdapter;
@@ -23,14 +23,14 @@ public class TGPagerFragment extends BaseFragment implements PVContract.View {
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
 
-    TabLayout mTabLayout;
-    List<Fragment> fragments;
+    private TabLayout mTabLayout;
+    private List<Fragment> fragments;
     private TGClassifyPresenter mPresenter;
 
     @Override
     protected void init(Bundle savedInstanceState) {
         mPresenter = new TGClassifyPresenter(this);
-        mPresenter.get(Contracts.Url.TNGOU_CLASSIFY);
+        mPresenter.get(Url.TNGOU_CLASSIFY);
         mTabLayout = getActivity().findViewById(R.id.tab_layout);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
@@ -50,7 +50,7 @@ public class TGPagerFragment extends BaseFragment implements PVContract.View {
             String title = ((ClassifyBean.TngouBean) bean).getTitle();
             int id = ((ClassifyBean.TngouBean) bean).getId();
             titles.add(title);
-            TGFragment fragment = TGFragment.newInstance(Contracts.Url.TNGOU_LIST + id + "&page=");
+            TGFragment fragment = TGFragment.newInstance(Url.TNGOU_LIST + id + "&page=");
             fragments.add(fragment);
         }
         TitlePagerAdapter adapter = new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="content_board_background_color" format="color" />
-    <attr name="board_background_color" format="color" />
+    <attr name="content_board_background" format="color|reference" />
+    <attr name="board_background" format="color|reference" />
+    <attr name="card_background" format="color|reference" />
+    <attr name="button_text_color" format="color|reference" />
+    <attr name="pin_text_color" format="color|reference" />
 </resources>

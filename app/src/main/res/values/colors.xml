@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorTransparentBackground">#f0000000</color>
 
     <color name="colorContentBoardBackground">#f1f3f6</color>
     <color name="colorContentBoardBackgroundNight">#252525</color>
     <color name="colorBoardBackground">#fdfdfd</color>
     <color name="colorBoardBackgroundNight">#3d3d3d</color>
-    <color name="colorText">#c4c4c4</color>
     <color name="colorTransparent">#00000000</color>
 
-    <color name="colorNormalBackground">#dcdcdc</color>
+    <color name="colorCardBackground">#ffffff</color>
+    <color name="colorCardBackgroundNight">@color/ThemeBlack</color>
+
+    <color name="colorText">@color/ThemeBlack</color>
+    <color name="colorTextNight">#fdfdfd</color>
 
 
     <color name="ThemeRed">#f24336</color>

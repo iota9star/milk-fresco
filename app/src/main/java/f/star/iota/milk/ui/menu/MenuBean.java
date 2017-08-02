@@ -1,11 +1,11 @@
 package f.star.iota.milk.ui.menu;
 
-public class MenuBean {
-    private int id;
-    private String name;
-    private String banner;
-    private String url;
-    private String loginUrl;
+class MenuBean {
+    private final int id;
+    private final String name;
+    private final String banner;
+    private final String url;
+    private final String loginUrl;
 
     public MenuBean(int id, String name, String url, String banner, String loginUrl) {
         this.id = id;

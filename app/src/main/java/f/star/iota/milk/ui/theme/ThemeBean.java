@@ -1,6 +1,6 @@
 package f.star.iota.milk.ui.theme;
 
-public class ThemeBean {
+class ThemeBean {
     private final int theme;
     private final int color;
     private final String description;

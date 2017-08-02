@@ -12,12 +12,12 @@ public class JuZiBean {
         return hitokoto;
     }
 
-    public String getSource() {
-        return source;
-    }
-
     public void setHitokoto(String hitokoto) {
         this.hitokoto = hitokoto;
+    }
+
+    public String getSource() {
+        return source;
     }
 
     public void setSource(String source) {

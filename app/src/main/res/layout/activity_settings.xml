@@ -27,6 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/board_background"
             android:orientation="vertical"
             android:paddingEnd="@dimen/v8dp"
             android:paddingStart="@dimen/v8dp">
@@ -35,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -59,7 +61,7 @@
                         android:layout_marginLeft="@dimen/v8dp"
                         android:layout_marginRight="@dimen/v8dp"
                         android:layout_marginStart="@dimen/v8dp"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <TextView
                         android:id="@+id/text_view_open_count"
@@ -67,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
+                        android:textColor="?@android:attr/colorAccent"
                         android:textSize="@dimen/v18sp"
                         android:textStyle="bold" />
 
@@ -77,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -95,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/v2dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <LinearLayout
                         android:id="@+id/linear_layout_cache"
@@ -129,6 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -147,7 +152,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/v2dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -212,6 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -230,7 +236,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/v2dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <com.xw.repo.BubbleSeekBar
                         android:id="@+id/bubble_seek_bar_span_count"
@@ -238,11 +244,10 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/v16dp"
                         app:bsb_auto_adjust_section_mark="true"
-                        app:bsb_bubble_color="@color/ThemeBlack"
-                        app:bsb_bubble_text_color="@color/md_white_1000"
+                        app:bsb_bubble_color="?@android:attr/colorAccent"
                         app:bsb_max="10"
                         app:bsb_min="2"
-                        app:bsb_second_track_color="@color/colorNormalBackground"
+                        app:bsb_second_track_color="?@android:attr/colorAccent"
                         app:bsb_section_count="8"
                         app:bsb_section_text_position="bottom_sides"
                         app:bsb_seek_by_section="true"
@@ -250,7 +255,7 @@
                         app:bsb_show_section_mark="true"
                         app:bsb_show_section_text="true"
                         app:bsb_show_thumb_text="true"
-                        app:bsb_track_color="@color/colorNormalBackground"
+                        app:bsb_track_color="?@android:attr/colorAccent"
                         app:bsb_track_size="@dimen/v2dp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -259,6 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -277,7 +283,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/v2dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <com.xw.repo.BubbleSeekBar
                         android:id="@+id/bubble_seek_bar_download_count"
@@ -285,11 +291,10 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/v16dp"
                         app:bsb_auto_adjust_section_mark="true"
-                        app:bsb_bubble_color="@color/ThemeBlack"
-                        app:bsb_bubble_text_color="@color/md_white_1000"
+                        app:bsb_bubble_color="?@android:attr/colorAccent"
                         app:bsb_max="5"
                         app:bsb_min="1"
-                        app:bsb_second_track_color="@color/colorNormalBackground"
+                        app:bsb_second_track_color="?@android:attr/colorAccent"
                         app:bsb_section_count="4"
                         app:bsb_section_text_position="bottom_sides"
                         app:bsb_seek_by_section="true"
@@ -297,7 +302,7 @@
                         app:bsb_show_section_mark="true"
                         app:bsb_show_section_text="true"
                         app:bsb_show_thumb_text="true"
-                        app:bsb_track_color="@color/colorNormalBackground"
+                        app:bsb_track_color="?@android:attr/colorAccent"
                         app:bsb_track_size="@dimen/v2dp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -306,6 +311,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -324,7 +330,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/v2dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <LinearLayout
                         android:id="@+id/linear_layout_juzi"
@@ -354,7 +360,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <LinearLayout
                         android:id="@+id/linear_layout_today_in_history"
@@ -385,8 +391,9 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/v8dp"
                 android:layout_marginBottom="@dimen/v128dp"
+                android:layout_marginTop="@dimen/v8dp"
+                app:cardBackgroundColor="?attr/card_background"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
 
@@ -405,7 +412,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/v2dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <LinearLayout
                         android:id="@+id/linear_layout_pin_lock"
@@ -436,7 +443,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorNormalBackground" />
+                        android:background="?@android:attr/colorAccent" />
 
                     <LinearLayout
                         android:id="@+id/linear_layout_fingerprint_lock"
@@ -462,6 +469,7 @@
                             app:srcCompat="@drawable/ic_fingerprint_white_24dp"
                             tools:ignore="ContentDescription" />
                     </LinearLayout>
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>

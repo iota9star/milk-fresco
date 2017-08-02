@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.www94taotucom.taotu;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class TAOTUBean extends BaseBean {
+class TAOTUBean extends BaseBean {
     private String url;
 
     public TAOTUBean() {

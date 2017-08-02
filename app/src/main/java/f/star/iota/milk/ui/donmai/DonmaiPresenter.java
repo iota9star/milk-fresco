@@ -7,8 +7,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Iterator;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
 import f.star.iota.milk.MyApp;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 import f.star.iota.milk.util.ConfigUtils;
@@ -43,11 +43,11 @@ public class DonmaiPresenter extends StringPresenter<List<DonmaiBean>> {
         }
         for (DonmaiBean bean : beans) {
             if (url.contains("safebooru")) {
-                bean.setUrl(Contracts.Url.SAFEBOORU_BASE + bean.getUrl());
-                bean.setPreview(Contracts.Url.SAFEBOORU_BASE + bean.getPreview());
+                bean.setUrl(Url.SAFEBOORU_BASE + bean.getUrl());
+                bean.setPreview(Url.SAFEBOORU_BASE + bean.getPreview());
             } else if (url.contains("danbooru")) {
-                bean.setUrl(Contracts.Url.DANBOORU_BASE + bean.getUrl());
-                bean.setPreview(Contracts.Url.DANBOORU_BASE + bean.getPreview());
+                bean.setUrl(Url.DANBOORU_BASE + bean.getUrl());
+                bean.setPreview(Url.DANBOORU_BASE + bean.getPreview());
             }
         }
         return beans;

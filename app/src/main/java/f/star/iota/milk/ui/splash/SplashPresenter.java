@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -36,7 +36,7 @@ public class SplashPresenter implements SplashContract.Presenter {
     @Override
     public void getHistory() {
         mCompositeDisposable.add(
-                OkGo.<String>get(Contracts.Url.TODAY_IN_HISTORY)
+                OkGo.<String>get(Url.TODAY_IN_HISTORY)
                         .converter(new StringConvert())
                         .adapt(new ObservableResponse<String>())
                         .subscribeOn(Schedulers.io())
@@ -67,7 +67,7 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Override
     public void getImage() {
-        String url = Contracts.Url.MOEIMG + (int) (Math.random() * 160);
+        String url = Url.MOEIMG + (int) (Math.random() * 160);
         mCompositeDisposable.add(
                 OkGo.<String>get(url)
                         .converter(new StringConvert())

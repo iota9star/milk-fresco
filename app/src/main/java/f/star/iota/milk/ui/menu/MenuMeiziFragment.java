@@ -4,7 +4,8 @@ package f.star.iota.milk.ui.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Menus;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.ui.chinagirlol.china.ChinaGirlOLPagerFragment;
@@ -27,66 +28,66 @@ public class MenuMeiziFragment extends MenuFragment {
         BaseActivity activity = (BaseActivity) mContext;
         BaseFragment currentFragment = null;
         switch (menu.getId()) {
-            case Contracts.Menu.MENU_GANK_ID:
+            case Menus.MENU_GANK_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = GankFragment.newInstance(Contracts.Url.GANK);
-                activity.setTitle(Contracts.Menu.MENU_GANK);
+                currentFragment = GankFragment.newInstance(Url.GANK);
+                activity.setTitle(Menus.MENU_GANK);
                 break;
-            case Contracts.Menu.MENU_TNGOU_ID:
+            case Menus.MENU_TNGOU_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new TGPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_TNGOU);
+                activity.setTitle(Menus.MENU_TNGOU);
                 break;
-            case Contracts.Menu.MENU_JDLINGYU_MEIZHI_ID:
+            case Menus.MENU_JDLINGYU_MEIZHI_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new JDLINGYUPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_JDLINGYU);
+                activity.setTitle(Menus.MENU_JDLINGYU);
                 break;
 
-            case Contracts.Menu.MENU_LESMAO_ID:
+            case Menus.MENU_LESMAO_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = LesmaoFragment.newInstance(Contracts.Url.LESMAO);
-                activity.setTitle(Contracts.Menu.MENU_LESMAO);
+                currentFragment = LesmaoFragment.newInstance(Url.LESMAO);
+                activity.setTitle(Menus.MENU_LESMAO);
                 break;
-            case Contracts.Menu.MENU_XIUMM_ID:
+            case Menus.MENU_XIUMM_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = XIUMMFragment.newInstance(Contracts.Url.XIUMM);
-                activity.setTitle(Contracts.Menu.MENU_XIUMM);
+                currentFragment = XIUMMFragment.newInstance(Url.XIUMM);
+                activity.setTitle(Menus.MENU_XIUMM);
                 break;
-            case Contracts.Menu.MENU_94TAOTU_ID:
+            case Menus.MENU_94TAOTU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = WWW94TAOTUCOMFragment.newInstance(Contracts.Url.WWW94TAOTUCOM);
-                activity.setTitle(Contracts.Menu.MENU_94TAOTU);
+                currentFragment = WWW94TAOTUCOMFragment.newInstance(Url.WWW94TAOTUCOM);
+                activity.setTitle(Menus.MENU_94TAOTU);
                 break;
-            case Contracts.Menu.MENU_MZITU_ID:
+            case Menus.MENU_MZITU_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = MZITUFragment.newInstance(Contracts.Url.MZITU);
-                activity.setTitle(Contracts.Menu.MENU_MZITU);
+                currentFragment = MZITUFragment.newInstance(Url.MZITU);
+                activity.setTitle(Menus.MENU_MZITU);
                 break;
-            case Contracts.Menu.MENU_MMONLY_ID:
+            case Menus.MENU_MMONLY_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = MMONLYFragment.newInstance(Contracts.Url.MMONLY);
-                activity.setTitle(Contracts.Menu.MENU_MMONLY);
+                currentFragment = MMONLYFragment.newInstance(Url.MMONLY);
+                activity.setTitle(Menus.MENU_MMONLY);
                 break;
-            case Contracts.Menu.MENU_ROSIYY_ID:
+            case Menus.MENU_ROSIYY_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = ROSIYYFragment.newInstance(Contracts.Url.ROSIYY);
-                activity.setTitle(Contracts.Menu.MENU_ROSIYY);
+                currentFragment = ROSIYYFragment.newInstance(Url.ROSIYY);
+                activity.setTitle(Menus.MENU_ROSIYY);
                 break;
-            case Contracts.Menu.MENU_192TT_ID:
+            case Menus.MENU_192TT_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new WWW192TTCOMPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_192TT);
+                activity.setTitle(Menus.MENU_192TT);
                 break;
-            case Contracts.Menu.MENU_XIUREN_ID:
+            case Menus.MENU_XIUREN_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = XiuRenFragment.newInstance(Contracts.Url.XIUREN);
-                activity.setTitle(Contracts.Menu.MENU_XIUREN);
+                currentFragment = XiuRenFragment.newInstance(Url.XIUREN);
+                activity.setTitle(Menus.MENU_XIUREN);
                 break;
-            case Contracts.Menu.MENU_CHINAGIRLOL_ID_MZ:
+            case Menus.MENU_CHINAGIRLOL_ID_MZ:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new ChinaGirlOLPagerFragment();
-                activity.setTitle(Contracts.Menu.MENU_CHINAGIRLOL);
+                activity.setTitle(Menus.MENU_CHINAGIRLOL);
                 break;
         }
         activity.showFragment(currentFragment);
@@ -95,31 +96,31 @@ public class MenuMeiziFragment extends MenuFragment {
     @Override
     protected List<MenuBean> getMenuList() {
         List<MenuBean> menu = new ArrayList<>();
-        menu.add(new MenuBean(Contracts.Menu.MENU_GANK_ID, Contracts.Menu.MENU_GANK,
-                Contracts.Url.GANK_BASE, "http://gank.io/static/favicon.ico", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_TNGOU_ID, Contracts.Menu.MENU_TNGOU,
-                Contracts.Url.TNGOU_BASE, "http://www.tngou.net/tnfs/common/amazeui/i/favicon.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_JDLINGYU_MEIZHI_ID, Contracts.Menu.MENU_JDLINGYU,
-                Contracts.Url.JDLINGYU_BASE, "http://www.jdlingyu.moe/wp-content/uploads/2017/01/2017-01-07_20-57-14.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_LESMAO_ID, Contracts.Menu.MENU_LESMAO,
-                Contracts.Url.LESMAO_BASE, "http://www.lesmao.com/static/image/common/logo.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_XIUMM_ID, Contracts.Menu.MENU_XIUMM,
-                Contracts.Url.XIUMM_BASE, "http://www.xiumm.org/themes/sense/images/logo.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_94TAOTU_ID, Contracts.Menu.MENU_94TAOTU,
-                Contracts.Url.WWW94TAOTUCOM_BASE, "http://www.94taotu.com/themes/sense/images/logo.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_MZITU_ID, Contracts.Menu.MENU_MZITU,
-                Contracts.Url.MZITU_BASE, "http://i.meizitu.net/pfiles/img/logo.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_MMONLY_ID, Contracts.Menu.MENU_MMONLY,
-                Contracts.Url.MMONLY_BASE, "http://www.mmonly.cc/skins/images/mmonly1.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_ROSIYY_ID, Contracts.Menu.MENU_ROSIYY,
-                Contracts.Url.ROSIYY_BASE, "http://www.rosiyy.com/usr/themes/mm/images/logo.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_192TT_ID, Contracts.Menu.MENU_192TT,
-                Contracts.Url.WWW192TTCOM_BASE, "http://www.192tt.com/style/logo/logo.png", null));
-        menu.add(new MenuBean(Contracts.Menu.MENU_CHINAGIRLOL_ID_MZ, Contracts.Menu.MENU_CHINAGIRLOL,
-                Contracts.Url.CHINAGIRLOL_BASE, "http://www.chinagirlol.cc/template/bbf_cg/src/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_GANK_ID, Menus.MENU_GANK,
+                Url.GANK_BASE, "http://gank.io/static/favicon.ico", null));
+        menu.add(new MenuBean(Menus.MENU_TNGOU_ID, Menus.MENU_TNGOU,
+                Url.TNGOU_BASE, "http://www.tngou.net/tnfs/common/amazeui/i/favicon.png", null));
+        menu.add(new MenuBean(Menus.MENU_JDLINGYU_MEIZHI_ID, Menus.MENU_JDLINGYU,
+                Url.JDLINGYU_BASE, "http://www.jdlingyu.moe/wp-content/uploads/2017/01/2017-01-07_20-57-14.png", null));
+        menu.add(new MenuBean(Menus.MENU_LESMAO_ID, Menus.MENU_LESMAO,
+                Url.LESMAO_BASE, "http://www.lesmao.com/static/image/common/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_XIUMM_ID, Menus.MENU_XIUMM,
+                Url.XIUMM_BASE, "http://www.xiumm.org/themes/sense/images/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_94TAOTU_ID, Menus.MENU_94TAOTU,
+                Url.WWW94TAOTUCOM_BASE, "http://www.94taotu.com/themes/sense/images/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_MZITU_ID, Menus.MENU_MZITU,
+                Url.MZITU_BASE, "http://i.meizitu.net/pfiles/img/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_MMONLY_ID, Menus.MENU_MMONLY,
+                Url.MMONLY_BASE, "http://www.mmonly.cc/skins/images/mmonly1.png", null));
+        menu.add(new MenuBean(Menus.MENU_ROSIYY_ID, Menus.MENU_ROSIYY,
+                Url.ROSIYY_BASE, "http://www.rosiyy.com/usr/themes/mm/images/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_192TT_ID, Menus.MENU_192TT,
+                Url.WWW192TTCOM_BASE, "http://www.192tt.com/style/logo/logo.png", null));
+        menu.add(new MenuBean(Menus.MENU_CHINAGIRLOL_ID_MZ, Menus.MENU_CHINAGIRLOL,
+                Url.CHINAGIRLOL_BASE, "http://www.chinagirlol.cc/template/bbf_cg/src/logo.png", null));
         if (!ConfigUtils.getR(aContext)) {
-            menu.add(new MenuBean(Contracts.Menu.MENU_XIUREN_ID, Contracts.Menu.MENU_XIUREN,
-                    Contracts.Url.XIUREN_BASE, "http://www.xiuren.org/logo.png", null));
+            menu.add(new MenuBean(Menus.MENU_XIUREN_ID, Menus.MENU_XIUREN,
+                    Url.XIUREN_BASE, "http://www.xiuren.org/logo.png", null));
         }
         return menu;
     }

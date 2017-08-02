@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -26,7 +26,7 @@ public class CosplayLaPresenter extends StringPresenter<List<CosplayLaBean>> {
             CosplayLaBean bean = new CosplayLaBean();
             String preview = element.select("a > img").attr("src");
             bean.setPreview(preview);
-            String url = Contracts.Url.COSPLAY_LA_BASE + element.select("p:nth-child(2) > a").attr("href");
+            String url = Url.COSPLAY_LA_BASE + element.select("p:nth-child(2) > a").attr("href");
             bean.setUrl(url);
             String description = element.select("p:nth-child(2) > a").text();
             bean.setDescription(description);

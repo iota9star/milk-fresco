@@ -17,10 +17,10 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
 
-    private View mContainerView;
-    private Unbinder unbinder;
     protected Context mContext;
     protected Context aContext;
+    private View mContainerView;
+    private Unbinder unbinder;
 
     protected abstract void init(Bundle savedInstanceState);
 

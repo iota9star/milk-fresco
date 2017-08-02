@@ -13,6 +13,10 @@ import f.star.iota.milk.base.StringPresenter;
 
 
 public class PicPresenter extends StringPresenter<List<PicBean>> {
+    public PicPresenter(PVContract.View view) {
+        super(view);
+    }
+
     @Override
     protected String dealUrl(String url) {
         if (url.contains(".htm/1")) {
@@ -22,10 +26,6 @@ public class PicPresenter extends StringPresenter<List<PicBean>> {
             }
         }
         return url;
-    }
-
-    public PicPresenter(PVContract.View view) {
-        super(view);
     }
 
     @Override

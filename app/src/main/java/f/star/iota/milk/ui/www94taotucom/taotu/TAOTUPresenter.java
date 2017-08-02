@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -35,7 +35,7 @@ public class TAOTUPresenter extends StringPresenter<List<TAOTUBean>> {
             TAOTUBean bean = new TAOTUBean();
             String url = element.attr("src");
             if (!url.contains("94taotu.com")) {
-                url = Contracts.Url.WWW94TAOTUCOM_BASE + url;
+                url = Url.WWW94TAOTUCOM_BASE + url;
             }
             bean.setUrl(url);
             list.add(bean);

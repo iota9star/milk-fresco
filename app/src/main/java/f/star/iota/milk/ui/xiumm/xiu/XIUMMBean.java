@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.xiumm.xiu;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class XIUMMBean extends BaseBean {
+class XIUMMBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

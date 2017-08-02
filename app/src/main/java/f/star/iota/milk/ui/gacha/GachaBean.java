@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.gacha;
 import f.star.iota.milk.base.BaseBean;
 
 
-public class GachaBean extends BaseBean {
+class GachaBean extends BaseBean {
 
     private String preview;
     private String url;

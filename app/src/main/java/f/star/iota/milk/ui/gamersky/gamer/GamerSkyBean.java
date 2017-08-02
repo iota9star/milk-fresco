@@ -3,7 +3,7 @@ package f.star.iota.milk.ui.gamersky.gamer;
 
 import f.star.iota.milk.base.BaseBean;
 
-public class GamerSkyBean extends BaseBean {
+class GamerSkyBean extends BaseBean {
     private String preview;
     private String url;
     private String description;

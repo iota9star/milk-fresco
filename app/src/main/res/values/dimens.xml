@@ -27,6 +27,4 @@
     <dimen name="v18dp">18dp</dimen>
     <dimen name="v72dp">72dp</dimen>
     <dimen name="v56dp">56dp</dimen>
-    <dimen name="v24sp">24sp</dimen>
-    <dimen name="v12dp">12dp</dimen>
 </resources>

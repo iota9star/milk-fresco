@@ -10,7 +10,7 @@ import com.andrognito.pinlockview.PinLockView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.util.ConfigUtils;
@@ -19,6 +19,8 @@ import f.star.iota.milk.util.SnackbarUtils;
 
 public class SetPinLockActivity extends BaseActivity {
 
+    private static final int STEP_ONE = 1;
+    private static final int STEP_TWO = 2;
     @BindView(R.id.pin_lock_view)
     PinLockView mPinLockView;
     @BindView(R.id.indicator_dots)
@@ -27,6 +29,8 @@ public class SetPinLockActivity extends BaseActivity {
     Button mButtonLeft;
     @BindView(R.id.button_right)
     Button mButtonRight;
+    private int mStep = STEP_ONE;
+    private String mPinCode;
 
     @OnClick({R.id.button_left, R.id.button_right})
     public void onClick(View view) {
@@ -48,18 +52,12 @@ public class SetPinLockActivity extends BaseActivity {
                     mButtonLeft.setText(R.string.wait_inut);
                 } else if (mStep == STEP_TWO) {
                     ConfigUtils.savePin(aContext, mPinCode);
-                    ConfigUtils.setLock(aContext, Contracts.LockType.PIN);
+                    ConfigUtils.setLock(aContext, LockType.PIN);
                     finish();
                 }
                 break;
         }
     }
-
-    private static final int STEP_ONE = 1;
-    private static final int STEP_TWO = 2;
-    private int mStep = STEP_ONE;
-
-    private String mPinCode;
 
     @Override
     protected void init(Bundle savedInstanceState) {

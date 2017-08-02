@@ -22,6 +22,7 @@
         android:id="@+id/recycler_view_download_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/content_board_background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.github.rubensousa.floatingtoolbar.FloatingToolbar

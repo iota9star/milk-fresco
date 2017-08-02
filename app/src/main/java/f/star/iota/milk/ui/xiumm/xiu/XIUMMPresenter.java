@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -22,7 +22,7 @@ public class XIUMMPresenter extends StringPresenter<List<XIUMMBean>> {
     @Override
     protected String dealUrl(String url) {
         if (url.contains("page-1.html")) {
-            url = Contracts.Url.XIUMM_BASE;
+            url = Url.XIUMM_BASE;
         }
         return url;
     }

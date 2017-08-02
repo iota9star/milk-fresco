@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Contracts;
+import f.star.iota.milk.Url;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -27,13 +27,13 @@ public class YuriImgPresenter extends StringPresenter<List<YuriImgBean>> {
             YuriImgBean bean = new YuriImgBean();
             String preview = element.select("div.image img").attr("data-original");
             bean.setPreview(preview);
-            String url = Contracts.Url.YURIIMG_BASE + element.select("div.image img").attr("data-viewersss");
+            String url = Url.YURIIMG_BASE + element.select("div.image img").attr("data-viewersss");
             bean.setUrl(url);
             String description = element.select("div.image img").attr("alt");
             bean.setDescription(description);
             String size = element.select("div.img-control > div.like > a > span").text();
             bean.setSize(size);
-            String referer = Contracts.Url.YURIIMG_BASE + element.select("div.image img").attr("data-href");
+            String referer = Url.YURIIMG_BASE + element.select("div.image img").attr("data-href");
             bean.setReferer(referer);
             list.add(bean);
         }

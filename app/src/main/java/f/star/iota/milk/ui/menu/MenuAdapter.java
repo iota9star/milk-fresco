@@ -25,17 +25,12 @@ import f.star.iota.milk.R;
 import f.star.iota.milk.ui.login.LoginActivity;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
-    private List<MenuBean> mList;
+    private final List<MenuBean> mList;
+    private OnMenuItemClickListener onMenuItemClickListener;
 
     public MenuAdapter() {
         this.mList = new ArrayList<>();
     }
-
-    public interface OnMenuItemClickListener {
-        void onClick(MenuBean menu);
-    }
-
-    private OnMenuItemClickListener onMenuItemClickListener;
 
     public void setOnMenuItemClickListener(OnMenuItemClickListener onMenuItemClickListener) {
         this.onMenuItemClickListener = onMenuItemClickListener;
@@ -76,24 +71,28 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         notifyItemRangeInserted(0, menu.size());
     }
 
+    public interface OnMenuItemClickListener {
+        void onClick(MenuBean menu);
+    }
+
     class MenuViewHolder extends RecyclerView.ViewHolder {
+        private final Context mContext;
         @BindView(R.id.simple_drawee_view_image)
         SimpleDraweeView mSimpleDraweeView;
         @BindView(R.id.image_button_more)
         ImageButton mImageButtonMore;
         @BindView(R.id.auto_fit_text_view_name)
         AutoResizeTextView mAutoFitTextViewName;
-        private Context mContext;
-
-        @OnClick(R.id.image_button_more)
-        public void onClick() {
-            showPopUpWindow();
-        }
 
         public MenuViewHolder(View itemView) {
             super(itemView);
             mContext = itemView.getContext();
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.image_button_more)
+        public void onClick() {
+            showPopUpWindow();
         }
 
         private void showPopUpWindow() {
