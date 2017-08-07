@@ -26,4 +26,8 @@ public class ImgFragment extends FixedImageFragment<ImgPresenter, ImgAdapter> {
         return new ImgAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

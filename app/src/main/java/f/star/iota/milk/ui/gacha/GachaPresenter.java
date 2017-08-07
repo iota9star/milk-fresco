@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class GachaPresenter extends StringPresenter<List<GachaBean>> {
     }
 
     @Override
-    protected List<GachaBean> dealResponse(String s) {
+    protected List<GachaBean> dealResponse(String s, HashMap<String, String> headers) {
         List<GachaBean> list = new ArrayList<>();
         Element top = Jsoup.parse(s).select("div.g-body > div.m-ikon-list.j-ikon-list > div.top-five.f-cb > div.m-ikon-first.f-fl").first();
         GachaBean t = new GachaBean();

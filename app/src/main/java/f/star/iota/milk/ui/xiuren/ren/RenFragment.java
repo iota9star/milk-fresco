@@ -26,4 +26,8 @@ public class RenFragment extends FixedImageFragment<RenPresenter, RenAdapter> {
         return new RenAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

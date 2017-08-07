@@ -25,4 +25,9 @@ public class DonmaiFragment extends ScrollImageFragment<DonmaiPresenter, DonmaiA
     protected DonmaiAdapter getAdapter() {
         return new DonmaiAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

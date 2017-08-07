@@ -10,8 +10,8 @@ import android.widget.CompoundButton;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.R;
-import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
@@ -33,16 +33,16 @@ public class MoreActivity extends BaseActivity {
                 intent.setData(Uri.parse(mContext.getString(R.string.wechat_pay_code)));
                 break;
             case R.id.text_view_hitokoto_bilibilijj:
-                intent.setData(Uri.parse(Url.HITOKOTO_BILIBILIJJ_BASE));
+                intent.setData(Uri.parse(Net.HITOKOTO_BILIBILIJJ_BASE));
                 break;
             case R.id.text_view_yiju:
-                intent.setData(Uri.parse(Url.YIJU_BASE));
+                intent.setData(Uri.parse(Net.YIJU_BASE));
                 break;
             case R.id.text_view_hitokoto_ad:
-                intent.setData(Uri.parse(Url.HITOKOTO_IMJAD_BASE));
+                intent.setData(Uri.parse(Net.HITOKOTO_IMJAD_BASE));
                 break;
             case R.id.text_view_hitokoto_loli:
-                intent.setData(Uri.parse(Url.HITOKOTO_LOLI_BASE));
+                intent.setData(Uri.parse(Net.HITOKOTO_LOLI_BASE));
                 break;
             case R.id.linear_layout_grade:
                 intent.setData(Uri.parse("market://details?id=" + mContext.getPackageName()));
@@ -58,7 +58,11 @@ public class MoreActivity extends BaseActivity {
                 }
                 return;
             case R.id.linear_layout_donation_alipay:
-                AlipayZeroSdk.startAlipayClient(this, getResources().getString(R.string.alipay_code));
+                if (AlipayZeroSdk.hasInstalledAlipayClient(mContext)) {
+                    AlipayZeroSdk.startAlipayClient(this, getResources().getString(R.string.alipay_code));
+                } else {
+                    SnackbarUtils.create(mContext, "你可能没有安装支付宝");
+                }
                 return;
         }
         if (intent.getData() != null) {

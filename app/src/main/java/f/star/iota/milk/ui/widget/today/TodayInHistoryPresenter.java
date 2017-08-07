@@ -9,7 +9,7 @@ import com.lzy.okrx2.adapter.ObservableResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.ui.splash.HistoryBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -32,10 +32,11 @@ public class TodayInHistoryPresenter implements TodayInHistoryContract.Presenter
     @Override
     public void getToday() {
         mCompositeDisposable.add(
-                OkGo.<String>get(Url.TODAY_IN_HISTORY)
+                OkGo.<String>get(Net.TODAY_IN_HISTORY)
                         .converter(new StringConvert())
                         .adapt(new ObservableResponse<String>())
-                        .subscribeOn(Schedulers.io())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .observeOn(Schedulers.computation())
                         .map(new Function<Response<String>, HistoryBean>() {
                             @Override
                             public HistoryBean apply(@NonNull Response<String> s) throws Exception {

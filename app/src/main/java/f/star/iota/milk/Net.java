@@ -1,6 +1,8 @@
 package f.star.iota.milk;
 
-public interface Url {
+public interface Net {
+    String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/6.1.2716.5 Safari/537.36";
+
     String HITOKOTO_BILIBILIJJ = "http://hitokoto.bilibilijj.com/?status=get";
     String HITOKOTO_BILIBILIJJ_BASE = "http://www.jijidown.com/";
     String HITOKOTO_IMJAD = "https://api.imjad.cn/hitokoto/?encode=json&charset=utf-8";
@@ -12,35 +14,31 @@ public interface Url {
 
     String TODAY_IN_HISTORY = "http://kabe.im/";
 
-    String YANDE = "https://yande.re/post.json?limit=12&page=";
+    String YANDE = "https://yande.re/post.json?limit=36&page=";
     String YANDE_BASE = "https://yande.re";
     String YANDE_LOGIN = "https://yande.re/user/login";
 
-    String KONACHAN = "https://konachan.com/post.json?limit=12&page=";
+    String KONACHAN = "https://konachan.com/post.json?limit=36&page=";
     String KONACHAN_LOGIN = "https://konachan.com/user/login";
     String KONACHAN_BASE = "https://konachan.com";
 
-    String LOLIBOORU = "https://lolibooru.moe/post/index.json?limit=12&page=";
+    String LOLIBOORU = "https://lolibooru.moe/post/index.json?limit=36&page=";
     String LOLIBOORU_LOGIN = "https://lolibooru.moe/post";
     String LOLIBOORU_BASE = "https://lolibooru.moe";
 
-    String DANBOORU = "https://danbooru.donmai.us/posts.json?limit=12&page=";
+    String DANBOORU = "https://danbooru.donmai.us/posts.json?limit=36&page=";
     String DANBOORU_LOGIN = "https://danbooru.donmai.us/session/new";
     String DANBOORU_BASE = "https://danbooru.donmai.us";
 
-    String SAFEBOORU = "https://safebooru.donmai.us/posts.json?limit=12&page=";
+    String SAFEBOORU = "https://safebooru.donmai.us/posts.json?limit=36&page=";
     String SAFEBOORU_LOGIN = "https://safebooru.donmai.us/session/new";
     String SAFEBOORU_BASE = "https://safebooru.donmai.us";
 
-    String _3DBOORU = "http://behoimi.org/post/index.json?page=";
-    String _3DBOORU_BASE = "http://behoimi.org/";
-    String _3DBOORU_LOGIN = "http://behoimi.org/user/login";
-
-    String E926 = "https://e926.net/post/index.json?limit=12&page=";
+    String E926 = "https://e926.net/post/index.json?limit=36&page=";
     String E926_LOGIN = "http://e926.net/user/login";
     String E926_BASE = "https://e926.net";
 
-    String E621 = "https://e621.net/post/index.json?limit=12&page=";
+    String E621 = "https://e621.net/post/index.json?limit=36&page=";
     String E621_LOGIN = "https://e621.net/user/login";
     String E621_BASE = "https://e621.net";
 
@@ -130,8 +128,8 @@ public interface Url {
     String JDLINGYU_TEDIAN = "http://www.jdlingyu.moe/%E7%89%B9%E7%82%B9/page/";
     String JDLINGYU_NONGCAO = "http://www.jdlingyu.moe/%E5%BC%84%E6%BD%AE/page/";
     String JDLINGYU_COSPLAY = "http://www.jdlingyu.moe/cosplay/page/";
-    String JDLINGYU_XIEZHEN = "http://www.jdlingyu.moe/%E5%86%99%E7%9C%9F/page/";
-    String JDLINGYU_XIAZAI = "http://www.jdlingyu.moe/%E4%B8%8B%E8%BD%BD/page/";
+    String JDLINGYU_MZITU = "http://www.jdlingyu.wang/mzitu/page/";
+    String JDLINGYU_HENTAI = "http://www.jdlingyu.wang/hentai/page/";
     String JDLINGYU_ACG = "http://www.jdlingyu.moe/acg/page/";
     String JDLINGYU_BASE = "http://www.jdlingyu.moe";
 
@@ -209,10 +207,12 @@ public interface Url {
     String MM131_QP = "http://www.mm131.com/qipao/list_4_";
     String MM131_XQ = "http://www.mm131.com/mingxing/list_5_";
 
+    String MIAOWU_BASE = "http://www.miaowu.cc";
     String MIAOWU_SIWA = "http://www.miaowu.cc/meinv/siwa/index_";
     String MIAOWU_XGMN = "http://www.miaowu.cc/meinv/shuaige/index_";
     String MIAOWU_NYMN = "http://www.miaowu.cc/meinv/guonei/index_";
     String MIAOWU_DXMN = "http://www.miaowu.cc/meinv/rihan/index_";
+    String MIAOWU_JRMV = "http://www.miaowu.cc/meinv/gangtai/index_";
     String MIAOWU_RBMN = "http://www.miaowu.cc/meinv/meinv/index_";
     String MIAOWU_OMMN = "http://www.miaowu.cc/meinv/oumei/index_";
     String MIAOWU_QCMN = "http://www.miaowu.cc/meinv/qingchun/index_";
@@ -221,5 +221,19 @@ public interface Url {
     String MIAOWU_LTMN = "http://www.miaowu.cc/meinv/luoti/index_";
     String MIAOWU_CTMN = "http://www.miaowu.cc/meinv/changtui/index_";
     String MIAOWU_BJNMN = "http://www.miaowu.cc/meinv/bijini/index_";
+
+    String MEIMEIZI = "http://www.meimeizi.com/page/";
+
+    String YOUWU_BASE = "http://www.youwu.cc";
+    String YOUWU_GUONEI = "http://www.youwu.cc/guonei/list_";
+    String YOUWU_GANGTAI = "http://www.youwu.cc/gangtai/list_";
+
+    String TAOTUTT = "http://taotutt.com/mztt/page_";
+    String TAOTUTT_BASE = "http://taotutt.com";
+
+    String UMEI = "http://www.umei.cc/meinvtupian/";
+
+    String GRAVUREGIRLZ = "http://www.gravuregirlz.com/page/";
+    String GRAVUREGIRLZ_BASE = "http://www.gravuregirlz.com";
 
 }

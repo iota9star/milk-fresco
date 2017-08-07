@@ -4,9 +4,10 @@ package f.star.iota.milk.ui.www192ttcom.tt;
 import org.jsoup.Jsoup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -23,17 +24,18 @@ public class TTPresenter extends StringPresenter<List<TTBean>> {
             url = url.replace("_1.html", ".html");
         }
         if (!url.contains("192tt")) {
-            url = Url.WWW192TTCOM_BASE + url;
+            url = Net.WWW192TTCOM_BASE + url;
         }
         return url;
     }
 
     @Override
-    protected List<TTBean> dealResponse(String s) {
+    protected List<TTBean> dealResponse(String s, HashMap<String, String> headers) {
         List<TTBean> list = new ArrayList<>();
         TTBean bean = new TTBean();
         String url = Jsoup.parse(s).select("#p > center > img").first().attr("lazysrc");
         bean.setUrl(url);
+        bean.setHeaders(headers);
         list.add(bean);
         return list;
     }

@@ -8,6 +8,7 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -85,19 +86,21 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     protected void init(Bundle savedInstanceState) {
         mPresenter = new SplashPresenter(this);
-        mPresenter.getImage();
+        mPresenter.getImage(ConfigUtils.getSplashSource(mContext));
         mRefreshLayout.autoRefresh();
+        mRefreshLayout.setEnableLoadmore(false);
         TypedValue typedValue = new TypedValue();
         mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
-        ProgressBarDrawable progressBarDrawable = new ProgressBarDrawable();
-        progressBarDrawable.setColor(colorStateList.getDefaultColor());
-        progressBarDrawable.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v16dp));
-        progressBarDrawable.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
+        ProgressBarDrawable progress = new ProgressBarDrawable();
+        progress.setColor(colorStateList.getDefaultColor());
+        progress.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v16dp));
+        progress.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
         GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources())
-                .setPlaceholderImage(R.mipmap.app_icon)
-                .setPlaceholderImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
-                .setProgressBarImage(progressBarDrawable).build();
+                .setPlaceholderImage(R.drawable.ic_placeholder)
+                .setPlaceholderImageScaleType(ScalingUtils.ScaleType.CENTER)
+                .setProgressBarImage(progress)
+                .build();
         mSimpleDraweeView.setHierarchy(hierarchyBuilder);
     }
 
@@ -141,26 +144,20 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void getSuccess(String url) {
+        mRefreshLayout.finishRefresh();
+        mRefreshLayout.setEnableRefresh(false);
         ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>() {
             @Override
             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
-                mRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mRefreshLayout.finishRefresh(true);
-                    }
-                }, 960);
                 mPresenter.getHistory();
             }
 
             @Override
             public void onFailure(String id, Throwable throwable) {
-                mRefreshLayout.finishRefresh(false);
                 go();
             }
         };
-
-        if (url != null) {
+        if (!TextUtils.isEmpty(url)) {
             Uri uri = Uri.parse(url);
             if (uri != null) {
                 Postprocessor postprocessor = new BasePostprocessor() {
@@ -180,16 +177,28 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                         });
                     }
                 };
-                ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(uri)
-                        .setPostprocessor(postprocessor)
-                        .setProgressiveRenderingEnabled(true)
-                        .build();
-                DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+                ImageRequestBuilder requestBuilder = ImageRequestBuilder.newBuilderWithSource(uri)
+                        .setPostprocessor(postprocessor);
+                if (url.contains(".")) {
+                    String extension = url.contains(".") ? url.substring(url.lastIndexOf(".", url.length())) : "";
+                    if (extension.contains("jpg") || extension.contains("jpeg")) {
+                        requestBuilder.setProgressiveRenderingEnabled(true);
+                    } else {
+                        requestBuilder.setProgressiveRenderingEnabled(false);
+                    }
+                }
+                ImageRequest request = requestBuilder.build();
+                final DraweeController draweeController = Fresco.newDraweeControllerBuilder()
                         .setOldController(mSimpleDraweeView.getController())
                         .setControllerListener(controllerListener)
-                        .setImageRequest(imageRequest)
+                        .setImageRequest(request)
                         .build();
-                mSimpleDraweeView.setController(draweeController);
+                mRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSimpleDraweeView.setController(draweeController);
+                    }
+                }, 360);
             }
         }
     }

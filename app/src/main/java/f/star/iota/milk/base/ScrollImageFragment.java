@@ -2,9 +2,12 @@ package f.star.iota.milk.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
+import com.github.rubensousa.floatingtoolbar.FloatingToolbar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -13,6 +16,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import f.star.iota.milk.R;
 import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
@@ -41,6 +45,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
 
     private int mSpanCount;
     private String mSuffix;
+    private FloatingActionButton mFab;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +80,16 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
         mRecyclerView.setItemAnimator(new LandingAnimator());
         mRecyclerView.addItemDecoration(mItemDecoration);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mLayoutManager.findFirstVisibleItemPositions(null)[mLayoutManager.getSpanCount() - 1] == mLayoutManager.getSpanCount() - 1) {
+                    mLayoutManager.invalidateSpanAssignments();
+                }
+            }
+        });
     }
 
     @Override
@@ -95,7 +110,20 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
         mItemDecoration.setSpanCount(spanCount);
     }
 
+    protected boolean isHideFab() {
+        return true;
+    }
+
     private void init() {
+        mFab = ButterKnife.findById(getActivity(), R.id.floating_action_button);
+        if (!isHideFab()) {
+            mFab.setVisibility(View.VISIBLE);
+            FloatingToolbar floatingToolbar = ButterKnife.findById(getActivity(), R.id.floating_toolbar);
+            floatingToolbar.attachFab(mFab);
+            floatingToolbar.attachRecyclerView(mRecyclerView);
+        } else {
+            mFab.setVisibility(View.GONE);
+        }
         isLoadMore = false;
         isRunning = false;
         currentPage = mInitialPage;
@@ -106,6 +134,8 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
 
     private void initRefreshLayout() {
         mRefreshLayout.autoRefresh();
+        mRefreshLayout.setLoadmoreFinished(false);
+        mRefreshLayout.setEnableLoadmoreWhenContentNotFull(true);
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -181,10 +211,13 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mPresenter != null) {
             mPresenter.unsubscribe();
+        }
+        if (mFab != null) {
+            mFab.setVisibility(View.GONE);
         }
     }
 }

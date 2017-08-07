@@ -1,15 +1,15 @@
 package f.star.iota.milk.base;
 
-import java.util.Map;
+import java.util.HashMap;
 
-public class ShowImageBean {
+public class PCBean {
     private final String url;
     private final String preview;
     private final String folder;
     private final String description;
-    private Map<String, String> headers;
+    private HashMap<String, String> headers;
 
-    public ShowImageBean(String url, String preview, String folder, String description, Map<String, String> headers) {
+    public PCBean(String url, String preview, String folder, String description, HashMap<String, String> headers) {
         this.url = url;
         this.description = description;
         this.preview = preview;
@@ -17,7 +17,7 @@ public class ShowImageBean {
         this.headers = headers;
     }
 
-    public ShowImageBean(String url, String preview, String folder, String description) {
+    public PCBean(String url, String preview, String folder, String description) {
         this.url = url;
         this.description = description;
         this.preview = preview;
@@ -40,7 +40,7 @@ public class ShowImageBean {
         return folder;
     }
 
-    public Map<String, String> getHeaders() {
+    public HashMap<String, String> getHeaders() {
         return headers;
     }
 }

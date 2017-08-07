@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -21,16 +21,16 @@ public class JDLINGYUPagerFragment extends PagerFragment {
         titles.add("特点");
         titles.add("弄潮");
         titles.add("COS");
-        titles.add("写真");
-        titles.add("下载");
+        titles.add("妹子图");
+        titles.add("Hentai好物");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_ALL));
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_ZHUANTI));
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_TEDIAN));
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_NONGCAO));
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_COSPLAY));
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_XIEZHEN));
-        fragments.add(JDLINGYUFragment.newInstance(Url.JDLINGYU_XIAZAI));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_ALL));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_ZHUANTI));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_TEDIAN));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_NONGCAO));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_COSPLAY));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_MZITU));
+        fragments.add(JDLINGYUFragment.newInstance(Net.JDLINGYU_HENTAI));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

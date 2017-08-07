@@ -26,4 +26,8 @@ public class HavenFragment extends FixedImageFragment<HavenPresenter, HavenAdapt
         return new HavenAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

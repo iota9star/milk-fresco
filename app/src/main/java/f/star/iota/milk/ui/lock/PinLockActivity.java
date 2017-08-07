@@ -39,21 +39,36 @@ public class PinLockActivity extends BaseActivity {
         fingerprintIdentify.startIdentify(3, new BaseFingerprint.FingerprintIdentifyListener() {
             @Override
             public void onSucceed() {
-                startActivity(new Intent(mContext, MainActivity.class));
-                finish();
+                verifySuccess();
             }
 
             @Override
-            public void onNotMatch(int availableTimes) {
-                SnackbarUtils.create(mContext, "指纹识别失败，你还有" + availableTimes + "次机会");
+            public void onNotMatch(int i) {
+                SnackbarUtils.create(mContext, "指纹识别失败，你还有" + i + "次机会");
             }
 
             @Override
-            public void onFailed() {
+            public void onFailed(boolean b) {
+
+            }
+
+            @Override
+            public void onStartFailedByDeviceLocked() {
                 finish();
             }
         });
 
+    }
+
+    private void verifySuccess() {
+        mPinLockView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(mContext, MainActivity.class));
+                finish();
+            }
+        }, 1600);
+        SnackbarUtils.create(mContext, "验证成功，即将前往主页面");
     }
 
     private void initEvent() {
@@ -61,9 +76,8 @@ public class PinLockActivity extends BaseActivity {
             @Override
             public void onComplete(String pin) {
                 if (ConfigUtils.getPin(aContext).equals(pin)) {
-                    startActivity(new Intent(mContext, MainActivity.class));
                     mErrorTimes = 0;
-                    finish();
+                    verifySuccess();
                 } else {
                     mPinLockView.resetPinLockView();
                     mErrorTimes++;

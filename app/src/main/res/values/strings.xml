@@ -61,4 +61,18 @@
     <string name="show_all">显示所有任务</string>
     <string name="download_count">同时下载任务数</string>
     <string name="info">信息</string>
+    <string name="theme">主题</string>
+    <string name="download_all">下载全部</string>
+    <string name="refresh_interval">刷新间隔</string>
+    <string name="use_info">使用信息</string>
+    <string name="display_download">展示与下载</string>
+    <string name="moeimg">MOEIMG</string>
+    <string name="apic">APIC</string>
+    <string name="bing">BING</string>
+    <string name="banner_source">背景源</string>
+    <string name="gank">GANK</string>
+    <string name="splash_source">Splash背景源</string>
+    <string name="buy_a_coffee">\u3000\u3000嗨，最近还好吗？\n\n\u3000\u3000本应用使用还算放心吗？如果有什么使用上的问题，可以去应用市场给我反馈，这会让应用获得更好的体验\n\n\u3000\u3000本应用花费了作者大量的时间和精力，如果可以的话，在此恳请您给应用一个好评，如果经济宽裕的话，也可以给我捐助，您的每一分捐助都会让作者获得更多的信心去做好这个应用，在此感谢您\n\n\u3000\u3000本应用完全免费，应用中所有资源均来自网络，如果可以的话，请前往对应网站点击广告来支持站长，让网站可以继续运营下去，再次感谢您的支持</string>
+    <string name="image_info">图片信息</string>
+    <string name="wallhaven">WALLHAVEN</string>
 </resources>

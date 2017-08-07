@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import f.star.iota.milk.R;
 
 
@@ -18,12 +19,11 @@ public abstract class PagerFragment extends BaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        mTabLayout = getActivity().findViewById(R.id.tab_layout);
+        mTabLayout = ButterKnife.findById(getActivity(), R.id.tab_layout);
         mTabLayout.setTabMode(setTabMode());
         TitlePagerAdapter mAdapter = getPagerAdapter();
         mViewPager.setOffscreenPageLimit(mAdapter.getCount());
         mViewPager.setAdapter(mAdapter);
-        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setupWithViewPager(mViewPager);
     }

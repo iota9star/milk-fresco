@@ -24,4 +24,9 @@ public class ZerochanFragment extends ScrollImageFragment<ZerochanPresenter, Zer
     protected ZerochanAdapter getAdapter() {
         return new ZerochanAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

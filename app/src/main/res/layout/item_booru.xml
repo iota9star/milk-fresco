@@ -26,7 +26,7 @@
                 android:id="@+id/simple_drawee_view_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:viewAspectRatio="0.618"
+                app:viewAspectRatio="1"
                 tools:ignore="ContentDescription" />
 
             <ImageView

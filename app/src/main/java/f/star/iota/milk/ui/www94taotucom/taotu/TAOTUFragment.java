@@ -27,4 +27,8 @@ public class TAOTUFragment extends ScrollImageFragment<TAOTUPresenter, TAOTUAdap
         return new TAOTUAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

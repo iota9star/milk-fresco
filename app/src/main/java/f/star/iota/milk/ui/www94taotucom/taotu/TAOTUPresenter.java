@@ -6,9 +6,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -28,16 +29,17 @@ public class TAOTUPresenter extends StringPresenter<List<TAOTUBean>> {
     }
 
     @Override
-    protected List<TAOTUBean> dealResponse(String s) {
+    protected List<TAOTUBean> dealResponse(String s, HashMap<String, String> headers) {
         List<TAOTUBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#bodywrap > table > tbody > tr > td > div > div.innercol.grid > div > div > div.item > div > table > tbody > tr > td > img");
         for (Element element : select) {
             TAOTUBean bean = new TAOTUBean();
             String url = element.attr("src");
             if (!url.contains("94taotu.com")) {
-                url = Url.WWW94TAOTUCOM_BASE + url;
+                url = Net.WWW94TAOTUCOM_BASE + url;
             }
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

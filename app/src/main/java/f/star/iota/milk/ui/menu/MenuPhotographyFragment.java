@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import f.star.iota.milk.Menus;
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.ui.bing.BingFragment;
@@ -18,7 +18,7 @@ public class MenuPhotographyFragment extends MenuFragment {
         switch (menu.getId()) {
             case Menus.MENU_BING_ID:
                 activity.removeFragmentContainerChildrenViews();
-                currentFragment = BingFragment.newInstance(Url.BING);
+                currentFragment = BingFragment.newInstance(Net.BING);
                 activity.setTitle(Menus.MENU_BING);
                 break;
         }
@@ -29,7 +29,7 @@ public class MenuPhotographyFragment extends MenuFragment {
     protected List<MenuBean> getMenuList() {
         List<MenuBean> menu = new ArrayList<>();
         menu.add(new MenuBean(Menus.MENU_BING_ID, Menus.MENU_BING,
-                Url.BING_BASE, "http://cn.bing.com/s/a/hp_zh_cn.png", null));
+                Net.BING_BASE, "http://cn.bing.com/s/a/hp_zh_cn.png", null));
         return menu;
     }
 }

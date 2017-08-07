@@ -26,4 +26,8 @@ public class IngFragment extends FixedImageFragment<IngPresenter, IngAdapter> {
         return new IngAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

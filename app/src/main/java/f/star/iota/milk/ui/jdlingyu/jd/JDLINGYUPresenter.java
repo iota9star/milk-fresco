@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -26,7 +27,7 @@ public class JDLINGYUPresenter extends StringPresenter<List<JDLINGYUBean>> {
     }
 
     @Override
-    protected List<JDLINGYUBean> dealResponse(String s) {
+    protected List<JDLINGYUBean> dealResponse(String s, HashMap<String, String> headers) {
         List<JDLINGYUBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#postlist > div.pin");
         for (Element element : select) {
@@ -40,6 +41,7 @@ public class JDLINGYUPresenter extends StringPresenter<List<JDLINGYUBean>> {
             bean.setDescription(description);
             String url = element.select("div.pin-coat > a").attr("href");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             String date = element.select("div.pin-coat > div.pin-data > span.timer > span").text();
             bean.setDate(date);
             list.add(bean);

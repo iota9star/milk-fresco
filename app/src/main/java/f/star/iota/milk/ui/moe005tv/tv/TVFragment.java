@@ -26,4 +26,8 @@ public class TVFragment extends FixedImageFragment<TVPresenter, TVAdapter> {
         return new TVAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

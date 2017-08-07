@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,13 +20,14 @@ public class MaoPresenter extends StringPresenter<List<MaoBean>> {
     }
 
     @Override
-    protected List<MaoBean> dealResponse(String s) {
+    protected List<MaoBean> dealResponse(String s, HashMap<String, String> headers) {
         List<MaoBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#thread-pic > ul > li > img");
         for (Element element : select) {
             MaoBean bean = new MaoBean();
             String url = element.attr("src");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

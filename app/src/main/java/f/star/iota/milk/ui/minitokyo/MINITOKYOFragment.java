@@ -26,4 +26,9 @@ public class MINITOKYOFragment extends ScrollImageFragment<MINITOKYOPresenter, M
     protected MINITOKYOAdapter getAdapter() {
         return new MINITOKYOAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

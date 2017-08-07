@@ -26,4 +26,8 @@ public class YYFragment extends ScrollImageFragment<YYPresenter, YYAdapter> {
         return new YYAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

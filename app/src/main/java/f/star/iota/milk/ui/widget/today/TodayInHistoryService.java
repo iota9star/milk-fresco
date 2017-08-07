@@ -32,6 +32,11 @@ import f.star.iota.milk.ui.splash.HistoryBean;
 import f.star.iota.milk.ui.widget.banner.BannerContract;
 import f.star.iota.milk.ui.widget.banner.BannerPresenter;
 import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.util.FastBlur;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class TodayInHistoryService extends Service implements TodayInHistoryContract.View, BannerContract.View {
@@ -42,6 +47,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     private Timer mTimer;
     private boolean todayIsRunning = false;
     private boolean bannerIsRunning = false;
+    private Context mContext;
     private final TimerTask mTask = new TimerTask() {
         @Override
         public void run() {
@@ -49,7 +55,6 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
             getBanner();
         }
     };
-    private Context mContext;
     private RefreshReceiver mRefreshReceiver;
 
     @Nullable
@@ -67,7 +72,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     private void getBanner() {
         if (bannerIsRunning) return;
         bannerIsRunning = true;
-        mBannerPresenter.getBanner();
+        mBannerPresenter.getBanner(ConfigUtils.getWidgetBannerSource(mContext));
     }
 
     @Override
@@ -100,7 +105,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
         }
         Intent playIntent = new Intent(ACTION_REFRESH);
         PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, playIntent, 0);
-        views.setOnClickPendingIntent(R.id.image_view_banner, refresh);
+        views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
         ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
         appWidgetManager.updateAppWidget(componentName, views);
     }
@@ -127,7 +132,24 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                                              public void onNewResultImpl(@Nullable Bitmap bitmap) {
                                                  bannerIsRunning = false;
                                                  if (bitmap == null) return;
-                                                 updateBanner(bitmap);
+                                                 try {
+                                                     updateBanner(bitmap);
+                                                     Observable.just(FastBlur.doBlur(bitmap, 24, false))
+                                                             .subscribeOn(Schedulers.computation())
+                                                             .observeOn(AndroidSchedulers.mainThread())
+                                                             .subscribe(new Consumer<Bitmap>() {
+                                                                 @Override
+                                                                 public void accept(Bitmap bitmap) throws Exception {
+                                                                     updateBackground(bitmap);
+                                                                 }
+                                                             }, new Consumer<Throwable>() {
+                                                                 @Override
+                                                                 public void accept(Throwable throwable) throws Exception {
+                                                                 }
+                                                             });
+                                                 } catch (Exception e) {
+                                                     e.printStackTrace();
+                                                 }
                                              }
 
                                              @Override
@@ -151,7 +173,23 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
             views.setImageViewBitmap(R.id.image_view_banner, resource);
             Intent intent = new Intent(ACTION_REFRESH);
             PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.image_view_banner, refresh);
+            views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
+            ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
+            appWidgetManager.updateAppWidget(componentName, views);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateBackground(Bitmap blur) {
+        try {
+            if (blur == null) return;
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_today_in_history_with_banner);
+            views.setImageViewBitmap(R.id.image_view_background, blur);
+            Intent intent = new Intent(ACTION_REFRESH);
+            PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+            views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
             ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
             appWidgetManager.updateAppWidget(componentName, views);
         } catch (Exception e) {

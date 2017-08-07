@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,13 +20,14 @@ public class CHPresenter extends StringPresenter<List<CHBean>> {
     }
 
     @Override
-    protected List<CHBean> dealResponse(String s) {
+    protected List<CHBean> dealResponse(String s, HashMap<String, String> headers) {
         List<CHBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#entry > ul > li > a > img");
         for (Element element : select) {
             CHBean bean = new CHBean();
             String url = element.attr("src");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

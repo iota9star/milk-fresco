@@ -4,5 +4,4 @@
     android:minHeight="@dimen/v40dp"
     android:minWidth="@dimen/v180dp"
     android:previewImage="@mipmap/app_icon"
-    android:resizeMode="vertical|horizontal"
-    android:updatePeriodMillis="3600000" />
+    android:resizeMode="vertical|horizontal" />

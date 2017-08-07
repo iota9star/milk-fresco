@@ -37,4 +37,19 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <com.github.rubensousa.floatingtoolbar.FloatingToolbar
+        android:id="@+id/floating_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/v48dp"
+        android:layout_gravity="bottom"
+        app:floatingMenu="@menu/menu_do_more_fab_toolbar" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/v16dp"
+        app:layout_behavior="f.star.iota.milk.base.ScrollAwareFABBehavior"
+        app:srcCompat="@drawable/ic_add_white_24dp" />
 </android.support.design.widget.CoordinatorLayout>

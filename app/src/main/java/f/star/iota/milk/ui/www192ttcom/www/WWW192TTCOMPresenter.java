@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -31,7 +32,7 @@ public class WWW192TTCOMPresenter extends StringPresenter<List<WWW192TTCOMBean>>
     }
 
     @Override
-    protected List<WWW192TTCOMBean> dealResponse(String s) {
+    protected List<WWW192TTCOMBean> dealResponse(String s, HashMap<String, String> headers) {
         List<WWW192TTCOMBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("body > div.mainer > div.piclist > ul > li");
         for (Element element : select) {
@@ -40,6 +41,7 @@ public class WWW192TTCOMPresenter extends StringPresenter<List<WWW192TTCOMBean>>
             bean.setPreview(preview);
             String url = element.select("a").attr("href");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             String description = element.select("a > span").text();
             bean.setDescription(description);
             String date = element.select("b.b1").text();

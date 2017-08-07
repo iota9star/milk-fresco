@@ -1,19 +1,18 @@
 package f.star.iota.milk.base;
 
 
-import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,7 +20,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import f.star.iota.milk.util.SnackbarUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -29,20 +27,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     protected Context aContext;
     private Unbinder unbinder;
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        Fresco.getImagePipeline().clearMemoryCaches();
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        if (level >= ComponentCallbacks2.TRIM_MEMORY_MODERATE) {
-            Fresco.getImagePipeline().clearMemoryCaches();
-        }
-    }
 
     protected void handleIntent(Intent intent) {
 
@@ -123,7 +107,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
             mHints[mHints.length - 1] = SystemClock.uptimeMillis();
-            SnackbarUtils.create(mContext, "再按一次退出");
+            Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_SHORT).setAction("再按一次退出", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.exit(0);
+                }
+            }).show();
             if (SystemClock.uptimeMillis() - mHints[0] <= 1600) {
                 System.exit(0);
             }

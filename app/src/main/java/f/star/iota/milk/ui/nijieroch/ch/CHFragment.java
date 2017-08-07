@@ -26,4 +26,8 @@ public class CHFragment extends FixedImageFragment<CHPresenter, CHAdapter> {
         return new CHAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

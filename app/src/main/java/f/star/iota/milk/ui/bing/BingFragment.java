@@ -26,4 +26,9 @@ public class BingFragment extends FixedImageFragment<BingPresenter, BingAdapter>
     protected BingAdapter getAdapter() {
         return new BingAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

@@ -3,6 +3,7 @@ package f.star.iota.milk.ui.bing;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -15,7 +16,7 @@ public class BingPresenter extends StringPresenter<List<BingBean.ImagesBean>> {
     }
 
     @Override
-    protected List<BingBean.ImagesBean> dealResponse(String s) {
+    protected List<BingBean.ImagesBean> dealResponse(String s, HashMap<String, String> headers) {
         BingBean bean = new Gson().fromJson(s, BingBean.class);
         return bean.getImages();
     }

@@ -27,4 +27,9 @@ public class SkyFragment extends ScrollImageFragment<SkyPresenter, SkyAdapter> {
         return new SkyAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
+
 }

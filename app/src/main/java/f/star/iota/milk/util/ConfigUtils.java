@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
+import f.star.iota.milk.SourceType;
 
 public class ConfigUtils {
 
@@ -129,28 +130,63 @@ public class ConfigUtils {
         edit.apply();
     }
 
-    public static int getJuziInterval(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        return sp.getInt("juzi_interval", 30);
+    public static boolean isShowDonation(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("donation_config", Context.MODE_PRIVATE);
+        return sp.getBoolean("show_donation", true);
     }
 
-    public static void saveJuziInterval(Context context, int interval) {
-        SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+    public static void saveDonationStatus(Context context, boolean show) {
+        SharedPreferences sp = context.getSharedPreferences("donation_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putInt("juzi_interval", interval);
+        edit.putBoolean("show_donation", show);
         edit.apply();
     }
 
     public static int getTodayInHistroyInterval(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         return sp.getInt("today_in_history_interval", 30);
     }
 
     public static void saveTodayInHistroyInterval(Context context, int interval) {
-        SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putInt("today_in_history_interval", interval);
         edit.apply();
     }
 
+    public static int getJuziInterval(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        return sp.getInt("juzi_interval", 30);
+    }
+
+    public static void saveJuziInterval(Context context, int interval) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putInt("juzi_interval", interval);
+        edit.apply();
+    }
+
+    public static int getWidgetBannerSource(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        return sp.getInt("widget_banner_source", SourceType.APIC);
+    }
+
+    public static void saveWidgetBannerSource(Context context, int type) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putInt("widget_banner_source", type);
+        edit.apply();
+    }
+
+    public static int getSplashSource(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("splash_config", Context.MODE_PRIVATE);
+        return sp.getInt("splash_background_source", SourceType.APIC);
+    }
+
+    public static void saveSplashSource(Context context, int type) {
+        SharedPreferences sp = context.getSharedPreferences("splash_config", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putInt("splash_background_source", type);
+        edit.apply();
+    }
 }

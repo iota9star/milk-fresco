@@ -27,4 +27,8 @@ public class MaoFragment extends ScrollImageFragment<MaoPresenter, MaoAdapter> {
         return new MaoAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

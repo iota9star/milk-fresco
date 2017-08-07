@@ -27,4 +27,8 @@ public class OnlyFragment extends ScrollImageFragment<OnlyPresenter, OnlyAdapter
         return new OnlyAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

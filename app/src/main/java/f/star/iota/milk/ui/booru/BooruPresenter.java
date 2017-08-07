@@ -4,6 +4,7 @@ package f.star.iota.milk.ui.booru;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class BooruPresenter extends StringPresenter<List<BooruBean>> {
     }
 
     @Override
-    protected List<BooruBean> dealResponse(String s) {
+    protected List<BooruBean> dealResponse(String s, HashMap<String, String> headers) {
         List<BooruBean> beans = new Gson().fromJson(s, new TypeToken<List<BooruBean>>() {
         }.getType());
         if (ConfigUtils.getR(MyApp.mContext)) {

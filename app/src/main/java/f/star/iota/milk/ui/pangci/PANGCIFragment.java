@@ -26,4 +26,9 @@ public class PANGCIFragment extends ScrollImageFragment<PANGCIPresenter, PANGCIA
     protected PANGCIAdapter getAdapter() {
         return new PANGCIAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

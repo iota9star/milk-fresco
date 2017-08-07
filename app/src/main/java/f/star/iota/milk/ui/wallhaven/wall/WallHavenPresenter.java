@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -18,7 +19,7 @@ public class WallHavenPresenter extends StringPresenter<List<WallHavenBean>> {
     }
 
     @Override
-    protected List<WallHavenBean> dealResponse(String s) {
+    protected List<WallHavenBean> dealResponse(String s, HashMap<String, String> headers) {
         List<WallHavenBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#thumbs > section > ul > li > figure");
         for (Element element : select) {
@@ -27,6 +28,7 @@ public class WallHavenPresenter extends StringPresenter<List<WallHavenBean>> {
             bean.setPreview(preview);
             String url = element.select("a.preview").attr("href");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             String size = element.select("div > span.wall-res").text();
             bean.setSize(size);
             list.add(bean);

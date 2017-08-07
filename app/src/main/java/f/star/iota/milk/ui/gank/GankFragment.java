@@ -25,4 +25,10 @@ public class GankFragment extends ScrollImageFragment<GankPresenter, GankAdapter
     protected GankAdapter getAdapter() {
         return new GankAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
+
 }

@@ -75,6 +75,15 @@
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings" />
+        <activity
+            android:name=".ui.settings.WidgetActivity"
+            android:label="@string/widget" />
+        <activity
+            android:name=".ui.settings.DisplayAndDownloadActivity"
+            android:label="@string/display_download" />
+        <activity
+            android:name=".ui.settings.UseInfoActivity"
+            android:label="@string/use_info" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.lock.SetPinLockActivity" />
         <activity android:name=".ui.lock.PinLockActivity" />

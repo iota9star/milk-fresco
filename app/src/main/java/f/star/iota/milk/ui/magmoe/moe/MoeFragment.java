@@ -25,4 +25,8 @@ public class MoeFragment extends FixedImageFragment<MoePresenter, MoeAdapter> {
         return new MoeAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

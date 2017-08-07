@@ -1,35 +1,28 @@
 package f.star.iota.milk.ui.donmai;
 
+import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.text.format.Formatter;
-import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.github.rubensousa.floatingtoolbar.FloatingToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import f.star.iota.milk.Menus;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseViewHolder;
-import f.star.iota.milk.base.ShowImageBean;
+import f.star.iota.milk.base.PCBean;
+import f.star.iota.milk.fresco.FrescoLoader;
 
 
 public class DonmaiViewHolder extends BaseViewHolder<DonmaiBean> {
@@ -52,23 +45,7 @@ public class DonmaiViewHolder extends BaseViewHolder<DonmaiBean> {
         final DonmaiBean bean = beans.get(getAdapterPosition());
         mTextViewTag.setText(bean.getSize());
         String r = bean.getRating();
-        if (bean.getUrl() != null) {
-            Uri uri = Uri.parse(bean.getPreview());
-            if (uri != null) {
-                TypedValue typedValue = new TypedValue();
-                mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
-                ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
-                ProgressBarDrawable progressBarDrawable = new ProgressBarDrawable();
-                progressBarDrawable.setColor(colorStateList.getDefaultColor());
-                progressBarDrawable.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v8dp));
-                progressBarDrawable.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
-                GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources()).setFadeDuration(300).setFailureImage(R.mipmap.app_icon).setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE).setProgressBarImage(progressBarDrawable).setRoundingParams(RoundingParams.fromCornersRadius(mContext.getResources().getDimension(R.dimen.v2dp))).build();
-                mSimpleDraweeView.setHierarchy(hierarchyBuilder);
-                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).setProgressiveRenderingEnabled(true).build();
-                DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request).setOldController(mSimpleDraweeView.getController()).build();
-                mSimpleDraweeView.setController(controller);
-            }
-        }
+        FrescoLoader.load(mSimpleDraweeView, bean.getPreview());
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -97,23 +74,6 @@ public class DonmaiViewHolder extends BaseViewHolder<DonmaiBean> {
                 return true;
             }
         });
-        mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<ShowImageBean> imgs = new ArrayList<>();
-                for (DonmaiBean bean : beans) {
-                    imgs.add(new ShowImageBean(bean.getUrl(), bean.getPreview(), Menus.MENU_DANBOORU,
-                            "作者：" + bean.getAuthor() + "\n\n" +
-                                    "评级：" + bean.getRating() + "\n\n" +
-                                    "分辨率：" + bean.getSize() + "\n\n" +
-                                    "来源：" + bean.getSource() + "\n\n" +
-                                    "标签：" + bean.getTags() + "\n\n" +
-                                    "文件大小：" + Formatter.formatFileSize(mContext, bean.getFileSize()) + "\n\n" +
-                                    "得分：" + bean.getScore()));
-                }
-                show(imgs);
-            }
-        });
         switch (r == null ? "o" : r) {
             case "s":
                 mImageViewRating.setImageResource(R.drawable.ic_bookmark_green_24dp);
@@ -128,5 +88,40 @@ public class DonmaiViewHolder extends BaseViewHolder<DonmaiBean> {
                 mImageViewRating.setImageResource(R.drawable.ic_bookmark_blue_24dp);
                 break;
         }
+        mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show(getProcessingCompletedBeans(beans));
+            }
+        });
+        ((FloatingToolbar) ButterKnife.findById((Activity) mContext, R.id.floating_toolbar)).setClickListener(new FloatingToolbar.ItemClickListener() {
+            @Override
+            public void onItemClick(MenuItem menuItem) {
+                batchDownload(getProcessingCompletedBeans(beans));
+            }
+
+            @Override
+            public void onItemLongClick(MenuItem menuItem) {
+
+            }
+        });
+    }
+
+    @Override
+    protected List<PCBean> getProcessingCompletedBeans(List<DonmaiBean> beans) {
+        List<PCBean> imgs = new ArrayList<>();
+        for (DonmaiBean bean : beans) {
+            imgs.add(new PCBean(bean.getUrl(), bean.getPreview(), Menus.MENU_DANBOORU,
+                    "作者：" + bean.getAuthor() + "\n\n" +
+                            "评级：" + bean.getRating() + "\n\n" +
+                            "分辨率：" + bean.getSize() + "\n\n" +
+                            "来源：" + bean.getSource() + "\n\n" +
+                            "标签：" + bean.getTags() + "\n\n" +
+                            "文件大小：" + Formatter.formatFileSize(mContext, bean.getFileSize()) + "\n\n" +
+                            "得分：" + bean.getScore() + "\n\n" +
+                            "下载地址：" + bean.getUrl()
+            ));
+        }
+        return imgs;
     }
 }

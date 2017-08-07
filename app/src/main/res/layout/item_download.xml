@@ -36,24 +36,16 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/simple_drawee_view_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
+                android:layout_height="@dimen/v48dp"
                 android:src="@drawable/bg_default_banner"
                 app:actualImageScaleType="centerCrop"
                 app:placeholderImageScaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
-            <com.john.waveview.WaveView
-                android:id="@+id/wave_view_progress"
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:above_wave_color="#9c000000"
-                app:blow_wave_color="#60000000"
-                app:progress="100"
-                app:wave_height="middle"
-                app:wave_hz="fast"
-                app:wave_length="little" />
-
+                android:background="#36000000" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

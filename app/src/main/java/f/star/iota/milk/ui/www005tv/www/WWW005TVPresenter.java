@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class WWW005TVPresenter extends StringPresenter<List<WWW005TVBean>> {
     }
 
     @Override
-    protected List<WWW005TVBean> dealResponse(String s) {
+    protected List<WWW005TVBean> dealResponse(String s, HashMap<String, String> headers) {
         List<WWW005TVBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("body > div.article-list-page > div.article-list-wrap > div.article-list > ul > li");
         for (Element element : select) {
@@ -28,6 +29,7 @@ public class WWW005TVPresenter extends StringPresenter<List<WWW005TVBean>> {
             bean.setTitle(title);
             String url = element.select("div > div > h3 > a").attr("href");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             String subtitle = element.select("div > div > div.p-row").text();
             bean.setSubtitle(subtitle);
             String date = element.select("div > div > div.label-row > span.time").text();

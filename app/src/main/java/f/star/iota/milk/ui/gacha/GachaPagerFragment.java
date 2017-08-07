@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -20,9 +20,9 @@ public class GachaPagerFragment extends PagerFragment {
         titles.add("周榜");
         titles.add("月榜");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(GachaFragment.newInstance(Url.GACHA_DAY));
-        fragments.add(GachaFragment.newInstance(Url.GACHA_WEEK));
-        fragments.add(GachaFragment.newInstance(Url.GACHA_MONTH));
+        fragments.add(GachaFragment.newInstance(Net.GACHA_DAY));
+        fragments.add(GachaFragment.newInstance(Net.GACHA_WEEK));
+        fragments.add(GachaFragment.newInstance(Net.GACHA_MONTH));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

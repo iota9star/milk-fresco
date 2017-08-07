@@ -18,13 +18,11 @@
     <dimen name="v16sp">16sp</dimen>
     <dimen name="v18sp">18sp</dimen>
     <dimen name="v36sp">36sp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="v196dp">196dp</dimen>
     <dimen name="v28sp">28sp</dimen>
     <dimen name="v180dp">180dp</dimen>
     <dimen name="v40dp">40dp</dimen>
     <dimen name="v128dp">128dp</dimen>
-    <dimen name="v18dp">18dp</dimen>
     <dimen name="v72dp">72dp</dimen>
     <dimen name="v56dp">56dp</dimen>
 </resources>

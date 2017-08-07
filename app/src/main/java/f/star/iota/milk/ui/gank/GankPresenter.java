@@ -3,6 +3,7 @@ package f.star.iota.milk.ui.gank;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -15,7 +16,7 @@ public class GankPresenter extends StringPresenter<List<GankBean.ResultsBean>> {
     }
 
     @Override
-    protected List<GankBean.ResultsBean> dealResponse(String s) {
+    protected List<GankBean.ResultsBean> dealResponse(String s, HashMap<String, String> headers) {
         return new Gson().fromJson(s, GankBean.class).getResults();
     }
 }

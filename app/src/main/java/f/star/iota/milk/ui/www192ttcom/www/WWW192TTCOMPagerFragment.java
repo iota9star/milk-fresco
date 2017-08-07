@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 
@@ -19,8 +19,8 @@ public class WWW192TTCOMPagerFragment extends PagerFragment {
         titles.add("高清");
         titles.add("美图");
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(WWW192TTCOMFragment.newInstance(Url.WWW192TTCOM_GQ));
-        fragments.add(WWW192TTCOMFragment.newInstance(Url.WWW192TTCOM_MT));
+        fragments.add(WWW192TTCOMFragment.newInstance(Net.WWW192TTCOM_GQ));
+        fragments.add(WWW192TTCOMFragment.newInstance(Net.WWW192TTCOM_MT));
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);
     }
 

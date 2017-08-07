@@ -39,6 +39,14 @@
 
 -ignorewarnings
 
+# blur kit
+-keep class com.wonderkiln.blurkit.** { *; }
+
+-dontwarn android.support.v8.renderscript.*
+-keepclassmembers class android.support.v8.renderscript.RenderScript {
+  native *** rsn*(...);
+  native *** n*(...);
+}
 
 # fresco
 # Keep our interfaces so they can be used by other ProGuard rules.

@@ -1,33 +1,26 @@
 package f.star.iota.milk.ui.apic.pic;
 
 
+import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.github.rubensousa.floatingtoolbar.FloatingToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import f.star.iota.milk.Menus;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseViewHolder;
-import f.star.iota.milk.base.ShowImageBean;
+import f.star.iota.milk.base.PCBean;
+import f.star.iota.milk.fresco.FrescoLoader;
 
 public class PicViewHolder extends BaseViewHolder<PicBean> {
     @BindView(R.id.card_view)
@@ -42,23 +35,7 @@ public class PicViewHolder extends BaseViewHolder<PicBean> {
     @Override
     public void bindView(final List<PicBean> beans) {
         final PicBean bean = beans.get(getAdapterPosition());
-        if (bean.getUrl() != null) {
-            Uri uri = Uri.parse(bean.getUrl());
-            if (uri != null) {
-                TypedValue typedValue = new TypedValue();
-                mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
-                ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
-                ProgressBarDrawable progressBarDrawable = new ProgressBarDrawable();
-                progressBarDrawable.setColor(colorStateList.getDefaultColor());
-                progressBarDrawable.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v8dp));
-                progressBarDrawable.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
-                GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources()).setFadeDuration(300).setFailureImage(R.mipmap.app_icon).setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE).setProgressBarImage(progressBarDrawable).setRoundingParams(RoundingParams.fromCornersRadius(mContext.getResources().getDimension(R.dimen.v2dp))).build();
-                mSimpleDraweeView.setHierarchy(hierarchyBuilder);
-                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).setProgressiveRenderingEnabled(true).build();
-                DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request).setOldController(mSimpleDraweeView.getController()).build();
-                mSimpleDraweeView.setController(controller);
-            }
-        }
+        FrescoLoader.load(mSimpleDraweeView, bean.getUrl());
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -90,13 +67,29 @@ public class PicViewHolder extends BaseViewHolder<PicBean> {
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<ShowImageBean> imgs = new ArrayList<>();
-                for (PicBean bean : beans) {
-                    imgs.add(new ShowImageBean(bean.getUrl(), bean.getUrl(), Menus.MENU_APIC,
-                            "下载地址：" + bean.getUrl()));
-                }
-                show(imgs);
+                show(getProcessingCompletedBeans(beans));
             }
         });
+        ((FloatingToolbar) ButterKnife.findById((Activity) mContext, R.id.floating_toolbar)).setClickListener(new FloatingToolbar.ItemClickListener() {
+            @Override
+            public void onItemClick(MenuItem menuItem) {
+                batchDownload(getProcessingCompletedBeans(beans));
+            }
+
+            @Override
+            public void onItemLongClick(MenuItem menuItem) {
+
+            }
+        });
+    }
+
+    @Override
+    protected List<PCBean> getProcessingCompletedBeans(List<PicBean> beans) {
+        List<PCBean> imgs = new ArrayList<>();
+        for (PicBean bean : beans) {
+            imgs.add(new PCBean(bean.getUrl(), bean.getUrl(), Menus.MENU_APIC,
+                    "下载地址：" + bean.getUrl()));
+        }
+        return imgs;
     }
 }

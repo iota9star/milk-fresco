@@ -26,4 +26,8 @@ public class LYFragment extends FixedImageFragment<LYPresenter, LYAdapter> {
         return new LYAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

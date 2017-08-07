@@ -4,6 +4,7 @@ package f.star.iota.milk.ui.wallhaven.haven;
 import org.jsoup.Jsoup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -16,7 +17,7 @@ public class HavenPresenter extends StringPresenter<List<HavenBean>> {
     }
 
     @Override
-    protected List<HavenBean> dealResponse(String s) {
+    protected List<HavenBean> dealResponse(String s, HashMap<String, String> headers) {
         List<HavenBean> list = new ArrayList<>();
         String url = "https:" + Jsoup.parse(s)
                 .select("#wallpaper")
@@ -24,6 +25,7 @@ public class HavenPresenter extends StringPresenter<List<HavenBean>> {
                 .attr("src");
         HavenBean bean = new HavenBean();
         bean.setUrl(url);
+        bean.setHeaders(headers);
         list.add(bean);
         return list;
     }

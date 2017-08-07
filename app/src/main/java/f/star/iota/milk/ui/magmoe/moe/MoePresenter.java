@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class MoePresenter extends StringPresenter<List<MoeBean>> {
     }
 
     @Override
-    protected List<MoeBean> dealResponse(String s) {
+    protected List<MoeBean> dealResponse(String s, HashMap<String, String> headers) {
         List<MoeBean> list = new ArrayList<>();
         Element i = Jsoup.parse(s).select("#main > article div.post-img > a > img").first();
         if (i != null) {
@@ -29,6 +30,7 @@ public class MoePresenter extends StringPresenter<List<MoeBean>> {
                 url = url.replace(url.substring(url.lastIndexOf("?itok=")), "").trim();
             }
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         Elements select = Jsoup.parse(s).select("#main > article div.post-entry > p > img");
@@ -39,6 +41,7 @@ public class MoePresenter extends StringPresenter<List<MoeBean>> {
                 url = url.replace(url.substring(url.lastIndexOf("?itok=")), "").trim();
             }
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

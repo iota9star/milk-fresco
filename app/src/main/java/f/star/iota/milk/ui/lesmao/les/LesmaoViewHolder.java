@@ -2,29 +2,20 @@ package f.star.iota.milk.ui.lesmao.les;
 
 
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseViewHolder;
+import f.star.iota.milk.fresco.FrescoLoader;
 import f.star.iota.milk.ui.lesmao.mao.MaoFragment;
 
 
@@ -43,23 +34,9 @@ public class LesmaoViewHolder extends BaseViewHolder<LesmaoBean> {
 
     @Override
     public void bindView(final LesmaoBean bean) {
-        if (bean.getUrl() != null) {
-            Uri uri = Uri.parse(bean.getPreview());
-            if (uri != null) {
-                TypedValue typedValue = new TypedValue();
-                mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
-                ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
-                ProgressBarDrawable progressBarDrawable = new ProgressBarDrawable();
-                progressBarDrawable.setColor(colorStateList.getDefaultColor());
-                progressBarDrawable.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v8dp));
-                progressBarDrawable.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
-                GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources()).setFadeDuration(300).setFailureImage(R.mipmap.app_icon).setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE).setProgressBarImage(progressBarDrawable).setRoundingParams(RoundingParams.fromCornersRadius(mContext.getResources().getDimension(R.dimen.v2dp))).build();
-                mSimpleDraweeView.setHierarchy(hierarchyBuilder);
-                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).setProgressiveRenderingEnabled(true).build();
-                DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request).setOldController(mSimpleDraweeView.getController()).build();
-                mSimpleDraweeView.setController(controller);
-            }
-        }
+        HashMap<String, String> headers = bean.getHeaders();
+        headers.put("Host", "v.pxyygm.com");
+        FrescoLoader.load(mSimpleDraweeView, bean.getPreview(), headers);
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

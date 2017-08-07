@@ -1,12 +1,14 @@
 package f.star.iota.milk.ui.main;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,24 +38,23 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import f.star.iota.milk.Menus;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.R;
-import f.star.iota.milk.Url;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.base.RVBean;
 import f.star.iota.milk.ui.download.DownloadManagerActivity;
-import f.star.iota.milk.ui.menu.MenuCosplayFragment;
 import f.star.iota.milk.ui.menu.MenuIllustrationFragment;
 import f.star.iota.milk.ui.menu.MenuMeiziFragment;
 import f.star.iota.milk.ui.menu.MenuPhotographyFragment;
 import f.star.iota.milk.ui.moeimg.moe.MoeimgFragment;
 import f.star.iota.milk.ui.more.MoreActivity;
 import f.star.iota.milk.ui.settings.SettingsActivity;
-import f.star.iota.milk.ui.theme.ThemeActivity;
 import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import moe.feng.alipay.zerosdk.AlipayZeroSdk;
 
 public class MainActivity extends BaseActivity implements MainActivityContract.View {
 
@@ -61,7 +62,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     Toolbar mToolbar;
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
-
 
     private Drawer drawer;
 
@@ -80,6 +80,19 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         initDrawer();
         initDrawerEvent();
         checkPermission();
+        isShowDonationDialog();
+    }
+
+    private void isShowDonationDialog() {
+        if ((ConfigUtils.getOpenCount(mContext) % 10 == 0 || ConfigUtils.getOpenCount(mContext) == 3)
+                && ConfigUtils.isShowDonation(mContext)) {
+            mCoordinatorLayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    donation();
+                }
+            }, 3600);
+        }
     }
 
     private void checkPermission() {
@@ -102,6 +115,62 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 });
     }
 
+    private void donation() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_donation, null);
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setView(view)
+                .setNegativeButton("下次吧", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNeutralButton("不再提醒", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ConfigUtils.saveDonationStatus(mContext, false);
+                        dialogInterface.dismiss();
+                        SnackbarUtils.create(mContext, "如果想要支持我的话，可以在“关于”里面查看");
+                    }
+                })
+                .create();
+        view.findViewById(R.id.linear_layout_donation_alipay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (AlipayZeroSdk.hasInstalledAlipayClient(mContext)) {
+                    AlipayZeroSdk.startAlipayClient(MainActivity.this, getResources().getString(R.string.alipay_code));
+                } else {
+                    SnackbarUtils.create(mContext, "你可能没有安装支付宝");
+                }
+            }
+        });
+        view.findViewById(R.id.linear_layout_donation_qq).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(mContext.getString(R.string.qq_pay_code)));
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.linear_layout_donation_wechat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(mContext.getString(R.string.wechat_pay_code)));
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.linear_layout_grade).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://details?id=" + mContext.getPackageName()));
+                startActivity(intent);
+            }
+        });
+        dialog.show();
+    }
+
     private void init() {
         setSupportActionBar(mToolbar);
         mPresenter = new MainActivityPresenter(this);
@@ -111,9 +180,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     @Override
     protected void setFirstFragment() {
         if (!ConfigUtils.getR(aContext)) {
-            currentFragment = MoeimgFragment.newInstance(Url.MOEIMG_H);
+            currentFragment = MoeimgFragment.newInstance(Net.MOEIMG_H);
         } else {
-            currentFragment = MoeimgFragment.newInstance(Url.MOEIMG);
+            currentFragment = MoeimgFragment.newInstance(Net.MOEIMG);
         }
         showFragment(currentFragment);
         setTitle(Menus.MENU_MOEIMG);
@@ -145,10 +214,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(Menus.MENU_ILLUSTRATION).withIdentifier(Menus.MENU_ILLUSTRATION_ID).withIcon(R.drawable.ic_menu_illustration).withSelectable(false),
                         new PrimaryDrawerItem().withName(Menus.MENU_MEIZI).withIdentifier(Menus.MENU_MEIZI_ID).withIcon(R.drawable.ic_menu_meizhi).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Menus.MENU_COSPLAY).withIdentifier(Menus.MENU_COSPLAY_ID).withIcon(R.drawable.ic_menu_cosplay).withSelectable(false),
                         new PrimaryDrawerItem().withName(Menus.MENU_PHOTOGRAPHY).withIdentifier(Menus.MENU_PHOTOGRAPHY_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(Menus.MENU_THEME).withIdentifier(Menus.MENU_THEME_ID).withIcon(R.drawable.ic_menu_theme).withSelectable(false),
                         new PrimaryDrawerItem().withName(Menus.MENU_SETTINGS).withIdentifier(Menus.MENU_SETTINGS_ID).withIcon(R.drawable.ic_menu_settings).withSelectable(false),
                         new PrimaryDrawerItem().withName(Menus.MENU_ABOUT).withIdentifier(Menus.MENU_ABOUT_ID).withIcon(R.drawable.ic_menu_more).withSelectable(false)
                 )
@@ -201,9 +268,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem dItem) {
                 switch ((int) dItem.getIdentifier()) {
-                    case Menus.MENU_THEME_ID:
-                        startActivity(new Intent(mContext, ThemeActivity.class));
-                        break;
                     case Menus.MENU_SETTINGS_ID:
                         startActivity(new Intent(mContext, SettingsActivity.class));
                         break;
@@ -217,10 +281,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     case Menus.MENU_MEIZI_ID:
                         currentFragment = new MenuMeiziFragment();
                         setTitle(Menus.MENU_MEIZI);
-                        break;
-                    case Menus.MENU_COSPLAY_ID:
-                        currentFragment = new MenuCosplayFragment();
-                        setTitle(Menus.MENU_COSPLAY);
                         break;
                     case Menus.MENU_PHOTOGRAPHY_ID:
                         currentFragment = new MenuPhotographyFragment();

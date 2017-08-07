@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class BCYSelectedPresenter extends StringPresenter<List<BCYSelectedBean>>
     }
 
     @Override
-    protected List<BCYSelectedBean> dealResponse(String s) {
+    protected List<BCYSelectedBean> dealResponse(String s, HashMap<String, String> headers) {
         List<BCYSelectedBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#discover_index_list > li.disc_one");
         for (Element e : select) {
@@ -30,6 +31,7 @@ public class BCYSelectedPresenter extends StringPresenter<List<BCYSelectedBean>>
             bean.setPreview(preview);
             String url = e.select("a").attr("href");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

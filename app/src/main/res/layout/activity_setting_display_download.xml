@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/v48dp"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/board_background"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/v8dp"
+            android:paddingStart="@dimen/v8dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/v8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@animator/touch_floating"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/splash_source" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/v2dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_source"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radio_moeimg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/moeimg" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_apic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/apic" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="?@android:attr/colorAccent"
+                            android:gravity="end|center_vertical" />
+
+                        <RadioButton
+                            android:id="@+id/radio_bing"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/bing" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_gank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/gank" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_wallhaven"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/wallhaven" />
+                    </RadioGroup>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/v8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@animator/touch_floating"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/span_count" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/v2dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <com.xw.repo.BubbleSeekBar
+                        android:id="@+id/bubble_seek_bar_span_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v16dp"
+                        app:bsb_auto_adjust_section_mark="true"
+                        app:bsb_bubble_color="?@android:attr/colorAccent"
+                        app:bsb_max="10"
+                        app:bsb_min="2"
+                        app:bsb_second_track_color="?@android:attr/colorAccent"
+                        app:bsb_section_count="8"
+                        app:bsb_section_text_position="bottom_sides"
+                        app:bsb_seek_by_section="true"
+                        app:bsb_show_progress_in_float="false"
+                        app:bsb_show_section_mark="true"
+                        app:bsb_show_section_text="true"
+                        app:bsb_show_thumb_text="true"
+                        app:bsb_track_color="?@android:attr/colorAccent"
+                        app:bsb_track_size="@dimen/v2dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/v8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@animator/touch_floating"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/download_count" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/v2dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <com.xw.repo.BubbleSeekBar
+                        android:id="@+id/bubble_seek_bar_download_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v16dp"
+                        app:bsb_auto_adjust_section_mark="true"
+                        app:bsb_bubble_color="?@android:attr/colorAccent"
+                        app:bsb_max="5"
+                        app:bsb_min="1"
+                        app:bsb_second_track_color="?@android:attr/colorAccent"
+                        app:bsb_section_count="4"
+                        app:bsb_section_text_position="bottom_sides"
+                        app:bsb_seek_by_section="true"
+                        app:bsb_show_progress_in_float="false"
+                        app:bsb_show_section_mark="true"
+                        app:bsb_show_section_text="true"
+                        app:bsb_show_thumb_text="true"
+                        app:bsb_track_color="?@android:attr/colorAccent"
+                        app:bsb_track_size="@dimen/v2dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

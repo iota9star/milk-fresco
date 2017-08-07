@@ -26,4 +26,8 @@ public class PicturesFragment extends ScrollImageFragment<PicturesPresenter, Pic
         return new PicturesAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

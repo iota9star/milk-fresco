@@ -26,4 +26,9 @@ public class MangaDrawingFragment extends ScrollImageFragment<MangaDrawingPresen
     protected MangaDrawingAdapter getAdapter() {
         return new MangaDrawingAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

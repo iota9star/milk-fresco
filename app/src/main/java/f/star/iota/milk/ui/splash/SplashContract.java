@@ -13,7 +13,7 @@ public interface SplashContract {
     interface Presenter {
         void getHistory();
 
-        void getImage();
+        void getImage(int type);
 
         void unsubscribe();
     }

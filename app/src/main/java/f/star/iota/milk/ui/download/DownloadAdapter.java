@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
@@ -20,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.john.waveview.WaveView;
 import com.lzy.okgo.db.DownloadManager;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okserver.OkDownload;
@@ -37,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import f.star.iota.milk.R;
+import f.star.iota.milk.fresco.FrescoLoader;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
@@ -104,24 +103,10 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         return mTasks == null ? 0 : mTasks.size();
     }
 
-    private void scanFile(final Context context, String path) {
-        MediaScannerConnection.scanFile(context, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
-            public void onScanCompleted(String path, Uri uri) {
-                Intent scan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                scan.setData(uri);
-                context.sendBroadcast(scan);
-            }
-        });
-    }
 
-    private void loadFileToGlide(File file, ViewHolder holder) {
+    private void loadFile(File file, ViewHolder holder) {
         if (file != null && file.exists()) {
-            SnackbarUtils.create(holder.mContext, "下载完成：" + file.getAbsolutePath());
-            Uri uri = Uri.parse("file://" + file.getAbsolutePath());
-            if (uri != null) {
-                holder.mSimpleDraweeView.setImageURI(uri);
-            }
-            scanFile(holder.mContext.getApplicationContext(), file.getAbsolutePath());
+            FrescoLoader.loadForDownload(holder.mSimpleDraweeView, "file://" + file.getAbsolutePath());
         } else {
             SnackbarUtils.create(holder.mContext, "文件不见了？");
         }
@@ -145,8 +130,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         TextView mTextViewIndex;
         @BindView(R.id.text_view_source)
         TextView mTextViewSource;
-        @BindView(R.id.wave_view_progress)
-        WaveView mWaveViewProgress;
         @BindView(R.id.text_view_progress)
         TextView mTextViewProgress;
         @BindView(R.id.text_view_status)
@@ -172,12 +155,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
             Progress progress = mTask.progress;
             String preview = (String) progress.extra1;
             String folder = (String) progress.extra2;
-            if (preview != null) {
-                Uri uri = Uri.parse(preview);
-                if (uri != null) {
-                    mSimpleDraweeView.setImageURI(uri);
-                }
-            }
+            FrescoLoader.loadForDownload(mSimpleDraweeView, preview);
             mTextViewIndex.setText(String.valueOf(mTasks.size() - getAdapterPosition()));
             mImageButtonMore.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -213,13 +191,8 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                 case Progress.FINISH:
                     mTextViewStatus.setText("下载完成");
                     mButtonAction.setImageResource(R.drawable.ic_open_in_new_white_24dp);
-                    String filePath = progress.filePath;
-                    if (filePath != null && new File(filePath).exists()) {
-                        Uri uri = Uri.parse("file://" + filePath);
-                        if (uri != null) {
-                            mSimpleDraweeView.setImageURI(uri);
-                        }
-                    }
+                    String path = progress.filePath;
+                    FrescoLoader.loadForDownload(mSimpleDraweeView, "file://" + path);
                     break;
                 case Progress.LOADING:
                     String speed = Formatter.formatFileSize(mContext, progress.speed);
@@ -227,7 +200,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                     mButtonAction.setImageResource(R.drawable.ic_pause_white_24dp);
                     break;
             }
-            mWaveViewProgress.setProgress(100 - (int) (progress.fraction * 100));
             mTextViewPercent.setText(mNumberFormat.format(progress.fraction));
         }
 
@@ -314,12 +286,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                     if (onOpenListener != null) {
                         onOpenListener.open(filePath);
                     }
-                    if (new File(filePath).exists()) {
-                        Uri uri = Uri.parse("file://" + filePath);
-                        if (uri != null) {
-                            mSimpleDraweeView.setImageURI(uri);
-                        }
-                    }
+                    FrescoLoader.loadForDownload(mSimpleDraweeView, "file://" + filePath);
                     break;
             }
             refresh(progress);
@@ -368,7 +335,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         @Override
         public void onFinish(File file, Progress progress) {
             if (tag == holder.getTag()) {
-                loadFileToGlide(file, holder);
+                loadFile(file, holder);
             }
             updateData(mType);
         }

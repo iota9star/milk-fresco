@@ -26,4 +26,10 @@ public class OlFragment extends FixedImageFragment<OlPresenter, OlAdapter> {
         return new OlAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
+
+
 }

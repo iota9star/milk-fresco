@@ -3,6 +3,7 @@ package f.star.iota.milk.ui.menu;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.lb.auto_fit_textview.AutoResizeTextView;
@@ -20,7 +21,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import f.star.iota.milk.R;
 import f.star.iota.milk.ui.login.LoginActivity;
 
@@ -42,15 +42,23 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MenuViewHolder holder, int position) {
+    public void onBindViewHolder(final MenuViewHolder holder, int position) {
         final MenuBean bean = mList.get(position);
+        holder.mButtonIndex.setText(String.valueOf(position + 1));
         holder.mAutoFitTextViewName.setText(bean.getName());
-        holder.mAutoFitTextViewName.setOnClickListener(new View.OnClickListener() {
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onMenuItemClickListener != null) {
                     onMenuItemClickListener.onClick(bean);
                 }
+            }
+        });
+        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                holder.showPopUpWindow();
+                return false;
             }
         });
         if (bean.getBanner() != null) {
@@ -79,20 +87,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         private final Context mContext;
         @BindView(R.id.simple_drawee_view_image)
         SimpleDraweeView mSimpleDraweeView;
-        @BindView(R.id.image_button_more)
-        ImageButton mImageButtonMore;
+        @BindView(R.id.card_view)
+        CardView mCardView;
         @BindView(R.id.auto_fit_text_view_name)
         AutoResizeTextView mAutoFitTextViewName;
+        @BindView(R.id.button_index)
+        Button mButtonIndex;
 
         public MenuViewHolder(View itemView) {
             super(itemView);
             mContext = itemView.getContext();
             ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.image_button_more)
-        public void onClick() {
-            showPopUpWindow();
         }
 
         private void showPopUpWindow() {
@@ -119,7 +124,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 }
             });
             listPopupWindow.setWidth((int) mContext.getResources().getDimension(R.dimen.v72dp));
-            listPopupWindow.setAnchorView(mImageButtonMore);
+            listPopupWindow.setAnchorView(mCardView);
             listPopupWindow.setModal(true);
             listPopupWindow.show();
         }

@@ -26,4 +26,9 @@ public class LaFragment extends FixedImageFragment<LaPresenter, LaAdapter> {
         return new LaAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
+
 }

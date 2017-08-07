@@ -26,4 +26,8 @@ public class TuFragment extends ScrollImageFragment<TuPresenter, TuAdapter> {
         return new TuAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
 import f.star.iota.milk.util.SnackbarUtils;
@@ -35,14 +35,14 @@ public class MOE005TVPagerFragment extends PagerFragment {
             titles.add("萌图");
             titles.add("电脑壁纸");
             titles.add("手机壁纸");
-            fragments.add(MOE005TVFragment.newInstance(Url.MOE005TV_MT));
-            fragments.add(MOE005TVFragment.newInstance(Url.MOE005TV_DNBZ));
-            fragments.add(MOE005TVFragment.newInstance(Url.MOE005TV_SJBZ));
+            fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_MT));
+            fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_DNBZ));
+            fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_SJBZ));
         } else if (type == COS) {
             titles.add("COSER介绍");
             titles.add("写真图集");
-            fragments.add(MOE005TVFragment.newInstance(Url.MOE005TV_COSER));
-            fragments.add(MOE005TVFragment.newInstance(Url.MOE005TV_COS));
+            fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_COSER));
+            fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_COS));
         } else {
             SnackbarUtils.create(mContext, "获取数据错误，请稍候重试");
         }

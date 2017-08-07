@@ -27,4 +27,8 @@ public class TTFragment extends ScrollImageFragment<TTPresenter, TTAdapter> {
         return new TTAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

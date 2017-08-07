@@ -26,4 +26,9 @@ public class GachaFragment extends FixedImageFragment<GachaPresenter, GachaAdapt
     protected GachaAdapter getAdapter() {
         return new GachaAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

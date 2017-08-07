@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -18,7 +19,7 @@ public class MINITOKYOPresenter extends StringPresenter<List<MINITOKYOBean>> {
     }
 
     @Override
-    protected List<MINITOKYOBean> dealResponse(String s) {
+    protected List<MINITOKYOBean> dealResponse(String s, HashMap<String, String> headers) {
         List<MINITOKYOBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#content > ul.scans > li > a > img");
         for (Element element : select) {
@@ -29,6 +30,7 @@ public class MINITOKYOPresenter extends StringPresenter<List<MINITOKYOBean>> {
             bean.setPreview(preview);
             String url = preview.replace("static3", "static").replace("thumbs", "downloads");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             String description = element.attr("alt").replace(" Wallpaper", "");
             bean.setDescription(description);
             list.add(bean);

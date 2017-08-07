@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class YuPresenter extends StringPresenter<List<YuBean>> {
     }
 
     @Override
-    protected List<YuBean> dealResponse(String s) {
+    protected List<YuBean> dealResponse(String s, HashMap<String, String> headers) {
         List<YuBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("article > div > div.single-content > p > a > img");
         for (Element element : select) {
@@ -27,6 +28,7 @@ public class YuPresenter extends StringPresenter<List<YuBean>> {
             String url = element.attr("data-original");
             url = url.replace(url.substring(url.lastIndexOf("-"), url.lastIndexOf(".")), "");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

@@ -24,4 +24,9 @@ public class ESHUUSHUUFragment extends ScrollImageFragment<ESHUUSHUUPresenter, E
     protected ESHUUSHUUAdapter getAdapter() {
         return new ESHUUSHUUAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

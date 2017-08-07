@@ -6,9 +6,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
 
@@ -20,7 +21,7 @@ public class BCYRankingPresenter extends StringPresenter<List<BCYRankingBean>> {
     }
 
     @Override
-    protected List<BCYRankingBean> dealResponse(String s) {
+    protected List<BCYRankingBean> dealResponse(String s, HashMap<String, String> headers) {
         List<BCYRankingBean> list = new ArrayList<>();
         Element doc = Jsoup.parse(s)
                 .select("body > div.div_body > div.row.grid.grid--25")
@@ -38,8 +39,9 @@ public class BCYRankingPresenter extends StringPresenter<List<BCYRankingBean>> {
             bean.setRank(ranking);
             String preview = e.select("div > div.work-thumbnail__topBd > a > img").attr("src");
             bean.setPreview(preview);
-            String url = Url.BCY_BASE + e.select("div > div.work-thumbnail__ft.center > a").attr("href");
+            String url = Net.BCY_BASE + e.select("div > div.work-thumbnail__ft.center > a").attr("href");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

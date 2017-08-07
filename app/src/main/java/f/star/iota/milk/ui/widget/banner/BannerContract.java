@@ -9,7 +9,7 @@ public interface BannerContract {
     }
 
     interface Presenter {
-        void getBanner();
+        void getBanner(int type);
 
         void unsubscribe();
     }

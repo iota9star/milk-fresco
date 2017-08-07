@@ -24,4 +24,9 @@ public class TGFragment extends ScrollImageFragment<TGPresenter, TGAdapter> {
     protected TGAdapter getAdapter() {
         return new TGAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

@@ -27,4 +27,9 @@ public class YuriImgFragment extends ScrollImageFragment<YuriImgPresenter, YuriI
     protected YuriImgAdapter getAdapter() {
         return new YuriImgAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

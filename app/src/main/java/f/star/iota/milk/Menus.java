@@ -1,24 +1,19 @@
 package f.star.iota.milk;
 
 public interface Menus {
-    String MENU_THEME = "主题";
-    int MENU_THEME_ID = 999;
     String MENU_SETTINGS = "设置";
-    int MENU_SETTINGS_ID = 998;
+    int MENU_SETTINGS_ID = 999;
     String MENU_ABOUT = "关于";
-    int MENU_ABOUT_ID = 997;
+    int MENU_ABOUT_ID = 998;
 
-    String MENU_ILLUSTRATION = "ILLUSTRATION";
+    String MENU_ILLUSTRATION = "插画";
     int MENU_ILLUSTRATION_ID = 996;
 
-    String MENU_MEIZI = "MEIZI";
+    String MENU_MEIZI = "妹子";
     int MENU_MEIZI_ID = 995;
 
-    String MENU_COSPLAY = "COSPLAY";
-    int MENU_COSPLAY_ID = 994;
-
-    String MENU_PHOTOGRAPHY = "PHOTOGRAPHY";
-    int MENU_PHOTOGRAPHY_ID = 993;
+    String MENU_PHOTOGRAPHY = "摄影";
+    int MENU_PHOTOGRAPHY_ID = 994;
 
     String MENU_YANDE = "YANDE";
     int MENU_YANDE_ID = 1;
@@ -44,8 +39,8 @@ public interface Menus {
     String MENU_ANIME_PICTURES = "ANIME-PICTURES";
     int MENU_ANIME_PICTURES_ID = 8;
 
-    String MENU_3DBOORU = "3DBOORU";
-    int MENU_3DBOORU_ID = 9;
+    String MENU_BEHOIMI = "BEHOIMI";
+    int MENU_BEHOIMI_ID = 9;
 
     String MENU_WALLHAVEN = "WALLHAVEN";
     int MENU_WALLHAVEN_ID = 10;
@@ -138,20 +133,37 @@ public interface Menus {
     int MENU_COSPLAY_LA_ID = 43;
 
     String MENU_CHINAGIRLOL = "CHINAGIRLOL";
-    int MENU_CHINAGIRLOL_ID_MZ = 44;
-    int MENU_CHINAGIRLOL_ID_COS = 45;
+    int MENU_CHINAGIRLOL_ID = 44;
 
     String MENU_MOE005TV = "MOE.005.TV";
-    int MENU_MOE005TV_ACG_ID = 46;
-    int MENU_MOE005TV_COS_ID = 47;
+    int MENU_MOE005TV_ACG_ID = 45;
+    int MENU_MOE005TV_COS_ID = 46;
 
     String MENU_ACG_GAMERSKY = "ACG.GAMERSKY";
-    int MENU_ACG_GAMERSKY_ACG_ID = 48;
-    int MENU_ACG_GAMERSKY_COS_ID = 49;
+    int MENU_ACG_GAMERSKY_ACG_ID = 47;
+    int MENU_ACG_GAMERSKY_COS_ID = 48;
 
     String MENU_PANGCI = "PANGCI";
-    int MENU_PANGCI_ID = 50;
+    int MENU_PANGCI_ID = 49;
 
     String MENU_YURIIMG = "YURIIMG";
-    int MENU_YURIIMG_ID = 51;
+    int MENU_YURIIMG_ID = 50;
+
+    String MENU_MIAOWU = "MIAOWU";
+    int MENU_MIAOWU_ID = 51;
+
+    String MENU_MEIMEIZI = "MEIMEIZI";
+    int MENU_MEIMEIZI_ID = 52;
+
+    String MENU_YOUWU = "YOUWU";
+    int MENU_YOUWU_ID = 53;
+
+    String MENU_TAOTUTT = "TAOTUTT";
+    int MENU_TAOTUTT_ID = 54;
+
+    String MENU_UMEI = "UMEI";
+    int MENU_UMEI_ID = 55;
+
+    String MENU_GRAVUREGIRLZ = "GRAVUREGIRLZ";
+    int MENU_GRAVUREGIRLZ_ID = 56;
 }

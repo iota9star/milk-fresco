@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -18,7 +19,7 @@ public class LaPresenter extends StringPresenter<List<LaBean>> {
     }
 
     @Override
-    protected List<LaBean> dealResponse(String s) {
+    protected List<LaBean> dealResponse(String s, HashMap<String, String> headers) {
         List<LaBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("body > div.box_talk > div.fleft > div:nth-child(1) > div.talk_pic.hauto > p > a > img");
         for (Element element : select) {
@@ -28,6 +29,7 @@ public class LaPresenter extends StringPresenter<List<LaBean>> {
                 url = url.replace(url.substring(url.indexOf("?imageView"), url.length()), "").trim();
             }
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;

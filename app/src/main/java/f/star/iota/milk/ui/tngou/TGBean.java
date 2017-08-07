@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import f.star.iota.milk.Url;
+import f.star.iota.milk.Net;
 import f.star.iota.milk.base.BaseBean;
 
 
@@ -38,7 +38,7 @@ class TGBean {
         private String title;
 
         public String getImg() {
-            return Url.TNGOU_BASE + img;
+            return Net.TNGOU_BASE + img;
         }
 
         public void setImg(String img) {

@@ -1,36 +1,28 @@
 package f.star.iota.milk.ui.yuriimg;
 
 
+import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.github.rubensousa.floatingtoolbar.FloatingToolbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import f.star.iota.milk.Menus;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseViewHolder;
-import f.star.iota.milk.base.ShowImageBean;
+import f.star.iota.milk.base.PCBean;
+import f.star.iota.milk.fresco.FrescoLoader;
 
 
 public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
@@ -51,28 +43,16 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
     @Override
     public void bindView(final List<YuriImgBean> beans) {
         final YuriImgBean bean = beans.get(getAdapterPosition());
-        if (bean.getUrl() != null) {
-            Uri uri = Uri.parse(bean.getPreview());
-            if (uri != null) {
-                TypedValue typedValue = new TypedValue();
-                mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
-                ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
-                ProgressBarDrawable progressBarDrawable = new ProgressBarDrawable();
-                progressBarDrawable.setColor(colorStateList.getDefaultColor());
-                progressBarDrawable.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v8dp));
-                progressBarDrawable.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
-                GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources()).setFadeDuration(300).setFailureImage(R.mipmap.app_icon).setFailureImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE).setProgressBarImage(progressBarDrawable).setRoundingParams(RoundingParams.fromCornersRadius(mContext.getResources().getDimension(R.dimen.v2dp))).build();
-                mSimpleDraweeView.setHierarchy(hierarchyBuilder);
-                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).setProgressiveRenderingEnabled(true).build();
-                DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request).setOldController(mSimpleDraweeView.getController()).build();
-                mSimpleDraweeView.setController(controller);
-            }
-        }
-        final Map<String, String> headers = new HashMap<>();
-        headers.put("Referer", bean.getReferer());
+        final HashMap<String, String> headers = bean.getHeaders();
+        headers.put("Referer", "http://yuriimg.com/");
+        headers.put("Host", "yuri.logacg.com");
+        headers.put("Accept-Encoding", "gzip, deflate");
+        headers.put("Accept", "image/webp,image/*,*/*;q=0.8");
+        FrescoLoader.load(mSimpleDraweeView, bean.getPreview(), headers);
+        headers.put("Referer", "http://yuriimg.com/");
+        headers.put("Host", "yuriimg.com");
         headers.put("Accept-Encoding", "gzip, deflate");
         headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-        headers.put("Upgrade-Insecure-Requests", "1");
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -101,19 +81,36 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
                 return true;
             }
         });
+
+        mTextViewTag.setText(bean.getSize());
+        mTextViewDescription.setText(bean.getDescription());
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<ShowImageBean> imgs = new ArrayList<>();
-                for (YuriImgBean bean : beans) {
-                    imgs.add(new ShowImageBean(bean.getUrl(), bean.getPreview(), Menus.MENU_YURIIMG,
-                            "描述：" + bean.getDescription() + "\n\n" + "下载地址：" + bean.getUrl(),
-                            headers));
-                }
-                show(imgs);
+                show(getProcessingCompletedBeans(beans, headers));
             }
         });
-        mTextViewTag.setText(bean.getSize());
-        mTextViewDescription.setText(bean.getDescription());
+        ((FloatingToolbar) ButterKnife.findById((Activity) mContext, R.id.floating_toolbar)).setClickListener(new FloatingToolbar.ItemClickListener() {
+            @Override
+            public void onItemClick(MenuItem menuItem) {
+                batchDownload(getProcessingCompletedBeans(beans, headers));
+            }
+
+            @Override
+            public void onItemLongClick(MenuItem menuItem) {
+
+            }
+        });
+    }
+
+    @Override
+    protected List<PCBean> getProcessingCompletedBeans(List<YuriImgBean> beans, HashMap<String, String> headers) {
+        List<PCBean> imgs = new ArrayList<>();
+        for (YuriImgBean bean : beans) {
+            imgs.add(new PCBean(bean.getUrl(), bean.getPreview(), Menus.MENU_YURIIMG,
+                    "描述：" + bean.getDescription() + "\n\n" + "下载地址：" + bean.getUrl(),
+                    headers));
+        }
+        return imgs;
     }
 }

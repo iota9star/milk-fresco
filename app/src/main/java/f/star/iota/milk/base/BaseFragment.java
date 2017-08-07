@@ -22,6 +22,7 @@ public abstract class BaseFragment extends Fragment {
     private View mContainerView;
     private Unbinder unbinder;
 
+
     protected abstract void init(Bundle savedInstanceState);
 
     protected abstract int getLayoutId();
@@ -49,6 +50,7 @@ public abstract class BaseFragment extends Fragment {
         init(savedInstanceState);
         return mContainerView;
     }
+
 
     @Override
     public void onDestroyView() {

@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class MZITUPresenter extends StringPresenter<List<MZITUBean>> {
     }
 
     @Override
-    protected List<MZITUBean> dealResponse(String s) {
+    protected List<MZITUBean> dealResponse(String s, HashMap<String, String> headers) {
         List<MZITUBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#pins > li");
         for (Element element : select) {
@@ -28,6 +29,7 @@ public class MZITUPresenter extends StringPresenter<List<MZITUBean>> {
             bean.setPreview(preview);
             String url = element.select("span:nth-child(2) > a").attr("href") + "/";
             bean.setUrl(url);
+            bean.setHeaders(headers);
             String description = element.select("span:nth-child(2) > a").text();
             bean.setDescription(description);
             String date = element.select("span.time").text();

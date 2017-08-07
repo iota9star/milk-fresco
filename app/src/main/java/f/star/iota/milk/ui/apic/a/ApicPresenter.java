@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -19,7 +20,7 @@ public class ApicPresenter extends StringPresenter<List<ApicBean>> {
     }
 
     @Override
-    protected List<ApicBean> dealResponse(String s) {
+    protected List<ApicBean> dealResponse(String s, HashMap<String, String> headers) {
         List<ApicBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#main > div.loop");
         if (select.size() < 1) {
@@ -30,6 +31,7 @@ public class ApicPresenter extends StringPresenter<List<ApicBean>> {
                 bean.setPreview(preview);
                 String url = element.select("h2.angela-title > a").attr("href");
                 bean.setUrl(url);
+                bean.setHeaders(headers);
                 String description = element.select("h2.angela-title > a").text();
                 bean.setDescription(description);
                 String date = element.select("div.v-clearfix.block-postMetaWrap > div > div.postMetaInline-feedSummary > span.postMetaInline.postMetaInline--supplemental").text();
@@ -43,6 +45,7 @@ public class ApicPresenter extends StringPresenter<List<ApicBean>> {
                 bean.setPreview(preview);
                 String url = element.select("h2 > a").attr("href");
                 bean.setUrl(url);
+                bean.setHeaders(headers);
                 String description = element.select("h2 > a").text();
                 bean.setDescription(description);
                 element.select("div.date > div").remove();

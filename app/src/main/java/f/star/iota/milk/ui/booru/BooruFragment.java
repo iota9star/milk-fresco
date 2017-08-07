@@ -25,4 +25,9 @@ public class BooruFragment extends ScrollImageFragment<BooruPresenter, BooruAdap
     protected BooruAdapter getAdapter() {
         return new BooruAdapter();
     }
+
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

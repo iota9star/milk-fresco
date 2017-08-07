@@ -27,4 +27,8 @@ public class MMFragment extends ScrollImageFragment<MMPresenter, MMAdapter> {
         return new MMAdapter();
     }
 
+    @Override
+    protected boolean isHideFab() {
+        return false;
+    }
 }

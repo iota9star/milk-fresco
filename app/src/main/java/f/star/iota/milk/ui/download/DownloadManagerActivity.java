@@ -18,7 +18,6 @@ import android.webkit.MimeTypeMap;
 
 import com.github.rubensousa.floatingtoolbar.FloatingToolbar;
 import com.lzy.okserver.OkDownload;
-import com.lzy.okserver.task.XExecutor;
 
 import java.io.File;
 
@@ -28,7 +27,7 @@ import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 
-public class DownloadManagerActivity extends BaseActivity implements XExecutor.OnAllTaskEndListener {
+public class DownloadManagerActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -165,7 +164,6 @@ public class DownloadManagerActivity extends BaseActivity implements XExecutor.O
                         .show();
             }
         });
-        mOkDownload.addOnAllTaskEndListener(this);
     }
 
     private void setBanner(String path) {
@@ -218,9 +216,7 @@ public class DownloadManagerActivity extends BaseActivity implements XExecutor.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mOkDownload != null) {
-            mOkDownload.removeOnAllTaskEndListener(this);
-        }
+
         if (mDownloadAdapter != null) {
             mDownloadAdapter.unRegister();
         }
@@ -231,8 +227,4 @@ public class DownloadManagerActivity extends BaseActivity implements XExecutor.O
         finish();
     }
 
-    @Override
-    public void onAllTaskEnd() {
-        SnackbarUtils.create(mContext, "除暂停、错误外，所有任务均已完成");
-    }
 }

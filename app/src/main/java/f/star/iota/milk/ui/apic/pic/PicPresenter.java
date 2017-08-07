@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import f.star.iota.milk.base.PVContract;
@@ -29,13 +30,14 @@ public class PicPresenter extends StringPresenter<List<PicBean>> {
     }
 
     @Override
-    protected List<PicBean> dealResponse(String s) {
+    protected List<PicBean> dealResponse(String s, HashMap<String, String> headers) {
         List<PicBean> list = new ArrayList<>();
         Elements select = Jsoup.parse(s).select("#post > div.post > p img");
         for (Element element : select) {
             PicBean bean = new PicBean();
             String url = element.attr("src").replace("!origin", "");
             bean.setUrl(url);
+            bean.setHeaders(headers);
             list.add(bean);
         }
         return list;
