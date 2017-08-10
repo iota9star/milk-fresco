@@ -62,11 +62,11 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void dealEvent(RVBean rv) {
-        if (rv.isChangeSpanCount()) {
+    public void dealEvent(RVBean r) {
+        if (r.isChangeSpanCount()) {
             changeRecyclerViewSpanCount();
         }
-        if (rv.isTouchToTop()) {
+        if (r.isTouchToTop()) {
             scrollToTop();
         }
     }
