@@ -34,7 +34,8 @@ public class DisplayAndDownloadActivity extends BaseActivity {
     RadioButton mRadioButtonGank;
     @BindView(R.id.radio_wallhaven)
     RadioButton mRadioButtonWallHaven;
-
+    @BindView(R.id.radio_simple_desktops)
+    RadioButton mRadioButtonSimpleDesktops;
     @Override
     protected void init(Bundle savedInstanceState) {
         setSupportActionBar(mToolbar);
@@ -94,6 +95,9 @@ public class DisplayAndDownloadActivity extends BaseActivity {
             case SourceType.WALLHAVEN:
                 mRadioButtonWallHaven.setChecked(true);
                 break;
+            case SourceType.SIMPLEDESKTOPS:
+                mRadioButtonSimpleDesktops.setChecked(true);
+                break;
         }
         mRadioGroupBannerSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -113,6 +117,9 @@ public class DisplayAndDownloadActivity extends BaseActivity {
                         break;
                     case R.id.radio_wallhaven:
                         ConfigUtils.saveSplashSource(mContext, SourceType.WALLHAVEN);
+                        break;
+                    case R.id.radio_simple_desktops:
+                        ConfigUtils.saveSplashSource(mContext, SourceType.SIMPLEDESKTOPS);
                         break;
                 }
             }

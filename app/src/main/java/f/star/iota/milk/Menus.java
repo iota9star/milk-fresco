@@ -166,4 +166,7 @@ public interface Menus {
 
     String MENU_GRAVUREGIRLZ = "GRAVUREGIRLZ";
     int MENU_GRAVUREGIRLZ_ID = 56;
+
+    String MENU_SIMPLEDESKTOPS = "SIMPLEDESKTOPS";
+    int MENU_SIMPLEDESKTOPS_ID = 57;
 }

@@ -26,8 +26,6 @@ public class YuriImgPresenter extends StringPresenter<List<YuriImgBean>> {
         Elements select = Jsoup.parse(s).select("#image-box div.image-list");
         for (Element element : select) {
             YuriImgBean bean = new YuriImgBean();
-            String preview = element.select("div.image img").attr("data-original");
-            bean.setPreview(preview);
             String url = Net.YURIIMG_BASE + element.select("div.image img").attr("data-viewersss");
             bean.setUrl(url);
             bean.setHeaders(headers);
@@ -35,8 +33,6 @@ public class YuriImgPresenter extends StringPresenter<List<YuriImgBean>> {
             bean.setDescription(description);
             String size = element.select("div.img-control > div.like > a > span").text();
             bean.setSize(size);
-            String referer = Net.YURIIMG_BASE + element.select("div.image img").attr("data-href");
-            bean.setReferer(referer);
             list.add(bean);
         }
         return list;

@@ -53,7 +53,7 @@
                     <ImageView
                         android:layout_width="@dimen/v32dp"
                         android:layout_height="@dimen/v32dp"
-                        android:src="@drawable/ic_menu_theme"
+                        android:src="@drawable/ic_setting_theme"
                         tools:ignore="ContentDescription" />
 
                     <View

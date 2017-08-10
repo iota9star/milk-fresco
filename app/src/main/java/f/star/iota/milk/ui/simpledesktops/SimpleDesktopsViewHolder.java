@@ -1,4 +1,4 @@
-package f.star.iota.milk.ui.yuriimg;
+package f.star.iota.milk.ui.simpledesktops;
 
 
 import android.app.Activity;
@@ -25,7 +25,7 @@ import f.star.iota.milk.base.PCBean;
 import f.star.iota.milk.fresco.FrescoLoader;
 
 
-public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
+public class SimpleDesktopsViewHolder extends BaseViewHolder<SimpleDesktopsBean> {
 
     @BindView(R.id.simple_drawee_view_image)
     SimpleDraweeView mSimpleDraweeView;
@@ -36,19 +36,14 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
     @BindView(R.id.card_view)
     CardView mCardView;
 
-    public YuriImgViewHolder(View itemView) {
+    public SimpleDesktopsViewHolder(View itemView) {
         super(itemView);
     }
 
     @Override
-    public void bindView(final List<YuriImgBean> beans) {
-        final YuriImgBean bean = beans.get(getAdapterPosition());
-        final HashMap<String, String> headers = bean.getHeaders();
-        headers.put("Referer", "http://yuriimg.com/");
-        headers.put("Host", "yuriimg.com");
-        headers.put("Accept-Encoding", "gzip, deflate");
-        headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-        FrescoLoader.load(mSimpleDraweeView, bean.getUrl(), headers);
+    public void bindView(final List<SimpleDesktopsBean> beans) {
+        final SimpleDesktopsBean bean = beans.get(getAdapterPosition());
+        FrescoLoader.load(mSimpleDraweeView, bean.getUrl());
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -70,7 +65,7 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 download(bean.getUrl(), bean.getUrl(),
-                                        Menus.MENU_YURIIMG, headers);
+                                        Menus.MENU_SIMPLEDESKTOPS, null);
                             }
                         })
                         .show();
@@ -78,18 +73,18 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
             }
         });
 
-        mTextViewTag.setText(bean.getSize());
+        mTextViewTag.setText(bean.getCreator());
         mTextViewDescription.setText(bean.getDescription());
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show(getProcessingCompletedBeans(beans, headers));
+                show(getProcessingCompletedBeans(beans));
             }
         });
         ((FloatingToolbar) ButterKnife.findById((Activity) mContext, R.id.floating_toolbar)).setClickListener(new FloatingToolbar.ItemClickListener() {
             @Override
             public void onItemClick(MenuItem menuItem) {
-                batchDownload(getProcessingCompletedBeans(beans, headers));
+                batchDownload(getProcessingCompletedBeans(beans));
             }
 
             @Override
@@ -100,11 +95,13 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
     }
 
     @Override
-    protected List<PCBean> getProcessingCompletedBeans(List<YuriImgBean> beans, HashMap<String, String> headers) {
+    protected List<PCBean> getProcessingCompletedBeans(List<SimpleDesktopsBean> beans, HashMap<String, String> headers) {
         List<PCBean> imgs = new ArrayList<>();
-        for (YuriImgBean bean : beans) {
-            imgs.add(new PCBean(bean.getUrl(), bean.getUrl(), Menus.MENU_YURIIMG,
-                    "描述：" + bean.getDescription() + "\n\n" + "下载地址：" + bean.getUrl(),
+        for (SimpleDesktopsBean bean : beans) {
+            imgs.add(new PCBean(bean.getUrl(), bean.getPreview(), Menus.MENU_SIMPLEDESKTOPS,
+                    "创建者：" + bean.getCreator() + "\n\n" +
+                            "描述：" + bean.getDescription() + "\n\n" +
+                            "下载地址：" + bean.getUrl(),
                     headers));
         }
         return imgs;

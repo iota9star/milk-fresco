@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import f.star.iota.milk.MyApp;
+
 public final class CrashUtils {
 
     private static final String FILE_SEP = System.getProperty("file.separator");
@@ -31,7 +33,7 @@ public final class CrashUtils {
 
     static {
         try {
-            PackageInfo pi = Utils.getContext().getPackageManager().getPackageInfo(Utils.getContext().getPackageName(), 0);
+            PackageInfo pi = MyApp.mContext.getPackageManager().getPackageInfo(MyApp.mContext.getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -113,10 +115,10 @@ public final class CrashUtils {
         }
         if (mInitialized) return true;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                && Utils.getContext().getExternalCacheDir() != null)
-            defaultDir = Utils.getContext().getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+                && MyApp.mContext.getExternalCacheDir() != null)
+            defaultDir = MyApp.mContext.getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         else {
-            defaultDir = Utils.getContext().getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+            defaultDir = MyApp.mContext.getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         }
         Thread.setDefaultUncaughtExceptionHandler(UNCAUGHT_EXCEPTION_HANDLER);
         return mInitialized = true;

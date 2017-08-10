@@ -55,7 +55,44 @@ public class BannerPresenter implements BannerContract.Presenter {
             case SourceType.WALLHAVEN:
                 getWallHaven();
                 break;
+            case SourceType.SIMPLEDESKTOPS:
+                getSimpleDesktops();
+                break;
         }
+    }
+
+    private void getSimpleDesktops() {
+        String url = "http://simpledesktops.com/browse/" + (new Random().nextInt(49) + 1);
+        mCompositeDisposable.add(
+                OkGo.<String>get(url)
+                        .converter(new StringConvert())
+                        .adapt(new ObservableResponse<String>())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .map(new Function<Response<String>, String>() {
+                            @Override
+                            public String apply(@NonNull Response<String> s) throws Exception {
+                                List<String> list = new ArrayList<>();
+                                Elements select = Jsoup.parse(s.body()).select("body > div > div.container > div > div.desktops> div.edge > div.desktop > a > img");
+                                for (Element element : select) {
+                                    String url = element.attr("src").replace(".295x184_q100.png", "");
+                                    list.add(url);
+                                }
+                                return list.get(new Random().nextInt(list.size()));
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(@NonNull String s) throws Exception {
+                                view.getBannerSuccess(s);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                view.getBannerError();
+                            }
+                        })
+        );
     }
 
     private void getWallHaven() {

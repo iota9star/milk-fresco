@@ -7,4 +7,5 @@ public interface SourceType {
     int APIC = 2;
     int GANK = 3;
     int WALLHAVEN = 4;
+    int SIMPLEDESKTOPS = 5;
 }

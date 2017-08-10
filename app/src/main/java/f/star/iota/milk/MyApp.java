@@ -45,7 +45,6 @@ import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
 import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.CrashUtils;
 import f.star.iota.milk.util.FileUtils;
-import f.star.iota.milk.util.Utils;
 import okhttp3.OkHttpClient;
 
 
@@ -116,7 +115,6 @@ public class MyApp extends Application {
         mContext = getApplicationContext();
         Themer.INSTANCE.init(this, ConfigUtils.getTheme(mContext));
 //        LeakCanary.install(this);
-        Utils.init(this);
         CrashUtils.init(FileUtils.getDownloadDir() + "Log");
         addCount();
         initOkGo();
@@ -162,7 +160,6 @@ public class MyApp extends Application {
                         Integer.MAX_VALUE,
                         Integer.MAX_VALUE,
                         Integer.MAX_VALUE);
-
             }
         };
         ProgressiveJpegConfig progressiveJpegConfig = new ProgressiveJpegConfig() {
@@ -202,7 +199,7 @@ public class MyApp extends Application {
         headers.put("User-Agent", Net.USER_AGENT);
         OkGo.getInstance().init(this)
                 .setOkHttpClient(makeOkHttpClient())
-                .setCacheMode(CacheMode.NO_CACHE)
+                .setCacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
                 .setRetryCount(3)
                 .addCommonHeaders(headers);

@@ -73,7 +73,6 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
         mItemDecoration = new SGSpacingItemDecoration(mSpanCount, mContext.getResources().getDimensionPixelSize(R.dimen.v4dp));
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new LandingAnimator());
-        mRecyclerView.removeItemDecoration(mItemDecoration);
         mRecyclerView.addItemDecoration(mItemDecoration);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -81,7 +80,7 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && mLayoutManager.findFirstVisibleItemPositions(null)[mLayoutManager.getSpanCount() - 1] == mLayoutManager.getSpanCount() - 1) {
+                        && mLayoutManager.findFirstVisibleItemPositions(null)[mLayoutManager.getSpanCount() - 1] == (mLayoutManager.getSpanCount() - 1)) {
                     mLayoutManager.invalidateSpanAssignments();
                 }
             }

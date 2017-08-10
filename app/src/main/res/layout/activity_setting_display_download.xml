@@ -147,6 +147,24 @@
                             android:paddingStart="0dp"
                             android:paddingTop="@dimen/v8dp"
                             android:text="@string/wallhaven" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_simple_desktops"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/simple_desktops" />
                     </RadioGroup>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

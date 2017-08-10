@@ -109,7 +109,6 @@ public class MenuIllustrationFragment extends MenuFragment {
                 currentFragment = MagFragment.newInstance(Net.MAG_MOE_MOE);
                 activity.setTitle(Menus.MENU_MAG_MOE);
                 break;
-
             case Menus.MENU_APIC_ID:
                 activity.removeFragmentContainerChildrenViews();
                 currentFragment = new ApicPagerFragment();

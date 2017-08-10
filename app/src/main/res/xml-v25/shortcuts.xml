@@ -1,0 +1,61 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_more"
+        android:shortcutDisabledMessage="@string/about"
+        android:shortcutId="about"
+        android:shortcutLongLabel="@string/about"
+        android:shortcutShortLabel="@string/about">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.main.MainActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.more.MoreActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_setting_display_download"
+        android:shortcutDisabledMessage="@string/splash_background_source_setting_short"
+        android:shortcutId="splash_background_source_setting"
+        android:shortcutLongLabel="@string/splash_background_source_setting_long"
+        android:shortcutShortLabel="@string/splash_background_source_setting_short">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.main.MainActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.settings.SettingsActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.settings.DisplayAndDownloadActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_setting_widget"
+        android:shortcutDisabledMessage="@string/widget_banner_source_setting_short"
+        android:shortcutId="widget_banner_source_setting"
+        android:shortcutLongLabel="@string/widget_banner_source_setting_long"
+        android:shortcutShortLabel="@string/widget_banner_source_setting_short">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.main.MainActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.settings.SettingsActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="f.star.iota.milk.ui.settings.WidgetActivity"
+            android:targetPackage="f.star.iota.milk" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

@@ -236,4 +236,6 @@ public interface Net {
     String GRAVUREGIRLZ = "http://www.gravuregirlz.com/page/";
     String GRAVUREGIRLZ_BASE = "http://www.gravuregirlz.com";
 
+    String SIMPLEDESKTOPS = "http://simpledesktops.com/browse/";
+
 }

@@ -39,7 +39,8 @@ public class WidgetActivity extends BaseActivity {
     RadioButton mRadioButtonGank;
     @BindView(R.id.radio_wallhaven)
     RadioButton mRadioButtonWallHaven;
-
+    @BindView(R.id.radio_simple_desktops)
+    RadioButton mRadioButtonSimpleDesktops;
     @OnClick({R.id.linear_layout_juzi, R.id.linear_layout_today_in_history})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -118,6 +119,9 @@ public class WidgetActivity extends BaseActivity {
             case SourceType.WALLHAVEN:
                 mRadioButtonWallHaven.setChecked(true);
                 break;
+            case SourceType.SIMPLEDESKTOPS:
+                mRadioButtonSimpleDesktops.setChecked(true);
+                break;
         }
         mRadioGroupBannerSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -137,6 +141,9 @@ public class WidgetActivity extends BaseActivity {
                         break;
                     case R.id.radio_wallhaven:
                         ConfigUtils.saveWidgetBannerSource(mContext, SourceType.WALLHAVEN);
+                        break;
+                    case R.id.radio_simple_desktops:
+                        ConfigUtils.saveWidgetBannerSource(mContext, SourceType.SIMPLEDESKTOPS);
                         break;
                 }
             }

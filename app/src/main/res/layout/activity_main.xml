@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/v48dp"
-            app:layout_scrollFlags="enterAlways|scroll|snap"
+            app:layout_scrollFlags="enterAlways|scroll"
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 

@@ -4,22 +4,13 @@ package f.star.iota.milk.ui.yuriimg;
 import f.star.iota.milk.base.BaseBean;
 
 class YuriImgBean extends BaseBean {
-    private String preview;
     private String url;
     private String description;
     private String size;
-    private String referer;
 
     YuriImgBean() {
     }
 
-    public String getPreview() {
-        return preview;
-    }
-
-    public void setPreview(String preview) {
-        this.preview = preview;
-    }
 
     public String getUrl() {
         return url;
@@ -43,13 +34,5 @@ class YuriImgBean extends BaseBean {
 
     public void setSize(String size) {
         this.size = size;
-    }
-
-    public String getReferer() {
-        return referer;
-    }
-
-    public void setReferer(String referer) {
-        this.referer = referer;
     }
 }
