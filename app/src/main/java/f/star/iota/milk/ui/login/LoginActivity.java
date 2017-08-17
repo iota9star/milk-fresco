@@ -1,7 +1,6 @@
 package f.star.iota.milk.ui.login;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,7 +32,7 @@ public class LoginActivity extends BaseActivity {
     ProgressBar mProgressBar;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

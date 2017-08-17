@@ -1,6 +1,5 @@
 package f.star.iota.milk.ui.menu;
 
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
@@ -10,7 +9,7 @@ import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.base.SGSpacingItemDecoration;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 
 public abstract class MenuFragment extends BaseFragment {
     private final MenuAdapter.OnMenuItemClickListener mOnMenuItemClickListener = new MenuAdapter.OnMenuItemClickListener() {
@@ -28,8 +27,8 @@ public abstract class MenuFragment extends BaseFragment {
     protected abstract void handleOnMenuItemOnClick(MenuBean menu);
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        init();
+    protected void init() {
+        create();
         initRecyclerView();
     }
 
@@ -58,18 +57,18 @@ public abstract class MenuFragment extends BaseFragment {
     @Override
     public void changeRecyclerViewSpanCount() {
         int spanCount = mLayoutManager.getSpanCount();
-        if (spanCount >= ConfigUtils.getSpanCountConfig(aContext)) {
+        if (spanCount >= OtherConfig.getSpanCountConfig(aContext)) {
             spanCount = 1;
         } else {
             spanCount++;
         }
-        ConfigUtils.saveCurrentSpanCount(aContext, spanCount);
+        OtherConfig.saveCurrentSpanCount(aContext, spanCount);
         mLayoutManager.setSpanCount(spanCount);
         mItemDecoration.setSpanCount(spanCount);
     }
 
-    private void init() {
-        mSpanCount = ConfigUtils.getCurrentSpanCount(aContext);
+    private void create() {
+        mSpanCount = OtherConfig.getCurrentSpanCount(aContext);
     }
 
     protected abstract List<MenuBean> getMenuList();

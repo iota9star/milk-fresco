@@ -41,8 +41,9 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 
 import java.util.concurrent.TimeUnit;
 
+import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
-import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.CrashUtils;
 import f.star.iota.milk.util.FileUtils;
 import okhttp3.OkHttpClient;
@@ -52,10 +53,11 @@ public class MyApp extends Application {
 
     private static final String FRESCO_BASE_CACHE_DIR = "fresco_main_cache";
     private static final String FRESCO_SMALL_IMAGE_CACHE_DIR = "fresco_small_image_cache";
-    private static final long MAX_DISK_CACHE_SIZE = 1024 * ByteConstants.MB;
+    private static final long MAX_DISK_CACHE_SIZE = Long.MAX_VALUE;
     private static final long MAX_DISK_CACHE_LOW_SIZE = 300 * ByteConstants.MB;
     private static final long MAX_DISK_CACHE_VERY_LOW_SIZE = 100 * ByteConstants.MB;
     private static final int MAX_CACHE_ENTRIES = 16;
+    private static final int MAX_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 4);
 
     @SuppressLint("StaticFieldLeak")
     public static Context mContext;
@@ -113,7 +115,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-        Themer.INSTANCE.init(this, ConfigUtils.getTheme(mContext));
+        Themer.INSTANCE.init(this, ThemeConfig.getTheme(mContext));
 //        LeakCanary.install(this);
         CrashUtils.init(FileUtils.getDownloadDir() + "Log");
         addCount();
@@ -155,9 +157,9 @@ public class MyApp extends Application {
             @Override
             public MemoryCacheParams get() {
                 return new MemoryCacheParams(
-                        (int) (Runtime.getRuntime().maxMemory() / 4),
+                        MAX_MEMORY_CACHE_SIZE,
                         MAX_CACHE_ENTRIES,
-                        Integer.MAX_VALUE,
+                        MAX_MEMORY_CACHE_SIZE,
                         Integer.MAX_VALUE,
                         Integer.MAX_VALUE);
             }
@@ -189,9 +191,9 @@ public class MyApp extends Application {
     }
 
     private void addCount() {
-        long openCount = ConfigUtils.getOpenCount(this);
+        long openCount = OtherConfig.getOpenCount(this);
         openCount++;
-        ConfigUtils.saveOpenCount(this, openCount);
+        OtherConfig.saveOpenCount(this, openCount);
     }
 
     private void initOkGo() {
@@ -203,6 +205,6 @@ public class MyApp extends Application {
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
                 .setRetryCount(3)
                 .addCommonHeaders(headers);
-        OkDownload.getInstance().getThreadPool().setCorePoolSize(ConfigUtils.getDownloadCountConfig(this));
+        OkDownload.getInstance().getThreadPool().setCorePoolSize(OtherConfig.getDownloadCountConfig(this));
     }
 }

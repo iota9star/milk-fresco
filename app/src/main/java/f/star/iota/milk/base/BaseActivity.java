@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
-    protected abstract void init(Bundle savedInstanceState);
+    protected abstract void init();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = this;
         unbinder = ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-        init(savedInstanceState);
+        init();
         if (null != getIntent()) {
             handleIntent(getIntent());
         }

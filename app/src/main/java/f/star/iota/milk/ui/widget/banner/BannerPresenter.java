@@ -1,6 +1,8 @@
 package f.star.iota.milk.ui.widget.banner;
 
 
+import android.net.Uri;
+
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.convert.StringConvert;
@@ -12,11 +14,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import f.star.iota.milk.Net;
 import f.star.iota.milk.SourceType;
+import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
 import f.star.iota.milk.ui.bing.BingBean;
 import f.star.iota.milk.ui.gank.GankBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -58,7 +62,51 @@ public class BannerPresenter implements BannerContract.Presenter {
             case SourceType.SIMPLEDESKTOPS:
                 getSimpleDesktops();
                 break;
+            case SourceType.YURIIMG:
+                getYuriimg();
+                break;
         }
+    }
+
+    private void getYuriimg() {
+        String url = "http://yuriimg.com/post/" + (new Random().nextInt(560) + 1) + ".html";
+        mCompositeDisposable.add(
+                OkGo.<String>get(url)
+                        .converter(new StringConvert())
+                        .adapt(new ObservableResponse<String>())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .map(new Function<Response<String>, String>() {
+                            @Override
+                            public String apply(@NonNull Response<String> s) throws Exception {
+                                List<String> list = new ArrayList<>();
+                                Elements select = Jsoup.parse(s.body()).select("#image-box div.image-list");
+                                for (Element element : select) {
+                                    String url = Net.YURIIMG_BASE + element.select("div.image img").attr("data-viewersss");
+                                    list.add(url);
+                                }
+                                HashMap<String, String> headers = new HashMap<>();
+                                headers.put("Referer", "http://yuriimg.com/");
+                                headers.put("Host", "yuriimg.com");
+                                headers.put("Accept-Encoding", "gzip, deflate");
+                                headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                                String url = list.get(new Random().nextInt(list.size()));
+                                MyOkHttpNetworkFetcher.Headers.put(Uri.parse(url), headers);
+                                return url;
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(@NonNull String s) throws Exception {
+                                view.getBannerSuccess(s);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                view.getBannerError();
+                            }
+                        })
+        );
     }
 
     private void getSimpleDesktops() {

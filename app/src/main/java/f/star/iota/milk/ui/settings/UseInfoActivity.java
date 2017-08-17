@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
-import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -23,7 +22,7 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.util.FileUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 
@@ -51,7 +50,7 @@ public class UseInfoActivity extends BaseActivity {
                 SnackbarUtils.create(mContext, "清空历史打开次数", "嗯", new Sneaker.OnSneakerClickListener() {
                     @Override
                     public void onSneakerClick(View view) {
-                        ConfigUtils.saveOpenCount(aContext, 0);
+                        OtherConfig.saveOpenCount(aContext, 0);
                         bindOpenCount();
                     }
                 });
@@ -77,7 +76,7 @@ public class UseInfoActivity extends BaseActivity {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +91,7 @@ public class UseInfoActivity extends BaseActivity {
     }
 
     private void bindOpenCount() {
-        mTextViewOpenCount.setText(String.format("%s 次", String.valueOf(ConfigUtils.getOpenCount(aContext))));
+        mTextViewOpenCount.setText(String.format("%s 次", String.valueOf(OtherConfig.getOpenCount(aContext))));
     }
 
     private void bindCacheSize() {

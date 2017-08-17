@@ -2,7 +2,6 @@ package f.star.iota.milk.ui.more;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -13,7 +12,7 @@ import butterknife.OnClick;
 import f.star.iota.milk.Net;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.util.SnackbarUtils;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;
 
@@ -71,9 +70,9 @@ public class MoreActivity extends BaseActivity {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setTitle(null);
-        if (ConfigUtils.getR(aContext)) {
+        if (OtherConfig.getR(aContext)) {
             mSwitchCompatR.setChecked(true);
         } else {
             mSwitchCompatR.setChecked(false);
@@ -82,10 +81,10 @@ public class MoreActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    ConfigUtils.saveR(aContext, true);
+                    OtherConfig.saveR(aContext, true);
                     SnackbarUtils.create(mContext, "好好学习，天天向上");
                 } else {
-                    ConfigUtils.saveR(aContext, false);
+                    OtherConfig.saveR(aContext, false);
                     SnackbarUtils.create(mContext, "飙车了");
                 }
             }

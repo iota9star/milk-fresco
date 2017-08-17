@@ -1,7 +1,6 @@
 package f.star.iota.milk.ui.lock;
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
@@ -12,8 +11,8 @@ import com.wei.android.lib.fingerprintidentify.base.BaseFingerprint;
 import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.main.MainActivity;
-import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class PinLockActivity extends BaseActivity {
@@ -26,14 +25,14 @@ public class PinLockActivity extends BaseActivity {
     private int mErrorTimes = 0;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         initView();
         initEvent();
         initFingerprint();
     }
 
     private void initFingerprint() {
-        if (!ConfigUtils.isOpenFingerprint(aContext)) return;
+        if (!OtherConfig.isOpenFingerprint(aContext)) return;
         FingerprintIdentify fingerprintIdentify = new FingerprintIdentify(mContext);
         if (!fingerprintIdentify.isFingerprintEnable()) return;
         fingerprintIdentify.startIdentify(3, new BaseFingerprint.FingerprintIdentifyListener() {
@@ -75,7 +74,7 @@ public class PinLockActivity extends BaseActivity {
         mPinLockView.setPinLockListener(new PinLockListener() {
             @Override
             public void onComplete(String pin) {
-                if (ConfigUtils.getPin(aContext).equals(pin)) {
+                if (OtherConfig.getPin(aContext).equals(pin)) {
                     mErrorTimes = 0;
                     verifySuccess();
                 } else {

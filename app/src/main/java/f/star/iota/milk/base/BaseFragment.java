@@ -23,7 +23,7 @@ public abstract class BaseFragment extends Fragment {
     private Unbinder unbinder;
 
 
-    protected abstract void init(Bundle savedInstanceState);
+    protected abstract void init();
 
     protected abstract int getLayoutId();
 
@@ -47,7 +47,7 @@ public abstract class BaseFragment extends Fragment {
             mContainerView = inflater.inflate(getLayoutId(), container, false);
         }
         unbinder = ButterKnife.bind(this, mContainerView);
-        init(savedInstanceState);
+        init();
         return mContainerView;
     }
 

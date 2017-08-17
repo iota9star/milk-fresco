@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -24,7 +23,7 @@ import java.io.File;
 import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class DownloadManagerActivity extends BaseActivity {
@@ -41,8 +40,8 @@ public class DownloadManagerActivity extends BaseActivity {
     private OkDownload mOkDownload;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        init();
+    protected void init() {
+        create();
         initRecyclerView();
         initEvents();
     }
@@ -167,11 +166,11 @@ public class DownloadManagerActivity extends BaseActivity {
     }
 
     private void setBanner(String path) {
-        ConfigUtils.saveBanner(aContext, "file://" + path);
+        ThemeConfig.saveBanner(aContext, "file://" + path);
         SnackbarUtils.create(mContext, "主界面重启后生效");
     }
 
-    private void init() {
+    private void create() {
         setSupportActionBar(mToolbar);
         mFloatingToolbar.attachFab(mFloatingActionButton);
         mFloatingToolbar.attachRecyclerView(mRecyclerView);

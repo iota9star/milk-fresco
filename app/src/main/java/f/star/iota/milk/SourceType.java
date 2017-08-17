@@ -8,4 +8,5 @@ public interface SourceType {
     int GANK = 3;
     int WALLHAVEN = 4;
     int SIMPLEDESKTOPS = 5;
+    int YURIIMG = 6;
 }

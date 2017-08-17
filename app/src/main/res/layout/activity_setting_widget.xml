@@ -135,6 +135,145 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/v8dp"
+                        android:text="@string/about_setting" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/v2dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_compat_is_set_wallpaper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/is_set_wallpaper"
+                        android:textSize="@dimen/v12sp"
+                        android:textStyle="normal" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_compat_wallpaper_is_blur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/wallpaper_is_blur"
+                        android:textSize="@dimen/v12sp"
+                        android:textStyle="normal" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_compat_widget_is_blur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/widget_is_blur"
+                        android:textSize="@dimen/v12sp"
+                        android:textStyle="normal" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_compat_widget_is_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/save_pic_to_local"
+                        android:textSize="@dimen/v12sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/v8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@animator/touch_floating"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/blur_value_setting" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/v2dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_blur_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="@dimen/v8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/blur_value"
+                            android:textSize="@dimen/v12sp" />
+
+                        <TextView
+                            android:id="@+id/text_view_blur_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/v12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/v96dp"
+                android:layout_marginTop="@dimen/v8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@animator/touch_floating"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
                         android:text="@string/banner_source" />
 
                     <View
@@ -249,10 +388,27 @@
                             android:paddingStart="0dp"
                             android:paddingTop="@dimen/v8dp"
                             android:text="@string/simple_desktops" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_yuriimg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/yuriimg" />
                     </RadioGroup>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
-
 </android.support.design.widget.CoordinatorLayout>

@@ -2,7 +2,6 @@ package f.star.iota.milk.ui.theme;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class ThemeActivity extends BaseActivity {
@@ -55,7 +54,7 @@ public class ThemeActivity extends BaseActivity {
     public void onClick() {
         String url = mEditTextUrl.getText().toString().trim().replace(" ", "");
         if (url.length() > 5) {
-            ConfigUtils.saveBanner(aContext, url);
+            ThemeConfig.saveBanner(aContext, url);
             SnackbarUtils.create(this, "已保存地址");
             loadBanner(url);
         } else {
@@ -102,14 +101,14 @@ public class ThemeActivity extends BaseActivity {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         if (!isExpand) {
             mAppBarLayout.setExpanded(false);
         }
-        init();
+        create();
         initAppBarLayoutEvent();
         initRecyclerView();
-        loadBanner(ConfigUtils.getBanner(aContext));
+        loadBanner(ThemeConfig.getBanner(aContext));
     }
 
     private void initAppBarLayoutEvent() {
@@ -130,7 +129,7 @@ public class ThemeActivity extends BaseActivity {
         adapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
             @Override
             public void onClick(int theme) {
-                ConfigUtils.saveTheme(aContext, theme);
+                ThemeConfig.saveTheme(aContext, theme);
                 Themer.INSTANCE.setThemeSoft(ThemeActivity.this, theme, null);
             }
         });
@@ -162,7 +161,7 @@ public class ThemeActivity extends BaseActivity {
         themes.add(new ThemeBean(R.style.ThemeDarkBlack, R.color.ThemeDarkBlack, "夜间/Night", false));
 
         for (ThemeBean theme : themes) {
-            if (theme.getTheme() == ConfigUtils.getTheme(aContext)) {
+            if (theme.getTheme() == ThemeConfig.getTheme(aContext)) {
                 theme.setSelected(true);
             }
         }
@@ -178,7 +177,7 @@ public class ThemeActivity extends BaseActivity {
         }
     }
 
-    private void init() {
+    private void create() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

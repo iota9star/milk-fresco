@@ -6,10 +6,10 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -30,7 +30,6 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
 
@@ -39,9 +38,10 @@ import butterknife.OnClick;
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
+import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.SplashConfig;
 import f.star.iota.milk.ui.lock.PinLockActivity;
 import f.star.iota.milk.ui.main.MainActivity;
-import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
@@ -60,9 +60,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     FrameLayout mFrameLayoutSplashContainer;
     @BindView(R.id.button_go)
     Button mButtonGo;
-    @BindView(R.id.refresh_layout)
-    SmartRefreshLayout mRefreshLayout;
     private SplashPresenter mPresenter;
+
+    private boolean isGo = false;
 
     @OnClick({R.id.button_go})
     public void onClick() {
@@ -70,9 +70,10 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     private void go() {
-        if (ConfigUtils.isLock(aContext) == LockType.PIN) {
+        isGo = true;
+        if (OtherConfig.isLock(aContext) == LockType.PIN) {
             startActivity(new Intent(mContext, PinLockActivity.class));
-        } else if (ConfigUtils.isLock(aContext) == LockType.NONE) {
+        } else if (OtherConfig.isLock(aContext) == LockType.NONE) {
             startActivity(new Intent(mContext, MainActivity.class));
         }
         finish();
@@ -84,11 +85,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         mPresenter = new SplashPresenter(this);
-        mPresenter.getImage(ConfigUtils.getSplashSource(mContext));
-        mRefreshLayout.autoRefresh();
-        mRefreshLayout.setEnableLoadmore(false);
+        mPresenter.getImage(SplashConfig.getSplashSource(mContext));
         TypedValue typedValue = new TypedValue();
         mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         ColorStateList colorStateList = ColorStateList.valueOf(typedValue.data);
@@ -126,6 +125,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
             mTextViewEvent.setText(bean.getEvent());
             if (mTextViewEvent.getLineCount() > 1) {
                 mTextViewEvent.setText(String.format("\u3000\u3000%s", bean.getEvent()));
+            } else {
+                mTextViewEvent.setGravity(Gravity.CENTER);
             }
         }
         endSplash();
@@ -137,26 +138,18 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         mSimpleDraweeView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                go();
+                try {
+                    if (isGo) return;
+                    go();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }, 3600);
     }
 
     @Override
     public void getSuccess(String url) {
-        mRefreshLayout.finishRefresh();
-        mRefreshLayout.setEnableRefresh(false);
-        ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>() {
-            @Override
-            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
-                mPresenter.getHistory();
-            }
-
-            @Override
-            public void onFailure(String id, Throwable throwable) {
-                go();
-            }
-        };
         if (!TextUtils.isEmpty(url)) {
             Uri uri = Uri.parse(url);
             if (uri != null) {
@@ -188,17 +181,23 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                     }
                 }
                 ImageRequest request = requestBuilder.build();
-                final DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+                ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>() {
+                    @Override
+                    public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                        mPresenter.getHistory();
+                    }
+
+                    @Override
+                    public void onFailure(String id, Throwable throwable) {
+                        go();
+                    }
+                };
+                DraweeController draweeController = Fresco.newDraweeControllerBuilder()
                         .setOldController(mSimpleDraweeView.getController())
                         .setControllerListener(controllerListener)
                         .setImageRequest(request)
                         .build();
-                mRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSimpleDraweeView.setController(draweeController);
-                    }
-                }, 360);
+                mSimpleDraweeView.setController(draweeController);
             }
         }
     }

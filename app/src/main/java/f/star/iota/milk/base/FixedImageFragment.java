@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import f.star.iota.milk.R;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.util.SnackbarUtils;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
@@ -51,8 +51,8 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        init();
+    protected void init() {
+        create();
         initRecyclerView();
         initRefreshLayout();
     }
@@ -95,17 +95,17 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
     @Override
     public void changeRecyclerViewSpanCount() {
         int spanCount = mLayoutManager.getSpanCount();
-        if (spanCount >= ConfigUtils.getSpanCountConfig(aContext)) {
+        if (spanCount >= OtherConfig.getSpanCountConfig(aContext)) {
             spanCount = 1;
         } else {
             spanCount++;
         }
-        ConfigUtils.saveCurrentSpanCount(aContext, spanCount);
+        OtherConfig.saveCurrentSpanCount(aContext, spanCount);
         mLayoutManager.setSpanCount(spanCount);
         mItemDecoration.setSpanCount(spanCount);
     }
 
-    private void init() {
+    private void create() {
         mFab = ButterKnife.findById(getActivity(), R.id.floating_action_button);
         if (!isHideFab()) {
             mFab.setVisibility(View.VISIBLE);
@@ -116,7 +116,7 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
             mFab.setVisibility(View.GONE);
         }
         isRunning = false;
-        mSpanCount = ConfigUtils.getCurrentSpanCount(aContext);
+        mSpanCount = OtherConfig.getCurrentSpanCount(aContext);
         mPresenter = getPresenter();
         mAdapter = getAdapter();
     }

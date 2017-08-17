@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
@@ -43,6 +42,8 @@ import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.base.RVBean;
+import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.ui.download.DownloadManagerActivity;
 import f.star.iota.milk.ui.menu.MenuIllustrationFragment;
 import f.star.iota.milk.ui.menu.MenuMeiziFragment;
@@ -50,7 +51,6 @@ import f.star.iota.milk.ui.menu.MenuPhotographyFragment;
 import f.star.iota.milk.ui.moeimg.moe.MoeimgFragment;
 import f.star.iota.milk.ui.more.MoreActivity;
 import f.star.iota.milk.ui.settings.SettingsActivity;
-import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -75,8 +75,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        init();
+    protected void init() {
+        create();
         initDrawer();
         initDrawerEvent();
         checkPermission();
@@ -84,15 +84,22 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     }
 
     private void isShowDonationDialog() {
-        if ((ConfigUtils.getOpenCount(mContext) % 10 == 0 || ConfigUtils.getOpenCount(mContext) == 3)
-                && ConfigUtils.isShowDonation(mContext)) {
-            mCoordinatorLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    donation();
-                }
-            }, 3600);
+        long openCount = OtherConfig.getOpenCount(mContext);
+        if ((openCount % 16 == 0 || openCount == 5) && OtherConfig.isShowDonation(mContext)) {
+            showDonationDialog();
+        } else if (openCount % 100 == 0) {
+            SnackbarUtils.create(mContext, "这是您打开的 " + openCount + " 次，将冒昧的显示捐赠页面");
+            showDonationDialog();
         }
+    }
+
+    private void showDonationDialog() {
+        mToolbar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                donation();
+            }
+        }, 3600);
     }
 
     private void checkPermission() {
@@ -128,7 +135,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 .setNeutralButton("不再提醒", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ConfigUtils.saveDonationStatus(mContext, false);
+                        OtherConfig.saveDonationStatus(mContext, false);
                         dialogInterface.dismiss();
                         SnackbarUtils.create(mContext, "如果想要支持我的话，可以在“关于”里面查看");
                     }
@@ -171,7 +178,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         dialog.show();
     }
 
-    private void init() {
+    private void create() {
         setSupportActionBar(mToolbar);
         mPresenter = new MainActivityPresenter(this);
         isRunning = false;
@@ -179,7 +186,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
     @Override
     protected void setFirstFragment() {
-        if (!ConfigUtils.getR(aContext)) {
+        if (!OtherConfig.getR(aContext)) {
             currentFragment = MoeimgFragment.newInstance(Net.MOEIMG_H);
         } else {
             currentFragment = MoeimgFragment.newInstance(Net.MOEIMG);
@@ -223,7 +230,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 .build();
         View header = drawer.getHeader();
         final KenBurnsView banner = header.findViewById(R.id.ken_burns_view_banner);
-        String url = ConfigUtils.getBanner(mContext);
+        String url = ThemeConfig.getBanner(mContext);
         try {
             if (url != null) {
                 Uri uri = Uri.parse(url);

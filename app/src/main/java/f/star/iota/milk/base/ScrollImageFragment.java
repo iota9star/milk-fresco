@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import f.star.iota.milk.R;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.util.SnackbarUtils;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
@@ -57,8 +57,8 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        init();
+    protected void init() {
+        create();
         initRecyclerView();
         initRefreshLayout();
     }
@@ -100,12 +100,12 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
     @Override
     public void changeRecyclerViewSpanCount() {
         int spanCount = mLayoutManager.getSpanCount();
-        if (spanCount >= ConfigUtils.getSpanCountConfig(aContext)) {
+        if (spanCount >= OtherConfig.getSpanCountConfig(aContext)) {
             spanCount = 1;
         } else {
             spanCount++;
         }
-        ConfigUtils.saveCurrentSpanCount(aContext, spanCount);
+        OtherConfig.saveCurrentSpanCount(aContext, spanCount);
         mLayoutManager.setSpanCount(spanCount);
         mItemDecoration.setSpanCount(spanCount);
     }
@@ -114,7 +114,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
         return true;
     }
 
-    private void init() {
+    private void create() {
         mFab = ButterKnife.findById(getActivity(), R.id.floating_action_button);
         if (!isHideFab()) {
             mFab.setVisibility(View.VISIBLE);
@@ -127,7 +127,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
         isLoadMore = false;
         isRunning = false;
         currentPage = mInitialPage;
-        mSpanCount = ConfigUtils.getCurrentSpanCount(aContext);
+        mSpanCount = OtherConfig.getCurrentSpanCount(aContext);
         mPresenter = getPresenter();
         mAdapter = getAdapter();
     }

@@ -8,6 +8,7 @@ import f.star.iota.milk.Menus;
 import f.star.iota.milk.Net;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.animepictures.anime.AnimePictureFragment;
 import f.star.iota.milk.ui.apic.a.ApicPagerFragment;
 import f.star.iota.milk.ui.bcy.ranking.BCYRankingPagerFragment;
@@ -31,7 +32,6 @@ import f.star.iota.milk.ui.wallhaven.wall.WallHavenFragment;
 import f.star.iota.milk.ui.www005tv.www.WWW005TVPagerFragment;
 import f.star.iota.milk.ui.yuriimg.YuriImgPagerFragment;
 import f.star.iota.milk.ui.zerochan.ZerochanFragment;
-import f.star.iota.milk.util.ConfigUtils;
 
 public class MenuIllustrationFragment extends MenuFragment {
     @Override
@@ -147,7 +147,7 @@ public class MenuIllustrationFragment extends MenuFragment {
                 break;
             case Menus.MENU_MOEIMG_ID:
                 activity.removeFragmentContainerChildrenViews();
-                if (!ConfigUtils.getR(aContext)) {
+                if (!OtherConfig.getR(aContext)) {
                     currentFragment = MoeimgFragment.newInstance(Net.MOEIMG_H);
                 } else {
                     currentFragment = MoeimgFragment.newInstance(Net.MOEIMG);
@@ -270,7 +270,7 @@ public class MenuIllustrationFragment extends MenuFragment {
                 "http://static.mangadrawing.net/themes/shinpatsu/md.jpg",
                 Net.MANGA_DRAWING_LOGIN
         ));
-        if (!ConfigUtils.getR(aContext)) {
+        if (!OtherConfig.getR(aContext)) {
             menu.add(new MenuBean(Menus.MENU_MANGA_DRAWING_HENTAI_ID,
                     Menus.MENU_MANGA_DRAWING_HENTAI,
                     Net.MANGA_DRAWING_BASE,

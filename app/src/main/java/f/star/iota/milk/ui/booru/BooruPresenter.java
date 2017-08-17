@@ -11,7 +11,7 @@ import java.util.List;
 import f.star.iota.milk.MyApp;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.StringPresenter;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 
 public class BooruPresenter extends StringPresenter<List<BooruBean>> {
 
@@ -23,7 +23,7 @@ public class BooruPresenter extends StringPresenter<List<BooruBean>> {
     protected List<BooruBean> dealResponse(String s, HashMap<String, String> headers) {
         List<BooruBean> beans = new Gson().fromJson(s, new TypeToken<List<BooruBean>>() {
         }.getType());
-        if (ConfigUtils.getR(MyApp.mContext)) {
+        if (OtherConfig.getR(MyApp.mContext)) {
             Iterator<BooruBean> iterator = beans.iterator();
             while (iterator.hasNext()) {
                 BooruBean b = iterator.next();

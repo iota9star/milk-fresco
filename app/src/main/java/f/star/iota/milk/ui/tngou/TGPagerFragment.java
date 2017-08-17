@@ -1,6 +1,5 @@
 package f.star.iota.milk.ui.tngou;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -28,7 +27,7 @@ public class TGPagerFragment extends BaseFragment implements PVContract.View {
     private TGClassifyPresenter mPresenter;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         mPresenter = new TGClassifyPresenter(this);
         mPresenter.get(Net.TNGOU_CLASSIFY);
         mTabLayout = getActivity().findViewById(R.id.tab_layout);

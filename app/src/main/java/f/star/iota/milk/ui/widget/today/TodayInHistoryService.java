@@ -2,6 +2,7 @@ package f.star.iota.milk.ui.widget.today;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.common.references.CloseableReference;
@@ -28,11 +30,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import f.star.iota.milk.R;
+import f.star.iota.milk.config.WidgetConfig;
 import f.star.iota.milk.ui.splash.HistoryBean;
 import f.star.iota.milk.ui.widget.banner.BannerContract;
 import f.star.iota.milk.ui.widget.banner.BannerPresenter;
-import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.FastBlur;
+import f.star.iota.milk.util.FileUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -72,7 +75,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     private void getBanner() {
         if (bannerIsRunning) return;
         bannerIsRunning = true;
-        mBannerPresenter.getBanner(ConfigUtils.getWidgetBannerSource(mContext));
+        mBannerPresenter.getBanner(WidgetConfig.getWidgetBannerSource(mContext));
     }
 
     @Override
@@ -85,7 +88,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
         mTodayInHistoryPresenter = new TodayInHistoryPresenter(this);
         mBannerPresenter = new BannerPresenter(this);
         mTimer = new Timer();
-        mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * ConfigUtils.getTodayInHistroyInterval(aContext));
+        mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * WidgetConfig.getTodayInHistroyInterval(aContext));
     }
 
     @Override
@@ -134,19 +137,38 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                                                  if (bitmap == null) return;
                                                  try {
                                                      updateBanner(bitmap);
-                                                     Observable.just(FastBlur.doBlur(bitmap, 24, false))
-                                                             .subscribeOn(Schedulers.computation())
-                                                             .observeOn(AndroidSchedulers.mainThread())
-                                                             .subscribe(new Consumer<Bitmap>() {
-                                                                 @Override
-                                                                 public void accept(Bitmap bitmap) throws Exception {
-                                                                     updateBackground(bitmap);
-                                                                 }
-                                                             }, new Consumer<Throwable>() {
-                                                                 @Override
-                                                                 public void accept(Throwable throwable) throws Exception {
-                                                                 }
-                                                             });
+                                                     if (WidgetConfig.getWidgetBannerIsSave(mContext)) {
+                                                         saveBitmap(bitmap);
+                                                     }
+                                                     if (!WidgetConfig.getWidgetWallpaperIsBlur(mContext) && WidgetConfig.getWidgetWallpaperIsSet(mContext)) {
+                                                         WallpaperManager manager = WallpaperManager.getInstance(mContext);
+                                                         manager.setBitmap(bitmap);
+                                                     }
+                                                     if (WidgetConfig.getWidgetBannerIsBlur(mContext) || WidgetConfig.getWidgetWallpaperIsBlur(mContext)) {
+                                                         Observable.just(FastBlur.doBlur(bitmap, WidgetConfig.getWidgetBlurValue(mContext), false))
+                                                                 .subscribeOn(Schedulers.computation())
+                                                                 .observeOn(AndroidSchedulers.mainThread())
+                                                                 .subscribe(new Consumer<Bitmap>() {
+                                                                     @Override
+                                                                     public void accept(Bitmap bitmap) throws Exception {
+                                                                         if (bitmap == null) return;
+                                                                         if (WidgetConfig.getWidgetBannerIsBlur(mContext)) {
+                                                                             updateBackground(bitmap);
+                                                                         } else {
+                                                                             updateBackground(null);
+                                                                         }
+                                                                         if (WidgetConfig.getWidgetWallpaperIsBlur(mContext) && WidgetConfig.getWidgetWallpaperIsSet(mContext)) {
+                                                                             WallpaperManager manager = WallpaperManager.getInstance(mContext);
+                                                                             manager.setBitmap(bitmap);
+                                                                         }
+                                                                     }
+                                                                 }, new Consumer<Throwable>() {
+                                                                     @Override
+                                                                     public void accept(Throwable throwable) throws Exception {
+                                                                         Toast.makeText(mContext, "发生错误：" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                     }
+                                                                 });
+                                                     }
                                                  } catch (Exception e) {
                                                      e.printStackTrace();
                                                  }
@@ -165,6 +187,22 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
         }
     }
 
+    private void saveBitmap(Bitmap bitmap) {
+        Observable.just(bitmap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(Bitmap bitmap) throws Exception {
+                        FileUtils.saveBitmap(bitmap);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+    }
     private void updateBanner(Bitmap resource) {
         try {
             if (resource == null) return;
@@ -183,7 +221,6 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
 
     private void updateBackground(Bitmap blur) {
         try {
-            if (blur == null) return;
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
             RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_today_in_history_with_banner);
             views.setImageViewBitmap(R.id.image_view_background, blur);

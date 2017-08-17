@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
@@ -24,9 +23,9 @@ import butterknife.OnClick;
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.lock.SetPinLockActivity;
 import f.star.iota.milk.ui.theme.ThemeActivity;
-import f.star.iota.milk.util.ConfigUtils;
 import f.star.iota.milk.util.SnackbarUtils;
 
 public class SettingsActivity extends BaseActivity {
@@ -51,7 +50,7 @@ public class SettingsActivity extends BaseActivity {
                 startActivity(new Intent(mContext, DisplayAndDownloadActivity.class));
                 break;
             case R.id.linear_layout_pin_lock:
-                if (ConfigUtils.isLock(aContext) != LockType.PIN) {
+                if (OtherConfig.isLock(aContext) != LockType.PIN) {
                     startActivity(new Intent(mContext, SetPinLockActivity.class));
                 } else {
                     new AlertDialog.Builder(mContext)
@@ -59,8 +58,8 @@ public class SettingsActivity extends BaseActivity {
                             .setPositiveButton("关闭 PIN", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    ConfigUtils.setLock(aContext, LockType.NONE);
-                                    ConfigUtils.savePin(aContext, "");
+                                    OtherConfig.setLock(aContext, LockType.NONE);
+                                    OtherConfig.savePin(aContext, "");
                                 }
                             })
                             .setNegativeButton("重新设置", new DialogInterface.OnClickListener() {
@@ -73,7 +72,7 @@ public class SettingsActivity extends BaseActivity {
                 }
                 break;
             case R.id.linear_layout_fingerprint_lock:
-                if (ConfigUtils.isLock(aContext) == LockType.NONE) {
+                if (OtherConfig.isLock(aContext) == LockType.NONE) {
                     SnackbarUtils.create(mContext, "请先设置至少一种解锁方式");
                     return;
                 }
@@ -91,16 +90,16 @@ public class SettingsActivity extends BaseActivity {
                     });
                     return;
                 }
-                final boolean isOpen = ConfigUtils.isOpenFingerprint(aContext);
+                final boolean isOpen = OtherConfig.isOpenFingerprint(aContext);
                 new AlertDialog.Builder(mContext)
                         .setTitle(isOpen ? "关闭指纹识别支持" : "开启指纹识别支持")
                         .setPositiveButton("嗯", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if (isOpen) {
-                                    ConfigUtils.openFingerprint(aContext, false);
+                                    OtherConfig.openFingerprint(aContext, false);
                                 } else {
-                                    ConfigUtils.openFingerprint(aContext, true);
+                                    OtherConfig.openFingerprint(aContext, true);
                                 }
                             }
                         })
@@ -109,7 +108,7 @@ public class SettingsActivity extends BaseActivity {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

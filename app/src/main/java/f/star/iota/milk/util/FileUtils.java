@@ -2,9 +2,12 @@ package f.star.iota.milk.util;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Environment;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class FileUtils {
@@ -77,21 +80,48 @@ public class FileUtils {
         return null;
     }
 
-    public static String getFileName(String url) {
-        long time = System.currentTimeMillis();
-        url = url.toLowerCase();
-        if (url.contains(".jpg") || url.contains(".jpeg")) {
-            return time + ".jpg";
-        } else if (url.contains(".png")) {
-            return time + ".png";
-        } else if (url.contains(".webp")) {
-            return time + ".webp";
-        } else if (url.contains(".bmp")) {
-            return time + ".bmp";
-        } else if (url.contains(".gif")) {
-            return time + ".gif";
-        } else {
-            return time + "";
+    public static void saveBitmap(Bitmap bitmap) {
+        if (getDownloadDir() == null) return;
+        try {
+            String dirPath = getDownloadDir() + "Widget/";
+            File dir = new File(dirPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            String filePath = dirPath + getCurrentDate() + ".png";
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    private static String getCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd EE HH:mm:ss", Locale.US);
+        return sdf.format(System.currentTimeMillis());
+    }
+//
+//    public static String getFileName(String url) {
+//        long time = System.currentTimeMillis();
+//        url = url.toLowerCase();
+//        if (url.contains(".jpg") || url.contains(".jpeg")) {
+//            return time + ".jpg";
+//        } else if (url.contains(".png")) {
+//            return time + ".png";
+//        } else if (url.contains(".webp")) {
+//            return time + ".webp";
+//        } else if (url.contains(".bmp")) {
+//            return time + ".bmp";
+//        } else if (url.contains(".gif")) {
+//            return time + ".gif";
+//        } else {
+//            return time + "";
+//        }
+//    }
 }

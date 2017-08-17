@@ -8,6 +8,7 @@ import f.star.iota.milk.Menus;
 import f.star.iota.milk.Net;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.bcy.ranking.BCYRankingPagerFragment;
 import f.star.iota.milk.ui.bcy.selected.BCYSelectedFragment;
 import f.star.iota.milk.ui.chinagirlol.china.ChinaGirlOLPagerFragment;
@@ -33,7 +34,6 @@ import f.star.iota.milk.ui.www94taotucom.www.WWW94TAOTUCOMFragment;
 import f.star.iota.milk.ui.xiumm.xiu.XIUMMFragment;
 import f.star.iota.milk.ui.xiuren.xiu.XiuRenFragment;
 import f.star.iota.milk.ui.youwu.you.YouWuPagerFragment;
-import f.star.iota.milk.util.ConfigUtils;
 
 public class MenuMeiziFragment extends MenuFragment {
     @Override
@@ -222,7 +222,7 @@ public class MenuMeiziFragment extends MenuFragment {
                 Net.TAOTUTT_BASE, "http://taotutt.com/wp-content/themes/cx-udy/images/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_UMEI_ID, Menus.MENU_UMEI,
                 Net.UMEI, "http://www.umei.cc/images/logo4.png", null));
-        if (!ConfigUtils.getR(aContext)) {
+        if (!OtherConfig.getR(aContext)) {
             menu.add(new MenuBean(Menus.MENU_XIUREN_ID, Menus.MENU_XIUREN,
                     Net.XIUREN_BASE, "http://www.xiuren.org/logo.png", null));
             menu.add(new MenuBean(Menus.MENU_GRAVUREGIRLZ_ID, Menus.MENU_GRAVUREGIRLZ,

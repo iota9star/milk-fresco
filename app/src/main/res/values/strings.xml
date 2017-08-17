@@ -81,4 +81,12 @@
     <string name="splash_background_source_setting_long">Splash背景源设置</string>
     <string name="splash_background_source_setting_short">Splash源</string>
     <string name="simple_desktops">SIMPLEDESKTOPS</string>
+    <string name="wallpaper_is_blur">壁纸是否模糊</string>
+    <string name="widget_is_blur">小部件模糊背景是否启用</string>
+    <string name="is_set_wallpaper">是否同时设置壁纸</string>
+    <string name="blur_value">模糊度</string>
+    <string name="blur_value_setting">图片模糊度设置</string>
+    <string name="save_pic_to_local">是否保存图片到本地</string>
+    <string name="yuriimg">YURIIMG</string>
+    <string name="about_setting">相关设置</string>
 </resources>

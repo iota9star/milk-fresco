@@ -1,6 +1,5 @@
 package f.star.iota.milk.ui.lock;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,7 +12,7 @@ import butterknife.OnClick;
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.util.SnackbarUtils;
 
 
@@ -51,8 +50,8 @@ public class SetPinLockActivity extends BaseActivity {
                     mButtonRight.setVisibility(View.GONE);
                     mButtonLeft.setText(R.string.wait_inut);
                 } else if (mStep == STEP_TWO) {
-                    ConfigUtils.savePin(aContext, mPinCode);
-                    ConfigUtils.setLock(aContext, LockType.PIN);
+                    OtherConfig.savePin(aContext, mPinCode);
+                    OtherConfig.setLock(aContext, LockType.PIN);
                     finish();
                 }
                 break;
@@ -60,7 +59,7 @@ public class SetPinLockActivity extends BaseActivity {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         initView();
         initEvent();
     }

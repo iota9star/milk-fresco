@@ -1,6 +1,5 @@
 package f.star.iota.milk.ui.settings;
 
-import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,7 +12,8 @@ import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.SourceType;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.ConfigUtils;
+import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.SplashConfig;
 
 public class DisplayAndDownloadActivity extends BaseActivity {
     @BindView(R.id.bubble_seek_bar_span_count)
@@ -36,8 +36,11 @@ public class DisplayAndDownloadActivity extends BaseActivity {
     RadioButton mRadioButtonWallHaven;
     @BindView(R.id.radio_simple_desktops)
     RadioButton mRadioButtonSimpleDesktops;
+    @BindView(R.id.radio_yuriimg)
+    RadioButton mRadioButtonYuriimg;
+
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +48,11 @@ public class DisplayAndDownloadActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        mBubbleSeekBarSpanCount.setProgress(ConfigUtils.getSpanCountConfig(aContext));
+        mBubbleSeekBarSpanCount.setProgress(OtherConfig.getSpanCountConfig(aContext));
         mBubbleSeekBarSpanCount.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(int progress, float progressFloat) {
-                ConfigUtils.saveSpanCountConfig(mContext, progress);
+                OtherConfig.saveSpanCountConfig(mContext, progress);
             }
 
             @Override
@@ -62,11 +65,11 @@ public class DisplayAndDownloadActivity extends BaseActivity {
 
             }
         });
-        mBubbleSeekBarDownloadCount.setProgress(ConfigUtils.getDownloadCountConfig(aContext));
+        mBubbleSeekBarDownloadCount.setProgress(OtherConfig.getDownloadCountConfig(aContext));
         mBubbleSeekBarDownloadCount.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(int i, float v) {
-                ConfigUtils.saveDownloadCountConfig(mContext, i);
+                OtherConfig.saveDownloadCountConfig(mContext, i);
             }
 
             @Override
@@ -79,7 +82,7 @@ public class DisplayAndDownloadActivity extends BaseActivity {
 
             }
         });
-        switch (ConfigUtils.getSplashSource(mContext)) {
+        switch (SplashConfig.getSplashSource(mContext)) {
             case SourceType.APIC:
                 mRadioButtonApic.setChecked(true);
                 break;
@@ -98,28 +101,34 @@ public class DisplayAndDownloadActivity extends BaseActivity {
             case SourceType.SIMPLEDESKTOPS:
                 mRadioButtonSimpleDesktops.setChecked(true);
                 break;
+            case SourceType.YURIIMG:
+                mRadioButtonYuriimg.setChecked(true);
+                break;
         }
         mRadioGroupBannerSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
                 switch (id) {
                     case R.id.radio_apic:
-                        ConfigUtils.saveSplashSource(mContext, SourceType.APIC);
+                        SplashConfig.saveSplashSource(mContext, SourceType.APIC);
                         break;
                     case R.id.radio_moeimg:
-                        ConfigUtils.saveSplashSource(mContext, SourceType.MOEIMG);
+                        SplashConfig.saveSplashSource(mContext, SourceType.MOEIMG);
                         break;
                     case R.id.radio_bing:
-                        ConfigUtils.saveSplashSource(mContext, SourceType.BING);
+                        SplashConfig.saveSplashSource(mContext, SourceType.BING);
                         break;
                     case R.id.radio_gank:
-                        ConfigUtils.saveSplashSource(mContext, SourceType.GANK);
+                        SplashConfig.saveSplashSource(mContext, SourceType.GANK);
                         break;
                     case R.id.radio_wallhaven:
-                        ConfigUtils.saveSplashSource(mContext, SourceType.WALLHAVEN);
+                        SplashConfig.saveSplashSource(mContext, SourceType.WALLHAVEN);
                         break;
                     case R.id.radio_simple_desktops:
-                        ConfigUtils.saveSplashSource(mContext, SourceType.SIMPLEDESKTOPS);
+                        SplashConfig.saveSplashSource(mContext, SourceType.SIMPLEDESKTOPS);
+                        break;
+                    case R.id.radio_yuriimg:
+                        SplashConfig.saveSplashSource(mContext, SourceType.YURIIMG);
                         break;
                 }
             }

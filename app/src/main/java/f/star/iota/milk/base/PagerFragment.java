@@ -1,6 +1,5 @@
 package f.star.iota.milk.base;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -18,7 +17,7 @@ public abstract class PagerFragment extends BaseFragment {
     private TabLayout mTabLayout;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         mTabLayout = ButterKnife.findById(getActivity(), R.id.tab_layout);
         mTabLayout.setTabMode(setTabMode());
         TitlePagerAdapter mAdapter = getPagerAdapter();
