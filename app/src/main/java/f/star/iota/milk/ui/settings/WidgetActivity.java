@@ -95,7 +95,7 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
                 final MaterialNumberPicker blur = getNumberPicker();
                 new AlertDialog.Builder(this)
                         .setTitle("模糊度")
-                        .setMessage("\u3000\u3000数值越大效果越好，但对手机性能要求越高，请设置适合的自己的数值")
+                        .setMessage("\u3000\u3000数值越大效果越好，但对手机性能要求越高，请设置合理的数值")
                         .setView(blur)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
