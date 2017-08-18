@@ -18,6 +18,18 @@ public class WidgetConfig {
         edit.apply();
     }
 
+    public static boolean isWiFiLoadBanner(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        return sp.getBoolean("is_wifi_load", false);
+    }
+
+    public static void isOnlyWiFiLoad(Context context, boolean isLoad) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putBoolean("is_wifi_load", isLoad);
+        edit.apply();
+    }
+
     public static int getJuziInterval(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         return sp.getInt("juzi_interval", 30);
@@ -54,50 +66,50 @@ public class WidgetConfig {
         edit.apply();
     }
 
-    public static void saveWidgetWallpaperIsBlur(Context context, boolean isBlur) {
+    public static void isBlurWallpaper(Context context, boolean isBlur) {
         SharedPreferences sp = context.getSharedPreferences("widget_wallpaper_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("widget_wallpaper_is_blur", isBlur);
         edit.apply();
     }
 
-    public static boolean getWidgetWallpaperIsBlur(Context context) {
+    public static boolean isBlurWallpaper(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_wallpaper_config", Context.MODE_PRIVATE);
         return sp.getBoolean("widget_wallpaper_is_blur", true);
     }
 
-    public static void saveWidgetWallpaperIsSet(Context context, boolean isSet) {
+    public static void isSetWallpaper(Context context, boolean isSet) {
         SharedPreferences sp = context.getSharedPreferences("widget_wallpaper_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("widget_wallpaper_is_set", isSet);
         edit.apply();
     }
 
-    public static boolean getWidgetWallpaperIsSet(Context context) {
+    public static boolean isSetWallpaper(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_wallpaper_config", Context.MODE_PRIVATE);
         return sp.getBoolean("widget_wallpaper_is_set", true);
     }
 
-    public static void saveWidgetBannerIsBlur(Context context, boolean isBlur) {
+    public static void isBlurWidgetBanner(Context context, boolean isBlur) {
         SharedPreferences sp = context.getSharedPreferences("widget_blur_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("widget_banner_is_blur", isBlur);
         edit.apply();
     }
 
-    public static boolean getWidgetBannerIsBlur(Context context) {
+    public static boolean isBlurWidgetBanner(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_blur_config", Context.MODE_PRIVATE);
         return sp.getBoolean("widget_banner_is_blur", false);
     }
 
-    public static void saveWidgetBannerIsSave(Context context, boolean isSave) {
+    public static void isSaveWidgetBanner(Context context, boolean isSave) {
         SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("widget_banner_is_save", isSave);
         edit.apply();
     }
 
-    public static boolean getWidgetBannerIsSave(Context context) {
+    public static boolean isSaveWidgetBanner(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         return sp.getBoolean("widget_banner_is_save", false);
     }

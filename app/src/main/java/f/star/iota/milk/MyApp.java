@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
@@ -61,7 +62,6 @@ public class MyApp extends Application {
     private static final long MAX_DISK_CACHE_VERY_LOW_SIZE = 100 * ByteConstants.MB;
     private static final int MAX_CACHE_ENTRIES = 16;
     private static final int MAX_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 4);
-
     @SuppressLint("StaticFieldLeak")
     public static Context mContext;
 
@@ -82,6 +82,8 @@ public class MyApp extends Application {
             }
         });
     }
+
+    private final long[] mIntervalException = new long[2];
 
     private static OkHttpClient makeOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -126,6 +128,11 @@ public class MyApp extends Application {
         Crash.setExceptionHandler(new Crash.ExceptionHandler() {
             @Override
             public void handleException(final Thread thread, final Throwable e) {
+                System.arraycopy(mIntervalException, 1, mIntervalException, 0, mIntervalException.length - 1);
+                mIntervalException[mIntervalException.length - 1] = SystemClock.uptimeMillis();
+                if (SystemClock.uptimeMillis() - mIntervalException[0] <= 1000) {
+                    return;
+                }
                 new Thread() {
                     @Override
                     public void run() {

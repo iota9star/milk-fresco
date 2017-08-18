@@ -36,6 +36,7 @@ import f.star.iota.milk.ui.widget.banner.BannerContract;
 import f.star.iota.milk.ui.widget.banner.BannerPresenter;
 import f.star.iota.milk.util.FastBlur;
 import f.star.iota.milk.util.FileUtils;
+import f.star.iota.milk.util.NetUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -74,8 +75,15 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
 
     private void getBanner() {
         if (bannerIsRunning) return;
-        bannerIsRunning = true;
-        mBannerPresenter.getBanner(WidgetConfig.getWidgetBannerSource(mContext));
+        if (WidgetConfig.isWiFiLoadBanner(mContext)) {
+            if (NetUtils.isWiFi(mContext)) {
+                bannerIsRunning = true;
+                mBannerPresenter.getBanner(WidgetConfig.getWidgetBannerSource(mContext));
+            }
+        } else {
+            bannerIsRunning = true;
+            mBannerPresenter.getBanner(WidgetConfig.getWidgetBannerSource(mContext));
+        }
     }
 
     @Override
@@ -137,14 +145,14 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                                                  if (bitmap == null) return;
                                                  try {
                                                      updateBanner(bitmap);
-                                                     if (WidgetConfig.getWidgetBannerIsSave(mContext)) {
+                                                     if (WidgetConfig.isSaveWidgetBanner(mContext)) {
                                                          saveBitmap(bitmap);
                                                      }
-                                                     if (!WidgetConfig.getWidgetWallpaperIsBlur(mContext) && WidgetConfig.getWidgetWallpaperIsSet(mContext)) {
+                                                     if (!WidgetConfig.isBlurWallpaper(mContext) && WidgetConfig.isSetWallpaper(mContext)) {
                                                          WallpaperManager manager = WallpaperManager.getInstance(mContext);
                                                          manager.setBitmap(bitmap);
                                                      }
-                                                     if (WidgetConfig.getWidgetBannerIsBlur(mContext) || WidgetConfig.getWidgetWallpaperIsBlur(mContext)) {
+                                                     if (WidgetConfig.isBlurWidgetBanner(mContext) || WidgetConfig.isBlurWallpaper(mContext)) {
                                                          Observable.just(FastBlur.doBlur(bitmap, WidgetConfig.getWidgetBlurValue(mContext), false))
                                                                  .subscribeOn(Schedulers.computation())
                                                                  .observeOn(AndroidSchedulers.mainThread())
@@ -152,12 +160,12 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                                                                      @Override
                                                                      public void accept(Bitmap bitmap) throws Exception {
                                                                          if (bitmap == null) return;
-                                                                         if (WidgetConfig.getWidgetBannerIsBlur(mContext)) {
+                                                                         if (WidgetConfig.isBlurWidgetBanner(mContext)) {
                                                                              updateBackground(bitmap);
                                                                          } else {
                                                                              updateBackground(null);
                                                                          }
-                                                                         if (WidgetConfig.getWidgetWallpaperIsBlur(mContext) && WidgetConfig.getWidgetWallpaperIsSet(mContext)) {
+                                                                         if (WidgetConfig.isBlurWallpaper(mContext) && WidgetConfig.isSetWallpaper(mContext)) {
                                                                              WallpaperManager manager = WallpaperManager.getInstance(mContext);
                                                                              manager.setBitmap(bitmap);
                                                                          }

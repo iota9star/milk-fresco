@@ -46,12 +46,15 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
 
     @BindView(R.id.switch_compat_is_set_wallpaper)
     SwitchCompat mSwitchCompatIsSetWallpaper;
-    @BindView(R.id.switch_compat_wallpaper_is_blur)
-    SwitchCompat mSwitchCompatWallpaperIsBlur;
-    @BindView(R.id.switch_compat_widget_is_blur)
-    SwitchCompat mSwitchCompatWidgetIsBlur;
-    @BindView(R.id.switch_compat_widget_is_save)
-    SwitchCompat mSwitchCompatWidgetIsSave;
+    @BindView(R.id.switch_compat_is_blur_wallpaper)
+    SwitchCompat mSwitchCompatIsBlurWallpaper;
+    @BindView(R.id.switch_compat_is_blur_widget_banner)
+    SwitchCompat mSwitchCompatIsBlurWidgetBanner;
+    @BindView(R.id.switch_compat_is_save_widget_banner)
+    SwitchCompat mSwitchCompatIsSaveWidgetBanner;
+    @BindView(R.id.switch_compat_is_only_wifi_load)
+    SwitchCompat mSwitchCompatIsOnlyWiFiLoad;
+
     @BindView(R.id.text_view_blur_value)
     TextView mTextViewBlurValue;
 
@@ -204,22 +207,26 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
                 }
             }
         });
-        if (WidgetConfig.getWidgetBannerIsBlur(mContext)) {
-            mSwitchCompatWidgetIsBlur.setChecked(true);
+        if (WidgetConfig.isBlurWidgetBanner(mContext)) {
+            mSwitchCompatIsBlurWidgetBanner.setChecked(true);
         }
-        if (WidgetConfig.getWidgetWallpaperIsBlur(mContext)) {
-            mSwitchCompatWallpaperIsBlur.setChecked(true);
+        if (WidgetConfig.isBlurWallpaper(mContext)) {
+            mSwitchCompatIsBlurWallpaper.setChecked(true);
         }
-        if (WidgetConfig.getWidgetWallpaperIsSet(mContext)) {
+        if (WidgetConfig.isSetWallpaper(mContext)) {
             mSwitchCompatIsSetWallpaper.setChecked(true);
         }
-        if (WidgetConfig.getWidgetBannerIsSave(mContext)) {
-            mSwitchCompatWidgetIsSave.setChecked(true);
+        if (WidgetConfig.isSaveWidgetBanner(mContext)) {
+            mSwitchCompatIsSaveWidgetBanner.setChecked(true);
+        }
+        if (WidgetConfig.isWiFiLoadBanner(mContext)) {
+            mSwitchCompatIsOnlyWiFiLoad.setChecked(true);
         }
         mSwitchCompatIsSetWallpaper.setOnCheckedChangeListener(this);
-        mSwitchCompatWallpaperIsBlur.setOnCheckedChangeListener(this);
-        mSwitchCompatWidgetIsBlur.setOnCheckedChangeListener(this);
-        mSwitchCompatWidgetIsSave.setOnCheckedChangeListener(this);
+        mSwitchCompatIsBlurWallpaper.setOnCheckedChangeListener(this);
+        mSwitchCompatIsBlurWidgetBanner.setOnCheckedChangeListener(this);
+        mSwitchCompatIsSaveWidgetBanner.setOnCheckedChangeListener(this);
+        mSwitchCompatIsOnlyWiFiLoad.setOnCheckedChangeListener(this);
     }
 
     private void bindTodayInHistoryInterval(int todayInHistroyInterval) {
@@ -270,16 +277,19 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         switch (compoundButton.getId()) {
             case R.id.switch_compat_is_set_wallpaper:
-                WidgetConfig.saveWidgetWallpaperIsSet(mContext, b);
+                WidgetConfig.isSetWallpaper(mContext, b);
                 break;
-            case R.id.switch_compat_wallpaper_is_blur:
-                WidgetConfig.saveWidgetWallpaperIsBlur(mContext, b);
+            case R.id.switch_compat_is_blur_wallpaper:
+                WidgetConfig.isBlurWallpaper(mContext, b);
                 break;
-            case R.id.switch_compat_widget_is_blur:
-                WidgetConfig.saveWidgetBannerIsBlur(mContext, b);
+            case R.id.switch_compat_is_blur_widget_banner:
+                WidgetConfig.isBlurWidgetBanner(mContext, b);
                 break;
-            case R.id.switch_compat_widget_is_save:
-                WidgetConfig.saveWidgetBannerIsSave(mContext, b);
+            case R.id.switch_compat_is_save_widget_banner:
+                WidgetConfig.isSaveWidgetBanner(mContext, b);
+                break;
+            case R.id.switch_compat_is_only_wifi_load:
+                WidgetConfig.isOnlyWiFiLoad(mContext, b);
                 break;
         }
     }
