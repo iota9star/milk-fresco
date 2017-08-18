@@ -89,7 +89,6 @@ public class MoreActivity extends BaseActivity {
                 }
             }
         });
-
     }
 
     @Override

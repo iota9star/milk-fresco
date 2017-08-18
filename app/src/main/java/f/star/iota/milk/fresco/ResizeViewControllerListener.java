@@ -9,13 +9,13 @@ import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
-public class ResizeViewControllerListener extends BaseControllerListener<ImageInfo> {
+class ResizeViewControllerListener extends BaseControllerListener<ImageInfo> {
 
     private final SimpleDraweeView draweeView;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
-    public ResizeViewControllerListener(SimpleDraweeView draweeView, int width, int height) {
+    ResizeViewControllerListener(SimpleDraweeView draweeView, int width, int height) {
         this.draweeView = draweeView;
         this.width = width;
         this.height = height;

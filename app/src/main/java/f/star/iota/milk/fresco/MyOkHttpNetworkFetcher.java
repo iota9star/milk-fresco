@@ -27,13 +27,13 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class MyOkHttpNetworkFetcher extends BaseNetworkFetcher<MyOkHttpNetworkFetcher.OkHttpNetworkFetchState> {
+    public static final WeakHashMap<Uri, HashMap<String, String>> Headers = new WeakHashMap<>();
     private static final String QUEUE_TIME = "queue_time";
     private static final String FETCH_TIME = "fetch_time";
     private static final String TOTAL_TIME = "total_time";
     private static final String IMAGE_SIZE = "image_size";
-    public static WeakHashMap<Uri, HashMap<String, String>> Headers = new WeakHashMap<>();
     private final OkHttpClient mClient;
-    private Executor mCancellationExecutor;
+    private final Executor mCancellationExecutor;
 
     public MyOkHttpNetworkFetcher(OkHttpClient client) {
         mClient = client;

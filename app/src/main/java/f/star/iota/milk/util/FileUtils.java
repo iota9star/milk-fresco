@@ -3,10 +3,13 @@ package f.star.iota.milk.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Environment;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -106,7 +109,8 @@ public class FileUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd EE HH:mm:ss", Locale.US);
         return sdf.format(System.currentTimeMillis());
     }
-//
+
+    //
 //    public static String getFileName(String url) {
 //        long time = System.currentTimeMillis();
 //        url = url.toLowerCase();
@@ -124,4 +128,66 @@ public class FileUtils {
 //            return time + "";
 //        }
 //    }
+    public static void saveCrashLog(Thread thread, Throwable throwable) {
+        try {
+            String dirPath = FileUtils.getDownloadDir() + "Log/";
+            String filePath = dirPath + FileUtils.getCurrentDate() + ".log";
+            File dir = new File(dirPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            String separator = System.getProperty("line.separator");
+            String sb = separator +
+                    "#############################" +
+                    separator +
+                    "# Milk@F Crash Log" +
+                    separator +
+                    "#############################" +
+                    separator +
+                    "USER: " + Build.USER +
+                    separator +
+                    "MANUFACTURER: " + Build.MANUFACTURER +
+                    separator +
+                    "DEVICE: " + Build.DEVICE +
+                    separator +
+                    "PRODUCT: " + Build.PRODUCT +
+                    separator +
+                    "SDK VERSION: " + Build.VERSION.SDK_INT +
+                    separator +
+                    "RELEASE: " + Build.VERSION.RELEASE +
+                    separator +
+                    "INCREMENTAL: " + Build.VERSION.INCREMENTAL +
+                    separator +
+                    "MODEL: " + Build.MODEL +
+                    separator +
+                    "HARDWARE: " + Build.HARDWARE +
+                    separator +
+                    "DISPLAY: " + Build.DISPLAY +
+                    separator +
+                    "BOARD: " + Build.BOARD +
+                    separator +
+                    "BRAND: " + Build.BRAND +
+                    separator + separator +
+                    "#############################" +
+                    separator +
+                    "# Raw Log Info" +
+                    separator +
+                    "#############################" +
+                    separator +
+                    "Thread: " + thread +
+                    separator +
+                    "Throwable: " + throwable;
+            bw.write(sb);
+            bw.flush();
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

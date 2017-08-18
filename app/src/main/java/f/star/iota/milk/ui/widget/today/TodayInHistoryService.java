@@ -203,6 +203,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                     }
                 });
     }
+
     private void updateBanner(Bitmap resource) {
         try {
             if (resource == null) return;

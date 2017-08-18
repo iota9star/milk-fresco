@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.disk.NoOpDiskTrimmableRegistry;
@@ -44,7 +47,7 @@ import java.util.concurrent.TimeUnit;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
-import f.star.iota.milk.util.CrashUtils;
+import f.star.iota.milk.ui.main.MainActivity;
 import f.star.iota.milk.util.FileUtils;
 import okhttp3.OkHttpClient;
 
@@ -117,10 +120,49 @@ public class MyApp extends Application {
         mContext = getApplicationContext();
         Themer.INSTANCE.init(this, ThemeConfig.getTheme(mContext));
 //        LeakCanary.install(this);
-        CrashUtils.init(FileUtils.getDownloadDir() + "Log");
         addCount();
         initOkGo();
         initFresco();
+        Crash.setExceptionHandler(new Crash.ExceptionHandler() {
+
+            @Override
+            public void handleOtherException(Thread thread, Throwable e) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Looper.prepare();
+                        Toast.makeText(mContext, "很抱歉,程序出现异常,正在收集日志,程序即将退出", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+                }.start();
+                try {
+                    FileUtils.saveCrashLog(thread, e);
+                    Thread.sleep(3000);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
+                } catch (Exception ignored) {
+                }
+            }
+
+            @Override
+            public void handleUIException(final Thread thread, final Throwable e) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Looper.prepare();
+                        Toast.makeText(mContext, "很抱歉,程序出现异常,正在收集日志,若长时间无响应，请强制退出", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(mContext, MainActivity.class));
+                        Looper.loop();
+                    }
+                }.start();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FileUtils.saveCrashLog(thread, e);
+                    }
+                }).start();
+            }
+        });
     }
 
     private void initFresco() {

@@ -1,5 +1,6 @@
 package f.star.iota.milk.base;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -152,7 +153,7 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
     }
 
     protected void show(final List<PCBean> images) {
-        final View overlayView = LayoutInflater.from(mContext).inflate(R.layout.view_overlay_watch, null);
+        @SuppressLint("InflateParams") final View overlayView = LayoutInflater.from(mContext).inflate(R.layout.view_overlay_watch, null);
         final Button info = ButterKnife.findById(overlayView, R.id.button_info);
         final Button download = ButterKnife.findById(overlayView, R.id.button_download);
         final Button index = ButterKnife.findById(overlayView, R.id.button_index);
@@ -186,7 +187,7 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
                         info.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                View dialog = LayoutInflater.from(mContext).inflate(R.layout.dialog_image_info, null);
+                                @SuppressLint("InflateParams") View dialog = LayoutInflater.from(mContext).inflate(R.layout.dialog_image_info, null);
                                 ((TextView) ButterKnife.findById(dialog, R.id.text_view_description)).setText(image.getDescription());
                                 new AlertDialog.Builder(mContext)
                                         .setView(dialog)

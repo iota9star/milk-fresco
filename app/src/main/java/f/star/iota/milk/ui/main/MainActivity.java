@@ -1,6 +1,7 @@
 package f.star.iota.milk.ui.main;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -123,7 +124,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     }
 
     private void donation() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_donation, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.dialog_donation, null);
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setView(view)
                 .setNegativeButton("下次吧", new DialogInterface.OnClickListener() {
