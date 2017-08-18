@@ -21,7 +21,7 @@ final class Crash {
                         Looper.loop();
                     } catch (Throwable e) {
                         if (sExceptionHandler != null) {
-                            sExceptionHandler.handleUIException(Looper.getMainLooper().getThread(), e);
+                            sExceptionHandler.handleException(Looper.getMainLooper().getThread(), e);
                         }
                     }
                 }
@@ -31,15 +31,13 @@ final class Crash {
             @Override
             public void uncaughtException(Thread thread, Throwable throwable) {
                 if (sExceptionHandler != null && throwable != null) {
-                    sExceptionHandler.handleOtherException(thread, throwable);
+                    sExceptionHandler.handleException(thread, throwable);
                 }
             }
         });
     }
 
     interface ExceptionHandler {
-        void handleOtherException(Thread thread, Throwable e);
-
-        void handleUIException(Thread thread, Throwable e);
+        void handleException(Thread thread, Throwable e);
     }
 }

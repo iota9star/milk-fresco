@@ -124,28 +124,8 @@ public class MyApp extends Application {
         initOkGo();
         initFresco();
         Crash.setExceptionHandler(new Crash.ExceptionHandler() {
-
             @Override
-            public void handleOtherException(Thread thread, Throwable e) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        Toast.makeText(mContext, "很抱歉,程序出现异常,正在收集日志,程序即将退出", Toast.LENGTH_LONG).show();
-                        Looper.loop();
-                    }
-                }.start();
-                try {
-                    FileUtils.saveCrashLog(thread, e);
-                    Thread.sleep(3000);
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(1);
-                } catch (Exception ignored) {
-                }
-            }
-
-            @Override
-            public void handleUIException(final Thread thread, final Throwable e) {
+            public void handleException(final Thread thread, final Throwable e) {
                 new Thread() {
                     @Override
                     public void run() {
