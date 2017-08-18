@@ -125,6 +125,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
             mTextViewEvent.setText(bean.getEvent());
             if (mTextViewEvent.getLineCount() > 1) {
                 mTextViewEvent.setText(String.format("\u3000\u3000%s", bean.getEvent()));
+                mTextViewEvent.setGravity(Gravity.START);
             } else {
                 mTextViewEvent.setGravity(Gravity.CENTER);
             }
