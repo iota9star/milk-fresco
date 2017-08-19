@@ -26,7 +26,7 @@
                     android:layout_width="@dimen/v96dp"
                     android:layout_height="@dimen/v96dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/lucoa"
+                    android:src="@mipmap/app_icon"
                     app:civ_border_color="@color/md_white_1000"
                     app:civ_border_width="@dimen/v2dp" />
 
@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/v8dp"
-                    android:text="@string/iota9star"
+                    android:text="@string/app_name"
                     android:textSize="@dimen/v18sp"
                     android:textStyle="bold" />
             </LinearLayout>

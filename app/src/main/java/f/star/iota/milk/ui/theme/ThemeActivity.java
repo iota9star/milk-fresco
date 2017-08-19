@@ -122,7 +122,7 @@ public class ThemeActivity extends BaseActivity {
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ThemeAdapter adapter = new ThemeAdapter();
         mRecyclerView.setAdapter(adapter);
         adapter.add(initTheme());
@@ -152,7 +152,7 @@ public class ThemeActivity extends BaseActivity {
         themes.add(new ThemeBean(R.style.ThemeYellow, R.color.ThemeYellow, "黄色/Yellow", false));
         themes.add(new ThemeBean(R.style.ThemeAmber, R.color.ThemeAmber, "琥珀/Amber", false));
         themes.add(new ThemeBean(R.style.ThemeOrange, R.color.ThemeOrange, "橙色/Orange", false));
-        themes.add(new ThemeBean(R.style.ThemeDeepOrange, R.color.ThemeDeepOrange, "暗橙/DeepOrange", false));
+        themes.add(new ThemeBean(R.style.ThemeDeepOrange, R.color.ThemeDeepOrange, "暗橙/Deep Orange", false));
         themes.add(new ThemeBean(R.style.ThemeBrown, R.color.ThemeBrown, "棕色/Brown", false));
         themes.add(new ThemeBean(R.style.ThemeGrey, R.color.ThemeGrey, "灰色/Grey", false));
         themes.add(new ThemeBean(R.style.ThemeBlueGrey, R.color.ThemeBlueGrey, "蓝灰/Blue Grey", false));

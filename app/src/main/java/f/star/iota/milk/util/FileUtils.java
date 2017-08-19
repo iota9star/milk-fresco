@@ -78,7 +78,7 @@ public class FileUtils {
     public static String getDownloadDir() {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
-            return Environment.getExternalStorageDirectory().getPath() + "/MILK/";
+            return Environment.getExternalStorageDirectory().getPath() + "/Milk/";
         }
         return null;
     }

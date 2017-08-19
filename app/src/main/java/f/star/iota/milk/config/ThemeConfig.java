@@ -21,7 +21,7 @@ public class ThemeConfig {
 
     public static String getBanner(Context context) {
         SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        return sp.getString("banner", "");
+        return sp.getString("banner", context.getString(R.string.banner));
     }
 
     public static void saveBanner(Context context, String url) {

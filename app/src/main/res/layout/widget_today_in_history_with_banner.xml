@@ -24,10 +24,9 @@
             android:id="@+id/image_view_banner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/v16dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_default_banner"
+            android:src="@drawable/ic_placeholder"
             tools:ignore="ContentDescription" />
 
         <LinearLayout

@@ -19,7 +19,7 @@
                 android:id="@+id/ken_burns_view_banner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/v256dp"
-                android:src="@drawable/bg_default_banner"
+                android:src="@drawable/ic_placeholder"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.6" />
 

@@ -29,7 +29,6 @@
     <string name="wechatpay">微信捐赠</string>
     <string name="dilidilijj">哔哩哔哩唧唧</string>
     <string name="hitokoto">一言</string>
-    <string name="iota9star">iota9star</string>
     <string name="alipay_code">FKX08696X3YPOJFGWKD92E</string>
     <string name="qq_pay_code">http://r.photo.store.qq.com/psb?/a97e084f-86ae-45db-a2e4-e63a3cb987b3/6wuOxikFvnHSM6rPTGtGM3U5WQBtTwiLW99WmaLsuPQ!/r/dGsBAAAAAAAA</string>
     <string name="wechat_pay_code">http://r.photo.store.qq.com/psb?/a97e084f-86ae-45db-a2e4-e63a3cb987b3/EWJsk3GK9MggfSSVklZb9mqNNK7oGcFry4EEYuAx.HM!/r/dGkBAAAAAAAA</string>
@@ -60,7 +59,7 @@
     <string name="show_finished">只显示下载完成</string>
     <string name="show_ing">只显示未完成</string>
     <string name="show_all">显示所有任务</string>
-    <string name="download_count">同时下载任务数</string>
+    <string name="download_count">同时下载任务数（重启后生效）</string>
     <string name="info">信息</string>
     <string name="theme">主题</string>
     <string name="download_all">下载全部</string>
@@ -90,4 +89,5 @@
     <string name="yuriimg">YURIIMG</string>
     <string name="about_setting">相关设置</string>
     <string name="is_wifi_load">仅WiFi下刷新图片</string>
+    <string name="banner">http://r.photo.store.qq.com/psb?/a97e084f-86ae-45db-a2e4-e63a3cb987b3/QEZceLxKD9WiFOviljS7VGtZknoXxmojzDrwqXjMtvc!/r/dD4BAAAAAAAA</string>
 </resources>

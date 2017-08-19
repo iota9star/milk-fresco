@@ -98,7 +98,7 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
         }
         OkDownload.request(url, request)
                 .extra1(preview)
-                .extra2(folder)
+                .extra2("根目录/Milk/" + folder)
                 .folder(FileUtils.getDownloadDir() + folder)
                 .save()
                 .start();
@@ -107,13 +107,14 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
     protected void batchDownload(final List<PCBean> images) {
         new AlertDialog.Builder(mContext)
                 .setTitle("下载当前已加载的图片")
-                .setNeutralButton("嗯", new DialogInterface.OnClickListener() {
+                .setIcon(R.mipmap.app_icon)
+                .setPositiveButton("嗯", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dealBatchDownload(images);
                     }
                 })
-                .setNegativeButton("按错了", new DialogInterface.OnClickListener() {
+                .setNegativeButton("我只是看看而已", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

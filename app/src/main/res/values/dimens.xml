@@ -25,4 +25,5 @@
     <dimen name="v128dp">128dp</dimen>
     <dimen name="v72dp">72dp</dimen>
     <dimen name="v56dp">56dp</dimen>
+    <dimen name="v320dp">320dp</dimen>
 </resources>

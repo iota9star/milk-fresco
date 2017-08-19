@@ -9,6 +9,7 @@
     android:foreground="?android:attr/selectableItemBackgroundBorderless"
     android:stateListAnimator="@animator/touch_floating"
     app:cardBackgroundColor="?attr/card_background"
+    app:cardElevation="0.36dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 

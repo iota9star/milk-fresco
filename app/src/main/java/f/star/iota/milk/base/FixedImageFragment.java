@@ -33,7 +33,6 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
     private A mAdapter;
     private String mBaseUrl;
     private P mPresenter;
-    private SGSpacingItemDecoration mItemDecoration;
     private StaggeredGridLayoutManager mLayoutManager;
 
     private int mSpanCount;
@@ -69,22 +68,9 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
 
     private void initRecyclerView() {
         mLayoutManager = new StaggeredGridLayoutManager(mSpanCount, StaggeredGridLayoutManager.VERTICAL);
-        mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        mItemDecoration = new SGSpacingItemDecoration(mSpanCount, mContext.getResources().getDimensionPixelSize(R.dimen.v4dp));
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new LandingAnimator());
-        mRecyclerView.addItemDecoration(mItemDecoration);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && mLayoutManager.findFirstVisibleItemPositions(null)[mLayoutManager.getSpanCount() - 1] == (mLayoutManager.getSpanCount() - 1)) {
-                    mLayoutManager.invalidateSpanAssignments();
-                }
-            }
-        });
     }
 
     @Override
@@ -102,7 +88,6 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
         }
         OtherConfig.saveCurrentSpanCount(aContext, spanCount);
         mLayoutManager.setSpanCount(spanCount);
-        mItemDecoration.setSpanCount(spanCount);
     }
 
     private void create() {

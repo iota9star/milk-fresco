@@ -201,6 +201,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 .withActivity(this)
                 .withToolbar(mToolbar)
                 .withHeader(R.layout.drawer_header_view)
+                .withHeaderDivider(false)
                 .withOnDrawerListener(new Drawer.OnDrawerListener() {
                     @Override
                     public void onDrawerOpened(View drawerView) {

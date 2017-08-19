@@ -5,9 +5,6 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/v8dp"
-    android:layout_marginRight="@dimen/v8dp"
-    android:layout_marginTop="@dimen/v8dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackgroundBorderless"
     android:stateListAnimator="@animator/touch_floating"
@@ -37,15 +34,10 @@
                 android:id="@+id/simple_drawee_view_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/v48dp"
-                android:src="@drawable/bg_default_banner"
                 app:actualImageScaleType="centerCrop"
                 app:placeholderImageScaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#36000000" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +79,6 @@
                     android:id="@+id/text_view_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:textColor="@color/md_white_1000"
                     android:textSize="@dimen/v12sp" />
             </LinearLayout>
@@ -126,6 +117,4 @@
             app:srcCompat="@drawable/ic_more_vert_white_24dp"
             tools:ignore="ContentDescription" />
     </LinearLayout>
-
-
 </android.support.v7.widget.CardView>

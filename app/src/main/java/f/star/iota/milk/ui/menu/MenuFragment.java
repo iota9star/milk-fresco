@@ -8,7 +8,6 @@ import java.util.List;
 import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseFragment;
-import f.star.iota.milk.base.SGSpacingItemDecoration;
 import f.star.iota.milk.config.OtherConfig;
 
 public abstract class MenuFragment extends BaseFragment {
@@ -20,7 +19,6 @@ public abstract class MenuFragment extends BaseFragment {
     };
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-    private SGSpacingItemDecoration mItemDecoration;
     private StaggeredGridLayoutManager mLayoutManager;
     private int mSpanCount;
 
@@ -39,10 +37,7 @@ public abstract class MenuFragment extends BaseFragment {
 
     private void initRecyclerView() {
         mLayoutManager = new StaggeredGridLayoutManager(mSpanCount, StaggeredGridLayoutManager.VERTICAL);
-        mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        mItemDecoration = new SGSpacingItemDecoration(mSpanCount, mContext.getResources().getDimensionPixelSize(R.dimen.v4dp));
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(mItemDecoration);
         MenuAdapter adapter = new MenuAdapter();
         adapter.add(getMenuList());
         adapter.setOnMenuItemClickListener(mOnMenuItemClickListener);
@@ -64,7 +59,6 @@ public abstract class MenuFragment extends BaseFragment {
         }
         OtherConfig.saveCurrentSpanCount(aContext, spanCount);
         mLayoutManager.setSpanCount(spanCount);
-        mItemDecoration.setSpanCount(spanCount);
     }
 
     private void create() {

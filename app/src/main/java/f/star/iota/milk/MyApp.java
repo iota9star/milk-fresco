@@ -60,8 +60,8 @@ public class MyApp extends Application {
     private static final long MAX_DISK_CACHE_SIZE = Long.MAX_VALUE;
     private static final long MAX_DISK_CACHE_LOW_SIZE = 300 * ByteConstants.MB;
     private static final long MAX_DISK_CACHE_VERY_LOW_SIZE = 100 * ByteConstants.MB;
-    private static final int MAX_CACHE_ENTRIES = 16;
     private static final int MAX_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 4);
+    private static final int MAX_CACHE_ENTRIES = MAX_MEMORY_CACHE_SIZE / 2;
     @SuppressLint("StaticFieldLeak")
     public static Context mContext;
 
@@ -104,7 +104,6 @@ public class MyApp extends Application {
     public void onLowMemory() {
         super.onLowMemory();
         Fresco.getImagePipeline().clearMemoryCaches();
-        System.gc();
     }
 
     @Override
@@ -112,7 +111,6 @@ public class MyApp extends Application {
         super.onTrimMemory(level);
         if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
             Fresco.getImagePipeline().clearMemoryCaches();
-            System.gc();
         }
     }
 
@@ -186,9 +184,9 @@ public class MyApp extends Application {
             @Override
             public MemoryCacheParams get() {
                 return new MemoryCacheParams(
-                        MAX_MEMORY_CACHE_SIZE,
-                        MAX_CACHE_ENTRIES,
-                        MAX_MEMORY_CACHE_SIZE,
+                        MAX_MEMORY_CACHE_SIZE == 0 ? 1 : MAX_MEMORY_CACHE_SIZE,
+                        MAX_CACHE_ENTRIES == 0 ? 1 : MAX_CACHE_ENTRIES,
+                        MAX_MEMORY_CACHE_SIZE == 0 ? 1 : MAX_MEMORY_CACHE_SIZE,
                         Integer.MAX_VALUE,
                         Integer.MAX_VALUE);
             }

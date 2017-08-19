@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/ken_burns_view_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/v256dp"
-        android:src="@drawable/bg_default_banner" />
+        android:layout_height="@dimen/v320dp"
+        android:src="@drawable/ic_placeholder" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#56ffffff"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_view_hitokoto_bilibilijj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/v8dp"
+            android:layout_marginTop="@dimen/v4dp"
             android:gravity="center_vertical"
-            android:padding="@dimen/v8dp"
+            android:padding="@dimen/v4dp"
             android:text="@string/please_wait"
             android:textStyle="bold" />
 
@@ -30,8 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginBottom="@dimen/v8dp"
-            android:layout_marginTop="@dimen/v8dp"
+            android:layout_marginBottom="@dimen/v4dp"
             android:background="@drawable/bg_drawer_header_hitokoto"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/v2dp"
@@ -40,6 +40,6 @@
             android:paddingTop="@dimen/v2dp"
             android:text="@string/wait"
             android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/v12sp" />
+            android:textSize="@dimen/v10sp" />
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>
