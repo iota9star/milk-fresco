@@ -31,7 +31,7 @@ import butterknife.OnClick;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.ThemeConfig;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class ThemeActivity extends BaseActivity {
 
@@ -55,10 +55,10 @@ public class ThemeActivity extends BaseActivity {
         String url = mEditTextUrl.getText().toString().trim().replace(" ", "");
         if (url.length() > 5) {
             ThemeConfig.saveBanner(aContext, url);
-            SnackbarUtils.create(this, "已保存地址");
+            MessageBar.create(this, "已保存地址");
             loadBanner(url);
         } else {
-            SnackbarUtils.create(this, "地址太短了吧");
+            MessageBar.create(this, "地址太短了吧");
         }
     }
 

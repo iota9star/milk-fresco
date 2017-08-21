@@ -13,7 +13,7 @@ import f.star.iota.milk.Net;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.OtherConfig;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;
 
 public class MoreActivity extends BaseActivity {
@@ -21,7 +21,7 @@ public class MoreActivity extends BaseActivity {
     @BindView(R.id.switch_compat_r)
     SwitchCompat mSwitchCompatR;
 
-    @OnClick({R.id.linear_layout_donation_alipay, R.id.linear_layout_donation_qq, R.id.linear_layout_donation_wechat, R.id.text_view_hitokoto_loli, R.id.text_view_hitokoto_ad, R.id.text_view_yiju, R.id.linear_layout_grade, R.id.text_view_hitokoto_bilibilijj, R.id.linear_layout_r})
+    @OnClick({R.id.linear_layout_donation_alipay, R.id.linear_layout_donation_qq, R.id.linear_layout_donation_wechat, R.id.text_view_hitokoto_loli, R.id.text_view_hitokoto_ad, R.id.text_view_yiju, R.id.linear_layout_grade, R.id.text_view_juzi, R.id.linear_layout_r})
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         switch (view.getId()) {
@@ -31,7 +31,7 @@ public class MoreActivity extends BaseActivity {
             case R.id.linear_layout_donation_wechat:
                 intent.setData(Uri.parse(mContext.getString(R.string.wechat_pay_code)));
                 break;
-            case R.id.text_view_hitokoto_bilibilijj:
+            case R.id.text_view_juzi:
                 intent.setData(Uri.parse(Net.HITOKOTO_BILIBILIJJ_BASE));
                 break;
             case R.id.text_view_yiju:
@@ -50,7 +50,7 @@ public class MoreActivity extends BaseActivity {
                 System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
                 mHints[mHints.length - 1] = SystemClock.uptimeMillis();
                 if (SystemClock.uptimeMillis() - mHints[0] <= 800) {
-                    SnackbarUtils.create(mContext, ((int) (Math.random() * 2)) == 1 ? "令人窒息的操作" : "还有这种操作？");
+                    MessageBar.create(mContext, ((int) (Math.random() * 2)) == 1 ? "令人窒息的操作" : "还有这种操作？");
                     if (mSwitchCompatR.getVisibility() == View.GONE) {
                         mSwitchCompatR.setVisibility(View.VISIBLE);
                     }
@@ -60,7 +60,7 @@ public class MoreActivity extends BaseActivity {
                 if (AlipayZeroSdk.hasInstalledAlipayClient(mContext)) {
                     AlipayZeroSdk.startAlipayClient(this, getResources().getString(R.string.alipay_code));
                 } else {
-                    SnackbarUtils.create(mContext, "你可能没有安装支付宝");
+                    MessageBar.create(mContext, "你可能没有安装支付宝");
                 }
                 return;
         }
@@ -82,10 +82,10 @@ public class MoreActivity extends BaseActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     OtherConfig.saveR(aContext, true);
-                    SnackbarUtils.create(mContext, "好好学习，天天向上");
+                    MessageBar.create(mContext, "好好学习，天天向上");
                 } else {
                     OtherConfig.saveR(aContext, false);
-                    SnackbarUtils.create(mContext, "飙车了");
+                    MessageBar.create(mContext, "飙车了");
                 }
             }
         });

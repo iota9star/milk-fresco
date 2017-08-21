@@ -26,11 +26,11 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.flaviofaria.kenburnsview.KenBurnsView;
-import com.irozon.sneaker.Sneaker;
+import com.liuguangqiang.cookie.OnActionClickListener;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -52,7 +52,7 @@ import f.star.iota.milk.ui.menu.MenuPhotographyFragment;
 import f.star.iota.milk.ui.moeimg.moe.MoeimgFragment;
 import f.star.iota.milk.ui.more.MoreActivity;
 import f.star.iota.milk.ui.settings.SettingsActivity;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;
@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         if ((openCount % 16 == 0 || openCount == 5) && OtherConfig.isShowDonation(mContext)) {
             showDonationDialog();
         } else if (openCount % 100 == 0) {
-            SnackbarUtils.create(mContext, "这是您打开的 " + openCount + " 次，将冒昧的显示捐赠页面");
+            MessageBar.create(mContext, "这是您打开的 " + openCount + " 次，将冒昧的显示捐赠页面");
             showDonationDialog();
         }
     }
@@ -109,9 +109,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     @Override
                     public void accept(@NonNull Boolean granted) throws Exception {
                         if (!granted) {
-                            SnackbarUtils.create(mContext, "您拒绝了写入文件的权限，下载可能会出现错误，是否立刻前往开启", "好的", new Sneaker.OnSneakerClickListener() {
+                            MessageBar.create(mContext, "您拒绝了写入文件的权限，下载可能会出现错误，是否立刻前往开启", "好的", new OnActionClickListener() {
                                 @Override
-                                public void onSneakerClick(View view) {
+                                public void onClick() {
                                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                     Uri uri = Uri.fromParts("package", getPackageName(), null);
                                     intent.setData(uri);
@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     public void onClick(DialogInterface dialogInterface, int i) {
                         OtherConfig.saveDonationStatus(mContext, false);
                         dialogInterface.dismiss();
-                        SnackbarUtils.create(mContext, "如果想要支持我的话，可以在“关于”里面查看");
+                        MessageBar.create(mContext, "如果想要支持我的话，可以在“关于”里面查看");
                     }
                 })
                 .create();
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 if (AlipayZeroSdk.hasInstalledAlipayClient(mContext)) {
                     AlipayZeroSdk.startAlipayClient(MainActivity.this, getResources().getString(R.string.alipay_code));
                 } else {
-                    SnackbarUtils.create(mContext, "你可能没有安装支付宝");
+                    MessageBar.create(mContext, "你可能没有安装支付宝");
                 }
             }
         });
@@ -221,12 +221,12 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     }
                 })
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(Menus.MENU_ILLUSTRATION).withIdentifier(Menus.MENU_ILLUSTRATION_ID).withIcon(R.drawable.ic_menu_illustration).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Menus.MENU_MEIZI).withIdentifier(Menus.MENU_MEIZI_ID).withIcon(R.drawable.ic_menu_meizhi).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Menus.MENU_PHOTOGRAPHY).withIdentifier(Menus.MENU_PHOTOGRAPHY_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
+                        new SecondaryDrawerItem().withName(Menus.MENU_ILLUSTRATION).withIdentifier(Menus.MENU_ILLUSTRATION_ID).withIcon(R.drawable.ic_menu_illustration).withSelectable(false),
+                        new SecondaryDrawerItem().withName(Menus.MENU_MEIZI).withIdentifier(Menus.MENU_MEIZI_ID).withIcon(R.drawable.ic_menu_meizhi).withSelectable(false),
+                        new SecondaryDrawerItem().withName(Menus.MENU_PHOTOGRAPHY).withIdentifier(Menus.MENU_PHOTOGRAPHY_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(Menus.MENU_SETTINGS).withIdentifier(Menus.MENU_SETTINGS_ID).withIcon(R.drawable.ic_menu_settings).withSelectable(false),
-                        new PrimaryDrawerItem().withName(Menus.MENU_ABOUT).withIdentifier(Menus.MENU_ABOUT_ID).withIcon(R.drawable.ic_menu_more).withSelectable(false)
+                        new SecondaryDrawerItem().withName(Menus.MENU_SETTINGS).withIdentifier(Menus.MENU_SETTINGS_ID).withIcon(R.drawable.ic_menu_settings).withSelectable(false),
+                        new SecondaryDrawerItem().withName(Menus.MENU_ABOUT).withIdentifier(Menus.MENU_ABOUT_ID).withIcon(R.drawable.ic_menu_more).withSelectable(false)
                 )
                 .withSelectedItem(-1)
                 .build();
@@ -268,8 +268,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mTextViewHitokoto = header.findViewById(R.id.text_view_hitokoto_bilibilijj);
-        mTextViewHitokotoSrc = header.findViewById(R.id.text_view_hitokoto_source);
+        mTextViewHitokoto = header.findViewById(R.id.text_view_juzi);
+        mTextViewHitokotoSrc = header.findViewById(R.id.text_view_juzi_source);
     }
 
     private void initDrawerEvent() {

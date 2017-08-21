@@ -24,7 +24,7 @@ import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.ThemeConfig;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class DownloadManagerActivity extends BaseActivity {
 
@@ -139,7 +139,7 @@ public class DownloadManagerActivity extends BaseActivity {
                     }
                     startActivity(intent);
                 } else {
-                    SnackbarUtils.create(mContext, "文件不存在，是否被删除？");
+                    MessageBar.create(mContext, "文件不存在，是否被删除？");
                 }
             }
         });
@@ -167,7 +167,7 @@ public class DownloadManagerActivity extends BaseActivity {
 
     private void setBanner(String path) {
         ThemeConfig.saveBanner(aContext, "file://" + path);
-        SnackbarUtils.create(mContext, "主界面重启后生效");
+        MessageBar.create(mContext, "主界面重启后生效");
     }
 
     private void create() {

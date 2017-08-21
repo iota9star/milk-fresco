@@ -13,7 +13,7 @@ import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.OtherConfig;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 
 public class SetPinLockActivity extends BaseActivity {
@@ -77,7 +77,7 @@ public class SetPinLockActivity extends BaseActivity {
                         mButtonRight.setText(R.string.finished);
                         mButtonRight.setVisibility(View.VISIBLE);
                     } else {
-                        SnackbarUtils.create(mContext, "前后不一致");
+                        MessageBar.create(mContext, "前后不一致");
                         mPinLockView.resetPinLockView();
                         mButtonRight.setVisibility(View.GONE);
                     }

@@ -188,6 +188,8 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                                              }
                                          },
                             UiThreadImmediateExecutorService.getInstance());
+                } else {
+                    updateBackground(null);
                 }
             }
         } catch (Exception e) {

@@ -2,12 +2,12 @@ package f.star.iota.milk.ui.theme;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -78,18 +78,16 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final Context mContext;
-        private final Context aContext;
         @BindView(R.id.image_view_image)
         ImageView image;
         @BindView(R.id.text_view_description)
         TextView description;
-        @BindView(R.id.linear_layout_theme_container)
-        LinearLayout container;
+        @BindView(R.id.card_view_theme_container)
+        CardView container;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mContext = itemView.getContext();
-            aContext = mContext.getApplicationContext();
             ButterKnife.bind(this, itemView);
         }
     }

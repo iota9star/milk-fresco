@@ -42,7 +42,7 @@ import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.config.SplashConfig;
 import f.star.iota.milk.ui.lock.PinLockActivity;
 import f.star.iota.milk.ui.main.MainActivity;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
 
@@ -96,7 +96,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         progress.setBarWidth(mContext.getResources().getDimensionPixelOffset(R.dimen.v16dp));
         progress.setRadius(mContext.getResources().getDimensionPixelOffset(R.dimen.v64dp));
         GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(mContext.getResources())
-                .setPlaceholderImage(R.drawable.ic_placeholder)
+                .setPlaceholderImage(R.drawable.ic_placeholder_72dp)
                 .setPlaceholderImageScaleType(ScalingUtils.ScaleType.CENTER)
                 .setProgressBarImage(progress)
                 .build();
@@ -205,7 +205,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void getError(String error) {
-        SnackbarUtils.create(mContext, error);
+        MessageBar.create(mContext, error);
         endSplash();
     }
 

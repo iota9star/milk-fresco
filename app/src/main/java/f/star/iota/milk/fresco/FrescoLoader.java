@@ -48,9 +48,9 @@ public class FrescoLoader {
         progress.setRadius(context.getResources().getDimensionPixelOffset(R.dimen.v64dp));
         GenericDraweeHierarchy hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
                 .setFadeDuration(300)
-                .setPlaceholderImage(R.drawable.ic_placeholder)
+                .setPlaceholderImage(R.drawable.ic_placeholder_72dp)
                 .setPlaceholderImageScaleType(ScalingUtils.ScaleType.CENTER)
-                .setFailureImage(R.drawable.ic_placeholder)
+                .setFailureImage(R.drawable.ic_placeholder_72dp)
                 .setFailureImageScaleType(ScalingUtils.ScaleType.CENTER)
                 .setProgressBarImage(progress)
                 .setRoundingParams(RoundingParams.fromCornersRadius(context.getResources().getDimension(R.dimen.v2dp)))

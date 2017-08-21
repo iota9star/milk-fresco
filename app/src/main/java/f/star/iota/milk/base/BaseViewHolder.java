@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 import f.star.iota.milk.R;
 import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
 import f.star.iota.milk.util.FileUtils;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -82,10 +82,10 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
 
     protected void download(String url, String preview, String folder, Map<String, String> headers) {
         if (OkDownload.getInstance().hasTask(url)) {
-            SnackbarUtils.create(mContext, "任务已存在：" + url);
+            MessageBar.create(mContext, "任务已存在：" + url);
         } else {
             buildTaskAndDownload(url, preview, folder, headers);
-            SnackbarUtils.create(mContext, "开始下载：" + url);
+            MessageBar.create(mContext, "开始下载：" + url);
         }
     }
 
@@ -150,7 +150,7 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
                     public void accept(Throwable throwable) throws Exception {
                     }
                 });
-        SnackbarUtils.create(mContext, "如有错误或是任务已存在，将自动跳过");
+        MessageBar.create(mContext, "如有错误或是任务已存在，将自动跳过");
     }
 
     protected void show(final List<PCBean> images) {
@@ -214,7 +214,7 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     OkDownload.request(image.getUrl(), request)
                                                             .extra1(image.getPreview())
-                                                            .extra2(image.getFolder())
+                                                            .extra2("根目录/Milk/" + image.getFolder())
                                                             .folder(FileUtils.getDownloadDir() + image.getFolder())
                                                             .save()
                                                             .restart();
@@ -230,7 +230,7 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
                                 } else {
                                     OkDownload.request(image.getUrl(), request)
                                             .extra1(image.getPreview())
-                                            .extra2(image.getFolder())
+                                            .extra2("根目录/Milk/" + image.getFolder())
                                             .folder(FileUtils.getDownloadDir() + image.getFolder())
                                             .save()
                                             .start();
@@ -241,9 +241,9 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
                     }
                 })
                 .setCustomDraweeHierarchyBuilder(GenericDraweeHierarchyBuilder.newInstance(mContext.getResources())
-                        .setPlaceholderImage(R.drawable.ic_placeholder)
+                        .setPlaceholderImage(R.drawable.ic_placeholder_72dp)
                         .setPlaceholderImageScaleType(ScalingUtils.ScaleType.CENTER)
-                        .setFailureImage(R.drawable.ic_placeholder)
+                        .setFailureImage(R.drawable.ic_placeholder_72dp)
                         .setFailureImageScaleType(ScalingUtils.ScaleType.CENTER)
                         .setProgressBarImage(progressBarDrawable))
                 .setOverlayView(overlayView)

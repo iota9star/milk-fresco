@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import f.star.iota.milk.R;
 import f.star.iota.milk.config.OtherConfig;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 
@@ -162,7 +162,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
                 mRefreshLayout.finishRefresh(true);
             }
             if (beans == null || beans.size() == 0) {
-                SnackbarUtils.create(mContext, "本次获得正确数据 0 条，请继续");
+                MessageBar.create(mContext, "本次获得正确数据 0 条，请继续");
             } else {
                 mRefreshLayout.postDelayed(new Runnable() {
                     @SuppressWarnings("unchecked")
@@ -189,7 +189,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
                 currentPage = mInitialPage + 1;
                 mRefreshLayout.finishRefresh(false);
             }
-            SnackbarUtils.create(mContext, error);
+            MessageBar.create(mContext, error);
         } catch (Exception e) {
             e.printStackTrace();
         }

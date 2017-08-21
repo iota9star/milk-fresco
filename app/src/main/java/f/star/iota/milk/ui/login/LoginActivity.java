@@ -18,7 +18,7 @@ import com.lzy.okgo.cookie.store.CookieStore;
 import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
@@ -46,7 +46,7 @@ public class LoginActivity extends BaseActivity {
     protected void handleIntent(Intent intent) {
         String loginUrl = intent.getStringExtra("login_url");
         if (loginUrl == null || loginUrl.length() < 5) {
-            SnackbarUtils.create(mContext, "数据接收有误，请返回重试？");
+            MessageBar.create(mContext, "数据接收有误，请返回重试？");
             return;
         }
         initWebView(loginUrl);
@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity {
                     try {
                         view.loadUrl(url);
                     } catch (Exception e) {
-                        SnackbarUtils.create(mContext, "网页加载错误？");
+                        MessageBar.create(mContext, "网页加载错误？");
                     }
                 return true;
             }
@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity {
         try {
             mWebView.loadUrl(baseUrl);
         } catch (Exception e) {
-            SnackbarUtils.create(mContext, "加载网址错误？");
+            MessageBar.create(mContext, "加载网址错误？");
         }
     }
 

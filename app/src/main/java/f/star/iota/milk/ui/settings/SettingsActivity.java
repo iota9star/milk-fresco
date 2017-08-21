@@ -12,7 +12,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.irozon.sneaker.Sneaker;
+import com.liuguangqiang.cookie.OnActionClickListener;
 import com.wei.android.lib.fingerprintidentify.FingerprintIdentify;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.lock.SetPinLockActivity;
 import f.star.iota.milk.ui.theme.ThemeActivity;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class SettingsActivity extends BaseActivity {
     @BindViews({R.id.image_view_fingerprint, R.id.image_view_pin})
@@ -73,18 +73,18 @@ public class SettingsActivity extends BaseActivity {
                 break;
             case R.id.linear_layout_fingerprint_lock:
                 if (OtherConfig.isLock(aContext) == LockType.NONE) {
-                    SnackbarUtils.create(mContext, "请先设置至少一种解锁方式");
+                    MessageBar.create(mContext, "请先设置至少一种解锁方式");
                     return;
                 }
                 FingerprintIdentify fingerprintIdentify = new FingerprintIdentify(mContext);
                 if (!fingerprintIdentify.isHardwareEnable()) {
-                    SnackbarUtils.create(mContext, "您的设备可能不支持指纹解锁");
+                    MessageBar.create(mContext, "您的设备可能不支持指纹解锁");
                     return;
                 }
                 if (!fingerprintIdentify.isRegisteredFingerprint()) {
-                    SnackbarUtils.create(mContext, "您可能还没有设置指纹，是否前往设置", "嗯", new Sneaker.OnSneakerClickListener() {
+                    MessageBar.create(mContext, "您可能还没有设置指纹，是否前往设置", "嗯", new OnActionClickListener() {
                         @Override
-                        public void onSneakerClick(View view) {
+                        public void onClick() {
                             startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
                         }
                     });

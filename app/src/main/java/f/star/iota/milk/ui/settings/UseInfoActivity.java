@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.irozon.sneaker.Sneaker;
+import com.liuguangqiang.cookie.OnActionClickListener;
 
 import java.io.File;
 import java.util.List;
@@ -24,7 +24,7 @@ import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.util.FileUtils;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class UseInfoActivity extends BaseActivity {
     @BindView(R.id.text_view_rx)
@@ -47,9 +47,9 @@ public class UseInfoActivity extends BaseActivity {
                 clearCache();
                 break;
             case R.id.card_view_open_count:
-                SnackbarUtils.create(mContext, "清空历史打开次数", "嗯", new Sneaker.OnSneakerClickListener() {
+                MessageBar.create(mContext, "清空历史打开次数", "嗯", new OnActionClickListener() {
                     @Override
-                    public void onSneakerClick(View view) {
+                    public void onClick() {
                         OtherConfig.saveOpenCount(aContext, 0);
                         bindOpenCount();
                     }
@@ -59,15 +59,15 @@ public class UseInfoActivity extends BaseActivity {
     }
 
     private void clearCache() {
-        SnackbarUtils.create(mContext, "清空缓存", "嗯", new Sneaker.OnSneakerClickListener() {
+        MessageBar.create(mContext, "清空缓存", "嗯", new OnActionClickListener() {
             @Override
-            public void onSneakerClick(View view) {
+            public void onClick() {
                 File cacheDir = FileUtils.getDiskCacheDir(mContext);
                 if (cacheDir != null && cacheDir.exists() && cacheDir.isDirectory()) {
                     if (!FileUtils.deleteDirsFiles(cacheDir)) {
-                        SnackbarUtils.create(mContext, "已清空");
+                        MessageBar.create(mContext, "已清空");
                     } else {
-                        SnackbarUtils.create(mContext, "可能部分缓存文件未被清除，请稍后再试");
+                        MessageBar.create(mContext, "可能部分缓存文件未被清除，请稍后再试");
                     }
                 }
                 bindCacheSize();

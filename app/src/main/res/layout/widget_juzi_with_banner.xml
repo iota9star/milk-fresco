@@ -26,7 +26,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_placeholder_72dp"
             tools:ignore="ContentDescription" />
 
         <LinearLayout

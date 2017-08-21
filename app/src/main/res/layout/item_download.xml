@@ -38,73 +38,89 @@
                 app:placeholderImageScaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="#64000000"
-                android:gravity="center"
-                android:paddingEnd="@dimen/v8dp"
-                android:paddingStart="@dimen/v8dp">
+                android:layout_height="@dimen/v48dp">
 
-                <TextView
-                    android:id="@+id/text_view_progress"
-                    android:layout_width="wrap_content"
+                <cn.lankton.flowlayout.FlowLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/v12sp" />
+                    android:layout_gravity="bottom"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                <View
-                    android:layout_width="@dimen/v1dp"
-                    android:layout_height="@dimen/v16dp"
-                    android:layout_marginEnd="@dimen/v4dp"
-                    android:layout_marginStart="@dimen/v4dp"
-                    android:background="?@android:attr/colorAccent" />
+                    <TextView
+                        android:id="@+id/text_view_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v2dp"
+                        android:background="@drawable/bg_button"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/v2dp"
+                        android:paddingStart="@dimen/v2dp"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="@dimen/v10sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_view_percent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/v12sp" />
+                    <TextView
+                        android:id="@+id/text_view_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v2dp"
+                        android:background="@drawable/bg_button"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/v2dp"
+                        android:paddingStart="@dimen/v2dp"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="@dimen/v10sp" />
 
-                <View
-                    android:layout_width="@dimen/v1dp"
-                    android:layout_height="@dimen/v16dp"
-                    android:layout_marginEnd="@dimen/v4dp"
-                    android:layout_marginStart="@dimen/v4dp"
-                    android:background="?@android:attr/colorAccent" />
+                    <TextView
+                        android:id="@+id/text_view_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v2dp"
+                        android:background="@drawable/bg_button"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/v2dp"
+                        android:paddingStart="@dimen/v2dp"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="@dimen/v10sp" />
 
-                <TextView
-                    android:id="@+id/text_view_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/v12sp" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/text_view_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v2dp"
+                        android:background="@drawable/bg_button"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/v2dp"
+                        android:paddingStart="@dimen/v2dp"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="@dimen/v10sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/v4dp">
-
-                <TextView
-                    android:id="@+id/text_view_source"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/text_view_index"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/text_view_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/v2dp"
+                        android:background="@drawable/bg_button"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/v2dp"
+                        android:paddingStart="@dimen/v2dp"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="@dimen/v10sp" />
+                </cn.lankton.flowlayout.FlowLayout>
+            </ScrollView>
         </FrameLayout>
 
         <ImageButton

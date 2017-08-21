@@ -10,7 +10,7 @@ import java.util.List;
 import f.star.iota.milk.Net;
 import f.star.iota.milk.base.PagerFragment;
 import f.star.iota.milk.base.TitlePagerAdapter;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 
 public class MOE005TVPagerFragment extends PagerFragment {
@@ -44,7 +44,7 @@ public class MOE005TVPagerFragment extends PagerFragment {
             fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_COSER));
             fragments.add(MOE005TVFragment.newInstance(Net.MOE005TV_COS));
         } else {
-            SnackbarUtils.create(mContext, "获取数据错误，请稍候重试");
+            MessageBar.create(mContext, "获取数据错误，请稍候重试");
         }
 
         return new TitlePagerAdapter(getChildFragmentManager(), fragments, titles);

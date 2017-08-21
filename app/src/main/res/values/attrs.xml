@@ -5,4 +5,5 @@
     <attr name="card_background" format="color|reference" />
     <attr name="button_text_color" format="color|reference" />
     <attr name="pin_text_color" format="color|reference" />
+    <attr name="juzi_color" format="color|reference" />
 </resources>

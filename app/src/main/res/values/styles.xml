@@ -13,26 +13,44 @@
         <item name="colorPrimary">@color/ThemeRed</item>
         <item name="colorPrimaryDark">@color/ThemeRed</item>
         <item name="colorAccent">@color/ThemeRed</item>
-        <item name="material_drawer_selected_text">@color/ThemeRed</item>
+        <item name="juzi_color">@color/ThemeRed</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeRed</item>
+        <item name="cookieTitleColor">@color/ThemeRed</item>
+        <item name="cookieActionColor">@color/ThemeRed</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemePink" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemePink</item>
         <item name="colorPrimaryDark">@color/ThemePink</item>
         <item name="colorAccent">@color/ThemePink</item>
-        <item name="material_drawer_selected_text">@color/ThemePink</item>
+        <item name="juzi_color">@color/ThemePink</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemePink</item>
+        <item name="cookieTitleColor">@color/ThemePink</item>
+        <item name="cookieActionColor">@color/ThemePink</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemePurple" parent="AppTheme.NoActionBar">
@@ -42,10 +60,19 @@
         <item name="android:textColor">@color/colorText</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemePurple</item>
+        <item name="juzi_color">@color/ThemePurple</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemePurple</item>
+        <item name="cookieTitleColor">@color/ThemePurple</item>
+        <item name="cookieActionColor">@color/ThemePurple</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeDeepPurple" parent="AppTheme.NoActionBar">
@@ -55,88 +82,151 @@
         <item name="colorAccent">@color/ThemeDeepPurple</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeDeepPurple</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
+        <item name="juzi_color">@color/ThemeDeepPurple</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeDeepPurple</item>
+        <item name="cookieTitleColor">@color/ThemeDeepPurple</item>
+        <item name="cookieActionColor">@color/ThemeDeepPurple</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeIndigo" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeIndigo</item>
         <item name="colorPrimaryDark">@color/ThemeIndigo</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorAccent">@color/ThemeIndigo</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeIndigo</item>
+        <item name="juzi_color">@color/ThemeIndigo</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeIndigo</item>
+        <item name="cookieTitleColor">@color/ThemeIndigo</item>
+        <item name="cookieActionColor">@color/ThemeIndigo</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeBlue" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeBlue</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeBlue</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeBlue</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeBlue</item>
+        <item name="juzi_color">@color/ThemeBlue</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeBlue</item>
+        <item name="cookieTitleColor">@color/ThemeBlue</item>
+        <item name="cookieActionColor">@color/ThemeBlue</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeLightBlue" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeLightBlue</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeLightBlue</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeLightBlue</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeLightBlue</item>
+        <item name="juzi_color">@color/ThemeLightBlue</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeLightBlue</item>
+        <item name="cookieTitleColor">@color/ThemeLightBlue</item>
+        <item name="cookieActionColor">@color/ThemeLightBlue</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeCyan" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeCyan</item>
         <item name="colorPrimaryDark">@color/ThemeCyan</item>
         <item name="android:textColor">@color/colorText</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeCyan</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeCyan</item>
+        <item name="juzi_color">@color/ThemeCyan</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeCyan</item>
+        <item name="cookieTitleColor">@color/ThemeCyan</item>
+        <item name="cookieActionColor">@color/ThemeCyan</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeTeal" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeTeal</item>
         <item name="colorPrimaryDark">@color/ThemeTeal</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorAccent">@color/ThemeTeal</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeTeal</item>
+        <item name="juzi_color">@color/ThemeTeal</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeTeal</item>
+        <item name="cookieTitleColor">@color/ThemeTeal</item>
+        <item name="cookieActionColor">@color/ThemeTeal</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeGreen" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeGreen</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeGreen</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeGreen</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeGreen</item>
+        <item name="juzi_color">@color/ThemeGreen</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeGreen</item>
+        <item name="cookieTitleColor">@color/ThemeGreen</item>
+        <item name="cookieActionColor">@color/ThemeGreen</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeLightGreen" parent="AppTheme.NoActionBar">
@@ -144,129 +234,219 @@
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeLightGreen</item>
         <item name="colorAccent">@color/ThemeLightGreen</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeLightGreen</item>
+        <item name="juzi_color">@color/ThemeLightGreen</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeLightGreen</item>
+        <item name="cookieTitleColor">@color/ThemeLightGreen</item>
+        <item name="cookieActionColor">@color/ThemeLightGreen</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeLime" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeLime</item>
         <item name="android:textColor">@color/colorText</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorPrimaryDark">@color/ThemeLime</item>
         <item name="colorAccent">@color/ThemeLime</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeLime</item>
+        <item name="juzi_color">@color/ThemeLime</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeLime</item>
+        <item name="cookieTitleColor">@color/ThemeLime</item>
+        <item name="cookieActionColor">@color/ThemeLime</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeYellow" parent="AppTheme.NoActionBar">
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimary">@color/ThemeYellow</item>
         <item name="colorPrimaryDark">@color/ThemeYellow</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeYellow</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeYellow</item>
+        <item name="juzi_color">@color/ThemeYellow</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeYellow</item>
+        <item name="cookieTitleColor">@color/ThemeYellow</item>
+        <item name="cookieActionColor">@color/ThemeYellow</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeAmber" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeAmber</item>
         <item name="colorPrimaryDark">@color/ThemeAmber</item>
         <item name="android:textColor">@color/colorText</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeAmber</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeAmber</item>
+        <item name="juzi_color">@color/ThemeAmber</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeAmber</item>
+        <item name="cookieTitleColor">@color/ThemeAmber</item>
+        <item name="cookieActionColor">@color/ThemeAmber</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeOrange" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeOrange</item>
         <item name="colorPrimaryDark">@color/ThemeOrange</item>
         <item name="colorAccent">@color/ThemeOrange</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeOrange</item>
+        <item name="juzi_color">@color/ThemeOrange</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeOrange</item>
+        <item name="cookieTitleColor">@color/ThemeOrange</item>
+        <item name="cookieActionColor">@color/ThemeOrange</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeDeepOrange" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeDeepOrange</item>
         <item name="colorPrimaryDark">@color/ThemeDeepOrange</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeDeepOrange</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeDeepOrange</item>
+        <item name="juzi_color">@color/ThemeDeepOrange</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeDeepOrange</item>
+        <item name="cookieTitleColor">@color/ThemeDeepOrange</item>
+        <item name="cookieActionColor">@color/ThemeDeepOrange</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeBrown" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeBrown</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeBrown</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="colorAccent">@color/ThemeBrown</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeBrown</item>
+        <item name="juzi_color">@color/ThemeBrown</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeBrown</item>
+        <item name="cookieTitleColor">@color/ThemeBrown</item>
+        <item name="cookieActionColor">@color/ThemeBrown</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeGrey" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeGrey</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeGrey</item>
         <item name="colorAccent">@color/ThemeGrey</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeGrey</item>
+        <item name="juzi_color">@color/ThemeGrey</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeGrey</item>
+        <item name="cookieTitleColor">@color/ThemeGrey</item>
+        <item name="cookieActionColor">@color/ThemeGrey</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeBlueGrey" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeBlueGrey</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="colorPrimaryDark">@color/ThemeBlueGrey</item>
         <item name="colorAccent">@color/ThemeBlueGrey</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeBlueGrey</item>
+        <item name="juzi_color">@color/ThemeBlueGrey</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeBlueGrey</item>
+        <item name="cookieTitleColor">@color/ThemeBlueGrey</item>
+        <item name="cookieActionColor">@color/ThemeBlueGrey</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeBiliBili" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/ThemeBiliBili</item>
         <item name="colorPrimaryDark">@color/ThemeBiliBili</item>
         <item name="colorAccent">@color/ThemeBiliBili</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeBiliBili</item>
+        <item name="juzi_color">@color/ThemeBiliBili</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeBiliBili</item>
+        <item name="cookieTitleColor">@color/ThemeBiliBili</item>
+        <item name="cookieActionColor">@color/ThemeBiliBili</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeBlack" parent="AppTheme.NoActionBar">
@@ -274,12 +454,21 @@
         <item name="colorPrimaryDark">@color/ThemeBlack</item>
         <item name="colorAccent">@color/ThemeBlack</item>
         <item name="android:textColor">@color/colorText</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
+        <item name="material_drawer_primary_text">@color/colorTextNight</item>
+        <item name="material_drawer_secondary_text">@color/colorTextNight</item>
+        <item name="material_drawer_divider">@color/colorTextNight</item>
+        <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
         <item name="content_board_background">@color/colorContentBoardBackground</item>
         <item name="board_background">@color/colorBoardBackground</item>
-        <item name="material_drawer_selected_text">@color/ThemeBlack</item>
+        <item name="juzi_color">@color/colorTextNight</item>
         <item name="card_background">@color/colorCardBackground</item>
         <item name="button_text_color">@color/colorTextNight</item>
         <item name="pin_text_color">@color/colorTextNight</item>
+        <item name="cookieTitleColor">@color/colorTextNight</item>
+        <item name="cookieActionColor">@color/colorTextNight</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="ThemeDarkBlack" parent="AppTheme.NoActionBar">
@@ -290,14 +479,18 @@
         <item name="material_drawer_primary_text">@color/colorTextNight</item>
         <item name="material_drawer_secondary_text">@color/colorTextNight</item>
         <item name="material_drawer_divider">@color/colorTextNight</item>
-        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
         <item name="material_drawer_selected">@color/colorBoardBackgroundNight</item>
+        <item name="material_drawer_background">@color/colorContentBoardBackgroundNight</item>
         <item name="content_board_background">@color/colorContentBoardBackgroundNight</item>
         <item name="board_background">@color/colorBoardBackgroundNight</item>
-        <item name="material_drawer_selected_text">@color/ThemeDarkBlack</item>
+        <item name="juzi_color">@color/colorTextNight</item>
         <item name="card_background">@color/colorCardBackgroundNight</item>
         <item name="button_text_color">@color/colorText</item>
         <item name="pin_text_color">@color/ThemeLime</item>
+        <item name="cookieTitleColor">@color/ThemeLime</item>
+        <item name="cookieActionColor">@color/ThemeLime</item>
+        <item name="cookieMessageColor">@color/colorTextNight</item>
+        <item name="cookieBackgroundColor">@color/colorContentBoardBackgroundNight</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

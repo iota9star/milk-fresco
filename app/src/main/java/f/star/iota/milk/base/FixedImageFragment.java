@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import f.star.iota.milk.R;
 import f.star.iota.milk.config.OtherConfig;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 
@@ -132,7 +132,7 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
             mRefreshLayout.finishRefresh(true);
             final List beans = (List) result;
             if (beans == null || beans.size() == 0) {
-                SnackbarUtils.create(mContext, "本次获得数据0条，请刷新");
+                MessageBar.create(mContext, "本次获得数据0条，请刷新");
             } else {
                 mRefreshLayout.postDelayed(new Runnable() {
                     @SuppressWarnings("unchecked")
@@ -153,7 +153,7 @@ public abstract class FixedImageFragment<P extends PVContract.Presenter, A exten
         try {
             isRunning = false;
             mRefreshLayout.finishRefresh(false);
-            SnackbarUtils.create(mContext, error);
+            MessageBar.create(mContext, error);
         } catch (Exception e) {
             e.printStackTrace();
         }

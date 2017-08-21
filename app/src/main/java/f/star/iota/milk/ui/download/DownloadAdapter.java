@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import f.star.iota.milk.R;
 import f.star.iota.milk.fresco.FrescoLoader;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
     public static final int TYPE_ALL = 0;
@@ -108,7 +108,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         if (file != null && file.exists()) {
             FrescoLoader.loadForDownload(holder.mSimpleDraweeView, "file://" + file.getAbsolutePath());
         } else {
-            SnackbarUtils.create(holder.mContext, "文件不见了？");
+            MessageBar.create(holder.mContext, "文件不见了？");
         }
     }
 

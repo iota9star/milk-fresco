@@ -168,6 +168,8 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
                                                                          Toast.makeText(mContext, "发生错误：" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                                                                      }
                                                                  });
+                                                     } else {
+                                                         updateBackground(null);
                                                      }
                                                  } catch (Exception e) {
                                                      e.printStackTrace();

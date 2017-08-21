@@ -13,7 +13,7 @@ import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.main.MainActivity;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 public class PinLockActivity extends BaseActivity {
 
@@ -43,7 +43,7 @@ public class PinLockActivity extends BaseActivity {
 
             @Override
             public void onNotMatch(int i) {
-                SnackbarUtils.create(mContext, "指纹识别失败，你还有" + i + "次机会");
+                MessageBar.create(mContext, "指纹识别失败，你还有" + i + "次机会");
             }
 
             @Override
@@ -67,7 +67,7 @@ public class PinLockActivity extends BaseActivity {
                 finish();
             }
         }, 1600);
-        SnackbarUtils.create(mContext, "验证成功，即将前往主页面");
+        MessageBar.create(mContext, "验证成功，即将前往主页面");
     }
 
     private void initEvent() {
@@ -84,7 +84,7 @@ public class PinLockActivity extends BaseActivity {
                         mErrorTimes = 0;
                         finish();
                     }
-                    SnackbarUtils.create(mContext, "解锁失败，你还有" + (3 - mErrorTimes) + "次输入机会");
+                    MessageBar.create(mContext, "解锁失败，你还有" + (3 - mErrorTimes) + "次输入机会");
                 }
             }
 

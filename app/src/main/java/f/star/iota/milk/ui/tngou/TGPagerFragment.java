@@ -14,7 +14,7 @@ import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.base.PVContract;
 import f.star.iota.milk.base.TitlePagerAdapter;
-import f.star.iota.milk.util.SnackbarUtils;
+import f.star.iota.milk.util.MessageBar;
 
 
 public class TGPagerFragment extends BaseFragment implements PVContract.View {
@@ -61,7 +61,7 @@ public class TGPagerFragment extends BaseFragment implements PVContract.View {
 
     @Override
     public void error(String error) {
-        SnackbarUtils.create(getActivity(), error);
+        MessageBar.create(getActivity(), error);
     }
 
     @Override

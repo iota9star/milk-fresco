@@ -7,8 +7,8 @@ android {
         applicationId 'f.star.iota.milk'
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 18
-        versionName "alpha-18"
+        versionCode 19
+        versionName "alpha-19"
         resConfigs "zh"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -121,11 +121,14 @@ dependencies {
     //frescoimageviewer
     compile 'com.github.stfalcon:frescoimageviewer:0.5.0'
 
-    //sneaker
-    compile 'com.irozon.sneaker:sneaker:latest.release'
-
     //Themer
     compile 'com.github.NightFarmer:Themer:latest.release'
+
+    //cookiebar
+    compile 'com.liuguangqiang.cookie:library:latest.release'
+
+    //flowlayout
+    compile 'cn.lankton:flowlayout:latest.release'
 
     //SmartRefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:latest.integration'
