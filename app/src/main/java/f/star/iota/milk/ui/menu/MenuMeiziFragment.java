@@ -42,134 +42,110 @@ public class MenuMeiziFragment extends MenuFragment {
         BaseFragment currentFragment = null;
         switch (menu.getId()) {
             case Menus.MENU_BCY_COS_SELECTED_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BCYSelectedFragment.newInstance(Net.BCY_COS_SELECTED);
                 activity.setTitle(Menus.MENU_BCY_SELECTED);
                 break;
 
             case Menus.MENU_BCY_COS_RANKING_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BCYRankingPagerFragment.newInstance(BCYRankingPagerFragment.COS);
                 activity.setTitle(Menus.MENU_BCY_RANKING);
                 break;
 
             case Menus.MENU_MAG_MOE_COS_STAR_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new MagPagerFragment();
                 activity.setTitle(Menus.MENU_MAG_MOE);
                 break;
             case Menus.MENU_WWW_005_TV_COS_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = WWW005TVFragment.newInstance(Net.WWW_005_TV_COS);
                 activity.setTitle(Menus.MENU_WWW_005_TV);
                 break;
             case Menus.MENU_COSPLAY_LA_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = CosplayLaFragment.newInstance(Net.COSPLAY_LA);
                 activity.setTitle(Menus.MENU_COSPLAY_LA);
                 break;
             case Menus.MENU_MOE005TV_COS_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MOE005TVPagerFragment.newInstance(MOE005TVPagerFragment.COS);
                 activity.setTitle(Menus.MENU_MOE005TV);
                 break;
             case Menus.MENU_ACG_GAMERSKY_COS_ID:
-                activity.removeFragmentContainerChildrenViews();
-                currentFragment = GamerSkyFragment.newInstance(Net.ACG_GAMERSKY_COS);
+                currentFragment = GamerSkyFragment.newInstance(Net.GAMERSKY_COS);
                 activity.setTitle(Menus.MENU_ACG_GAMERSKY);
                 break;
             case Menus.MENU_GANK_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = GankFragment.newInstance(Net.GANK);
                 activity.setTitle(Menus.MENU_GANK);
                 break;
             case Menus.MENU_TNGOU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new TGPagerFragment();
                 activity.setTitle(Menus.MENU_TNGOU);
                 break;
             case Menus.MENU_JDLINGYU_MEIZHI_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new JDLINGYUPagerFragment();
                 activity.setTitle(Menus.MENU_JDLINGYU);
                 break;
 
             case Menus.MENU_LESMAO_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = LesmaoFragment.newInstance(Net.LESMAO);
                 activity.setTitle(Menus.MENU_LESMAO);
                 break;
             case Menus.MENU_XIUMM_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = XIUMMFragment.newInstance(Net.XIUMM);
                 activity.setTitle(Menus.MENU_XIUMM);
                 break;
             case Menus.MENU_94TAOTU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = WWW94TAOTUCOMFragment.newInstance(Net.WWW94TAOTUCOM);
                 activity.setTitle(Menus.MENU_94TAOTU);
                 break;
             case Menus.MENU_MZITU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MZITUFragment.newInstance(Net.MZITU);
                 activity.setTitle(Menus.MENU_MZITU);
                 break;
             case Menus.MENU_MMONLY_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MMONLYFragment.newInstance(Net.MMONLY);
                 activity.setTitle(Menus.MENU_MMONLY);
                 break;
             case Menus.MENU_ROSIYY_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = ROSIYYFragment.newInstance(Net.ROSIYY);
                 activity.setTitle(Menus.MENU_ROSIYY);
                 break;
             case Menus.MENU_192TT_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new WWW192TTCOMPagerFragment();
                 activity.setTitle(Menus.MENU_192TT);
                 break;
             case Menus.MENU_XIUREN_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = XiuRenFragment.newInstance(Net.XIUREN);
                 activity.setTitle(Menus.MENU_XIUREN);
                 break;
             case Menus.MENU_CHINAGIRLOL_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new ChinaGirlOLPagerFragment();
                 activity.setTitle(Menus.MENU_CHINAGIRLOL);
                 break;
             case Menus.MENU_MIAOWU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new MiaoWuPagerFragment();
                 activity.setTitle(Menus.MENU_MIAOWU);
                 break;
             case Menus.MENU_MEIMEIZI_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MeiMeiZiFragment.newInstance(Net.MEIMEIZI);
                 activity.setTitle(Menus.MENU_MEIMEIZI);
                 break;
             case Menus.MENU_YOUWU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new YouWuPagerFragment();
                 activity.setTitle(Menus.MENU_YOUWU);
                 break;
             case Menus.MENU_TAOTUTT_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = TAOTUTTFragment.newInstance(Net.TAOTUTT);
                 activity.setTitle(Menus.MENU_TAOTUTT);
                 break;
             case Menus.MENU_UMEI_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = UMEIFragment.newInstance(Net.UMEI);
                 activity.setTitle(Menus.MENU_UMEI);
                 break;
             case Menus.MENU_GRAVUREGIRLZ_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = GravureGirlZFragment.newInstance(Net.GRAVUREGIRLZ);
                 activity.setTitle(Menus.MENU_GRAVUREGIRLZ);
                 break;
         }
+        activity.removeFragmentContainerChildrenViews();
         activity.showFragment(currentFragment);
     }
 
@@ -189,7 +165,7 @@ public class MenuMeiziFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_MOE005TV_COS_ID, Menus.MENU_MOE005TV,
                 Net.MOE005TV_BASE, "http://www.005.tv/templets/muban/moe_style/image/moe_logo.png", null));
         menu.add(new MenuBean(Menus.MENU_ACG_GAMERSKY_COS_ID, Menus.MENU_ACG_GAMERSKY,
-                Net.ACG_GAMERSKY_BASE, "http://image.gamersky.com/webimg13/acg/new/logo.png", null));
+                Net.GAMERSKY_BASE, "http://image.gamersky.com/webimg13/acg/new/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_GANK_ID, Menus.MENU_GANK,
                 Net.GANK_BASE, "http://gank.io/static/favicon.ico", null));
         menu.add(new MenuBean(Menus.MENU_TNGOU_ID, Menus.MENU_TNGOU,

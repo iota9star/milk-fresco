@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
@@ -27,6 +28,10 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.liuguangqiang.cookie.OnActionClickListener;
+import com.lzy.okgo.db.DownloadManager;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okserver.OkDownload;
+import com.lzy.okserver.task.XExecutor;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -35,6 +40,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 import butterknife.BindView;
 import f.star.iota.milk.Menus;
@@ -48,16 +55,21 @@ import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.ui.download.DownloadManagerActivity;
 import f.star.iota.milk.ui.menu.MenuIllustrationFragment;
 import f.star.iota.milk.ui.menu.MenuMeiziFragment;
-import f.star.iota.milk.ui.menu.MenuPhotographyFragment;
+import f.star.iota.milk.ui.menu.MenuWallpaperFragment;
 import f.star.iota.milk.ui.moeimg.moe.MoeimgFragment;
 import f.star.iota.milk.ui.more.MoreActivity;
 import f.star.iota.milk.ui.settings.SettingsActivity;
+import f.star.iota.milk.util.MediaUtils;
 import f.star.iota.milk.util.MessageBar;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;
 
-public class MainActivity extends BaseActivity implements MainActivityContract.View {
+public class MainActivity extends BaseActivity implements XExecutor.OnAllTaskEndListener, MainActivityContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -183,6 +195,10 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         setSupportActionBar(mToolbar);
         mPresenter = new MainActivityPresenter(this);
         isRunning = false;
+        if (!MediaUtils.hasNomediaFile()) {
+            OkDownload.getInstance()
+                    .addOnAllTaskEndListener(MainActivity.this);
+        }
     }
 
     @Override
@@ -223,7 +239,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 .addDrawerItems(
                         new SecondaryDrawerItem().withName(Menus.MENU_ILLUSTRATION).withIdentifier(Menus.MENU_ILLUSTRATION_ID).withIcon(R.drawable.ic_menu_illustration).withSelectable(false),
                         new SecondaryDrawerItem().withName(Menus.MENU_MEIZI).withIdentifier(Menus.MENU_MEIZI_ID).withIcon(R.drawable.ic_menu_meizhi).withSelectable(false),
-                        new SecondaryDrawerItem().withName(Menus.MENU_PHOTOGRAPHY).withIdentifier(Menus.MENU_PHOTOGRAPHY_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
+                        new SecondaryDrawerItem().withName(Menus.MENU_WALLPAPER).withIdentifier(Menus.MENU_WALLPAPER_ID).withIcon(R.drawable.ic_menu_photography).withSelectable(false),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(Menus.MENU_SETTINGS).withIdentifier(Menus.MENU_SETTINGS_ID).withIcon(R.drawable.ic_menu_settings).withSelectable(false),
                         new SecondaryDrawerItem().withName(Menus.MENU_ABOUT).withIdentifier(Menus.MENU_ABOUT_ID).withIcon(R.drawable.ic_menu_more).withSelectable(false)
@@ -291,9 +307,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                         currentFragment = new MenuMeiziFragment();
                         setTitle(Menus.MENU_MEIZI);
                         break;
-                    case Menus.MENU_PHOTOGRAPHY_ID:
-                        currentFragment = new MenuPhotographyFragment();
-                        setTitle(Menus.MENU_PHOTOGRAPHY);
+                    case Menus.MENU_WALLPAPER_ID:
+                        currentFragment = new MenuWallpaperFragment();
+                        setTitle(Menus.MENU_WALLPAPER);
                         break;
                 }
                 showFragment(currentFragment);
@@ -371,5 +387,34 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     @Override
     public void onBackPressed() {
         exit();
+    }
+
+    @Override
+    public void onAllTaskEnd() {
+        Observable.just(DownloadManager.getInstance().getFinished())
+                .map(new Function<List<Progress>, String[]>() {
+                    @Override
+                    public String[] apply(@NonNull List<Progress> downloadTasks) throws Exception {
+                        String[] paths = new String[downloadTasks.size()];
+                        for (int i = 0; i < downloadTasks.size(); i++) {
+                            paths[i] = downloadTasks.get(i).filePath;
+                        }
+                        return paths;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String[]>() {
+                    @Override
+                    public void accept(String[] paths) throws Exception {
+                        MediaScannerConnection.scanFile(mContext, paths, null, null);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        MessageBar.create(mContext, "更新文件到媒体库时，发生了一些错误：" + throwable.getMessage());
+                    }
+                });
+
     }
 }

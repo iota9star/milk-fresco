@@ -11,6 +11,7 @@ import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.ui.animepictures.anime.AnimePictureFragment;
 import f.star.iota.milk.ui.apic.a.ApicPagerFragment;
+import f.star.iota.milk.ui.artstation.art.ArtStationFragment;
 import f.star.iota.milk.ui.bcy.ranking.BCYRankingPagerFragment;
 import f.star.iota.milk.ui.bcy.selected.BCYSelectedFragment;
 import f.star.iota.milk.ui.booru.BooruFragment;
@@ -28,7 +29,6 @@ import f.star.iota.milk.ui.moe005tv.moe.MOE005TVPagerFragment;
 import f.star.iota.milk.ui.moeimg.moe.MoeimgFragment;
 import f.star.iota.milk.ui.nijieroch.nijiero.NijieroCHFragment;
 import f.star.iota.milk.ui.pangci.PANGCIFragment;
-import f.star.iota.milk.ui.wallhaven.wall.WallHavenFragment;
 import f.star.iota.milk.ui.www005tv.www.WWW005TVPagerFragment;
 import f.star.iota.milk.ui.yuriimg.YuriImgPagerFragment;
 import f.star.iota.milk.ui.zerochan.ZerochanFragment;
@@ -40,113 +40,92 @@ public class MenuIllustrationFragment extends MenuFragment {
         BaseFragment currentFragment = null;
         switch (menu.getId()) {
             case Menus.MENU_YANDE_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BooruFragment.newInstance(Net.YANDE);
                 activity.setTitle(Menus.MENU_YANDE);
                 break;
             case Menus.MENU_KONACHAN_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BooruFragment.newInstance(Net.KONACHAN);
                 activity.setTitle(Menus.MENU_KONACHAN);
                 break;
             case Menus.MENU_LOLIBOORU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BooruFragment.newInstance(Net.LOLIBOORU);
                 activity.setTitle(Menus.MENU_LOLIBOORU);
                 break;
             case Menus.MENU_DANBOORU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = DonmaiFragment.newInstance(Net.DANBOORU);
                 activity.setTitle(Menus.MENU_DANBOORU);
                 break;
             case Menus.MENU_SAFEBOORU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = DonmaiFragment.newInstance(Net.SAFEBOORU);
                 activity.setTitle(Menus.MENU_SAFEBOORU);
                 break;
             case Menus.MENU_E621_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BooruFragment.newInstance(Net.E621);
                 activity.setTitle(Menus.MENU_E621);
                 break;
             case Menus.MENU_E926_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BooruFragment.newInstance(Net.E926);
                 activity.setTitle(Menus.MENU_E926);
                 break;
-            case Menus.MENU_WALLHAVEN_ID:
-                activity.removeFragmentContainerChildrenViews();
-                currentFragment = WallHavenFragment.newInstance(Net.WALLHAVEN);
-                activity.setTitle(Menus.MENU_WALLHAVEN);
-                break;
+
             case Menus.MENU_GACHA_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new GachaPagerFragment();
                 activity.setTitle(Menus.MENU_GACHA);
                 break;
             case Menus.MENU_BCY_ILLUST_SELECTED_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BCYSelectedFragment.newInstance(Net.BCY_ILLUST_SELECTED);
                 activity.setTitle(Menus.MENU_BCY_SELECTED);
                 break;
             case Menus.MENU_BCY_ILLUST_RANKING_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = BCYRankingPagerFragment.newInstance(BCYRankingPagerFragment.ILLUST);
                 activity.setTitle(Menus.MENU_BCY_RANKING);
                 break;
             case Menus.MENU_MANGA_DRAWING_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new MangaDrawingPagerFragment();
                 activity.setTitle(Menus.MENU_MANGA_DRAWING);
                 break;
             case Menus.MENU_MANGA_DRAWING_HENTAI_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new MangaDrawingHentaiPagerFragment();
                 activity.setTitle(Menus.MENU_MANGA_DRAWING);
                 break;
             case Menus.MENU_MAG_MOE_MOE_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MagFragment.newInstance(Net.MAG_MOE_MOE);
                 activity.setTitle(Menus.MENU_MAG_MOE);
                 break;
             case Menus.MENU_APIC_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new ApicPagerFragment();
                 activity.setTitle(Menus.MENU_APIC);
                 break;
             case Menus.MENU_ZEROCHAN_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = ZerochanFragment.newInstance(Net.ZEROCHAN);
                 activity.setTitle(Menus.MENU_ZEROCHAN);
                 break;
             case Menus.MENU_E_SHUUSHUU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = ESHUUSHUUFragment.newInstance(Net.E_SHUUSHUU);
                 activity.setTitle(Menus.MENU_E_SHUUSHUU);
                 break;
+            case Menus.MENU_ARTSTATION_ID:
+                currentFragment = ArtStationFragment.newInstance(Net.ARTSTATION);
+                activity.setTitle(Menus.MENU_ARTSTATION);
+                break;
             case Menus.MENU_MINITOKYO_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MINITOKYOFragment.newInstance(Net.MINITOKYO);
                 activity.setTitle(Menus.MENU_MINITOKYO);
                 break;
             case Menus.MENU_WWW_005_TV_ACG_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new WWW005TVPagerFragment();
                 activity.setTitle(Menus.MENU_WWW_005_TV);
                 break;
 
             case Menus.MENU_JDLINGYU_ACG_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = JDLINGYUFragment.newInstance(Net.JDLINGYU_ACG);
                 activity.setTitle(Menus.MENU_JDLINGYU);
                 break;
             case Menus.MENU_LINGYU_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = LingYuFragment.newInstance(Net.LINGYU);
                 activity.setTitle(Menus.MENU_LINGYU);
                 break;
             case Menus.MENU_MOEIMG_ID:
-                activity.removeFragmentContainerChildrenViews();
                 if (!OtherConfig.getR(aContext)) {
                     currentFragment = MoeimgFragment.newInstance(Net.MOEIMG_H);
                 } else {
@@ -155,37 +134,32 @@ public class MenuIllustrationFragment extends MenuFragment {
                 activity.setTitle(Menus.MENU_MOEIMG);
                 break;
             case Menus.MENU_NIJIERO_CH_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = NijieroCHFragment.newInstance(Net.NIJIERO_CH);
                 activity.setTitle(Menus.MENU_NIJIERO_CH);
                 break;
 
             case Menus.MENU_MOE005TV_ACG_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = MOE005TVPagerFragment.newInstance(MOE005TVPagerFragment.ACG);
                 activity.setTitle(Menus.MENU_MOE005TV);
                 break;
             case Menus.MENU_ACG_GAMERSKY_ACG_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new GamerSkyPagerFragment();
                 activity.setTitle(Menus.MENU_ACG_GAMERSKY);
                 break;
             case Menus.MENU_PANGCI_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = PANGCIFragment.newInstance(Net.PANGCI);
                 activity.setTitle(Menus.MENU_PANGCI);
                 break;
             case Menus.MENU_YURIIMG_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = new YuriImgPagerFragment();
                 activity.setTitle(Menus.MENU_YURIIMG);
                 break;
             case Menus.MENU_ANIME_PICTURES_ID:
-                activity.removeFragmentContainerChildrenViews();
                 currentFragment = AnimePictureFragment.newInstance(Net.ANIME_PICTURES);
                 activity.setTitle(Menus.MENU_ANIME_PICTURES);
                 break;
         }
+        activity.removeFragmentContainerChildrenViews();
         activity.showFragment(currentFragment);
     }
 
@@ -240,11 +214,11 @@ public class MenuIllustrationFragment extends MenuFragment {
                 "http://img.moeimg.net/wp-content/uploads/img/moeimg_pc.gif",
                 null
         ));
-        menu.add(new MenuBean(Menus.MENU_WALLHAVEN_ID,
-                Menus.MENU_WALLHAVEN,
-                Net.WALLHAVEN_BASE,
-                "https://alpha.wallhaven.cc/images/layout/logo.png",
-                Net.WALLHAVEN_LOGIN
+        menu.add(new MenuBean(Menus.MENU_ARTSTATION_ID,
+                Menus.MENU_ARTSTATION,
+                Net.ARTSTATION_BASE,
+                "https://www.artstation.com/assets/logo@2x-00d3f09a1f4ada085fe7e8c9be1e40ae.png",
+                null
         ));
         menu.add(new MenuBean(Menus.MENU_GACHA_ID,
                 Menus.MENU_GACHA,
@@ -341,7 +315,7 @@ public class MenuIllustrationFragment extends MenuFragment {
         ));
         menu.add(new MenuBean(Menus.MENU_ACG_GAMERSKY_ACG_ID,
                 Menus.MENU_ACG_GAMERSKY,
-                Net.ACG_GAMERSKY_BASE,
+                Net.GAMERSKY_BASE,
                 "http://image.gamersky.com/webimg13/acg/new/logo.png",
                 null
         ));

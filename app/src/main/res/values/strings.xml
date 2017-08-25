@@ -90,4 +90,10 @@
     <string name="about_setting">相关设置</string>
     <string name="is_wifi_load">仅WiFi下刷新图片</string>
     <string name="banner">http://r.photo.store.qq.com/psb?/a97e084f-86ae-45db-a2e4-e63a3cb987b3/u5FVmAbBltiKs9u*jmt5R*Qj9kIzigECBi48EIbrNvI!/r/dD4BAAAAAAAA</string>
+    <string name="pause_refresh">暂停刷新部件</string>
+    <string name="kuvva">KUVVA</string>
+    <string name="is_update_media">更新图片到媒体库（重启后生效）</string>
+    <string name="scan_setting">扫描</string>
+    <string name="you_are_good">其实你已经很努力了\nｸﾞｯ!(๑•̀ㅂ•́)و✧</string>
+    <string name="gamersky">GAMERSKY</string>
 </resources>

@@ -189,7 +189,7 @@ public abstract class ScrollImageFragment<P extends PVContract.Presenter, A exte
                 currentPage = mInitialPage + 1;
                 mRefreshLayout.finishRefresh(false);
             }
-            MessageBar.create(mContext, error);
+            MessageBar.create(mContext, "可能到底了：" + error);
         } catch (Exception e) {
             e.printStackTrace();
         }

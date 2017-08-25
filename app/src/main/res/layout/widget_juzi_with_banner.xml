@@ -20,65 +20,59 @@
         android:animateLayoutChanges="true"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/image_view_banner"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder_72dp"
-            tools:ignore="ContentDescription" />
+            android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/v8dp"
+                android:shadowColor="#80242424"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="5"
+                android:text="@string/you_are_good"
+                android:textColor="#c4606060"
+                android:textSize="@dimen/v18sp"
+                android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/image_view_banner"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/v128dp"
-                android:layout_marginEnd="-80dp"
-                android:layout_marginStart="-80dp"
-                android:layout_marginTop="-98dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_shadow"
+                android:layout_height="match_parent"
+                android:background="#80c4c4c4"
+                android:scaleType="centerCrop"
                 tools:ignore="ContentDescription" />
+        </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-24dp"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_view_juzi_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/v4dp"
+            android:shadowColor="#80242424"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="5"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/v12sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_view_juzi_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:shadowColor="#80242424"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="5"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/v12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/text_view_juzi_source"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/v4dp"
-                    android:gravity="center"
-                    android:shadowColor="#80242424"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="5"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/v10sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/text_view_juzi_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/v4dp"
+            android:gravity="end"
+            android:shadowColor="#80242424"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="5"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/v10sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>

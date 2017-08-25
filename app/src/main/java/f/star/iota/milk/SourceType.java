@@ -9,4 +9,6 @@ public interface SourceType {
     int WALLHAVEN = 4;
     int SIMPLEDESKTOPS = 5;
     int YURIIMG = 6;
+    int KUVVA = 7;
+    int GAMERSKY = 8;
 }

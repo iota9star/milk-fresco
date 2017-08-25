@@ -183,7 +183,83 @@
                             android:paddingStart="0dp"
                             android:paddingTop="@dimen/v8dp"
                             android:text="@string/yuriimg" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_kuvva"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/kuvva" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_gravity="center"
+                            android:background="?@android:attr/colorAccent" />
+
+                        <RadioButton
+                            android:id="@+id/radio_gamersky"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="end|center_vertical"
+                            android:paddingBottom="@dimen/v8dp"
+                            android:paddingEnd="@dimen/v8dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="@dimen/v8dp"
+                            android:text="@string/gamersky" />
                     </RadioGroup>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/v8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@animator/touch_floating"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/scan_setting" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/v2dp"
+                        android:layout_gravity="center"
+                        android:background="?@android:attr/colorAccent" />
+
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_compat_is_update_media"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/v8dp"
+                        android:text="@string/is_update_media"
+                        android:textSize="@dimen/v12sp"
+                        android:textStyle="normal" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

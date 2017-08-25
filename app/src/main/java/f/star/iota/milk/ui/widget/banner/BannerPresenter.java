@@ -65,7 +65,147 @@ public class BannerPresenter implements BannerContract.Presenter {
             case SourceType.YURIIMG:
                 getYuriimg();
                 break;
+            case SourceType.KUVVA:
+                getKuvva();
+                break;
+            case SourceType.GAMERSKY:
+                getGamersky();
+                break;
         }
+    }
+
+    private void getGamersky() {
+        String url = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20117\",\"isNodeId\":\"true\",\"page\":" + (new Random().nextInt(23) + 1) + "}";
+        mCompositeDisposable.add(
+                OkGo.<String>get(url)
+                        .converter(new StringConvert())
+                        .adapt(new ObservableResponse<String>())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .map(new Function<Response<String>, String>() {
+                            @Override
+                            public String apply(@NonNull Response<String> s) throws Exception {
+                                List<String> list = new ArrayList<>();
+                                Elements select = Jsoup.parseBodyFragment(s.body().replaceAll("\\\\", "")).select(".img > a");
+                                for (Element element : select) {
+                                    String url = element.attr("href");
+                                    list.add(url);
+                                }
+                                return list.get(new Random().nextInt(list.size()));
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(@NonNull String s) throws Exception {
+                                getGamerskyRaw(s);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                view.getBannerError();
+                            }
+                        })
+        );
+    }
+
+    private void getGamerskyRaw(String url) {
+        url = url.replace(".shtml", "_" + (new Random().nextInt(5) + 1) + ".shtml");
+        if (url.contains("_1.shtml")) {
+            url = url.replace("_1.shtml", ".shtml");
+        }
+        mCompositeDisposable.add(
+                OkGo.<String>get(url)
+                        .converter(new StringConvert())
+                        .adapt(new ObservableResponse<String>())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .map(new Function<Response<String>, String>() {
+                            @Override
+                            public String apply(@NonNull Response<String> s) throws Exception {
+                                List<String> list = new ArrayList<>();
+                                Elements select = Jsoup.parse(s.body()).select("div > div > div > p > a");
+                                for (Element element : select) {
+                                    String url = element.attr("href");
+                                    if (!url.contains(".shtml?http")) continue;
+                                    url = url.substring(url.indexOf(".shtml?http") + 7, url.length());
+                                    list.add(url);
+                                }
+                                return list.get(new Random().nextInt(list.size()));
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(@NonNull String s) throws Exception {
+                                view.getBannerSuccess(s);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                view.getBannerError();
+                            }
+                        })
+        );
+    }
+
+    private void getKuvva() {
+        String url = "https://www.kuvva.com/wallpapers?page=" + (new Random().nextInt(42) + 1);
+        mCompositeDisposable.add(
+                OkGo.<String>get(url)
+                        .converter(new StringConvert())
+                        .adapt(new ObservableResponse<String>())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .map(new Function<Response<String>, String>() {
+                            @Override
+                            public String apply(@NonNull Response<String> s) throws Exception {
+                                List<String> list = new ArrayList<>();
+                                Elements select = Jsoup.parse(s.body()).select("body > div > section > ul > li > a");
+                                for (Element element : select) {
+                                    String url = Net.KUVVA_BASE + element.attr("href");
+                                    list.add(url);
+                                }
+                                return list.get(new Random().nextInt(list.size()));
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(@NonNull String s) throws Exception {
+                                getKuvvaRaw(s);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                view.getBannerError();
+                            }
+                        })
+        );
+    }
+
+    private void getKuvvaRaw(String s) {
+        mCompositeDisposable.add(
+                OkGo.<String>get(s)
+                        .converter(new StringConvert())
+                        .adapt(new ObservableResponse<String>())
+                        .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
+                        .map(new Function<Response<String>, String>() {
+                            @Override
+                            public String apply(@NonNull Response<String> s) throws Exception {
+                                return Jsoup.parse(s.body()).select("body > section.illustration > div > div.image > div > a > img").attr("src");
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(@NonNull String s) throws Exception {
+                                view.getBannerSuccess(s);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                view.getBannerError();
+                            }
+                        })
+        );
     }
 
     private void getYuriimg() {

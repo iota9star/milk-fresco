@@ -12,8 +12,8 @@ public interface Menus {
     String MENU_MEIZI = "妹子";
     int MENU_MEIZI_ID = 995;
 
-    String MENU_PHOTOGRAPHY = "摄影";
-    int MENU_PHOTOGRAPHY_ID = 994;
+    String MENU_WALLPAPER = "壁纸";
+    int MENU_WALLPAPER_ID = 994;
 
     String MENU_YANDE = "YANDE";
     int MENU_YANDE_ID = 1;
@@ -90,7 +90,6 @@ public interface Menus {
     String MENU_WWW_005_TV = "WWW.005.TV";
     int MENU_WWW_005_TV_ACG_ID = 27;
     int MENU_WWW_005_TV_COS_ID = 28;
-
 
     String MENU_JDLINGYU = "JDLINGYU";
     int MENU_JDLINGYU_ACG_ID = 30;
@@ -169,4 +168,26 @@ public interface Menus {
 
     String MENU_SIMPLEDESKTOPS = "SIMPLEDESKTOPS";
     int MENU_SIMPLEDESKTOPS_ID = 57;
+
+    String MENU_BILIBILI = "BILIBILI";
+    int MENU_BILIBILI_ID = 58;
+
+    String MENU_ARTSTATION = "ARTSTATION";
+    int MENU_ARTSTATION_ID = 59;
+
+    String MENU_KUVVA = "KUVVA";
+    int MENU_KUVVA_ID = 60;
+
+    String MENU_ISUJIN = "ISUJIN";
+    int MENU_ISUJIN_ID = 61;
+
+    String MENU_JUSTINMALLER = "JUSTINMALLER";
+    int MENU_JUSTINMALLER_ID = 62;
+
+    String MENU_GAMERSKY = "GAMERSKY";
+    int MENU_GAMERSKY_ID = 63;
+
+    String MENU_MAGDELEINE = "MAGDELEINE";
+    int MENU_MAGDELEINE_ID = 64;
+
 }

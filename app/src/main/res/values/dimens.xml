@@ -1,5 +1,4 @@
 <resources>
-    <dimen name="v1dp">1dp</dimen>
     <dimen name="v2dp">2dp</dimen>
     <dimen name="v4dp">4dp</dimen>
     <dimen name="v8dp">8dp</dimen>
@@ -25,5 +24,4 @@
     <dimen name="v128dp">128dp</dimen>
     <dimen name="v72dp">72dp</dimen>
     <dimen name="v56dp">56dp</dimen>
-    <dimen name="v320dp">320dp</dimen>
 </resources>

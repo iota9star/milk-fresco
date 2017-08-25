@@ -69,6 +69,14 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
         return getProcessingCompletedBeans(beans, null);
     }
 
+    protected List<PCBean> getProcessingCompletedBeans(B beans, HashMap<String, String> headers) {
+        return null;
+    }
+
+    protected List<PCBean> getProcessingCompletedBeans(B beans) {
+        return getProcessingCompletedBeans(beans, null);
+    }
+
     protected void open(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));

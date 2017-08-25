@@ -20,7 +20,7 @@ import f.star.iota.milk.SourceType;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.WidgetConfig;
 
-public class WidgetActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class WidgetActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
     @BindView(R.id.text_view_interval_juzi)
     TextView mTextViewIntervalJuzi;
     @BindView(R.id.text_view_interval_today_in_history)
@@ -43,6 +43,10 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
     RadioButton mRadioButtonSimpleDesktops;
     @BindView(R.id.radio_yuriimg)
     RadioButton mRadioButtonYuriimg;
+    @BindView(R.id.radio_kuvva)
+    RadioButton mRadioButtonKuvva;
+    @BindView(R.id.radio_gamersky)
+    RadioButton mRadioButtonGamersky;
 
     @BindView(R.id.switch_compat_is_set_wallpaper)
     SwitchCompat mSwitchCompatIsSetWallpaper;
@@ -54,7 +58,8 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
     SwitchCompat mSwitchCompatIsSaveWidgetBanner;
     @BindView(R.id.switch_compat_is_only_wifi_load)
     SwitchCompat mSwitchCompatIsOnlyWiFiLoad;
-
+    @BindView(R.id.switch_compat_is_pause_refresh)
+    SwitchCompat mSwitchCompatIsPauseRefresh;
     @BindView(R.id.text_view_blur_value)
     TextView mTextViewBlurValue;
 
@@ -178,35 +183,14 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
             case SourceType.YURIIMG:
                 mRadioButtonYuriimg.setChecked(true);
                 break;
+            case SourceType.KUVVA:
+                mRadioButtonKuvva.setChecked(true);
+                break;
+            case SourceType.GAMERSKY:
+                mRadioButtonGamersky.setChecked(true);
+                break;
         }
-        mRadioGroupBannerSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
-                switch (id) {
-                    case R.id.radio_apic:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.APIC);
-                        break;
-                    case R.id.radio_moeimg:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.MOEIMG);
-                        break;
-                    case R.id.radio_bing:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.BING);
-                        break;
-                    case R.id.radio_gank:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.GANK);
-                        break;
-                    case R.id.radio_wallhaven:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.WALLHAVEN);
-                        break;
-                    case R.id.radio_simple_desktops:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.SIMPLEDESKTOPS);
-                        break;
-                    case R.id.radio_yuriimg:
-                        WidgetConfig.saveWidgetBannerSource(mContext, SourceType.YURIIMG);
-                        break;
-                }
-            }
-        });
+        mRadioGroupBannerSource.setOnCheckedChangeListener(this);
         if (WidgetConfig.isBlurWidgetBanner(mContext)) {
             mSwitchCompatIsBlurWidgetBanner.setChecked(true);
         }
@@ -219,14 +203,18 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
         if (WidgetConfig.isSaveWidgetBanner(mContext)) {
             mSwitchCompatIsSaveWidgetBanner.setChecked(true);
         }
-        if (WidgetConfig.isWiFiLoadBanner(mContext)) {
+        if (WidgetConfig.isOnlyWiFiLoad(mContext)) {
             mSwitchCompatIsOnlyWiFiLoad.setChecked(true);
+        }
+        if (WidgetConfig.isPauseRefresh(mContext)) {
+            mSwitchCompatIsPauseRefresh.setChecked(true);
         }
         mSwitchCompatIsSetWallpaper.setOnCheckedChangeListener(this);
         mSwitchCompatIsBlurWallpaper.setOnCheckedChangeListener(this);
         mSwitchCompatIsBlurWidgetBanner.setOnCheckedChangeListener(this);
         mSwitchCompatIsSaveWidgetBanner.setOnCheckedChangeListener(this);
         mSwitchCompatIsOnlyWiFiLoad.setOnCheckedChangeListener(this);
+        mSwitchCompatIsPauseRefresh.setOnCheckedChangeListener(this);
     }
 
     private void bindTodayInHistoryInterval(int todayInHistroyInterval) {
@@ -290,6 +278,42 @@ public class WidgetActivity extends BaseActivity implements CompoundButton.OnChe
                 break;
             case R.id.switch_compat_is_only_wifi_load:
                 WidgetConfig.isOnlyWiFiLoad(mContext, b);
+                break;
+            case R.id.switch_compat_is_pause_refresh:
+                WidgetConfig.isPauseRefresh(mContext, b);
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+        switch (i) {
+            case R.id.radio_apic:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.APIC);
+                break;
+            case R.id.radio_moeimg:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.MOEIMG);
+                break;
+            case R.id.radio_bing:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.BING);
+                break;
+            case R.id.radio_gank:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.GANK);
+                break;
+            case R.id.radio_wallhaven:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.WALLHAVEN);
+                break;
+            case R.id.radio_simple_desktops:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.SIMPLEDESKTOPS);
+                break;
+            case R.id.radio_yuriimg:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.YURIIMG);
+                break;
+            case R.id.radio_kuvva:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.KUVVA);
+                break;
+            case R.id.radio_gamersky:
+                WidgetConfig.saveWidgetBannerSource(mContext, SourceType.GAMERSKY);
                 break;
         }
     }

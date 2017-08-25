@@ -18,7 +18,7 @@ public class WidgetConfig {
         edit.apply();
     }
 
-    public static boolean isWiFiLoadBanner(Context context) {
+    public static boolean isOnlyWiFiLoad(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         return sp.getBoolean("is_wifi_load", false);
     }
@@ -27,6 +27,18 @@ public class WidgetConfig {
         SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("is_wifi_load", isLoad);
+        edit.apply();
+    }
+
+    public static boolean isPauseRefresh(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        return sp.getBoolean("is_pause_refresh", false);
+    }
+
+    public static void isPauseRefresh(Context context, boolean refresh) {
+        SharedPreferences sp = context.getSharedPreferences("widget_config", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putBoolean("is_pause_refresh", refresh);
         edit.apply();
     }
 

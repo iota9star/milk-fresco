@@ -55,6 +55,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
     private final TimerTask mTask = new TimerTask() {
         @Override
         public void run() {
+            if (WidgetConfig.isPauseRefresh(mContext)) return;
             juzi();
             banner();
         }
@@ -75,7 +76,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
 
     private void banner() {
         if (bannerIsRunning) return;
-        if (WidgetConfig.isWiFiLoadBanner(mContext)) {
+        if (WidgetConfig.isOnlyWiFiLoad(mContext)) {
             if (NetUtils.isWiFi(mContext)) {
                 bannerIsRunning = true;
                 mBannerPresenter.getBanner(WidgetConfig.getWidgetBannerSource(mContext));
@@ -106,16 +107,21 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
     }
 
     private void updateJuzi(JuZiBean bean) {
-        if (bean.getHitokoto() == null || bean.getHitokoto().length() < 3) return;
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_juzi_with_banner);
-        views.setTextViewText(R.id.text_view_juzi_content, bean.getHitokoto());
-        views.setTextViewText(R.id.text_view_juzi_source, bean.getSource());
-        Intent intent = new Intent(ACTION_REFRESH);
-        PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-        views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
-        ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
-        appWidgetManager.updateAppWidget(componentName, views);
+        try {
+            if (bean.getHitokoto() == null || bean.getHitokoto().length() < 3) return;
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_juzi_with_banner);
+            views.setTextViewText(R.id.text_view_juzi_content, bean.getHitokoto());
+            views.setTextViewText(R.id.text_view_juzi_source, bean.getSource());
+            Intent intent = new Intent(ACTION_REFRESH);
+            PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+            views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
+            ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
+            appWidgetManager.updateAppWidget(componentName, views);
+            startService(new Intent(mContext, JuZiService.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -217,6 +223,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
             views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
             ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
             appWidgetManager.updateAppWidget(componentName, views);
+            startService(new Intent(mContext, JuZiService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -232,6 +239,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
             views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
             ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
             appWidgetManager.updateAppWidget(componentName, views);
+            startService(new Intent(mContext, JuZiService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -256,6 +264,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
             mTimer = null;
         }
         unregisterReceiver(mRefreshReceiver);
+        startService(new Intent(mContext, JuZiService.class));
     }
 
     @Override
@@ -266,6 +275,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
     public class RefreshReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (WidgetConfig.isPauseRefresh(mContext)) return;
             if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
                 juzi();
                 banner();

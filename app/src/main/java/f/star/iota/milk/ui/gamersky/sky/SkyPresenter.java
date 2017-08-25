@@ -22,7 +22,7 @@ public class SkyPresenter extends StringPresenter<List<SkyBean>> {
     @Override
     protected List<SkyBean> dealResponse(String s, HashMap<String, String> headers) {
         List<SkyBean> list = new ArrayList<>();
-        Elements select = Jsoup.parse(s).select("body > div.Mid > div.Mid_con > div.Mid_L > div.MidL_con > p > a");
+        Elements select = Jsoup.parse(s).select("div > div > div > p > a");
         for (Element element : select) {
             String url = element.attr("href");
             if (!url.contains(".shtml?http")) continue;

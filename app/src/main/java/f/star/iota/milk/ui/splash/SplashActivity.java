@@ -38,7 +38,7 @@ import butterknife.OnClick;
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.SecurityConfig;
 import f.star.iota.milk.config.SplashConfig;
 import f.star.iota.milk.ui.lock.PinLockActivity;
 import f.star.iota.milk.ui.main.MainActivity;
@@ -71,9 +71,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     private void go() {
         isGo = true;
-        if (OtherConfig.isLock(aContext) == LockType.PIN) {
+        if (SecurityConfig.isLock(aContext) == LockType.PIN) {
             startActivity(new Intent(mContext, PinLockActivity.class));
-        } else if (OtherConfig.isLock(aContext) == LockType.NONE) {
+        } else if (SecurityConfig.isLock(aContext) == LockType.NONE) {
             startActivity(new Intent(mContext, MainActivity.class));
         }
         finish();
@@ -173,14 +173,14 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 };
                 ImageRequestBuilder requestBuilder = ImageRequestBuilder.newBuilderWithSource(uri)
                         .setPostprocessor(postprocessor);
-                if (url.contains(".")) {
-                    String extension = url.contains(".") ? url.substring(url.lastIndexOf(".", url.length())) : "";
-                    if (extension.contains("jpg") || extension.contains("jpeg")) {
-                        requestBuilder.setProgressiveRenderingEnabled(true);
-                    } else {
-                        requestBuilder.setProgressiveRenderingEnabled(false);
-                    }
-                }
+//                if (url.contains(".")) {
+//                    String extension = url.contains(".") ? url.substring(url.lastIndexOf(".", url.length())) : "";
+//                    if (extension.contains("jpg") || extension.contains("jpeg")) {
+//                        requestBuilder.setProgressiveRenderingEnabled(true);
+//                    } else {
+//                        requestBuilder.setProgressiveRenderingEnabled(false);
+//                    }
+//                }
                 ImageRequest request = requestBuilder.build();
                 ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>() {
                     @Override

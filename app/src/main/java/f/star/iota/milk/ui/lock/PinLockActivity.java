@@ -11,7 +11,7 @@ import com.wei.android.lib.fingerprintidentify.base.BaseFingerprint;
 import butterknife.BindView;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.SecurityConfig;
 import f.star.iota.milk.ui.main.MainActivity;
 import f.star.iota.milk.util.MessageBar;
 
@@ -32,7 +32,7 @@ public class PinLockActivity extends BaseActivity {
     }
 
     private void initFingerprint() {
-        if (!OtherConfig.isOpenFingerprint(aContext)) return;
+        if (!SecurityConfig.isOpenFingerprint(aContext)) return;
         FingerprintIdentify fingerprintIdentify = new FingerprintIdentify(mContext);
         if (!fingerprintIdentify.isFingerprintEnable()) return;
         fingerprintIdentify.startIdentify(3, new BaseFingerprint.FingerprintIdentifyListener() {
@@ -74,7 +74,7 @@ public class PinLockActivity extends BaseActivity {
         mPinLockView.setPinLockListener(new PinLockListener() {
             @Override
             public void onComplete(String pin) {
-                if (OtherConfig.getPin(aContext).equals(pin)) {
+                if (SecurityConfig.getPin(aContext).equals(pin)) {
                     mErrorTimes = 0;
                     verifySuccess();
                 } else {

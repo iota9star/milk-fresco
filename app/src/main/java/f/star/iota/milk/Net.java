@@ -183,12 +183,13 @@ public class Net {
     public static final String MOE005TV_COS = "http://moe.005.tv/cosplay/cosxztj/list_598_";
     public static final String MOE005TV_BASE = "http://moe.005.tv";
 
-    public static final String ACG_GAMERSKY_BASE = "http://acg.gamersky.com";
-    public static final String ACG_GAMERSKY_ZX = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20449\",\"isNodeId\":\"true\",\"page\":";
-    public static final String ACG_GAMERSKY_PC = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20450\",\"isNodeId\":\"true\",\"page\":";
-    public static final String ACG_GAMERSKY_SJ = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20451\",\"isNodeId\":\"true\",\"page\":";
-    public static final String ACG_GAMERSKY_MT = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20395\",\"isNodeId\":\"true\",\"page\":";
-    public static final String ACG_GAMERSKY_COS = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20397\",\"isNodeId\":\"true\",\"page\":";
+    public static final String GAMERSKY_BASE = "http://gamersky.com";
+    public static final String GAMERSKY_ZX = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20449\",\"isNodeId\":\"true\",\"page\":";
+    public static final String GAMERSKY_PC = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20450\",\"isNodeId\":\"true\",\"page\":";
+    public static final String GAMERSKY_SJ = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20451\",\"isNodeId\":\"true\",\"page\":";
+    public static final String GAMERSKY_MT = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20395\",\"isNodeId\":\"true\",\"page\":";
+    public static final String GAMERSKY_COS = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20397\",\"isNodeId\":\"true\",\"page\":";
+    public static final String GAMERSKY_BZ = "http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={\"type\":\"updatenodelabel\",\"isCache\":true,\"cacheTime\":60,\"nodeId\":\"20117\",\"isNodeId\":\"true\",\"page\":";
 
     public static final String PANGCI = "https://www.pangci.cc/works/index_";
     public static final String PANGCI_BASE = "https://www.pangci.cc";
@@ -237,5 +238,26 @@ public class Net {
     public static final String GRAVUREGIRLZ_BASE = "http://www.gravuregirlz.com";
 
     public static final String SIMPLEDESKTOPS = "http://simpledesktops.com/browse/";
+
+    public static final String BILIBILI = "http://h.bilibili.com/wallpaperApi?action=getOptions&page=";
+    public static final String BILIBILI_BASE = "http://h.bilibili.com";
+
+    public static final String ARTSTATION = "https://www.artstation.com/projects.json?sorting=latest&page=";
+    public static final String ARTSTATION_BASE = "https://www.artstation.com/";
+
+
+    public static final String KUVVA = "https://www.kuvva.com/wallpapers?page=";
+    public static final String KUVVA_BASE = "https://www.kuvva.com";
+
+    public static final String ISUJIN = "http://isujin.com/page/";
+    public static final String ISUJIN_BASE = "http://isujin.com/page/";
+
+
+    public static final String JUSTINMALLER = "http://justinmaller.com/wallpapers/";
+    public static final String JUSTINMALLER_BASE = "http://justinmaller.com";
+
+
+    public static final String MAGDELEINE = "https://magdeleine.co/browse/page/";
+    public static final String MAGDELEINE_BASE = "https://magdeleine.co";
 
 }

@@ -1,15 +1,12 @@
 package f.star.iota.milk;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Looper;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.disk.NoOpDiskTrimmableRegistry;
@@ -22,9 +19,6 @@ import com.facebook.common.util.ByteConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
-import com.facebook.imagepipeline.image.ImmutableQualityInfo;
-import com.facebook.imagepipeline.image.QualityInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -48,20 +42,16 @@ import java.util.concurrent.TimeUnit;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
-import f.star.iota.milk.ui.main.MainActivity;
 import f.star.iota.milk.util.FileUtils;
 import okhttp3.OkHttpClient;
 
 
 public class MyApp extends Application {
-
     private static final String FRESCO_BASE_CACHE_DIR = "fresco_main_cache";
     private static final String FRESCO_SMALL_IMAGE_CACHE_DIR = "fresco_small_image_cache";
     private static final long MAX_DISK_CACHE_SIZE = Long.MAX_VALUE;
     private static final long MAX_DISK_CACHE_LOW_SIZE = 300 * ByteConstants.MB;
     private static final long MAX_DISK_CACHE_VERY_LOW_SIZE = 100 * ByteConstants.MB;
-    private static final int MAX_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 4);
-    private static final int MAX_CACHE_ENTRIES = MAX_MEMORY_CACHE_SIZE / 2;
     @SuppressLint("StaticFieldLeak")
     public static Context mContext;
 
@@ -82,8 +72,6 @@ public class MyApp extends Application {
             }
         });
     }
-
-    private final long[] mIntervalException = new long[2];
 
     private static OkHttpClient makeOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -123,31 +111,6 @@ public class MyApp extends Application {
         addCount();
         initOkGo();
         initFresco();
-        Crash.setExceptionHandler(new Crash.ExceptionHandler() {
-            @Override
-            public void handleException(final Thread thread, final Throwable e) {
-                System.arraycopy(mIntervalException, 1, mIntervalException, 0, mIntervalException.length - 1);
-                mIntervalException[mIntervalException.length - 1] = SystemClock.uptimeMillis();
-                if (SystemClock.uptimeMillis() - mIntervalException[0] <= 1000) {
-                    return;
-                }
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        Toast.makeText(mContext, "很抱歉,程序出现异常,正在收集日志,若长时间无响应，请强制退出", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(mContext, MainActivity.class));
-                        Looper.loop();
-                    }
-                }.start();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        FileUtils.saveCrashLog(thread, e);
-                    }
-                }).start();
-            }
-        });
     }
 
     private void initFresco() {
@@ -184,24 +147,24 @@ public class MyApp extends Application {
             @Override
             public MemoryCacheParams get() {
                 return new MemoryCacheParams(
-                        MAX_MEMORY_CACHE_SIZE == 0 ? 1 : MAX_MEMORY_CACHE_SIZE,
-                        MAX_CACHE_ENTRIES == 0 ? 1 : MAX_CACHE_ENTRIES,
-                        MAX_MEMORY_CACHE_SIZE == 0 ? 1 : MAX_MEMORY_CACHE_SIZE,
+                        getMaxCacheSize(),
+                        getMaxCacheSize() / 4,
+                        getMaxCacheSize(),
                         Integer.MAX_VALUE,
                         Integer.MAX_VALUE);
             }
         };
-        ProgressiveJpegConfig progressiveJpegConfig = new ProgressiveJpegConfig() {
-            @Override
-            public int getNextScanNumberToDecode(int scanNumber) {
-                return scanNumber + 2;
-            }
-
-            public QualityInfo getQualityInfo(int scanNumber) {
-                boolean isGoodEnough = (scanNumber >= 5);
-                return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
-            }
-        };
+//        ProgressiveJpegConfig progressiveJpegConfig = new ProgressiveJpegConfig() {
+//            @Override
+//            public int getNextScanNumberToDecode(int scanNumber) {
+//                return scanNumber + 2;
+//            }
+//
+//            public QualityInfo getQualityInfo(int scanNumber) {
+//                boolean isGoodEnough = (scanNumber >= 5);
+//                return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
+//            }
+//        };
         ImagePipelineConfig imagePipelineConfig = ImagePipelineConfig
                 .newBuilder(mContext)
                 .setDownsampleEnabled(true)
@@ -211,7 +174,7 @@ public class MyApp extends Application {
                 .setSmallImageDiskCacheConfig(diskSmallCacheConfig)
                 .setBitmapMemoryCacheParamsSupplier(bitmapMemoryCacheParamsSupplier)
                 .setMemoryTrimmableRegistry(memoryTrimmableRegistry)
-                .setProgressiveJpegConfig(progressiveJpegConfig)
+//                .setProgressiveJpegConfig(progressiveJpegConfig)
                 .setNetworkFetcher(new MyOkHttpNetworkFetcher(makeOkHttpClient()))
                 .build();
         Fresco.initialize(mContext, imagePipelineConfig);
@@ -233,5 +196,17 @@ public class MyApp extends Application {
                 .setRetryCount(3)
                 .addCommonHeaders(headers);
         OkDownload.getInstance().getThreadPool().setCorePoolSize(OtherConfig.getDownloadCountConfig(this));
+    }
+
+    private int getMaxCacheSize() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        final int maxMemory = Math.min(activityManager.getMemoryClass() * ByteConstants.MB, Integer.MAX_VALUE);
+        if (maxMemory < 32 * ByteConstants.MB) {
+            return 4 * ByteConstants.MB;
+        } else if (maxMemory < 64 * ByteConstants.MB) {
+            return 8 * ByteConstants.MB;
+        } else {
+            return maxMemory / 8;
+        }
     }
 }

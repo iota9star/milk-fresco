@@ -22,7 +22,7 @@ public class GamerSkyPresenter extends StringPresenter<List<GamerSkyBean>> {
     @Override
     protected List<GamerSkyBean> dealResponse(String s, HashMap<String, String> headers) {
         List<GamerSkyBean> list = new ArrayList<>();
-        Elements select = Jsoup.parseBodyFragment(s.replaceAll("\\\\", "")).select("li.img > a");
+        Elements select = Jsoup.parseBodyFragment(s.replaceAll("\\\\", "")).select(".img > a");
         for (Element element : select) {
             GamerSkyBean bean = new GamerSkyBean();
             String preview = element.select("img").attr("src");
@@ -30,7 +30,7 @@ public class GamerSkyPresenter extends StringPresenter<List<GamerSkyBean>> {
             String url = element.attr("href");
             bean.setUrl(url);
             bean.setHeaders(headers);
-            String description = element.attr("title");
+            String description = element.select("img").attr("alt");
             bean.setDescription(description);
             list.add(bean);
         }

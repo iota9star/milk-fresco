@@ -37,7 +37,7 @@ public class FrescoLoader {
         if (headers != null) {
             MyOkHttpNetworkFetcher.Headers.put(uri, headers);
         }
-        String extension = path.contains(".") ? path.substring(path.lastIndexOf(".", path.length())) : "";
+//        String extension = path.contains(".") ? path.substring(path.lastIndexOf(".", path.length())) : "";
         Context context = draweeView.getContext();
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
@@ -57,11 +57,12 @@ public class FrescoLoader {
                 .build();
         draweeView.setHierarchy(hierarchyBuilder);
         ImageRequestBuilder requestBuilder = ImageRequestBuilder.newBuilderWithSource(uri);
-        if (extension.contains("jpg") || extension.contains("jpeg")) {
-            requestBuilder.setProgressiveRenderingEnabled(true);
-        } else {
-            requestBuilder.setProgressiveRenderingEnabled(false);
-        }
+//        if (extension.contains("jpg") || extension.contains("jpeg")) {
+//            requestBuilder.setProgressiveRenderingEnabled(true);
+//        } else {
+//            requestBuilder.setProgressiveRenderingEnabled(false);
+//        }
+        requestBuilder.setProgressiveRenderingEnabled(false);
         int width = draweeView.getWidth();
         int height = draweeView.getHeight();
         if (width > 0 && height > 0) {

@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.SecurityConfig;
 import f.star.iota.milk.ui.lock.SetPinLockActivity;
 import f.star.iota.milk.ui.theme.ThemeActivity;
 import f.star.iota.milk.util.MessageBar;
@@ -50,7 +50,7 @@ public class SettingsActivity extends BaseActivity {
                 startActivity(new Intent(mContext, DisplayAndDownloadActivity.class));
                 break;
             case R.id.linear_layout_pin_lock:
-                if (OtherConfig.isLock(aContext) != LockType.PIN) {
+                if (SecurityConfig.isLock(aContext) != LockType.PIN) {
                     startActivity(new Intent(mContext, SetPinLockActivity.class));
                 } else {
                     new AlertDialog.Builder(mContext)
@@ -58,8 +58,8 @@ public class SettingsActivity extends BaseActivity {
                             .setPositiveButton("关闭 PIN", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    OtherConfig.setLock(aContext, LockType.NONE);
-                                    OtherConfig.savePin(aContext, "");
+                                    SecurityConfig.setLock(aContext, LockType.NONE);
+                                    SecurityConfig.savePin(aContext, "");
                                 }
                             })
                             .setNegativeButton("重新设置", new DialogInterface.OnClickListener() {
@@ -72,7 +72,7 @@ public class SettingsActivity extends BaseActivity {
                 }
                 break;
             case R.id.linear_layout_fingerprint_lock:
-                if (OtherConfig.isLock(aContext) == LockType.NONE) {
+                if (SecurityConfig.isLock(aContext) == LockType.NONE) {
                     MessageBar.create(mContext, "请先设置至少一种解锁方式");
                     return;
                 }
@@ -90,16 +90,16 @@ public class SettingsActivity extends BaseActivity {
                     });
                     return;
                 }
-                final boolean isOpen = OtherConfig.isOpenFingerprint(aContext);
+                final boolean isOpen = SecurityConfig.isOpenFingerprint(aContext);
                 new AlertDialog.Builder(mContext)
                         .setTitle(isOpen ? "关闭指纹识别支持" : "开启指纹识别支持")
                         .setPositiveButton("嗯", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if (isOpen) {
-                                    OtherConfig.openFingerprint(aContext, false);
+                                    SecurityConfig.openFingerprint(aContext, false);
                                 } else {
-                                    OtherConfig.openFingerprint(aContext, true);
+                                    SecurityConfig.openFingerprint(aContext, true);
                                 }
                             }
                         })

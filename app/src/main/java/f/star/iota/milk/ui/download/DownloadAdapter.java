@@ -292,13 +292,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
             refresh(progress);
         }
 
-        @OnClick(R.id.simple_drawee_view_image)
-        public void onClick() {
-            if (onSetBannerListener != null) {
-                onSetBannerListener.set(mTask.progress.filePath);
-            }
-        }
-
         String getTag() {
             return mTag;
         }

@@ -55,6 +55,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     private final TimerTask mTask = new TimerTask() {
         @Override
         public void run() {
+            if (WidgetConfig.isPauseRefresh(mContext)) return;
             getToday();
             getBanner();
         }
@@ -75,7 +76,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
 
     private void getBanner() {
         if (bannerIsRunning) return;
-        if (WidgetConfig.isWiFiLoadBanner(mContext)) {
+        if (WidgetConfig.isOnlyWiFiLoad(mContext)) {
             if (NetUtils.isWiFi(mContext)) {
                 bannerIsRunning = true;
                 mBannerPresenter.getBanner(WidgetConfig.getWidgetBannerSource(mContext));
@@ -106,19 +107,24 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     }
 
     private void updateToday(HistoryBean bean) {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_today_in_history_with_banner);
-        if (bean.getYear().trim().replaceAll(" ", "").length() < 3) {
-            views.setTextViewText(R.id.text_view_history, "今天天气应该不错吧");
-        } else {
-            views.setTextViewText(R.id.text_view_history, bean.getEvent());
-            views.setTextViewText(R.id.text_view_today, bean.getDay() + " # " + bean.getYear());
+        try {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_today_in_history_with_banner);
+            if (bean.getYear().trim().replaceAll(" ", "").length() < 3) {
+                views.setTextViewText(R.id.text_view_history, "今天天气应该不错吧");
+            } else {
+                views.setTextViewText(R.id.text_view_history, bean.getEvent());
+                views.setTextViewText(R.id.text_view_today, bean.getDay() + " # " + bean.getYear());
+            }
+            Intent playIntent = new Intent(ACTION_REFRESH);
+            PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, playIntent, 0);
+            views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
+            ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
+            appWidgetManager.updateAppWidget(componentName, views);
+            startService(new Intent(mContext, TodayInHistoryService.class));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        Intent playIntent = new Intent(ACTION_REFRESH);
-        PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, playIntent, 0);
-        views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
-        ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
-        appWidgetManager.updateAppWidget(componentName, views);
     }
 
     @Override
@@ -225,6 +231,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
             views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
             ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
             appWidgetManager.updateAppWidget(componentName, views);
+            startService(new Intent(mContext, TodayInHistoryService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -240,6 +247,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
             views.setOnClickPendingIntent(R.id.frame_layout_today_container, refresh);
             ComponentName componentName = new ComponentName(mContext, TodayInHistoryWidgetProvider.class);
             appWidgetManager.updateAppWidget(componentName, views);
+            startService(new Intent(mContext, TodayInHistoryService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -264,6 +272,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
             mTimer = null;
         }
         unregisterReceiver(mRefreshReceiver);
+        startService(new Intent(mContext, TodayInHistoryService.class));
     }
 
     @Override
@@ -274,6 +283,7 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     public class RefreshReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (WidgetConfig.isPauseRefresh(mContext)) return;
             if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
                 getToday();
                 getBanner();

@@ -1,8 +1,10 @@
 package f.star.iota.milk.ui.settings;
 
 import android.support.annotation.IdRes;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -14,8 +16,9 @@ import f.star.iota.milk.SourceType;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.config.SplashConfig;
+import f.star.iota.milk.util.MediaUtils;
 
-public class DisplayAndDownloadActivity extends BaseActivity {
+public class DisplayAndDownloadActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
     @BindView(R.id.bubble_seek_bar_span_count)
     BubbleSeekBar mBubbleSeekBarSpanCount;
     @BindView(R.id.bubble_seek_bar_download_count)
@@ -38,6 +41,13 @@ public class DisplayAndDownloadActivity extends BaseActivity {
     RadioButton mRadioButtonSimpleDesktops;
     @BindView(R.id.radio_yuriimg)
     RadioButton mRadioButtonYuriimg;
+    @BindView(R.id.radio_kuvva)
+    RadioButton mRadioButtonKuvva;
+    @BindView(R.id.radio_gamersky)
+    RadioButton mRadioButtonGamersky;
+
+    @BindView(R.id.switch_compat_is_update_media)
+    SwitchCompat mSwitchCompatIsUpdateMedia;
 
     @Override
     protected void init() {
@@ -104,35 +114,20 @@ public class DisplayAndDownloadActivity extends BaseActivity {
             case SourceType.YURIIMG:
                 mRadioButtonYuriimg.setChecked(true);
                 break;
+            case SourceType.KUVVA:
+                mRadioButtonKuvva.setChecked(true);
+                break;
+            case SourceType.GAMERSKY:
+                mRadioButtonGamersky.setChecked(true);
+                break;
         }
-        mRadioGroupBannerSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
-                switch (id) {
-                    case R.id.radio_apic:
-                        SplashConfig.saveSplashSource(mContext, SourceType.APIC);
-                        break;
-                    case R.id.radio_moeimg:
-                        SplashConfig.saveSplashSource(mContext, SourceType.MOEIMG);
-                        break;
-                    case R.id.radio_bing:
-                        SplashConfig.saveSplashSource(mContext, SourceType.BING);
-                        break;
-                    case R.id.radio_gank:
-                        SplashConfig.saveSplashSource(mContext, SourceType.GANK);
-                        break;
-                    case R.id.radio_wallhaven:
-                        SplashConfig.saveSplashSource(mContext, SourceType.WALLHAVEN);
-                        break;
-                    case R.id.radio_simple_desktops:
-                        SplashConfig.saveSplashSource(mContext, SourceType.SIMPLEDESKTOPS);
-                        break;
-                    case R.id.radio_yuriimg:
-                        SplashConfig.saveSplashSource(mContext, SourceType.YURIIMG);
-                        break;
-                }
-            }
-        });
+        if (MediaUtils.hasNomediaFile()) {
+            mSwitchCompatIsUpdateMedia.setChecked(false);
+        } else {
+            mSwitchCompatIsUpdateMedia.setChecked(true);
+        }
+        mSwitchCompatIsUpdateMedia.setOnCheckedChangeListener(this);
+        mRadioGroupBannerSource.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -140,4 +135,41 @@ public class DisplayAndDownloadActivity extends BaseActivity {
         return R.layout.activity_setting_display_download;
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+        MediaUtils.deleteOrCreateNomediaFile(checked);
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+        switch (i) {
+            case R.id.radio_apic:
+                SplashConfig.saveSplashSource(mContext, SourceType.APIC);
+                break;
+            case R.id.radio_moeimg:
+                SplashConfig.saveSplashSource(mContext, SourceType.MOEIMG);
+                break;
+            case R.id.radio_bing:
+                SplashConfig.saveSplashSource(mContext, SourceType.BING);
+                break;
+            case R.id.radio_gank:
+                SplashConfig.saveSplashSource(mContext, SourceType.GANK);
+                break;
+            case R.id.radio_wallhaven:
+                SplashConfig.saveSplashSource(mContext, SourceType.WALLHAVEN);
+                break;
+            case R.id.radio_simple_desktops:
+                SplashConfig.saveSplashSource(mContext, SourceType.SIMPLEDESKTOPS);
+                break;
+            case R.id.radio_yuriimg:
+                SplashConfig.saveSplashSource(mContext, SourceType.YURIIMG);
+                break;
+            case R.id.radio_kuvva:
+                SplashConfig.saveSplashSource(mContext, SourceType.KUVVA);
+                break;
+            case R.id.radio_gamersky:
+                SplashConfig.saveSplashSource(mContext, SourceType.GAMERSKY);
+                break;
+        }
+    }
 }

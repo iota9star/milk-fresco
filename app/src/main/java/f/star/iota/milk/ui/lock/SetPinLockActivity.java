@@ -12,7 +12,7 @@ import butterknife.OnClick;
 import f.star.iota.milk.LockType;
 import f.star.iota.milk.R;
 import f.star.iota.milk.base.BaseActivity;
-import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.config.SecurityConfig;
 import f.star.iota.milk.util.MessageBar;
 
 
@@ -50,8 +50,8 @@ public class SetPinLockActivity extends BaseActivity {
                     mButtonRight.setVisibility(View.GONE);
                     mButtonLeft.setText(R.string.wait_inut);
                 } else if (mStep == STEP_TWO) {
-                    OtherConfig.savePin(aContext, mPinCode);
-                    OtherConfig.setLock(aContext, LockType.PIN);
+                    SecurityConfig.savePin(aContext, mPinCode);
+                    SecurityConfig.setLock(aContext, LockType.PIN);
                     finish();
                 }
                 break;
