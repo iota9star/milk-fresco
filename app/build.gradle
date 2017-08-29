@@ -7,8 +7,8 @@ android {
         applicationId 'f.star.iota.milk'
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 23
-        versionName "alpha-23"
+        versionCode 24
+        versionName "alpha-24"
         resConfigs "zh"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

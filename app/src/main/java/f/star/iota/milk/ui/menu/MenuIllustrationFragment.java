@@ -217,13 +217,13 @@ public class MenuIllustrationFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_ARTSTATION_ID,
                 Menus.MENU_ARTSTATION,
                 Net.ARTSTATION_BASE,
-                "https://www.artstation.com/assets/logo@2x-00d3f09a1f4ada085fe7e8c9be1e40ae.png",
+                "https://cdnb.artstation.com/p/assets/images/images/006/971/975/20170814045007/smaller_square/in-shoo-copy.jpg?1502704207",
                 null
         ));
         menu.add(new MenuBean(Menus.MENU_GACHA_ID,
                 Menus.MENU_GACHA,
                 Net.GACHA_BASE,
-                "http://gacha.cdn.126.net/src/image/all/logo.png",
+                "http://gacha.nosdn.127.net/71bb10f890de40b7aaa63504a121283c.jpeg?imageView&type=jpg&enlarge=1&quality=100&axis=0&thumbnail=0x400",
                 null
         ));
         menu.add(new MenuBean(Menus.MENU_BCY_ILLUST_SELECTED_ID,
@@ -334,7 +334,7 @@ public class MenuIllustrationFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_ANIME_PICTURES_ID,
                 Menus.MENU_ANIME_PICTURES,
                 Net.ANIME_PICTURES_BASE,
-                "https://anime-pictures.net/static/styles/first/images/back_patern.png",
+                "https://cdn.anime-pictures.net/jvwall_images/f07/f0797c9f86fbcd9abebf395b8b777da7_cp.jpg.webp",
                 Net.ANIME_PICTURES_LOGIN
         ));
         return menu;

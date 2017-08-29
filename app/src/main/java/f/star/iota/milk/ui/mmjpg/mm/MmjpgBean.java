@@ -1,23 +1,19 @@
-package f.star.iota.milk.ui.moeimg.moe;
+package f.star.iota.milk.ui.mmjpg.mm;
 
 
 import f.star.iota.milk.base.BaseBean;
 
-class MoeimgBean extends BaseBean {
+class MmjpgBean extends BaseBean {
     private String preview;
     private String url;
     private String description;
     private String date;
 
-    public MoeimgBean() {
+    MmjpgBean() {
     }
 
     public String getPreview() {
-        if (preview.contains("img.moeimg.net")) {
-            return preview.replace("http:", "https:");
-        } else {
-            return preview;
-        }
+        return preview;
     }
 
     public void setPreview(String preview) {

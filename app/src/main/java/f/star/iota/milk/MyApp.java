@@ -5,8 +5,12 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.disk.NoOpDiskTrimmableRegistry;
@@ -25,6 +29,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.DBCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
+import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okserver.OkDownload;
 import com.nightfarmer.themer.Themer;
@@ -38,10 +43,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.config.ThemeConfig;
 import f.star.iota.milk.fresco.MyOkHttpNetworkFetcher;
+import f.star.iota.milk.ui.main.MainActivity;
 import f.star.iota.milk.util.FileUtils;
 import okhttp3.OkHttpClient;
 
@@ -73,12 +80,14 @@ public class MyApp extends Application {
         });
     }
 
+    private final long[] mIntervalException = new long[2];
+
     private static OkHttpClient makeOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
-//        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
-//        loggingInterceptor.setColorLevel(Level.INFO);
-//        builder.addInterceptor(loggingInterceptor);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
+        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+        loggingInterceptor.setColorLevel(Level.INFO);
+        builder.addInterceptor(loggingInterceptor);
         builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
@@ -111,6 +120,41 @@ public class MyApp extends Application {
         addCount();
         initOkGo();
         initFresco();
+        Crash.setExceptionHandler(new Crash.ExceptionHandler() {
+            @Override
+            public void handleException(final Thread thread, final Throwable throwable) {
+                System.arraycopy(mIntervalException, 1, mIntervalException, 0, mIntervalException.length - 1);
+                mIntervalException[mIntervalException.length - 1] = SystemClock.uptimeMillis();
+                if (SystemClock.uptimeMillis() - mIntervalException[0] <= 1000) {
+                    return;
+                }
+                if (throwable != null) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                FileUtils.saveCrashLog(thread, throwable);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Looper.prepare();
+                            Toast.makeText(mContext, "很抱歉,程序出现异常,正在收集日志,若长时间无响应，请强制退出", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(mContext, MainActivity.class));
+                            Looper.loop();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
     }
 
     private void initFresco() {

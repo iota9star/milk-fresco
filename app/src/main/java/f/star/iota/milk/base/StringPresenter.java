@@ -4,6 +4,7 @@ package f.star.iota.milk.base;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 import com.lzy.okrx2.adapter.ObservableResponse;
 
 import java.util.HashMap;
@@ -38,8 +39,10 @@ public abstract class StringPresenter<T> implements PVContract.Presenter {
     public void get(String url) {
         url = dealUrl(url);
         final String finalUrl = url;
+        GetRequest<String> stringGetRequest = OkGo.<String>get(url);
+        addHeaders(stringGetRequest);
         mCompositeDisposable.add(
-                OkGo.<String>get(url)
+                stringGetRequest
                         .converter(new StringConvert())
                         .adapt(new ObservableResponse<String>())
                         .subscribeOn(Schedulers.io()).observeOn(Schedulers.computation())
@@ -84,6 +87,10 @@ public abstract class StringPresenter<T> implements PVContract.Presenter {
                             }
                         })
         );
+    }
+
+    protected void addHeaders(GetRequest<String> request) {
+
     }
 
     protected String dealUrl(String url) {

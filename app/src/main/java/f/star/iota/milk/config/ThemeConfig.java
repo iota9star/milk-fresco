@@ -9,7 +9,7 @@ import f.star.iota.milk.R;
 public class ThemeConfig {
     public static int getTheme(Context context) {
         SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        return sp.getInt("theme", R.style.ThemeLime);
+        return sp.getInt("theme", R.style.ThemeLightBlue);
     }
 
     public static void saveTheme(Context context, int theme) {

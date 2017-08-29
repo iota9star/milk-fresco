@@ -260,4 +260,11 @@ public class Net {
     public static final String MAGDELEINE = "https://magdeleine.co/browse/page/";
     public static final String MAGDELEINE_BASE = "https://magdeleine.co";
 
+
+    public static final String ALPHACODERS = "https://wall.alphacoders.com/newest_wallpapers.php?page=";
+    public static final String ALPHACODERS_BASE = "https://wall.alphacoders.com";
+
+    public static final String MMJPG = "http://www.mmjpg.com/home/";
+    public static final String MMJPG_BASE = "http://www.mmjpg.com";
+
 }

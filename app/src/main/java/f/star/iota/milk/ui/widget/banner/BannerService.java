@@ -1,4 +1,4 @@
-package f.star.iota.milk.ui.widget.juzi;
+package f.star.iota.milk.ui.widget.banner;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -30,9 +30,6 @@ import java.util.TimerTask;
 
 import f.star.iota.milk.R;
 import f.star.iota.milk.config.WidgetConfig;
-import f.star.iota.milk.ui.main.JuZiBean;
-import f.star.iota.milk.ui.widget.banner.BannerContract;
-import f.star.iota.milk.ui.widget.banner.BannerPresenter;
 import f.star.iota.milk.util.FastBlur;
 import f.star.iota.milk.util.FileUtils;
 import f.star.iota.milk.util.NetUtils;
@@ -42,20 +39,17 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class JuZiService extends Service implements JuZiContract.View, BannerContract.View {
+public class BannerService extends Service implements BannerContract.View {
 
-    private static final String ACTION_REFRESH = "star.iota.widget.juzi.refresh";
-    private JuZiPresenter mJuziJuZiPresenter;
+    private static final String ACTION_REFRESH = "star.iota.widget.banner.refresh";
     private BannerPresenter mBannerPresenter;
     private Timer mTimer;
-    private boolean juziIsRunning = false;
     private boolean bannerIsRunning = false;
     private Context mContext;
     private final TimerTask mTask = new TimerTask() {
         @Override
         public void run() {
             if (WidgetConfig.isPauseRefresh(mContext)) return;
-            juzi();
             banner();
         }
     };
@@ -65,12 +59,6 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    private void juzi() {
-        if (juziIsRunning) return;
-        juziIsRunning = true;
-        mJuziJuZiPresenter.getJuzi();
     }
 
     private void banner() {
@@ -93,34 +81,9 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
         Context aContext = getApplicationContext();
         IntentFilter filter = new IntentFilter(ACTION_REFRESH);
         registerReceiver(mRefreshReceiver = new RefreshReceiver(), filter);
-        mJuziJuZiPresenter = new JuZiPresenter(this);
         mBannerPresenter = new BannerPresenter(this);
         mTimer = new Timer();
         mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * WidgetConfig.getJuziInterval(aContext));
-    }
-
-    @Override
-    public void getJuziSuccess(JuZiBean bean) {
-        juziIsRunning = false;
-        updateJuzi(bean);
-    }
-
-    private void updateJuzi(JuZiBean bean) {
-        try {
-            if (bean.getHitokoto() == null || bean.getHitokoto().length() < 3) return;
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_juzi_with_banner);
-            views.setTextViewText(R.id.text_view_juzi_content, bean.getHitokoto());
-            views.setTextViewText(R.id.text_view_juzi_source, bean.getSource());
-            Intent intent = new Intent(ACTION_REFRESH);
-            PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
-            ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
-            appWidgetManager.updateAppWidget(componentName, views);
-            startService(new Intent(mContext, JuZiService.class));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -149,7 +112,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
                                                          WallpaperManager manager = WallpaperManager.getInstance(mContext);
                                                          manager.setBitmap(bitmap);
                                                      }
-                                                     if (WidgetConfig.isBlurWidgetBanner(mContext) || WidgetConfig.isBlurWallpaper(mContext)) {
+                                                     if (WidgetConfig.isBlurWallpaper(mContext)) {
                                                          Observable.just(FastBlur.doBlur(bitmap, WidgetConfig.getWidgetBlurValue(mContext), false))
                                                                  .subscribeOn(Schedulers.computation())
                                                                  .observeOn(AndroidSchedulers.mainThread())
@@ -157,12 +120,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
                                                                      @Override
                                                                      public void accept(Bitmap bitmap) throws Exception {
                                                                          if (bitmap == null) return;
-                                                                         if (WidgetConfig.isBlurWidgetBanner(mContext)) {
-                                                                             updateBackground(bitmap);
-                                                                         } else {
-                                                                             updateBackground(null);
-                                                                         }
-                                                                         if (WidgetConfig.isBlurWallpaper(mContext) && WidgetConfig.isSetWallpaper(mContext)) {
+                                                                         if (WidgetConfig.isSetWallpaper(mContext)) {
                                                                              WallpaperManager manager = WallpaperManager.getInstance(mContext);
                                                                              manager.setBitmap(bitmap);
                                                                          }
@@ -172,8 +130,6 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
                                                                      public void accept(Throwable throwable) throws Exception {
                                                                      }
                                                                  });
-                                                     } else {
-                                                         updateBackground(null);
                                                      }
                                                  } catch (Exception e) {
                                                      e.printStackTrace();
@@ -214,30 +170,14 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
         try {
             if (resource == null) return;
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_juzi_with_banner);
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_with_banner);
             views.setImageViewBitmap(R.id.image_view_banner, resource);
             Intent intent = new Intent(ACTION_REFRESH);
             PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
-            ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
+            views.setOnClickPendingIntent(R.id.frame_layout_banner_container, refresh);
+            ComponentName componentName = new ComponentName(mContext, BannerWidgetProvider.class);
             appWidgetManager.updateAppWidget(componentName, views);
-            startService(new Intent(mContext, JuZiService.class));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void updateBackground(Bitmap blur) {
-        try {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_juzi_with_banner);
-            views.setImageViewBitmap(R.id.image_view_background, blur);
-            Intent intent = new Intent(ACTION_REFRESH);
-            PendingIntent refresh = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.frame_layout_juzi_container, refresh);
-            ComponentName componentName = new ComponentName(mContext, JuZiWidgetProvider.class);
-            appWidgetManager.updateAppWidget(componentName, views);
-            startService(new Intent(mContext, JuZiService.class));
+            startService(new Intent(mContext, BannerService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -251,9 +191,6 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mJuziJuZiPresenter != null) {
-            mJuziJuZiPresenter.unsubscribe();
-        }
         if (mBannerPresenter != null) {
             mBannerPresenter.unsubscribe();
         }
@@ -262,7 +199,7 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
             mTimer = null;
         }
         unregisterReceiver(mRefreshReceiver);
-        startService(new Intent(mContext, JuZiService.class));
+        startService(new Intent(mContext, BannerService.class));
     }
 
     @Override
@@ -275,7 +212,6 @@ public class JuZiService extends Service implements JuZiContract.View, BannerCon
         public void onReceive(Context context, Intent intent) {
             if (WidgetConfig.isPauseRefresh(mContext)) return;
             if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
-                juzi();
                 banner();
             }
         }

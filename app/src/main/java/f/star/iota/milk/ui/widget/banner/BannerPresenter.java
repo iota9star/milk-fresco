@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -465,6 +466,12 @@ public class BannerPresenter implements BannerContract.Presenter {
                                 for (Element element : select) {
                                     String url = element.attr("src").replace("!origin", "");
                                     list.add(url);
+                                }
+                                Iterator<String> iterator = list.iterator();
+                                while (iterator.hasNext()) {
+                                    if (iterator.next().contains("Aqutips.png")) {
+                                        iterator.remove();
+                                    }
                                 }
                                 return list.get((int) (Math.random() * list.size()));
                             }

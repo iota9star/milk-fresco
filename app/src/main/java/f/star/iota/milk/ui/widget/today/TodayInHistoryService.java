@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.common.references.CloseableReference;
@@ -179,7 +178,6 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
                                                                  }, new Consumer<Throwable>() {
                                                                      @Override
                                                                      public void accept(Throwable throwable) throws Exception {
-                                                                         Toast.makeText(mContext, "发生错误：" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                                                                      }
                                                                  });
                                                      }

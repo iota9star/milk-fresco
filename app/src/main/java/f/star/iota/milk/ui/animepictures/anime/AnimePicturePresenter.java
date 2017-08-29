@@ -26,7 +26,7 @@ public class AnimePicturePresenter extends StringPresenter<List<AnimePictureBean
         Elements select = Jsoup.parse(s).select("#posts > div.posts_block > span.img_block_big");
         for (Element element : select) {
             AnimePictureBean bean = new AnimePictureBean();
-            String preview = element.select("a > picture > source").attr("srcset");
+            String preview = "https:" + element.select("a > picture > source").attr("srcset");
             bean.setPreview(preview);
             String url = Net.ANIME_PICTURES_BASE + element.select("a").attr("href");
             bean.setUrl(url);

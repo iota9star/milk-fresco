@@ -24,6 +24,7 @@ public class PicturesPresenter extends StringPresenter<List<PicturesBean>> {
     protected List<PicturesBean> dealResponse(String s, HashMap<String, String> headers) {
         List<PicturesBean> list = new ArrayList<>();
         Element select = Jsoup.parse(s).select("#rating > a.download_icon").first();
+        if (select == null) return list;
         PicturesBean bean = new PicturesBean();
         String url = Net.ANIME_PICTURES_BASE + select.attr("href");
         bean.setUrl(url);

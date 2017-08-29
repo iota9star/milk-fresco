@@ -8,6 +8,7 @@ import f.star.iota.milk.Menus;
 import f.star.iota.milk.Net;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
+import f.star.iota.milk.ui.alphacoders.AlphaCodersFragment;
 import f.star.iota.milk.ui.bilibili.BilibiliFragment;
 import f.star.iota.milk.ui.bing.BingFragment;
 import f.star.iota.milk.ui.gamersky.gamer.GamerSkyFragment;
@@ -61,6 +62,10 @@ public class MenuWallpaperFragment extends MenuFragment {
                 currentFragment = GamerSkyFragment.newInstance(Net.GAMERSKY_BZ);
                 activity.setTitle(Menus.MENU_GAMERSKY);
                 break;
+            case Menus.MENU_ALPHACODERS_ID:
+                currentFragment = AlphaCodersFragment.newInstance(Net.ALPHACODERS);
+                activity.setTitle(Menus.MENU_ALPHACODERS);
+                break;
         }
         activity.removeFragmentContainerChildrenViews();
         activity.showFragment(currentFragment);
@@ -72,7 +77,7 @@ public class MenuWallpaperFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_BING_ID,
                 Menus.MENU_BING,
                 Net.BING_BASE,
-                "http://cn.bing.com/s/a/hp_zh_cn.png",
+                "https://cn.bing.com/az/hprichbg/rb/BatEaredFox_ZH-CN12456670113_1920x1080.jpg",
                 null));
         menu.add(new MenuBean(Menus.MENU_SIMPLEDESKTOPS_ID,
                 Menus.MENU_SIMPLEDESKTOPS,
@@ -120,6 +125,12 @@ public class MenuWallpaperFragment extends MenuFragment {
                 Menus.MENU_GAMERSKY,
                 Net.GAMERSKY_BASE,
                 "http://image.gamersky.com/webimg15/logo.png",
+                null
+        ));
+        menu.add(new MenuBean(Menus.MENU_ALPHACODERS_ID,
+                Menus.MENU_ALPHACODERS,
+                Net.ALPHACODERS_BASE,
+                "https://images4.alphacoders.com/867/thumb-350-867570.png",
                 null
         ));
         return menu;

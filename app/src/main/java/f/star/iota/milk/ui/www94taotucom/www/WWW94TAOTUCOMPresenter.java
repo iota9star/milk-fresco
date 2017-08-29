@@ -34,7 +34,7 @@ public class WWW94TAOTUCOMPresenter extends StringPresenter<List<WWW94TAOTUCOMBe
         Elements select = Jsoup.parse(s).select("#bodywrap > table > tbody > tr > td > div > div > div.gallary_wrap > div.gallary_item_album > div.item > div.pic_box");
         for (Element element : select) {
             WWW94TAOTUCOMBean bean = new WWW94TAOTUCOMBean();
-            String preview = element.select("table > tbody > tr > td > a > img").attr("src");
+            String preview = element.select("table > tbody > tr > td > a > img").attr("data-original");
             bean.setPreview(preview);
             String url = Net.WWW94TAOTUCOM_BASE + element.select("table > tbody > tr > td > a").attr("href");
             bean.setUrl(url);

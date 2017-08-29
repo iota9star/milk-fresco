@@ -35,7 +35,7 @@
                 android:shadowDy="2"
                 android:shadowRadius="5"
                 android:text="@string/you_are_good"
-                android:textColor="#c4606060"
+                android:textColor="#c4303030"
                 android:textSize="@dimen/v18sp"
                 android:textStyle="bold" />
 
@@ -48,31 +48,56 @@
                 tools:ignore="ContentDescription" />
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/text_view_history"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/v4dp"
-            android:shadowColor="#80242424"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="5"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/v12sp"
-            android:textStyle="bold" />
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_view_today"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/v4dp"
-            android:gravity="end"
-            android:shadowColor="#80242424"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="5"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/v10sp"
-            android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/v128dp"
+                android:layout_marginEnd="-80dp"
+                android:layout_marginStart="-80dp"
+                android:layout_marginTop="-98dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_shadow"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-24dp"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_view_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:shadowColor="#80242424"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="5"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="@dimen/v12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_view_today"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/v4dp"
+                    android:gravity="center"
+                    android:shadowColor="#80242424"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="5"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="@dimen/v10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

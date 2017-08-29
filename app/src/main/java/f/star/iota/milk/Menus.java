@@ -190,4 +190,9 @@ public interface Menus {
     String MENU_MAGDELEINE = "MAGDELEINE";
     int MENU_MAGDELEINE_ID = 64;
 
+    String MENU_ALPHACODERS = "ALPHACODERS";
+    int MENU_ALPHACODERS_ID = 65;
+
+    String MENU_MMJPG = "MMJPG";
+    int MENU_MMJPG_ID = 66;
 }

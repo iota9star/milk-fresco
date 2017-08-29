@@ -10,7 +10,11 @@ class ImgBean extends BaseBean {
     }
 
     public String getUrl() {
-        return url;
+        if (url.contains("img.moeimg.net")) {
+            return url.replace("http:", "https:");
+        } else {
+            return url;
+        }
     }
 
     public void setUrl(String url) {

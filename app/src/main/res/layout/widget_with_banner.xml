@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout_banner_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:clickable="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/v8dp"
+        android:shadowColor="#80242424"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:text="@string/you_are_good"
+        android:textColor="#c4303030"
+        android:textSize="@dimen/v18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/image_view_banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80c4c4c4"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
+</FrameLayout>

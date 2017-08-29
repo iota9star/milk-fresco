@@ -21,6 +21,7 @@ import f.star.iota.milk.ui.lesmao.les.LesmaoFragment;
 import f.star.iota.milk.ui.magmoe.mag.MagPagerFragment;
 import f.star.iota.milk.ui.meimeizi.mei.MeiMeiZiFragment;
 import f.star.iota.milk.ui.miaowu.miao.MiaoWuPagerFragment;
+import f.star.iota.milk.ui.mmjpg.mm.MmjpgFragment;
 import f.star.iota.milk.ui.mmonly.mm.MMONLYFragment;
 import f.star.iota.milk.ui.moe005tv.moe.MOE005TVPagerFragment;
 import f.star.iota.milk.ui.mzitu.mzi.MZITUFragment;
@@ -144,6 +145,10 @@ public class MenuMeiziFragment extends MenuFragment {
                 currentFragment = GravureGirlZFragment.newInstance(Net.GRAVUREGIRLZ);
                 activity.setTitle(Menus.MENU_GRAVUREGIRLZ);
                 break;
+            case Menus.MENU_MMJPG_ID:
+                currentFragment = MmjpgFragment.newInstance(Net.MMJPG);
+                activity.setTitle(Menus.MENU_MMJPG);
+                break;
         }
         activity.removeFragmentContainerChildrenViews();
         activity.showFragment(currentFragment);
@@ -167,17 +172,17 @@ public class MenuMeiziFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_ACG_GAMERSKY_COS_ID, Menus.MENU_ACG_GAMERSKY,
                 Net.GAMERSKY_BASE, "http://image.gamersky.com/webimg13/acg/new/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_GANK_ID, Menus.MENU_GANK,
-                Net.GANK_BASE, "http://gank.io/static/favicon.ico", null));
+                Net.GANK_BASE, "https://ws1.sinaimg.cn/large/610dc034ly1fiiiyfcjdoj20u00u0ju0.jpg", null));
         menu.add(new MenuBean(Menus.MENU_TNGOU_ID, Menus.MENU_TNGOU,
-                Net.TNGOU_BASE, "http://www.tngou.net/tnfs/common/amazeui/i/favicon.png", null));
+                Net.TNGOU_BASE, "https://ws1.sinaimg.cn/large/610dc034ly1fiednrydq8j20u011itfz.jpg", null));
         menu.add(new MenuBean(Menus.MENU_JDLINGYU_MEIZHI_ID, Menus.MENU_JDLINGYU,
                 Net.JDLINGYU_BASE, "http://www.jdlingyu.moe/wp-content/uploads/2017/01/2017-01-07_20-57-14.png", null));
         menu.add(new MenuBean(Menus.MENU_LESMAO_ID, Menus.MENU_LESMAO,
                 Net.LESMAO_BASE, "http://www.lesmao.com/static/image/common/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_XIUMM_ID, Menus.MENU_XIUMM,
-                Net.XIUMM_BASE, "http://www.xiumm.org/themes/sense/images/logo.png", null));
+                Net.XIUMM_BASE, "http://www.xiumm8.com/data/t/0188/86/15039196529439_album.jpg", null));
         menu.add(new MenuBean(Menus.MENU_94TAOTU_ID, Menus.MENU_94TAOTU,
-                Net.WWW94TAOTUCOM_BASE, "http://www.94taotu.com/themes/sense/images/logo.png", null));
+                Net.WWW94TAOTUCOM_BASE, "http://img.94taotu.com/data/t/0155/07/1503666691557_album.jpg", null));
         menu.add(new MenuBean(Menus.MENU_MZITU_ID, Menus.MENU_MZITU,
                 Net.MZITU_BASE, "http://i.meizitu.net/pfiles/img/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_MMONLY_ID, Menus.MENU_MMONLY,
@@ -193,11 +198,13 @@ public class MenuMeiziFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_MEIMEIZI_ID, Menus.MENU_MZITU,
                 Net.MEIMEIZI + 1, "http://www.meimeizi.com/wp-content/themes/Loostrive/images/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_YOUWU_ID, Menus.MENU_YOUWU,
-                Net.YOUWU_BASE, "http://www.youwu.cc/templets/images/logo.png", null));
+                Net.YOUWU_BASE, "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", null));
         menu.add(new MenuBean(Menus.MENU_TAOTUTT_ID, Menus.MENU_TAOTUTT,
                 Net.TAOTUTT_BASE, "http://taotutt.com/wp-content/themes/cx-udy/images/logo.png", null));
         menu.add(new MenuBean(Menus.MENU_UMEI_ID, Menus.MENU_UMEI,
                 Net.UMEI, "http://www.umei.cc/images/logo4.png", null));
+        menu.add(new MenuBean(Menus.MENU_MMJPG_ID, Menus.MENU_MMJPG,
+                Net.MMJPG_BASE, "http://img.mmjpg.com/2015/295/1.jpg", null));
         if (!OtherConfig.getR(aContext)) {
             menu.add(new MenuBean(Menus.MENU_XIUREN_ID, Menus.MENU_XIUREN,
                     Net.XIUREN_BASE, "http://www.xiuren.org/logo.png", null));

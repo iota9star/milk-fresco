@@ -51,7 +51,9 @@ class DonmaiBean extends BaseBean {
     }
 
     public String getUrl() {
-        return url;
+        if (url.contains("https:")) return url;
+        else if (url.contains("http:")) return url.replace("http:", "https:");
+        else return "https:" + url;
     }
 
     public void setUrl(String url) {
@@ -59,7 +61,9 @@ class DonmaiBean extends BaseBean {
     }
 
     public String getPreview() {
-        return preview;
+        if (preview.contains("https:")) return preview;
+        else if (preview.contains("http:")) return preview.replace("http:", "https:");
+        else return "https:" + preview;
     }
 
     public void setPreview(String preview) {

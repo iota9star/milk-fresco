@@ -17,7 +17,7 @@
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon"
-        android:theme="@style/ThemeLime">
+        android:theme="@style/ThemeLightBlue">
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,6 +51,16 @@
         </provider>
 
         <receiver
+            android:name=".ui.widget.banner.BannerWidgetProvider"
+            android:label="@string/pic">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/provider_banner" />
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
+        <receiver
             android:name=".ui.widget.today.TodayInHistoryWidgetProvider"
             android:label="@string/today_in_history">
             <meta-data
@@ -73,6 +83,7 @@
 
         <service android:name=".ui.widget.today.TodayInHistoryService" />
         <service android:name=".ui.widget.juzi.JuZiService" />
+        <service android:name=".ui.widget.banner.BannerService" />
 
         <activity android:name=".ui.more.MoreActivity" />
         <activity
@@ -91,5 +102,4 @@
         <activity android:name=".ui.lock.SetPinLockActivity" />
         <activity android:name=".ui.lock.PinLockActivity" />
     </application>
-
 </manifest>
