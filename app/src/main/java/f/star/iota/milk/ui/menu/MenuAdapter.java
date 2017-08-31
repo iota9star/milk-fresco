@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.lb.auto_fit_textview.AutoResizeTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void onBindViewHolder(final MenuViewHolder holder, int position) {
         final MenuBean bean = mList.get(position);
         holder.mButtonIndex.setText(String.valueOf(position + 1));
-        holder.mAutoFitTextViewName.setText(bean.getName());
+        holder.mButtonName.setText(bean.getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,11 +53,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 }
             }
         });
-        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.mButtonName.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                holder.showPopUpWindow();
-                return false;
+            public void onClick(View view) {
+                holder.showPopUpWindow(holder.mCardView);
             }
         });
         if (bean.getBanner() != null) {
@@ -89,8 +87,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         SimpleDraweeView mSimpleDraweeView;
         @BindView(R.id.card_view)
         CardView mCardView;
-        @BindView(R.id.auto_fit_text_view_name)
-        AutoResizeTextView mAutoFitTextViewName;
+        @BindView(R.id.button_name)
+        Button mButtonName;
         @BindView(R.id.button_index)
         Button mButtonIndex;
 
@@ -100,7 +98,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             ButterKnife.bind(this, itemView);
         }
 
-        private void showPopUpWindow() {
+        private void showPopUpWindow(View view) {
             final MenuBean bean = mList.get(getAdapterPosition());
             String[] menus;
             if (bean.getLoginUrl() != null && bean.getLoginUrl().length() > 5) {
@@ -124,7 +122,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 }
             });
             listPopupWindow.setWidth((int) mContext.getResources().getDimension(R.dimen.v72dp));
-            listPopupWindow.setAnchorView(mCardView);
+            listPopupWindow.setAnchorView(view);
             listPopupWindow.setModal(true);
             listPopupWindow.show();
         }
