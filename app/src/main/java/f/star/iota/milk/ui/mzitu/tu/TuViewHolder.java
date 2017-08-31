@@ -37,8 +37,9 @@ public class TuViewHolder extends BaseViewHolder<TuBean> {
     @Override
     public void bindView(final List<TuBean> beans) {
         final TuBean bean = beans.get(getAdapterPosition());
-        HashMap<String, String> headers = bean.getHeaders();
+        final HashMap<String, String> headers = bean.getHeaders();
         headers.put("Host", "i.meizitu.net");
+        beans.get(getAdapterPosition()).setHeaders(headers);
         FrescoLoader.load(mSimpleDraweeView, bean.getUrl(), headers);
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -61,7 +62,7 @@ public class TuViewHolder extends BaseViewHolder<TuBean> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 download(bean.getUrl(), bean.getUrl(),
-                                        Menus.MENU_MZITU, null);
+                                        Menus.MENU_MZITU, headers);
                             }
                         })
                         .show();
@@ -93,7 +94,7 @@ public class TuViewHolder extends BaseViewHolder<TuBean> {
         List<PCBean> imgs = new ArrayList<>();
         for (TuBean bean : beans) {
             imgs.add(new PCBean(bean.getUrl(), bean.getUrl(), Menus.MENU_MZITU,
-                    "下载地址：" + bean.getUrl()));
+                    "下载地址：" + bean.getUrl(), bean.getHeaders()));
         }
         return imgs;
     }

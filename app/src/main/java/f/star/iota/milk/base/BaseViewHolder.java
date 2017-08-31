@@ -26,7 +26,6 @@ import com.lzy.okserver.OkDownload;
 import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -61,20 +60,8 @@ public abstract class BaseViewHolder<B extends BaseBean> extends RecyclerView.Vi
     public void bindView(B bean) {
     }
 
-    protected List<PCBean> getProcessingCompletedBeans(List<B> beans, HashMap<String, String> headers) {
-        return null;
-    }
-
     protected List<PCBean> getProcessingCompletedBeans(List<B> beans) {
-        return getProcessingCompletedBeans(beans, null);
-    }
-
-    protected List<PCBean> getProcessingCompletedBeans(B beans, HashMap<String, String> headers) {
         return null;
-    }
-
-    protected List<PCBean> getProcessingCompletedBeans(B beans) {
-        return getProcessingCompletedBeans(beans, null);
     }
 
     protected void open(String url) {

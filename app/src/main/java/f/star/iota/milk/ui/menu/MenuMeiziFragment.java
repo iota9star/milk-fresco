@@ -15,6 +15,7 @@ import f.star.iota.milk.ui.chinagirlol.china.ChinaGirlOLPagerFragment;
 import f.star.iota.milk.ui.cosplayla.cosplay.CosplayLaFragment;
 import f.star.iota.milk.ui.gamersky.gamer.GamerSkyFragment;
 import f.star.iota.milk.ui.gank.GankFragment;
+import f.star.iota.milk.ui.girlatlas.girl.GirlAtlasPagerFragment;
 import f.star.iota.milk.ui.gravuregirlz.gravure.GravureGirlZFragment;
 import f.star.iota.milk.ui.jdlingyu.jd.JDLINGYUPagerFragment;
 import f.star.iota.milk.ui.lesmao.les.LesmaoFragment;
@@ -35,6 +36,7 @@ import f.star.iota.milk.ui.www94taotucom.www.WWW94TAOTUCOMFragment;
 import f.star.iota.milk.ui.xiumm.xiu.XIUMMFragment;
 import f.star.iota.milk.ui.xiuren.xiu.XiuRenFragment;
 import f.star.iota.milk.ui.youwu.you.YouWuPagerFragment;
+import f.star.iota.milk.ui.zdt8.zd.ZDT8Fragment;
 
 public class MenuMeiziFragment extends MenuFragment {
     @Override
@@ -149,6 +151,14 @@ public class MenuMeiziFragment extends MenuFragment {
                 currentFragment = MmjpgFragment.newInstance(Net.MMJPG);
                 activity.setTitle(Menus.MENU_MMJPG);
                 break;
+            case Menus.MENU_GIRL_ATLAS_ID:
+                currentFragment = new GirlAtlasPagerFragment();
+                activity.setTitle(Menus.MENU_GIRL_ATLAS);
+                break;
+            case Menus.MENU_ZDT8_ID:
+                currentFragment = ZDT8Fragment.newInstance(Net.ZDT8);
+                activity.setTitle(Menus.MENU_ZDT8);
+                break;
         }
         activity.removeFragmentContainerChildrenViews();
         activity.showFragment(currentFragment);
@@ -184,7 +194,7 @@ public class MenuMeiziFragment extends MenuFragment {
         menu.add(new MenuBean(Menus.MENU_94TAOTU_ID, Menus.MENU_94TAOTU,
                 Net.WWW94TAOTUCOM_BASE, "http://img.94taotu.com/data/t/0155/07/1503666691557_album.jpg", null));
         menu.add(new MenuBean(Menus.MENU_MZITU_ID, Menus.MENU_MZITU,
-                Net.MZITU_BASE, "http://i.meizitu.net/pfiles/img/logo.png", null));
+                Net.MZITU_BASE, "https://ws1.sinaimg.cn/large/610dc034gy1fi678xgq1ij20pa0vlgo4.jpg", null));
         menu.add(new MenuBean(Menus.MENU_MMONLY_ID, Menus.MENU_MMONLY,
                 Net.MMONLY_BASE, "http://www.mmonly.cc/skins/images/mmonly1.png", null));
         menu.add(new MenuBean(Menus.MENU_ROSIYY_ID, Menus.MENU_ROSIYY,
@@ -205,6 +215,10 @@ public class MenuMeiziFragment extends MenuFragment {
                 Net.UMEI, "http://www.umei.cc/images/logo4.png", null));
         menu.add(new MenuBean(Menus.MENU_MMJPG_ID, Menus.MENU_MMJPG,
                 Net.MMJPG_BASE, "http://img.mmjpg.com/2015/295/1.jpg", null));
+        menu.add(new MenuBean(Menus.MENU_GIRL_ATLAS_ID, Menus.MENU_GIRL_ATLAS,
+                Net.GIRL_ATLAS_BASE, "https://girlatlasfile.b0.upaiyun.com/static/img/logo@2x.png", null));
+        menu.add(new MenuBean(Menus.MENU_ZDT8_ID, Menus.MENU_ZDT8,
+                Net.ZDT8_BASE, "http://www.zdt8.com/style/logo/logo.png", null));
         if (!OtherConfig.getR(aContext)) {
             menu.add(new MenuBean(Menus.MENU_XIUREN_ID, Menus.MENU_XIUREN,
                     Net.XIUREN_BASE, "http://www.xiuren.org/logo.png", null));

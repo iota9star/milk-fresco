@@ -48,6 +48,7 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
         headers.put("Host", "yuriimg.com");
         headers.put("Accept-Encoding", "gzip, deflate");
         headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        beans.get(getAdapterPosition()).setHeaders(headers);
         FrescoLoader.load(mSimpleDraweeView, bean.getUrl(), headers);
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -83,13 +84,13 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show(getProcessingCompletedBeans(beans, headers));
+                show(getProcessingCompletedBeans(beans));
             }
         });
         ((FloatingToolbar) ButterKnife.findById((Activity) mContext, R.id.floating_toolbar)).setClickListener(new FloatingToolbar.ItemClickListener() {
             @Override
             public void onItemClick(MenuItem menuItem) {
-                batchDownload(getProcessingCompletedBeans(beans, headers));
+                batchDownload(getProcessingCompletedBeans(beans));
             }
 
             @Override
@@ -100,12 +101,12 @@ public class YuriImgViewHolder extends BaseViewHolder<YuriImgBean> {
     }
 
     @Override
-    protected List<PCBean> getProcessingCompletedBeans(List<YuriImgBean> beans, HashMap<String, String> headers) {
+    protected List<PCBean> getProcessingCompletedBeans(List<YuriImgBean> beans) {
         List<PCBean> imgs = new ArrayList<>();
         for (YuriImgBean bean : beans) {
             imgs.add(new PCBean(bean.getUrl(), bean.getUrl(), Menus.MENU_YURIIMG,
                     "描述：" + bean.getDescription() + "\n\n" + "下载地址：" + bean.getUrl(),
-                    headers));
+                    bean.getHeaders()));
         }
         return imgs;
     }

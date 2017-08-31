@@ -1,4 +1,4 @@
-package f.star.iota.milk.ui.simpledesktops;
+package f.star.iota.milk.ui.akabe.kabe;
 
 
 import android.app.Activity;
@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.rubensousa.floatingtoolbar.FloatingToolbar;
@@ -23,25 +22,19 @@ import f.star.iota.milk.base.BaseViewHolder;
 import f.star.iota.milk.base.PCBean;
 import f.star.iota.milk.fresco.FrescoLoader;
 
-
-public class SimpleDesktopsViewHolder extends BaseViewHolder<SimpleDesktopsBean> {
-
-    @BindView(R.id.simple_drawee_view_image)
-    SimpleDraweeView mSimpleDraweeView;
-    @BindView(R.id.text_view_tag)
-    TextView mTextViewTag;
-    @BindView(R.id.text_view_description)
-    TextView mTextViewDescription;
+public class KabeViewHolder extends BaseViewHolder<KabeBean> {
     @BindView(R.id.card_view)
     CardView mCardView;
+    @BindView(R.id.simple_drawee_view_image)
+    SimpleDraweeView mSimpleDraweeView;
 
-    public SimpleDesktopsViewHolder(View itemView) {
+    public KabeViewHolder(View itemView) {
         super(itemView);
     }
 
     @Override
-    public void bindView(final List<SimpleDesktopsBean> beans) {
-        final SimpleDesktopsBean bean = beans.get(getAdapterPosition());
+    public void bindView(final List<KabeBean> beans) {
+        final KabeBean bean = beans.get(getAdapterPosition());
         FrescoLoader.load(mSimpleDraweeView, bean.getUrl());
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -64,16 +57,13 @@ public class SimpleDesktopsViewHolder extends BaseViewHolder<SimpleDesktopsBean>
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 download(bean.getUrl(), bean.getUrl(),
-                                        Menus.MENU_SIMPLEDESKTOPS, null);
+                                        Menus.MENU_A_KABE, null);
                             }
                         })
                         .show();
                 return true;
             }
         });
-
-        mTextViewTag.setText(bean.getCreator());
-        mTextViewDescription.setText(bean.getDescription());
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,13 +84,11 @@ public class SimpleDesktopsViewHolder extends BaseViewHolder<SimpleDesktopsBean>
     }
 
     @Override
-    protected List<PCBean> getProcessingCompletedBeans(List<SimpleDesktopsBean> beans) {
+    protected List<PCBean> getProcessingCompletedBeans(List<KabeBean> beans) {
         List<PCBean> imgs = new ArrayList<>();
-        for (SimpleDesktopsBean bean : beans) {
-            imgs.add(new PCBean(bean.getUrl(), bean.getPreview(), Menus.MENU_SIMPLEDESKTOPS,
-                    "创建者：" + bean.getCreator() + "\n\n" +
-                            "描述：" + bean.getDescription() + "\n\n" +
-                            "下载地址：" + bean.getUrl()));
+        for (KabeBean bean : beans) {
+            imgs.add(new PCBean(bean.getUrl(), bean.getUrl(), Menus.MENU_A_KABE,
+                    "下载地址：" + bean.getUrl()));
         }
         return imgs;
     }

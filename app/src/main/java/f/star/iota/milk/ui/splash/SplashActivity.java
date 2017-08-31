@@ -1,11 +1,13 @@
 package f.star.iota.milk.ui.splash;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -30,6 +32,8 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.liuguangqiang.cookie.OnActionClickListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;
 
@@ -43,6 +47,8 @@ import f.star.iota.milk.config.SplashConfig;
 import f.star.iota.milk.ui.lock.PinLockActivity;
 import f.star.iota.milk.ui.main.MainActivity;
 import f.star.iota.milk.util.MessageBar;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
 
@@ -63,14 +69,29 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     private SplashPresenter mPresenter;
 
     private boolean isGo = false;
+    private boolean isGranted;
+    private boolean isFinished;
+    private RxPermissions mRxPermissions;
 
     @OnClick({R.id.button_go})
     public void onClick() {
-        go();
+        if (isGranted = mRxPermissions.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            isGo = true;
+            go();
+        } else {
+            MessageBar.create(mContext, "您拒绝了写入文件的权限，将无法进入软件，是否立刻前往开启", "好的", new OnActionClickListener() {
+                @Override
+                public void onClick() {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void go() {
-        isGo = true;
         if (SecurityConfig.isLock(aContext) == LockType.PIN) {
             startActivity(new Intent(mContext, PinLockActivity.class));
         } else if (SecurityConfig.isLock(aContext) == LockType.NONE) {
@@ -86,6 +107,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     protected void init() {
+        isFinished = false;
         mPresenter = new SplashPresenter(this);
         mPresenter.getImage(SplashConfig.getSplashSource(mContext));
         TypedValue typedValue = new TypedValue();
@@ -101,6 +123,36 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .setProgressBarImage(progress)
                 .build();
         mSimpleDraweeView.setHierarchy(hierarchyBuilder);
+    }
+
+    private void checkPermission() {
+        mRxPermissions = new RxPermissions(this);
+        mRxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean granted) throws Exception {
+                        if (!granted) {
+                            MessageBar.create(mContext, "您拒绝了写入文件的权限，将无法进入软件，是否立刻前往开启", "好的", new OnActionClickListener() {
+                                @Override
+                                public void onClick() {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                    intent.setData(uri);
+                                    startActivity(intent);
+                                }
+                            });
+                        } else {
+                            isGranted = true;
+                            endSplash();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPermission();
     }
 
     private void bindPalette(Palette.Swatch swatch) {
@@ -130,23 +182,26 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 mTextViewEvent.setGravity(Gravity.CENTER);
             }
         }
+        isFinished = true;
         endSplash();
     }
 
     private void endSplash() {
-        ObjectAnimator.ofFloat(mSimpleDraweeView, "scaleX", 1f, 1.6f).setDuration(3000).start();
-        ObjectAnimator.ofFloat(mSimpleDraweeView, "scaleY", 1f, 1.6f).setDuration(3000).start();
-        mSimpleDraweeView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (isGo) return;
-                    go();
-                } catch (Exception e) {
-                    e.printStackTrace();
+        if (isGranted && isFinished) {
+            ObjectAnimator.ofFloat(mSimpleDraweeView, "scaleX", 1f, 1.6f).setDuration(3000).start();
+            ObjectAnimator.ofFloat(mSimpleDraweeView, "scaleY", 1f, 1.6f).setDuration(3000).start();
+            mSimpleDraweeView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        if (isGo) return;
+                        go();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }, 3600);
+            }, 3600);
+        }
     }
 
     @Override
@@ -206,6 +261,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     public void getError(String error) {
         MessageBar.create(mContext, error);
+        isFinished = true;
         endSplash();
     }
 

@@ -9,6 +9,7 @@ import f.star.iota.milk.Net;
 import f.star.iota.milk.base.BaseActivity;
 import f.star.iota.milk.base.BaseFragment;
 import f.star.iota.milk.config.OtherConfig;
+import f.star.iota.milk.ui.akabe.a.AKabeFragment;
 import f.star.iota.milk.ui.animepictures.anime.AnimePictureFragment;
 import f.star.iota.milk.ui.apic.a.ApicPagerFragment;
 import f.star.iota.milk.ui.artstation.art.ArtStationFragment;
@@ -158,6 +159,10 @@ public class MenuIllustrationFragment extends MenuFragment {
                 currentFragment = AnimePictureFragment.newInstance(Net.ANIME_PICTURES);
                 activity.setTitle(Menus.MENU_ANIME_PICTURES);
                 break;
+            case Menus.MENU_A_KABE_ID:
+                currentFragment = AKabeFragment.newInstance(Net.A_KABE);
+                activity.setTitle(Menus.MENU_A_KABE);
+                break;
         }
         activity.removeFragmentContainerChildrenViews();
         activity.showFragment(currentFragment);
@@ -244,20 +249,6 @@ public class MenuIllustrationFragment extends MenuFragment {
                 "http://static.mangadrawing.net/themes/shinpatsu/md.jpg",
                 Net.MANGA_DRAWING_LOGIN
         ));
-        if (!OtherConfig.getR(aContext)) {
-            menu.add(new MenuBean(Menus.MENU_MANGA_DRAWING_HENTAI_ID,
-                    Menus.MENU_MANGA_DRAWING_HENTAI,
-                    Net.MANGA_DRAWING_BASE,
-                    "http://static.mangadrawing.net/themes/shinpatsu/md.jpg",
-                    Net.MANGA_DRAWING_LOGIN
-            ));
-            menu.add(new MenuBean(Menus.MENU_NIJIERO_CH_ID,
-                    Menus.MENU_NIJIERO_CH,
-                    Net.NIJIERO_CH_BASE,
-                    "https://nijiero-ch.com/wp-content/themes/erosite-theme/images/pc/img_title.png",
-                    null
-            ));
-        }
         menu.add(new MenuBean(Menus.MENU_MAG_MOE_MOE_ID,
                 Menus.MENU_MAG_MOE,
                 Net.MAG_MOE_BASE,
@@ -337,6 +328,26 @@ public class MenuIllustrationFragment extends MenuFragment {
                 "https://cdn.anime-pictures.net/jvwall_images/f07/f0797c9f86fbcd9abebf395b8b777da7_cp.jpg.webp",
                 Net.ANIME_PICTURES_LOGIN
         ));
+        menu.add(new MenuBean(Menus.MENU_A_KABE_ID,
+                Menus.MENU_A_KABE,
+                Net.A_KABE_BASE,
+                "http://www.a-kabe.com/img/_wp/_idolmaster/1920x1080/yayoi_141008_0000.jpg",
+                null
+        ));
+        if (!OtherConfig.getR(aContext)) {
+            menu.add(new MenuBean(Menus.MENU_MANGA_DRAWING_HENTAI_ID,
+                    Menus.MENU_MANGA_DRAWING_HENTAI,
+                    Net.MANGA_DRAWING_BASE,
+                    "http://static.mangadrawing.net/themes/shinpatsu/md.jpg",
+                    Net.MANGA_DRAWING_LOGIN
+            ));
+            menu.add(new MenuBean(Menus.MENU_NIJIERO_CH_ID,
+                    Menus.MENU_NIJIERO_CH,
+                    Net.NIJIERO_CH_BASE,
+                    "https://nijiero-ch.com/wp-content/themes/erosite-theme/images/pc/img_title.png",
+                    null
+            ));
+        }
         return menu;
     }
 }

@@ -90,13 +90,14 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        Context aContext = getApplicationContext();
-        IntentFilter filter = new IntentFilter(ACTION_REFRESH);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_REFRESH);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(mRefreshReceiver = new RefreshReceiver(), filter);
         mTodayInHistoryPresenter = new TodayInHistoryPresenter(this);
         mBannerPresenter = new BannerPresenter(this);
         mTimer = new Timer();
-        mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * WidgetConfig.getTodayInHistroyInterval(aContext));
+        mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * WidgetConfig.getTodayInHistroyInterval(mContext));
     }
 
     @Override
@@ -281,8 +282,9 @@ public class TodayInHistoryService extends Service implements TodayInHistoryCont
     public class RefreshReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            startService(new Intent(mContext, TodayInHistoryService.class));
             if (WidgetConfig.isPauseRefresh(mContext)) return;
-            if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
+            if (intent != null && (intent.getAction().equals(ACTION_REFRESH) || intent.getAction().equals(Intent.ACTION_SCREEN_ON))) {
                 getToday();
                 getBanner();
             }

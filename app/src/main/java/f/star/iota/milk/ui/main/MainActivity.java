@@ -1,13 +1,11 @@
 package f.star.iota.milk.ui.main;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +25,6 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.flaviofaria.kenburnsview.KenBurnsView;
-import com.liuguangqiang.cookie.OnActionClickListener;
 import com.lzy.okgo.db.DownloadManager;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okserver.OkDownload;
@@ -37,7 +34,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -92,7 +88,6 @@ public class MainActivity extends BaseActivity implements XExecutor.OnAllTaskEnd
         create();
         initDrawer();
         initDrawerEvent();
-        checkPermission();
         isShowDonationDialog();
     }
 
@@ -113,26 +108,6 @@ public class MainActivity extends BaseActivity implements XExecutor.OnAllTaskEnd
                 donation();
             }
         }, 3600);
-    }
-
-    private void checkPermission() {
-        new RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(@NonNull Boolean granted) throws Exception {
-                        if (!granted) {
-                            MessageBar.create(mContext, "您拒绝了写入文件的权限，下载可能会出现错误，是否立刻前往开启", "好的", new OnActionClickListener() {
-                                @Override
-                                public void onClick() {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
-                                }
-                            });
-                        }
-                    }
-                });
     }
 
     private void donation() {

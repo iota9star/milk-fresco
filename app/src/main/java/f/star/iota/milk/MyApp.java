@@ -29,7 +29,6 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.DBCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
-import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okserver.OkDownload;
 import com.nightfarmer.themer.Themer;
@@ -43,7 +42,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import f.star.iota.milk.config.OtherConfig;
 import f.star.iota.milk.config.ThemeConfig;
@@ -84,10 +82,10 @@ public class MyApp extends Application {
 
     private static OkHttpClient makeOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
-        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
-        loggingInterceptor.setColorLevel(Level.INFO);
-        builder.addInterceptor(loggingInterceptor);
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
+//        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+//        loggingInterceptor.setColorLevel(Level.INFO);
+//        builder.addInterceptor(loggingInterceptor);
         builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
@@ -165,8 +163,7 @@ public class MyApp extends Application {
                 final double suggestedTrimRatio = trimType.getSuggestedTrimRatio();
                 if (MemoryTrimType.OnCloseToDalvikHeapLimit.getSuggestedTrimRatio() == suggestedTrimRatio
                         || MemoryTrimType.OnSystemLowMemoryWhileAppInBackground.getSuggestedTrimRatio() == suggestedTrimRatio
-                        || MemoryTrimType.OnSystemLowMemoryWhileAppInForeground.getSuggestedTrimRatio() == suggestedTrimRatio
-                        ) {
+                        || MemoryTrimType.OnSystemLowMemoryWhileAppInForeground.getSuggestedTrimRatio() == suggestedTrimRatio) {
                     Fresco.getImagePipeline().clearMemoryCaches();
                 }
             }

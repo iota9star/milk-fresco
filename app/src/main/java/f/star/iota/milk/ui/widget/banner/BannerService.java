@@ -78,12 +78,13 @@ public class BannerService extends Service implements BannerContract.View {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        Context aContext = getApplicationContext();
-        IntentFilter filter = new IntentFilter(ACTION_REFRESH);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_REFRESH);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(mRefreshReceiver = new RefreshReceiver(), filter);
         mBannerPresenter = new BannerPresenter(this);
         mTimer = new Timer();
-        mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * WidgetConfig.getJuziInterval(aContext));
+        mTimer.scheduleAtFixedRate(mTask, 0, 1000 * 60 * WidgetConfig.getJuziInterval(mContext));
     }
 
     @Override
@@ -210,8 +211,9 @@ public class BannerService extends Service implements BannerContract.View {
     public class RefreshReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            startService(new Intent(mContext, BannerService.class));
             if (WidgetConfig.isPauseRefresh(mContext)) return;
-            if (intent != null && intent.getAction().equals(ACTION_REFRESH)) {
+            if (intent != null && (intent.getAction().equals(ACTION_REFRESH) || intent.getAction().equals(Intent.ACTION_SCREEN_ON))) {
                 banner();
             }
         }

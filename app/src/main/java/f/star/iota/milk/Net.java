@@ -267,4 +267,14 @@ public class Net {
     public static final String MMJPG = "http://www.mmjpg.com/home/";
     public static final String MMJPG_BASE = "http://www.mmjpg.com";
 
+    public static final String GIRL_ATLAS_JH = "https://girl-atlas.net/?p=";
+    public static final String GIRL_ATLAS_ZX = "https://girl-atlas.net/index1?p=";
+    public static final String GIRL_ATLAS_BASE = "https://girl-atlas.net";
+
+    public static final String ZDT8 = "http://www.zdt8.com/listinfo-1-";
+    public static final String ZDT8_BASE = "http://www.zdt8.com";
+
+    public static final String A_KABE = "http://www.a-kabe.com/index_";
+    public static final String A_KABE_BASE = "http://www.a-kabe.com/";
+
 }

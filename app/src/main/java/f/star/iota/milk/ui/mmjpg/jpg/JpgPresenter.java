@@ -44,7 +44,7 @@ public class JpgPresenter extends StringPresenter<List<JpgBean>> {
     @Override
     protected void addHeaders(GetRequest<String> request) {
         request.headers("Host", "www.mmjpg.com");
-        request.headers("Referer", "http://127.0.0.1:8888");
+        request.headers("Referer", "http://www.mmjpg.com/home/2");
         request.headers("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
         request.headers("Proxy-Connection", "keep-alive");
         request.headers("Upgrade-Insecure-Requests", "1");

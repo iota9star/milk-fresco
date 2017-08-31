@@ -195,4 +195,13 @@ public interface Menus {
 
     String MENU_MMJPG = "MMJPG";
     int MENU_MMJPG_ID = 66;
+
+    String MENU_GIRL_ATLAS = "GIRL-ATLAS";
+    int MENU_GIRL_ATLAS_ID = 67;
+
+    String MENU_ZDT8 = "ZDT8";
+    int MENU_ZDT8_ID = 68;
+
+    String MENU_A_KABE = "A-KABE";
+    int MENU_A_KABE_ID = 69;
 }

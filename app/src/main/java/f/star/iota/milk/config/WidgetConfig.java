@@ -99,7 +99,7 @@ public class WidgetConfig {
 
     public static boolean isSetWallpaper(Context context) {
         SharedPreferences sp = context.getSharedPreferences("widget_wallpaper_config", Context.MODE_PRIVATE);
-        return sp.getBoolean("widget_wallpaper_is_set", true);
+        return sp.getBoolean("widget_wallpaper_is_set", false);
     }
 
     public static void isBlurWidgetBanner(Context context, boolean isBlur) {

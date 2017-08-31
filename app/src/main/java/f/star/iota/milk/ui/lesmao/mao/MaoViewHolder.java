@@ -39,6 +39,7 @@ public class MaoViewHolder extends BaseViewHolder<MaoBean> {
         final MaoBean bean = beans.get(getAdapterPosition());
         final HashMap<String, String> headers = bean.getHeaders();
         headers.put("Host", "v.pxyygm.com");
+        beans.get(getAdapterPosition()).setHeaders(headers);
         FrescoLoader.load(mSimpleDraweeView, bean.getUrl(), headers);
         mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -72,13 +73,13 @@ public class MaoViewHolder extends BaseViewHolder<MaoBean> {
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show(getProcessingCompletedBeans(beans, headers));
+                show(getProcessingCompletedBeans(beans));
             }
         });
         ((FloatingToolbar) ButterKnife.findById((Activity) mContext, R.id.floating_toolbar)).setClickListener(new FloatingToolbar.ItemClickListener() {
             @Override
             public void onItemClick(MenuItem menuItem) {
-                batchDownload(getProcessingCompletedBeans(beans, headers));
+                batchDownload(getProcessingCompletedBeans(beans));
             }
 
             @Override
@@ -89,11 +90,11 @@ public class MaoViewHolder extends BaseViewHolder<MaoBean> {
     }
 
     @Override
-    protected List<PCBean> getProcessingCompletedBeans(List<MaoBean> beans, HashMap<String, String> headers) {
+    protected List<PCBean> getProcessingCompletedBeans(List<MaoBean> beans) {
         List<PCBean> imgs = new ArrayList<>();
         for (MaoBean bean : beans) {
             imgs.add(new PCBean(bean.getUrl(), bean.getUrl(), Menus.MENU_LESMAO,
-                    "下载地址：" + bean.getUrl(), headers));
+                    "下载地址：" + bean.getUrl(), bean.getHeaders()));
         }
         return imgs;
     }
