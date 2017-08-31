@@ -17,7 +17,7 @@
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon"
-        android:theme="@style/ThemeLightBlue">
+        android:theme="@style/ThemeBiliBili">
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
